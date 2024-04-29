@@ -11,12 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
-
 import { LoginComponent } from './login';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { LayoutComponent } from './admin-panel/layout/layout.component';
 import { SecureLayoutComponent } from './super-admin-panel/secure-layout/secure-layout.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
 
 
 @NgModule({
@@ -32,7 +32,9 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
         UnauthorizedComponent,
         LayoutComponent,
         SecureLayoutComponent,
-        ForgetPasswordComponent
+        ForgetPasswordComponent,
+        OnlineRequestDemoComponent,
+        
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

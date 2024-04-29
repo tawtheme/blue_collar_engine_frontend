@@ -1,0 +1,12 @@
+<table>
+    <thead>
+        <tr>
+            <th *ngFor="let header of data[0] | keyvalue: sortNull">{{ header.key }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of data">
+            <td *ngFor="let cell of row | keyvalue: sortNull">{{ cell.value }}</td>
+        </tr>
+    </tbody>
+</table>

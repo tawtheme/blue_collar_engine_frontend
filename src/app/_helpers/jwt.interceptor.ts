@@ -20,8 +20,7 @@ export class JwtInterceptor implements HttpInterceptor {
                     Authorization: `Bearer ${user.data.token}`
                 }
             });
-        }
-
+        }       
         return next.handle(request);
     }
 }
