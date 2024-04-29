@@ -1,1 +1,0 @@
-{"ast":null,"code":"export * from './role';\nexport * from './user';","map":null,"metadata":{},"sourceType":"module"}
