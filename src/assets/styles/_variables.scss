@@ -1,0 +1,33 @@
+:root {
+  --primary: rgba(45, 100, 214, 1); // Original: #2d64d6
+  --light-primary: rgba(243, 245, 249, 1); // Original: #f3f5f9
+  --primary80: rgba(45, 100, 214, 0.8);
+  --secondary: rgba(11, 33, 71, 1); // Original: #0b2147
+  --success: rgba(21, 128, 61, 1); // Original: #15803d
+  --light-success: rgba(240, 253, 244); // Original: #F0FDF4
+  --info: rgba(3, 201, 215, 1); // Original: #03c9d7
+  --warning: rgba(251, 191, 36, 1); // Original: #fbbf24
+  --light-warning: rgba(255, 251, 235, 1); // Original: #FFFBEB
+  --yellow: rgba(247, 205, 75, 1); // Original: #f7cd4b
+  --danger: rgba(185, 28, 28, 1); // Original: #b91c1c
+  --light-danger: rgba(254, 242, 242, 1); // Original: #FEF2F2
+  --indigo: rgba(77, 83, 253, 1); // Original: #4d53fd
+  --light: rgba(249, 250, 251, 1); // Original: #f9fafb
+  --dark: rgba(57, 57, 57, 1); // Original: #393939
+  --muted: rgba(107, 114, 128, 1); // Original: #6b7280
+  --white: rgba(255, 255, 255, 1); // Original: #fff
+  --black: rgba(0, 0, 0, 1); // Original: #000
+  --light-muted: rgba(55, 65, 81, 1); // Original: #374151
+
+  --light-info: rgba(156, 163, 175, 1); // Original: #9ca3af
+  --border-color: rgba(209, 213, 219, 1); // Original: #d1d5db
+  --border-color2: rgba(229, 231, 235, 1); // Original: #E5E7EB
+  --border-white: rgba(255, 255, 255, 0.2); // Original: #ffffff
+
+  --border-primary: #6599f1;
+  --border-success: #86efac;
+  --border-grey: #d1d5db;
+  --border-danger: #fca5a5;
+}
+
+$primary: #2d64d6;

@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
+
+$font-family: "Lexend", sans-serif;
+
+@mixin flexbox($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin grid-layout($col: 1fr, $gap: 0, $row: unset) {
+  display: grid;
+  grid-template-columns: $col;
+  grid-template-rows: $row;
+  gap: $gap;
+}
+
+@mixin square-circle($size, $shape: square, $borderRadius: null) {
+  width: $size;
+  height: $size;
+  min-width: $size;
+  @if $borderRadius {
+    border-radius: $borderRadius;
+  } @else {
+    border-radius: if($shape == circle, 50%, 0%);
+  }
+}
+
+@mixin inputStyle(
+  $w: 100%,
+  $h: auto,
+  $p: 1rem,
+  $bgColor: inherit,
+  $border: none,
+  $borderRadius: 0,
+  $color: var(--light-muted)
+) {
+  padding: $p;
+  border: $border;
+  background-color: $bgColor;
+  width: $w;
+  height: $h; // Add height property
+  border-radius: $borderRadius;
+  $color: $color;
+  outline: none;
+  font-family: $font-family;
+}
+
+@mixin input-label-field {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="date"],
+  select {
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    width: 100%;
+    height: 38px;
+    color: var(--dark);
+    background-color: var(--white);
+    font-weight: 300;
+    font-family: $font-family;
+    &::placeholder {
+      color: var(--light-info);
+      font-weight: 300;
+    }
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--light-muted);
+  }
+}
+
+@mixin button(
+  $background-color,
+  $text-color,
+  $border-color,
+  $height,
+  $font-size
+) {
+  background-color: $background-color;
+  color: $text-color;
+  border: 1px solid;
+  border-color: $border-color;
+  padding: 10px 15px;
+  border-radius: 4px;
+  height: $height;
+  font-family: $font-family;
+  cursor: pointer;
+  font-size: $font-size;
+  @include flexbox(row, center, center);
+  gap: 0.5rem;
+  &:focus {
+    outline: none;
+  }
+}
+
+// @mixin checkbox {
+//   input[type="checkbox"] {
+//     opacity: 0;
+//     position: absolute;
+//     width: 0;
+//     height: 0;
+//     + label {
+//       position: relative;
+//       padding-left: 25px;
+//       font-weight: 400 !important;
+//       cursor: pointer;
+//       color: var(--muted) !important;
+//       &:before {
+//         content: "";
+//         position: absolute;
+//         left: 0;
+//         top: 0;
+//         width: 15px;
+//         height: 15px;
+//         border: 1px solid #d1d5db;
+//         border-radius: 2px;
+//       }
+//       &:after {
+//         content: "";
+//         position: absolute;
+//         left: 6px;
+//         top: 2px;
+//         width: 4px;
+//         height: 8px;
+//         border: solid #000;
+//         border-width: 0 2px 2px 0;
+//         transform: rotate(45deg);
+//         display: none;
+//       }
+//     }
+
+//     &:checked + label:after {
+//       display: block;
+//     }
+//   }
+// }
+
+@mixin font-size($size) {
+  font-size: $size;
+}
+
+@for $i from 8 through 50 {
+  .fontSize-#{$i} {
+    @include font-size(#{$i}px);
+  }
+}
+
+@mixin posCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin toggle-switch {
+  position: relative;
+  display: inline-block !important;
+  padding-left: 42px;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  z-index: 9;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--primary);
+    transition: 0.4s;
+    border-radius: 34px;
+    width: 35px;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 11px;
+      width: 11px;
+      left: 3px;
+      bottom: 2px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    &:checked + .slider {
+      background-color: #2196f3;
+    }
+
+    &:focus + .slider {
+      box-shadow: 0 0 1px #2196f3;
+    }
+
+    &:checked + .slider:before {
+      transform: translateX(26px);
+    }
+  }
+}
+
+@mixin badge($background-color, $text-color, $border-color: transparent) {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: $background-color;
+  color: $text-color;
+  font-size: 12px;
+  font-weight: 400;
+  border: 1px solid $border-color;
+}

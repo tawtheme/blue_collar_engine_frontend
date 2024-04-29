@@ -1,0 +1,550 @@
+@import "./variables";
+@import "./mixins";
+@import "./common.scss";
+@import "../fonts/fonts.css";
+
+// Define primary and secondary colors as variables
+$primary-color: #2d64d6;
+$secondary-color: #173777;
+
+// Root styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: $font-family;
+  color: var(--black);
+  background: white;
+  font-weight: 400;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+// Utilities
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family;
+  font-weight: 600;
+  margin: 0;
+}
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: inherit;
+}
+
+h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  font-family: $font-family;
+  font-size: 15px;
+}
+
+dl,
+ol,
+ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+// Badges Styles
+
+.primary-badge {
+  @include badge(var(--light-primary), $primary, $primary);
+}
+
+.success-badge {
+  @include badge(#bbf7d0, #15803d, #4ade80);
+}
+
+.danger-badge {
+  @include badge(#fee2e2, #b91c1c, #f87171);
+}
+
+.warning-badge {
+  @include badge(#fef3c7, #b45309, #fbbf24);
+}
+
+.grey-badge {
+  @include badge(#e5e7eb, #4b5563, #d1d5db);
+}
+
+// Form
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+// Buttons
+
+.primary-filled-button {
+  @include button(var(--primary), var(--white), var(--primary), 38px, 14px);
+  white-space: nowrap;
+  &:hover {
+    background-color: var(--primary80);
+    border-color: var(--primary80);
+  }
+}
+
+.primary-outlined-button {
+  @include button(transparent, var(--muted), var(--primary), 38px, 14px);
+}
+
+.light-primary-outlined-button {
+  @include button(#e8f0fd, var(--primary), #bbd3f9, 38px, 14px);
+  &:hover {
+    background-color: var(--light-primary);
+    border-color: var(--border-color);
+  }
+}
+
+.light-outlined-button {
+  @include button(transparent, var(--muted), var(--border-color), 38px, 14px);
+  &:hover {
+    background-color: var(--light-primary);
+    border-color: var(--border-color);
+  }
+}
+
+// Size Classes
+
+.xs-btn {
+  height: 28px;
+  font-size: 12px;
+}
+
+.sm-btn {
+  height: 34px;
+  font-size: 14px;
+}
+
+.md-btn {
+  height: 38px;
+  font-size: 14px;
+}
+
+.toggle-switch {
+  @include toggle-switch;
+}
+
+// @include checkbox;
+
+.page-title-box {
+  @include flexbox(row, space-between, flex-start);
+  padding: 20px 30px;
+  border-bottom: 1px solid var(--border-color);
+  .page-title {
+    @include flexbox(row, space-between, flex-start);
+  }
+}
+
+// Breadcrumb
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  a {
+    text-decoration: none;
+    color: $primary;
+    transition: color 0.3s;
+    &:hover {
+      color: darken($primary, 10%); // Darken the color on hover
+    }
+
+    &:not(:last-child) {
+      margin-right: 5px; // Adjust as needed
+    }
+  }
+
+  .separator {
+    margin: 0 10px; // Adjust as needed
+  }
+}
+
+// Widget Styles
+
+.page-content-wrapper {
+  padding: 30px;
+}
+
+.widget-container {
+  @include grid-layout(1fr 1fr 1fr 1fr, 1rem);
+  .widget-card {
+    @include flexbox(row, space-between, center);
+    gap: 0.8rem;
+    background-color: white;
+    border: 1px solid var(--border-color2);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    &-circle {
+      @include square-circle(48px, circle);
+      @include flexbox(row, center, center);
+      font-size: 1.5rem;
+    }
+    &-info {
+      flex-grow: 1;
+      h6 {
+        font-size: 20px;
+        margin-bottom: 5px;
+        color: var(--dark);
+        span {
+          font-size: 10px;
+          color: var(--dark);
+          margin-left: 2px;
+        }
+      }
+      p {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 0;
+      }
+    }
+  }
+}
+
+.lightGrayBox {
+  background-color: var(--light-primary);
+  color: var(--light-muted);
+}
+
+.lightYellowBox {
+  background-color: var(--light-warning);
+  color: var(--warning);
+}
+
+.lightDangerBox {
+  background-color: var(--light-danger);
+  color: var(--danger);
+}
+
+.lightSuccessBox {
+  background-color: var(--light-success);
+  color: var(--success);
+}
+
+.startIconInputField {
+  position: relative;
+  input {
+    padding-left: 30px !important;
+  }
+  .iconPosition {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: var(--muted);
+  }
+}
+
+.endIconInputField {
+  position: relative;
+  input {
+    padding-right: 30px !important;
+  }
+  .iconPosition {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: var(--muted);
+  }
+}
+
+.table-top-filter-row {
+  margin-top: 12px;
+  @include flexbox(row, space-between, center);
+  .table-top-filter-left {
+    @include flexbox(row, flex-start, center);
+    gap: 1.2rem;
+    flex: 55;
+  }
+  .table-top-filter-right {
+    flex: 45;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.lightPrimaryCardBox {
+  background-color: var(--light-primary) !important;
+  border-color: var(--border-primary) !important;
+}
+
+.lightSuccessCardBox {
+  background-color: var(--light-success) !important;
+  border-color: var(--border-success) !important;
+}
+
+.lightGreyCardBox {
+  background-color: var(--light) !important;
+  border-color: var(--border-grey) !important;
+}
+
+.lightDangerCardBox {
+  background-color: var(--light-danger) !important;
+  border-color: var(--border-danger) !important;
+}
+
+// Tabs
+
+.borderStyleTabs {
+  display: flex;
+  .nav-item {
+    .nav-link {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding: 0 0 10px 0;
+      border-radius: 0;
+      border-bottom: 2px solid transparent;
+      &.active {
+        color: var(--primary);
+        border-bottom: 2px solid var(--primary);
+        background-color: transparent;
+      }
+    }
+
+    &:not(:first-child) {
+      margin-left: 35px;
+    }
+  }
+}
+
+.reset-password-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #ddd;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#reset-password-modal .cs-modal-body {
+  width: 480px;
+  background: #fff;
+  padding: 50px 30px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 0;
+}
+
+.reset-password-modal-wrapper {
+  button {
+    height: 44px;
+    margin-top: 40px;
+  }
+  p {
+    a {
+      color: var(--primary);
+    }
+  }
+}
+
+// custom table and datatable styles
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid var(--border-grey);
+  border-radius: 5px;
+}
+
+th,
+table.dataTable th {
+  background-color: #f2f2f2;
+  padding: 8px 15px !important;
+  text-align: left !important;
+  border-bottom: 1px solid #ddd !important;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 400 !important;
+}
+table.dataTable thead > tr > th.sorting:before,
+table.dataTable thead > tr > th.sorting:after {
+  right: 5px !important;
+}
+table.dataTable th .form-check-input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+}
+th:last-child {
+  text-align: right;
+}
+
+tr tr:last-child {
+  text-align: right;
+}
+
+td {
+  border: none;
+  text-align: left;
+  padding: 20px 15px;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+tr:nth-child(even) {
+  background-color: var(--light);
+}
+
+tr {
+  border-bottom: 1px solid #dddddd; /* Add border between rows */
+}
+
+.dataTables_wrapper .dataTables_length {
+  margin-bottom: 20px;
+}
+.dataTables_filter {
+  margin-bottom: 20px;
+}
+.dataTables_filter label {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.dataTables_filter input {
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  width: 100%;
+  height: 38px;
+  color: var(--dark);
+  background-color: var(--white);
+  font-weight: 300;
+  font-family: "Lexend", sans-serif;
+  outline: none;
+}
+
+table.dataTable tbody td {
+  border: none;
+  text-align: left;
+  padding: 20px 15px !important;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.dataTables_wrapper .dataTables_info {
+  font-size: 14px;
+  margin-top: 15px;
+}
+.dataTables_paginate {
+  margin-top: 15px;
+  color: var(--muted);
+}
+
+.dataTables_paginate .paginate_button {
+  font-size: 14px;
+  color: var(--muted) !important;
+}
+
+.dataTables_paginate span {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.dataTables_paginate span a.paginate_button {
+  border: 1px solid #ddd !important;
+  width: 28px;
+  height: 28px;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px !important;
+  font-size: 14px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate span a.paginate_button.current,
+.dataTables_wrapper .dataTables_paginate span a.paginate_button.current:hover,
+.dataTables_wrapper .dataTables_paginate span a.paginate_button:hover {
+  background: var(--primary) !important;
+  color: var(--white) !important;
+  border-color: var(--primary) !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.next:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.previous:hover {
+  background: transparent !important;
+  color: var(--muted) !important;
+  border-color: transparent !important;
+  outline: none;
+  box-shadow: none !important;
+}
+
+.sidebar-popup-header {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h6 {
+    font-size: 18px;
+  }
+  button {
+    cursor: pointer;
+    padding: 0;
+    margin-right: 5px;
+  }
+}
+
+.sidebar-popup-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--border-color);
+  padding: 12px 15px;
+  margin-top: auto;
+  gap: 1rem;
+}
