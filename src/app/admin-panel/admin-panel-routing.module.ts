@@ -9,46 +9,66 @@ import { JobsComponent } from './jobs/jobs.component';
 import { EstimateInvoiceComponent } from './estimate-invoice/estimate-invoice.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { EstimateComponent } from './estimate/estimate.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { CreateEstimateComponent } from './create-estimate/create-estimate.component';
+import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
+import { CreateJobComponent } from './create-job/create-job.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children:[
+    children: [
       {
-        path:'',
-        component:DashboardComponent,
-        pathMatch: 'full'
+        path: '',
+        component: DashboardComponent,
+        pathMatch: 'full',
       },
       {
         path: 'customer',
-        component: CustomerComponent       
+        component: CustomerComponent,
       },
       {
         path: 'customer-detail',
-        component: CustomerDetailsComponent       
+        component: CustomerDetailsComponent,
       },
       {
         path: 'scheduler',
-        component: SchedulerComponent       
+        component: SchedulerComponent,
       },
       {
         path: 'jobs',
-        component: JobsComponent       
+        component: JobsComponent,
       },
       {
-        path: 'estimate-invoice',
-        component: EstimateInvoiceComponent       
-      }
+        path: 'create-job',
+        component: CreateJobComponent,
+      },
+      {
+        path: 'estimate',
+        component: EstimateComponent,
+      },
+      {
+        path: 'create-estimate',
+        component: CreateEstimateComponent,
+      },
+      {
+        path: 'invoice',
+        component: InvoiceComponent,
+      },
+      {
+        path: 'create-invoice',
+        component: CreateInvoiceComponent,
+      },
     ],
     canActivate: [AuthGuard],
-    data: { roles: [Role.Admin] }
+    data: { roles: [Role.Admin] },
   },
- 
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminPanelRoutingModule { }
+export class AdminPanelRoutingModule {}

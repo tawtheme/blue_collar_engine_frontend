@@ -1,7 +1,7 @@
 <header class="main-header-wrapper">
     <div class="top-header-wrap">
         <div class="container-xxl">
-            <div class="d-flex">
+            <div class="d-flex align-items-center">
                 <a class="navbar-brand" href="javascript:void(0);">
                     <img src="../../../../assets/images/logo-white.svg" alt="logo" />
                 </a>
@@ -90,7 +90,7 @@
                     <li class="nav-item" routerLinkActive="active">
                         <a class="nav-link" [routerLink]="['/admin/scheduler']">
                             <span class="icon-holder">
-                                <span class="icon-user"></span>
+                                <span class="icon-calendar"></span>
                             </span>
                             <span class="menu-title">Scheduler</span>
                         </a>
@@ -98,17 +98,25 @@
                     <li class="nav-item" routerLinkActive="active">
                         <a class="nav-link" [routerLink]="['/admin/jobs']">
                             <span class="icon-holder">
-                                <span class="icon-user"></span>
+                                <span class="icon-job"></span>
                             </span>
                             <span class="menu-title">Jobs</span>
                         </a>
                     </li>
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" [routerLink]="['/admin/estimate-invoice']">
+                        <a class="nav-link" [routerLink]="['/admin/estimate']">
                             <span class="icon-holder">
-                                <span class="icon-user"></span>
+                                <span class="icon-estimate"></span>
                             </span>
-                            <span class="menu-title">Estimate Invoice</span>
+                            <span class="menu-title">Estimate</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['/admin/invoice']">
+                            <span class="icon-holder">
+                                <span class="icon-invoice"></span>
+                            </span>
+                            <span class="menu-title">Invoice</span>
                         </a>
                     </li>
                 </ul>

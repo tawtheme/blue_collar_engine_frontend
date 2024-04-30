@@ -9,6 +9,12 @@ import { JobsComponent } from './jobs/jobs.component';
 import { EstimateInvoiceComponent } from './estimate-invoice/estimate-invoice.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { CustomerComponent } from './customer/customer.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { EstimateComponent } from './estimate/estimate.component';
+import { CreateEstimateComponent } from './create-estimate/create-estimate.component';
+import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
+import { CreateJobComponent } from './create-job/create-job.component';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -17,11 +23,13 @@ import { CustomerComponent } from './customer/customer.component';
     EstimateInvoiceComponent,
     LayoutComponent,
     CustomerComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    InvoiceComponent,
+    EstimateComponent,
+    CreateEstimateComponent,
+    CreateInvoiceComponent,
+    CreateJobComponent,
   ],
-  imports: [
-    CommonModule,
-    AdminPanelRoutingModule
-  ]
+  imports: [CommonModule, AdminPanelRoutingModule],
 })
-export class AdminPanelModule { }
+export class AdminPanelModule {}

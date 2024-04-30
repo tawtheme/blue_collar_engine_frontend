@@ -1,6 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { TagInputModule } from 'ngx-chips';
 
 @Component({
@@ -9,15 +16,13 @@ import { TagInputModule } from 'ngx-chips';
   styleUrls: ['./customer.component.scss'],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TagInputModule],
-
 })
 export class CustomerComponent implements OnInit {
-
   customerForm!: FormGroup;
   loading = false;
   submitted = false;
   count_user_click = 0;
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.customerForm = this.formBuilder.group({
@@ -37,13 +42,13 @@ export class CustomerComponent implements OnInit {
   }
 
   contacts(): FormArray {
-    return this.customerForm.get("contacts") as FormArray
+    return this.customerForm.get('contacts') as FormArray;
   }
 
   newcontact(): FormGroup {
     return this.formBuilder.group({
-      contact: ['', Validators.required]
-    })
+      contact: ['', Validators.required],
+    });
   }
 
   addMoreContact() {
@@ -55,9 +60,9 @@ export class CustomerComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.customerForm.controls; }
-
-
+  get f() {
+    return this.customerForm.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -67,5 +72,4 @@ export class CustomerComponent implements OnInit {
     console.log(this.customerForm.value);
     this.loading = true;
   }
-
 }
