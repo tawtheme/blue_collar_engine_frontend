@@ -1,0 +1,73 @@
+<header class="main-header-wrapper">
+    <div class="top-header-wrap">
+        <div class="container-xxl">
+            <div class="d-flex">
+                <a class="navbar-brand" href="#">
+                    <img src="../../../../assets/images/logo-white.svg" alt="logo" />
+                </a>
+                <div class="top-header-right ms-auto">
+                    <div class="header-search-box">
+                        <form action="#">
+                            <input type="text" name="search" placeholder="Search..." autocomplete="off" value="">
+                            <button>
+                                <span class="icon-search"></span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="header-actions">
+                        <a href="#">
+                            <span class="icon-help"></span>
+                        </a>
+                        <a href="#">
+                            <span class="icon-notification"></span>
+
+                        </a>
+                    </div>
+                    <div class="header-user">
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                                data-bs-display="static" aria-expanded="false">
+                                <img src="../../../../assets/images/user-icon.svg" />
+                                <h5>John Smith</h5>
+                                <span class="icon-down-arrow"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-lg-end">
+                                <li><a href="#"><span class="icon-user"></span>Profile</a></li>
+                                <li><a href="#"><span class="icon-returning"></span>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark header-navigation">
+        <div class="container-xxl">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['/admin/dashboard']">
+                            <span class="icon-holder">
+                                <span class="icon-house"></span>
+                            </span>
+                            <span class="menu-title">Overview</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['/admin/customers']">
+                            <span class="icon-holder">
+                                <span class="icon-user"></span>
+                            </span>
+                            <span class="menu-title">Customers</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

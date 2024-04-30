@@ -17,6 +17,8 @@ import { LayoutComponent } from './admin-panel/layout/layout.component';
 import { SecureLayoutComponent } from './super-admin-panel/secure-layout/secure-layout.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { OnlineRequestDemoComponent } from './online-request-demo/online-request
         SecureLayoutComponent,
         ForgetPasswordComponent,
         OnlineRequestDemoComponent,
+        ResetPasswordComponent,
+        HeaderComponent,
         
     ],
     providers: [

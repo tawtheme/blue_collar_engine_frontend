@@ -11,7 +11,6 @@
         }
       },
       "root": "",
-      
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
@@ -29,10 +28,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/assets/styles/index.scss"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/styles/index.scss",
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {

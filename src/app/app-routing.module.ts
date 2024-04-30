@@ -8,41 +8,68 @@ import { Role } from './_models';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { DashboardComponent } from './admin-panel/dashboard/dashboard.component';
+import { CustomersComponent } from './admin-panel/customers/customers.component';
+import { CustomerDetailsComponent } from './admin-panel/customer-details/customer-details.component';
+
 const routes: Routes = [
-    {
-        path: '',
-        component: LoginComponent
-    },
-    {
-        path: 'secure-panel',
-        loadChildren: () => import('./super-admin-panel/super-admin-panel.module').then(m => m.SuperAdminPanelModule)
-    },
-    {
-        path: 'admin',
-        loadChildren: () => import('./admin-panel/admin-panel-routing.module').then(m => m.AdminPanelRoutingModule)
-    },
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: 'forget-password',
-        component: ForgetPasswordComponent
-    },
-    {
-        path: 'unauthorized',
-        component: UnauthorizedComponent
-    },
-    {
-        path: 'online-request-demo',
-        component: OnlineRequestDemoComponent
-    },
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+  {
+    path: '',
+    component: LoginComponent,
+  },
+  {
+    path: 'secure-panel',
+    loadChildren: () =>
+      import('./super-admin-panel/super-admin-panel.module').then(
+        (m) => m.SuperAdminPanelModule
+      ),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin-panel/admin-panel-routing.module').then(
+        (m) => m.AdminPanelRoutingModule
+      ),
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'forget-password',
+    component: ForgetPasswordComponent,
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
+  },
+  {
+    path: 'online-request-demo',
+    component: OnlineRequestDemoComponent,
+  },
+  {
+    path: 'admin/dashboard',
+    component: DashboardComponent,
+  },
+  {
+    path: 'admin/customers',
+    component: CustomersComponent,
+  },
+  {
+    path: 'admin/customer-details',
+    component: CustomerDetailsComponent,
+  },
+  // otherwise redirect to home
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -1,0 +1,125 @@
+@import "../../../styles/mixins";
+
+.main-header-wrapper {
+  .top-header-wrap {
+    background-color: var(--secondary);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    @include flexbox(row, space-between, center);
+    .top-header-right {
+      @include flexbox(row, center, center);
+      height: 100%;
+      .header-actions {
+        @include flexbox(row, center, center);
+        height: 100%;
+        border-left: 1px solid var(--border-white);
+        border-right: 1px solid var(--border-white);
+        margin: 0 20px;
+        gap: 30px;
+        padding: 0 20px;
+        a {
+          @include flexbox(row, center, center);
+          color: var(--white);
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+      .header-user {
+        position: relative;
+        button {
+          @include flexbox(row, center, center);
+          gap: 10px;
+          background: transparent;
+          border: 0;
+          padding: 0;
+          &.dropdown-toggle::after {
+            border: 0;
+          }
+          h5 {
+            font-size: 13px;
+            font-weight: 400;
+          }
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+    .app-brand {
+      width: 180px;
+      @include flexbox(row, center, center);
+    }
+    .header-search-box {
+      @include flexbox(row, space-between, center);
+      position: relative;
+      input {
+        @include inputStyle(
+          $h: 30px,
+          $w: 420px,
+          $bgColor: var(--white),
+          $borderRadius: 50px
+        );
+      }
+      button {
+        position: absolute;
+        right: 15px;
+        top: 5px;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+    }
+  }
+  .header-navigation {
+    background-color: var(--secondary);
+    padding: 0;
+    .navbar-nav {
+      .nav-item {
+        position: relative;
+        margin-right: 10px;
+        .nav-link {
+          width: 100%;
+          padding: 16px 20px;
+          @include flexbox(row, flex-start, center);
+          color: var(--white);
+          gap: 12px;
+          position: relative;
+          .menu-title {
+            font-size: 14px;
+            font-weight: 300;
+          }
+          &::before {
+            content: "";
+            width: 0%;
+            height: 2px;
+            background-color: #f9d867;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+          }
+          &:hover::before {
+            width: 100%;
+          }
+          &:hover {
+            color: #f9d867;
+          }
+        }
+        &.active {
+          .nav-link {
+            &::before {
+              width: 100%;
+            }
+            color: #f9d867;
+            .icon-holder {
+              color: #f9d867;
+            }
+          }
+        }
+      }
+    }
+  }
+}

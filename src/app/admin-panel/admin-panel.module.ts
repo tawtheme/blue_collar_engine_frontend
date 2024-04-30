@@ -7,7 +7,8 @@ import { SchedulerComponent } from './scheduler/scheduler.component';
 import { LayoutComponent } from './layout/layout.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { EstimateInvoiceComponent } from './estimate-invoice/estimate-invoice.component';
-
+import { CustomersComponent } from './customers/customers.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
@@ -15,11 +16,10 @@ import { EstimateInvoiceComponent } from './estimate-invoice/estimate-invoice.co
     SchedulerComponent,
     JobsComponent,
     EstimateInvoiceComponent,
-    LayoutComponent
+    LayoutComponent,
+    CustomersComponent,
+    CustomerDetailsComponent,
   ],
-  imports: [
-    CommonModule,
-    AdminPanelRoutingModule
-  ] 
+  imports: [CommonModule, AdminPanelRoutingModule],
 })
-export class AdminPanelModule { }
+export class AdminPanelModule {}
