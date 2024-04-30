@@ -317,55 +317,78 @@
     <div class="offcanvas-header sidebar-popup-header">
         <h6 class="offcanvas-title" id="offcanvasRightLabel">Add Customer</h6>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
-
         </button>
     </div>
-    <div class="offcanvas-body">
-        <form class="sidebar-popup-inner">
+    <form class="sidebar-popup-inner" [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+        <div class="offcanvas-body" style="height: 700px;">
             <div class="form-group mb-3">
                 <label for="fname" class="form-label">Customer Name</label>
-                <input type="text" id="fname" name="fname" placeholder="First Name" class="form-control mb-15">
-                <input type="text" id="lname" name="lname" placeholder="Last Name" class="form-control">
+                <input type="text" formControlName="fname" class="form-control" placeholder="First name"
+                    [ngClass]="{ 'is-invalid': submitted && f.fname.errors }" maxlength="50" />
+                <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+                    <div *ngIf="f.fname.errors.required">First name is required</div>
+                </div>
+                <input type="text" formControlName="lname" class="form-control" placeholder="Last name"
+                    [ngClass]="{ 'is-invalid': submitted && f.lname.errors }" maxlength="50" />
+                <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+                    <div *ngIf="f.lname.errors.required">Last name is required</div>
+                </div>
             </div>
             <div class="form-group mb-3">
                 <label for="companyname" class="form-label">Company Name (If applicable)</label>
-                <input type="text" id="companyname" name="companyname" placeholder="Company name" class="form-control ">
+                <input type="text" formControlName="companyName" class="form-control" placeholder="Company name"
+                    [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" maxlength="200" />
             </div>
-            <div class="form-group mb-3">
+            <div class="form-group mb-3" formArrayName="contacts">
                 <label for="mobile" class="form-label">Phone Number</label>
-                <div class="row mb-15 gx-3">
-                    <div class="col-md-8">
-                        <input type="text" id="phone" name="phone" placeholder="Enter Number" class="form-control">
-                    </div>
-                    <div class="col-md-4">
-                        <select id="mobile" name="mobile" class="form-select">
-                            <option value="Mobile" selected>Mobile</option>
-                            <option value="Landline">Landline</option>
-                        </select>
+                <!-- <div class="row mb-15 gx-3">
+                    <div class="col-md-12">
+                        <input type="text" formControlName="contact" id="phone" name="phone" placeholder="Enter Number" class="form-control">
+                    </div>                   
+                </div> -->
+
+                <div class="row mb-15 gx-3" *ngFor="let contact of contacts().controls; let i=index"
+                    [formGroupName]="i">
+                    <div class="col-md-12">
+                        <input type="text" formControlName="contact" id="phone" name="phone" placeholder="Enter Number"
+                            class="form-control" [ngClass]="{ 'is-invalid': submitted && contact.errors }"
+                            pattern="[0-9]{5}[-][0-9]{7}[-][0-9]{1}" />
+                        <div *ngIf="submitted && contact.errors" class="invalid-feedback">
+                            <div *ngIf="contact.errors.required">This field is required</div>
+                        </div>
+                        <button (click)="removeContact(i)" class="btn btn-danger">Remove</button>
                     </div>
                 </div>
-                <button class="light-primary-outlined-button xs-btn"><span class="icon-add"></span>Add
+                <button class="light-primary-outlined-button xs-btn" (click)="addMoreContact()" type="button"><span
+                        class="icon-add"></span>Add
                     Phone</button>
             </div>
             <div class="form-group mb-3">
                 <label for="email" class="form-label">Email Address</label>
-                <input type="text" id="email" name="email" placeholder="Email address" class="form-control">
+                <input type="text" formControlName="emailAddress" class="form-control" placeholder="Email address"
+                    [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" maxlength="200"
+                    pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+                <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
+                    <div *ngIf="f.emailAddress.errors.required">Email address is required</div>
+                    <div *ngIf="f.emailAddress.errors.pattern">Enter valid email address</div>
+                </div>
             </div>
 
             <div class="form-group mb-3">
                 <label for="fname" class="form-label">Service Address</label>
-                <input type="text" id="address" name="address" placeholder="Address" class="form-control mb-15">
+                <input type="text" formControlName="address" class="form-control" placeholder="Service Address"
+                    [ngClass]="{ 'is-invalid': submitted && f.address.errors }" maxlength="500" />
                 <div class="row g-3">
-
-                    <div class="col-md-6 ">
+                    <!-- <div class="col-md-6 ">
                         <select id="state" name="Country" class="form-select">
                             <option value="" disabled selected>Country</option>
                             <option value="USA">USA</option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="col-md-6 ">
-                        <select id="state" name="state" class="form-select">
-                            <option value="" disabled selected>State</option>
+                        <select id="state" formControlName="state" name="state" class="form-select"
+                            [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                            <option value="">Select</option>
                             <option value="California">California</option>
                             <option value="Texas">Texas</option>
                             <option value="Florida">Florida</option>
@@ -379,17 +402,20 @@
                         </select>
                     </div>
                     <div class="col-md-6 ">
-                        <input type="text" id="city" name="city" placeholder="City" class="form-control">
+                        <input type="text" formControlName="city" class="form-control" placeholder="City"
+                            [ngClass]="{ 'is-invalid': submitted && f.city.errors }" maxlength="50" />
                     </div>
                     <div class="col-md-6">
-                        <input type="text" id="zipcode" name="zipcode" placeholder="Zip Code" class="form-control">
+                        <input type="text" formControlName="zipCode" class="form-control" placeholder="ZipCode"
+                            [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }" maxlength="10" />
                     </div>
 
                 </div>
             </div>
             <div class="form-group mb-3">
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked
+                        formControlName="IsDefaultBillingAddress">
                     <label class="form-check-label form-label" for="flexSwitchCheckChecked"> User this for billing
                         address as
                         default</label>
@@ -397,24 +423,28 @@
             </div>
             <div class="form-group mb-3">
                 <label for="tags" class="form-label">Tags</label>
-                <input type="text" id="tags" name="tags" placeholder="Add more tags" class="form-control">
+                <tag-input formControlName="tags" class="form-control" placeholder="tags" [modelAsStrings]="true"
+                    [theme]="'dark'" [ngClass]="{ 'is-invalid': submitted && f.tags.errors }"
+                    maxlength="500"></tag-input>
             </div>
             <div class="form-group mb-3">
                 <label for="status" class="form-label">Status</label>
-                <select id="status" name="status" class="form-select">
-                    <option value="company1">Active Customer</option>
-                    <option value="company2">In-active Customer</option>
+                <select id="status" name="status" class="form-select" formControlName="status">
+                    <option value="A" selected>Active Customer</option>
+                    <option value="I">In-active Customer</option>
                 </select>
             </div>
-        </form>
-    </div>
-    <div class="sidebar-popup-bottom offcanvas-footer">
-        <button class="light-outlined-button outlined w-100" data-bs-dismiss="offcanvas" type="button">Cancel</button>
-        <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="submit">Save</button>
-    </div>
+        </div>
+        <div class="sidebar-popup-bottom offcanvas-footer">
+            <button class="light-outlined-button outlined w-100" data-bs-dismiss="offcanvas"
+                type="button">Cancel</button>
+            <button [disabled]="loading" class="btn btn-primary">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                Save
+            </button>
+        </div>
+    </form>
 </div>
-
-
 
 
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddAddressSidebar"

@@ -7,6 +7,8 @@ import { SchedulerComponent } from './scheduler/scheduler.component';
 import { LayoutComponent } from './layout/layout.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { EstimateInvoiceComponent } from './estimate-invoice/estimate-invoice.component';
+import { CustomerComponent } from './customer/customer.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,14 @@ const routes: Routes = [
         path:'',
         component:DashboardComponent,
         pathMatch: 'full'
+      },
+      {
+        path: 'customer',
+        component: CustomerComponent       
+      },
+      {
+        path: 'customer-detail',
+        component: CustomerDetailsComponent       
       },
       {
         path: 'scheduler',

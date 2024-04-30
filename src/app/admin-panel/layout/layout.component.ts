@@ -9,13 +9,11 @@ import { AuthenticationService } from '@app/_services';
 export class LayoutComponent implements OnInit {
 
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
 
-  logout() {
-    this.authenticationService.logout();
-  }
+ 
 }

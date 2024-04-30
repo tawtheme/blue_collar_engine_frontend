@@ -24,13 +24,13 @@ export class AuthenticationService {
         return this.userSubject.value;
     }
 
-        login(username: string, password: string) {
+    login(username: string, password: string) {
         var _params = {
             'username': username,
             'password': password
         };
         let reqHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-        return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/Login`, JSON.stringify(_params),{ headers: reqHeaders })
+        return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/Login`, JSON.stringify(_params), { headers: reqHeaders })
             .pipe(map(user => {
                 //console.log(JSON.stringify(user))
                 // store user details and jwt token in local storage to keep user logged in between page refreshes

@@ -13,7 +13,7 @@ export class AppComponent {
 
     get isAdmin() {
         return this.user?.data.role === Role.Admin;
-    }
+    }  
 
     logout() {
         this.authenticationService.logout();

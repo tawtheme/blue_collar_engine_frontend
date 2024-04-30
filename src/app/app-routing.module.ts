@@ -10,8 +10,8 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { DashboardComponent } from './admin-panel/dashboard/dashboard.component';
-import { CustomersComponent } from './admin-panel/customers/customers.component';
 import { CustomerDetailsComponent } from './admin-panel/customer-details/customer-details.component';
+import { CustomerComponent } from './admin-panel/customer/customer.component';
 
 const routes: Routes = [
   {
@@ -51,19 +51,7 @@ const routes: Routes = [
   {
     path: 'online-request-demo',
     component: OnlineRequestDemoComponent,
-  },
-  {
-    path: 'admin/dashboard',
-    component: DashboardComponent,
-  },
-  {
-    path: 'admin/customers',
-    component: CustomersComponent,
-  },
-  {
-    path: 'admin/customer-details',
-    component: CustomerDetailsComponent,
-  },
+  },  
   // otherwise redirect to home
   { path: '**', redirectTo: '' },
 ];

@@ -20,13 +20,12 @@ import { OnlineRequestDemoComponent } from './online-request-demo/online-request
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { HeaderComponent } from './shared/header/header.component';
 
-
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule
+        AppRoutingModule                 
     ],
     declarations: [
         AppComponent,

@@ -2,12 +2,12 @@
     <div class="top-header-wrap">
         <div class="container-xxl">
             <div class="d-flex">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="javascript:void(0);">
                     <img src="../../../../assets/images/logo-white.svg" alt="logo" />
                 </a>
                 <div class="top-header-right ms-auto">
                     <div class="header-search-box">
-                        <form action="#">
+                        <form action="javascript:void(0);">
                             <input type="text" name="search" placeholder="Search..." autocomplete="off" value="">
                             <button>
                                 <span class="icon-search"></span>
@@ -15,10 +15,10 @@
                         </form>
                     </div>
                     <div class="header-actions">
-                        <a href="#">
+                        <a href="javascript:void(0);">
                             <span class="icon-help"></span>
                         </a>
-                        <a href="#">
+                        <a href="javascript:void(0);">
                             <span class="icon-notification"></span>
 
                         </a>
@@ -28,12 +28,13 @@
                             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                                 data-bs-display="static" aria-expanded="false">
                                 <img src="../../../../assets/images/user-icon.svg" />
-                                <h5>John Smith</h5>
+                                <h5>{{user!.data.email}}</h5>
                                 <span class="icon-down-arrow"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
-                                <li><a href="#"><span class="icon-user"></span>Profile</a></li>
-                                <li><a href="#"><span class="icon-returning"></span>Logout</a></li>
+                                <li><a href="javascript:void(0);"><span class="icon-user"></span>Profile</a></li>
+                                <li><a href="javascript:void(0);" (click)="logout()"><span
+                                            class="icon-returning"></span>Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -49,9 +50,29 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!isAdmin">
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" [routerLink]="['/admin/dashboard']">
+                        <a class="nav-link" [routerLink]="['/secure-panel/dashboard']">
+                            <span class="icon-holder">
+                                <span class="icon-house"></span>
+                            </span>
+                            <span class="menu-title">Overview</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['/secure-panel/request-demo']">
+                            <span class="icon-holder">
+                                <span class="icon-house"></span>
+                            </span>
+                            <span class="menu-title">Request Demo</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isAdmin">
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['/admin']">
                             <span class="icon-holder">
                                 <span class="icon-house"></span>
                             </span>
@@ -59,11 +80,35 @@
                         </a>
                     </li>
                     <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" [routerLink]="['/admin/customers']">
+                        <a class="nav-link" [routerLink]="['/admin/customer']">
                             <span class="icon-holder">
                                 <span class="icon-user"></span>
                             </span>
                             <span class="menu-title">Customers</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['/admin/scheduler']">
+                            <span class="icon-holder">
+                                <span class="icon-user"></span>
+                            </span>
+                            <span class="menu-title">Scheduler</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['/admin/jobs']">
+                            <span class="icon-holder">
+                                <span class="icon-user"></span>
+                            </span>
+                            <span class="menu-title">Jobs</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" routerLinkActive="active">
+                        <a class="nav-link" [routerLink]="['/admin/estimate-invoice']">
+                            <span class="icon-holder">
+                                <span class="icon-user"></span>
+                            </span>
+                            <span class="menu-title">Estimate Invoice</span>
                         </a>
                     </li>
                 </ul>
