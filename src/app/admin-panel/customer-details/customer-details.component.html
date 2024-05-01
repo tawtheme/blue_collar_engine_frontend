@@ -3,8 +3,8 @@
         <div class="d-flex items-center">
             <div class="">
                 <div class="d-flex items-center mb-10">
-                    <h4 class="page-title">John Smith </h4>
-                    <span class="success-badge ml-10">Commercial</span>
+                    <h4 class="page-title">{{customerInfo.firstName}} {{customerInfo.lastName}} </h4>
+                    <span class="success-badge ml-10">{{customerInfo.tags}}</span>
                 </div>
                 <div class="breadcrumb">
                     <a>Dashboard</a>
@@ -23,6 +23,7 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a href="#"><span class="icon-edit-2"></span> Edit Details</a></li>
+                        <li><a href="#"><span class="icon-edit-2"></span> Add Address</a></li>
                         <li><a href="#"><span class="icon-estimate"></span> Create Estimate</a></li>
                         <li><a href="#"><span class="icon-job"></span> Create Job</a></li>
                         <li><a href="#"><span class="icon-invoice"></span> Create Invoice</a></li>
@@ -39,23 +40,23 @@
         <div class="customers-info-wrapper">
             <div class="customers-card-item">
                 <p>Customer ID</p>
-                <h6>4483</h6>
+                <h6>{{customerInfo.customerId}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Customer Since</p>
-                <h6>2024</h6>
+                <h6>{{customerInfo.createdDate }}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Billing Address</p>
-                <h6>333 Cedar Drive, Mountain View, CA 94040</h6>
+                <h6>{{customerInfo.serviceAddress}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Phone Number</p>
-                <h6><span class="icon-call"></span>(345) 847 459</h6>
+                <h6><span class="icon-call"></span>{{customerInfo.mobileNumber}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Email Address</p>
-                <h6><span class="icon-email"></span>johndeo&#64;example.com</h6>
+                <h6><span class="icon-email"></span>{{customerInfo.emailAddress}}</h6>
             </div>
         </div>
         <h4 class="mb-12 font16">Customer Summary</h4>
@@ -153,6 +154,7 @@
                         </tr>
                     </tbody>
                 </table>
+               
             </div>
             <div class="tab-pane fade" id="pills-estimate" role="tabpanel" aria-labelledby="pills-estimate-tab"
                 tabindex="0">

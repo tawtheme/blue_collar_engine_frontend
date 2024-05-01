@@ -19,13 +19,21 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        AppRoutingModule                 
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot({
+            timeOut: 30000, // 30 seconds
+            closeButton: true,
+            progressBar: true,
+        }),
     ],
     declarations: [
         AppComponent,
@@ -36,13 +44,12 @@ import { HeaderComponent } from './shared/header/header.component';
         ForgetPasswordComponent,
         OnlineRequestDemoComponent,
         ResetPasswordComponent,
-        HeaderComponent,
-        
+        HeaderComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
+        
         // provider used to create fake backend
         fakeBackendProvider
     ],

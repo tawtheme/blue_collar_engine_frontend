@@ -9,6 +9,7 @@ import { JobsComponent } from './jobs/jobs.component';
 import { EstimateInvoiceComponent } from './estimate-invoice/estimate-invoice.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { CustomerComponent } from './customer/customer.component';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -21,7 +22,8 @@ import { CustomerComponent } from './customer/customer.component';
   ],
   imports: [
     CommonModule,
-    AdminPanelRoutingModule
+    AdminPanelRoutingModule,
+    
   ]
 })
 export class AdminPanelModule { }
