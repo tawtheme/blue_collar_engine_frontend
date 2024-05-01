@@ -17,10 +17,11 @@ export class JwtInterceptor implements HttpInterceptor {
         if (isLoggedIn && isApiUrl) {
             request = request.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${user.data.token}`
+                    Authorization: `Bearer ${user.data.token}`,
+                    'Content-Type': 'application/json'
                 }
             });
-        }       
+        }
         return next.handle(request);
     }
 }

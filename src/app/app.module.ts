@@ -20,35 +20,43 @@ import { OnlineRequestDemoComponent } from './online-request-demo/online-request
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { BookingComponent } from './booking/booking.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-    imports: [
-        BrowserModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        AppRoutingModule                 
-    ],
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        UnauthorizedComponent,
-        LayoutComponent,
-        SecureLayoutComponent,
-        ForgetPasswordComponent,
-        OnlineRequestDemoComponent,
-        ResetPasswordComponent,
-        HeaderComponent,
-        BookingComponent,
-        
-    ],
-    providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 30000, // 30 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
+  ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    UnauthorizedComponent,
+    LayoutComponent,
+    SecureLayoutComponent,
+    ForgetPasswordComponent,
+    OnlineRequestDemoComponent,
+    ResetPasswordComponent,
+    HeaderComponent,
+    BookingComponent,
 
-        // provider used to create fake backend
-        fakeBackendProvider
-    ],
-    bootstrap: [AppComponent]
+    HeaderComponent,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider,
+  ],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule { }
+export class AppModule {}

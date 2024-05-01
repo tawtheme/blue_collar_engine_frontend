@@ -9,6 +9,7 @@ import { JobsComponent } from './jobs/jobs.component';
 import { EstimateInvoiceComponent } from './estimate-invoice/estimate-invoice.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { CustomerComponent } from './customer/customer.component';
+
 import { InvoiceComponent } from './invoice/invoice.component';
 import { EstimateComponent } from './estimate/estimate.component';
 import { CreateEstimateComponent } from './create-estimate/create-estimate.component';
@@ -31,5 +32,6 @@ import { CreateJobComponent } from './create-job/create-job.component';
     CreateJobComponent,
   ],
   imports: [CommonModule, AdminPanelRoutingModule],
+ 
 })
 export class AdminPanelModule {}

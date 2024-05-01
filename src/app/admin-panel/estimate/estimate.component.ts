@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-estimate',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EstimateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
   }
-
+  createEstimate(){
+    this._router.navigate(['/admin/create-estimate'])
+  }
 }
