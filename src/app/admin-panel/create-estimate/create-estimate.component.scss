@@ -1,0 +1,40 @@
+.itemDetailsTable table {
+  border: 0;
+  thead {
+    tr {
+      border: 0;
+      th {
+        text-transform: capitalize;
+        color: var(--muted);
+        border: 0 !important;
+        background-color: var(--light-primary);
+        padding: 8px 15px !important;
+        text-align: left !important;
+        color: var(--muted);
+        font-size: 0.75rem;
+        font-weight: 400 !important;
+      }
+    }
+  }
+  tbody {
+    tr {
+      border: 0;
+      vertical-align: text-top;
+      td {
+        border: none;
+        text-align: left;
+        padding: 20px 15px;
+        font-size: 0.875rem;
+        font-weight: 400;
+        &:first-child {
+          padding-left: 0 !important;
+        }
+        form {
+          td {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -51,7 +51,7 @@ const routes: Routes = [
   {
     path: 'online-request-demo',
     component: OnlineRequestDemoComponent,
-  },  
+  },
   // otherwise redirect to home
   { path: '**', redirectTo: '' },
 ];

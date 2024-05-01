@@ -14,10 +14,8 @@ import { BehaviorSubject, Observable, first } from 'rxjs';
   styleUrls: ['./customer.component.scss'],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TagInputModule],
-
 })
 export class CustomerComponent implements OnInit {
-
   customerForm!: FormGroup;
   loading = false;
   submitted = false;

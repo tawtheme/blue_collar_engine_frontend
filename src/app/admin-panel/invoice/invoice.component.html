@@ -1,0 +1,172 @@
+<div class="page-title-box items-center">
+    <div class="container-xxl">
+        <div class="d-flex items-center">
+            <h3 class="page-title">Invoices</h3>
+            <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
+                <button class="primary-filled-button  w-100" type="button"  (click)="createInvoice()"><span class="icon-add"></span>
+                    Add New Invoice</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-xxl">
+    <div class="py-4">
+        <div class="widget-container">
+            <article class="widget-card ">
+                <div class="widget-card-circle lightGrayBox">
+                    <span class="icon-estimate"></span>
+                </div>
+                <div class="widget-card-info">
+                    <h6>234</h6>
+                    <p>Total Invoice</p>
+                </div>
+            </article>
+            <article class="widget-card ">
+                <div class="widget-card-circle lightYellowBox">
+                    <span class="icon-time"></span>
+                </div>
+                <div class="widget-card-info">
+                    <h6>$18,000</h6>
+                    <p>Draft from 15 invoices</p>
+                </div>
+            </article>
+            <article class="widget-card ">
+                <div class="widget-card-circle lightDangerBox">
+                    <span class="icon-overdue"></span>
+                </div>
+                <div class="widget-card-info">
+                    <h6>$25,000</h6>
+                    <p>Overdue from 35 invoices</p>
+                </div>
+            </article>
+            <article class="widget-card ">
+                <div class="widget-card-circle lightSuccessBox">
+                    <span class="icon-job"></span>
+                </div>
+                <div class="widget-card-info">
+                    <h6>$35,000</h6>
+                    <p>Need invoices for 26 jobs</p>
+                </div>
+            </article>
+        </div>
+        <div class="table-top-filter-row">
+            <div class="table-top-filter-left">
+                <div class="top-search-group flexGrow2 startIconInputField">
+                    <input type="text" id="search" name="search" placeholder="Search invoice here..."
+                        class="form-control">
+                    <span class="icon-search iconPosition"></span>
+                </div>
+                <div class="top-search-group flexGrow1">
+                    <input type="date" id="date" name="date" placeholder="Select date..." class="form-control">
+                </div>
+                <div class="top-search-group flexGrow1">
+                    <select id="status" name="status" class="form-select pe-4">
+                        <option selected>Show only</option>
+                        <option value="">Paid</option>
+                        <option value="">Pending</option>
+                        <option value="">Overdue</option>
+                        <option value="">Draft</option>
+                    </select>
+                </div>
+            </div>
+            <div class="table-top-filter-right">
+                <button class="light-outlined-button"><span class="icon-send"></span> Send invoices</button>
+                <button class="light-outlined-button"><span class="icon-import"></span> Send Reminder</button>
+                <button class="light-outlined-button"><span class="icon-import"></span> Export</button>
+            </div>
+        </div>
+        <div class="mt-20">
+            <table class="row-border">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                            </div>
+                        </th>
+                        <th>Invoice No.</th>
+                        <th>Create Date</th>
+                        <th>Customer Name</th>
+                        <th>Amount</th>
+                        <th>Job</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                            </div>
+                        </td>
+                        <td>23456</td>
+                        <td>Feb 26, 2024</td>
+                        <td>Ava Franklin</td>
+                        <td>$1,273.00</td>
+                        <td>#459574</td>
+                        <td>
+                            <div class="">
+                                <span class="success-badge">Paid</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center justify-content-end">
+                                <button class=" light-outlined-button">View
+                                    Details</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                            </div>
+                        </td>
+                        <td>23456</td>
+                        <td>Feb 26, 2024</td>
+                        <td>Ava Franklin</td>
+                        <td>$1,273.00</td>
+                        <td>#459574</td>
+                        <td>
+                            <div class="">
+                                <span class="success-badge">Paid</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center justify-content-end">
+                                <button class=" light-outlined-button">View
+                                    Details</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                            </div>
+                        </td>
+                        <td>23456</td>
+                        <td>Feb 26, 2024</td>
+                        <td>Ava Franklin</td>
+                        <td>$1,273.00</td>
+                        <td>#459574</td>
+                        <td>
+                            <div class="">
+                                <span class="success-badge">Paid</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center justify-content-end">
+                                <button class=" light-outlined-button">View
+                                    Details</button>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

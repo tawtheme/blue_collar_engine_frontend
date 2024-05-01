@@ -1,0 +1,53 @@
+div#BookingDetailsSidebar {
+  width: 500px;
+}
+
+.bookingDateTimeWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  span.icon-calendar {
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    font-size: 14px;
+  }
+  .form-control {
+    padding-left: 35px;
+    height: 32px;
+  }
+  button {
+    position: absolute;
+    right: 10px;
+    padding: 0;
+    font-size: 14px;
+    top: 5px;
+  }
+}
+
+li.dropdown-team-item {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color2);
+  .dropdown-badge {
+    height: 22px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 12px;
+  }
+  &:last-child {
+    border-bottom: 0;
+  }
+  .tech-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50px;
+    overflow: hidden;
+  }
+}
+
+.selected-tech-team {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+}
