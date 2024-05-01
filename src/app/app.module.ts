@@ -19,6 +19,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { BookingComponent } from './booking/booking.component';
 
 @NgModule({
     imports: [
@@ -37,6 +38,7 @@ import { HeaderComponent } from './shared/header/header.component';
         OnlineRequestDemoComponent,
         ResetPasswordComponent,
         HeaderComponent,
+        BookingComponent,
         
     ],
     providers: [

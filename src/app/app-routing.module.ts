@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { DashboardComponent } from './admin-panel/dashboard/dashboard.component';
 import { CustomerDetailsComponent } from './admin-panel/customer-details/customer-details.component';
 import { CustomerComponent } from './admin-panel/customer/customer.component';
+import { BookingComponent } from './booking/booking.component';
 
 const routes: Routes = [
   {
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'online-request-demo',
     component: OnlineRequestDemoComponent,
+  },
+  {
+    path: 'booking',
+    component: BookingComponent,
   },
   // otherwise redirect to home
   { path: '**', redirectTo: '' },
