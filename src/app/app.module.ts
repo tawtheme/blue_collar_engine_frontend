@@ -49,7 +49,7 @@ import { LoaderInterceptor } from './_helpers/loader.interceptor';
         OnlineRequestDemoComponent,
         ResetPasswordComponent,
         HeaderComponent,
-        
+
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -61,4 +61,4 @@ import { LoaderInterceptor } from './_helpers/loader.interceptor';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
