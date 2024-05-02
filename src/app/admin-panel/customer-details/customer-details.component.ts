@@ -10,15 +10,24 @@ import { first } from 'rxjs';
 })
 export class CustomerDetailsComponent implements OnInit {
   customerInfo: any;
+  customerAddress: any = [];
+  customerId: number = 0;
   constructor(private route: ActivatedRoute, private _customerService: CustomerService) { }
 
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
-        //console.log(params); // { order: "popular" }
+        this.customerId = params.customerId;
         this.get(params.customerId);
+        this.getAddress(params.customerId);
       }
       );
+    this._customerService.customerDetailAdded.subscribe((customerId: number) => {
+      if (customerId > 0) {
+        this.get(customerId);
+        this.getAddress(customerId);
+      }
+    }); 
   }
 
   get(customerId: number) {
@@ -26,7 +35,6 @@ export class CustomerDetailsComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: (res) => {
-          //console.log(res)
           this.customerInfo = res.data;
         },
         error: error => {
@@ -34,4 +42,24 @@ export class CustomerDetailsComponent implements OnInit {
       });
   }
 
+  getAddress(customerId: number) {
+    var _param = {
+      "id": 0,
+      "pageNumber": 0,
+      "pageSize": 0,
+      "searchStr": ""
+    }
+    this._customerService.getAllAddress(_param)
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.customerAddress = res.data.filter(function (el: { customerId: number; }) {
+            return el.customerId == customerId;
+          });
+          console.log(this.customerAddress)
+        },
+        error: error => {
+        }
+      });
+  }
 }

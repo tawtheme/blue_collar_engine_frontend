@@ -21,6 +21,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { HeaderComponent } from './shared/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CreateCustomerComponent } from './admin-panel/shared/create-customer/create-customer.component';
+import { LoaderService } from './_services/loader.service';
+import { LoaderInterceptor } from './_helpers/loader.interceptor';
 
 @NgModule({
     imports: [
@@ -30,7 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
         AppRoutingModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot({
-            timeOut: 30000, // 30 seconds
+            timeOut: 15000, // 30 seconds
             closeButton: true,
             progressBar: true,
         }),
@@ -44,12 +47,14 @@ import { ToastrModule } from 'ngx-toastr';
         ForgetPasswordComponent,
         OnlineRequestDemoComponent,
         ResetPasswordComponent,
-        HeaderComponent
+        HeaderComponent,
+        
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        
+        { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+        LoaderService,
         // provider used to create fake backend
         fakeBackendProvider
     ],

@@ -9,11 +9,14 @@ import { JobsComponent } from './jobs/jobs.component';
 import { EstimateInvoiceComponent } from './estimate-invoice/estimate-invoice.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
-import { EstimateComponent } from './estimate/estimate.component';
+
 import { InvoiceComponent } from './invoice/invoice.component';
 import { CreateEstimateComponent } from './create-estimate/create-estimate.component';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 import { CreateJobComponent } from './create-job/create-job.component';
+import { EstimateComponent } from './estimate/estimate.component';
+import { CreateCustomerAddressComponent } from './shared/create-customer-address/create-customer-address.component';
+
 
 const routes: Routes = [
   {
@@ -31,7 +34,7 @@ const routes: Routes = [
       },
       {
         path: 'customer-detail',
-        component: CustomerDetailsComponent,
+        component: CustomerDetailsComponent
       },
       {
         path: 'scheduler',
@@ -71,4 +74,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminPanelRoutingModule {}
+export class AdminPanelRoutingModule { }

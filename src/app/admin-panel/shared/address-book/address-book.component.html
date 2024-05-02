@@ -1,0 +1,44 @@
+<div class="offcanvas-header sidebar-popup-header">
+    <h6 class="offcanvas-title" id="offcanvasRightLabel">Address Book</h6>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+    </button>
+</div>
+<div class="offcanvas-body">
+    <form class="sidebar-popup-inner">
+        <div class="card-checkbox" *ngFor="let address of items">
+            <label>
+                <input type="radio" name="address" class="card-input-element" [checked]="address.isDefault">
+                <div class="card-input">
+                    <span class="grey-badge mb-2 border-0">{{address.addressLabel}}</span>
+                    <p class="font15">{{address.address}} {{address.city}} {{address.state}} {{address.zipCode}}</p>
+                    <span class="icon-tick"></span>
+                    <button class="light-outlined-button xs-btn mt-2 px-2" type="button" (click)="getData(address)">
+                        <span class="icon-edit"></span> Edit
+                        Address</button>
+                    <!-- <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#AddAddressSidebar" aria-controls="AddAddressSidebar">
+                        <span class="icon-edit"></span> Edit
+                        Address</button> -->
+                </div>
+            </label>
+            <!-- <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddAddressSidebar"
+                aria-labelledby="offcanvasRightLabel">
+                <app-create-customer-address [data]="items"></app-create-customer-address>
+            </div> -->
+        </div>
+    </form>
+</div>
+<div class="sidebar-popup-bottom offcanvas-footer">
+    <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="button" (click)="addAdreess()"><span
+            class="icon-add"></span> Add Address</button>
+</div>
+
+<!-- <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddAddressSidebar"
+    aria-labelledby="offcanvasRightLabel">
+    <app-create-customer-address></app-create-customer-address>
+</div>  -->
+<a href="javascript:void(0);" style="display:none;" data-bs-toggle="offcanvas"
+    data-bs-target="#AddAddressSidebar" aria-controls="AddAddressSidebar" #clickEvent><span class="icon-edit-2"></span>
+    Edit Details</a>
+
+

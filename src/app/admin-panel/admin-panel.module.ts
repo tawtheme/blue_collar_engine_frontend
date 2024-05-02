@@ -15,6 +15,15 @@ import { EstimateComponent } from './estimate/estimate.component';
 import { CreateEstimateComponent } from './create-estimate/create-estimate.component';
 import { CreateInvoiceComponent } from './create-invoice/create-invoice.component';
 import { CreateJobComponent } from './create-job/create-job.component';
+import { CreateCustomerComponent } from './shared/create-customer/create-customer.component';
+import { ResuableTableComponent } from '@app/shared/resuable-table/resuable-table.component';
+import { TagModelClass } from 'ngx-chips/core/tag-model';
+import { TagInputModule } from 'ngx-chips';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreateCustomerAddressComponent } from './shared/create-customer-address/create-customer-address.component';
+import { PaginationComponent } from '@app/shared/Pagination/pagination.component';
+import { AddressBookComponent } from './shared/address-book/address-book.component';
+import { EditAddressComponent } from './shared/edit-address/edit-address.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +31,6 @@ import { CreateJobComponent } from './create-job/create-job.component';
     SchedulerComponent,
     JobsComponent,
     EstimateInvoiceComponent,
-    LayoutComponent,
     CustomerComponent,
     CustomerDetailsComponent,
     InvoiceComponent,
@@ -30,8 +38,12 @@ import { CreateJobComponent } from './create-job/create-job.component';
     CreateEstimateComponent,
     CreateInvoiceComponent,
     CreateJobComponent,
+    CreateCustomerComponent,
+    CreateCustomerAddressComponent,
+    PaginationComponent,
+    AddressBookComponent,
+    EditAddressComponent
   ],
-  imports: [CommonModule, AdminPanelRoutingModule],
- 
+  imports: [CommonModule, AdminPanelRoutingModule, TagInputModule, ReactiveFormsModule,]
 })
 export class AdminPanelModule {}

@@ -3,7 +3,7 @@
         <div class="d-flex items-center">
             <div class="">
                 <div class="d-flex items-center mb-10">
-                    <h4 class="page-title">{{customerInfo.firstName}} {{customerInfo.lastName}} </h4>
+                    <h4 class="page-title">{{customerInfo!.firstName}} {{customerInfo.lastName}} </h4>
                     <span class="success-badge ml-10">{{customerInfo.tags}}</span>
                 </div>
                 <div class="breadcrumb">
@@ -22,12 +22,19 @@
                         <span class="icon-down-arrow"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a href="#"><span class="icon-edit-2"></span> Edit Details</a></li>
-                        <li><a href="#"><span class="icon-edit-2"></span> Add Address</a></li>
-                        <li><a href="#"><span class="icon-estimate"></span> Create Estimate</a></li>
-                        <li><a href="#"><span class="icon-job"></span> Create Job</a></li>
-                        <li><a href="#"><span class="icon-invoice"></span> Create Invoice</a></li>
-                        <li><a href="#"><span class="icon-address"></span> Address Book</a></li>
+                        <li>
+                            <a href="javascript:void(0);" data-bs-toggle="offcanvas"
+                                data-bs-target="#AddCustomerSidebar" aria-controls="AddCustomerSidebar"><span
+                                    class="icon-edit-2"></span> Edit Details</a>
+                        </li>                       
+                        <li><a routerLink="/admin/create-estimate"><span class="icon-estimate"></span> Create
+                                Estimate</a></li>
+                        <li><a routerLink="/admin/create-job"><span class="icon-job"></span> Create Job</a></li>
+                        <li><a routerLink="/admin/create-invoice"><span class="icon-invoice"></span> Create Invoice</a>
+                        </li>
+                        <li><a href="javascript:void(0);" data-bs-toggle="offcanvas"
+                                data-bs-target="#AddressBookSidebar" aria-controls="AddressBookSidebar"><span
+                                    class="icon-address"></span> Address Book</a></li>
                     </ul>
                 </div>
             </div>
@@ -44,11 +51,11 @@
             </div>
             <div class="customers-card-item">
                 <p>Customer Since</p>
-                <h6>{{customerInfo.createdDate }}</h6>
+                <h6>{{customerInfo.createdDate | date:'mediumDate'}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Billing Address</p>
-                <h6>{{customerInfo.serviceAddress}}</h6>
+                <h6>{{customerInfo.serviceAddress}} {{customerInfo.city}} {{customerInfo.state}} {{customerInfo.zipCode}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Phone Number</p>
@@ -154,7 +161,7 @@
                         </tr>
                     </tbody>
                 </table>
-               
+
             </div>
             <div class="tab-pane fade" id="pills-estimate" role="tabpanel" aria-labelledby="pills-estimate-tab"
                 tabindex="0">
@@ -339,3 +346,19 @@
             </div>
         </div>
     </div>
+</div>
+<div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddCustomerSidebar"
+    aria-labelledby="offcanvasRightLabel">
+    <app-create-customer [items]="customerInfo"></app-create-customer>
+</div>
+
+
+<div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddressBookSidebar"
+    aria-labelledby="offcanvasRightLabel">
+    <app-address-book [items]="customerAddress"></app-address-book>
+</div>
+
+<div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddAddressSidebar"
+    aria-labelledby="offcanvasRightLabel">
+    <app-create-customer-address></app-create-customer-address>
+</div>

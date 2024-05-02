@@ -50,7 +50,7 @@
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="EstimateId" class="form-label">Estimate ID</label>
-                        <input type="text" disabled id="EstimateId" formControlName="EstimateId" value="CZHC-00001"
+                        <input type="text" id="EstimateId" formControlName="EstimateId" value="CZHC-00001"
                             placeholder="EstimateId" class="form-control">
                     </div>
                 </div>
@@ -201,56 +201,7 @@
 
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddressBookSidebar"
     aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header sidebar-popup-header">
-        <h6 class="offcanvas-title" id="offcanvasRightLabel">Address Book</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
-
-        </button>
-    </div>
-    <div class="offcanvas-body">
-        <form class="sidebar-popup-inner">
-
-            <div class="card-checkbox">
-                <label>
-                    <input type="radio" name="address" class="card-input-element" checked>
-                    <div class="card-input">
-                        <span class="grey-badge mb-2 border-0">Office Address</span>
-                        <p class="font15">123 Oak Street, Springfield, IL 62701</p>
-                        <span class="icon-tick"></span>
-                        <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#EditAddressSidebar" aria-controls="EditAddressSidebar"> <span
-                                class="icon-edit"></span> Edit
-                            Address</button>
-                    </div>
-                </label>
-            </div>
-
-            <div class="card-checkbox">
-                <label>
-                    <input type="radio" name="address" class="card-input-element">
-                    <div class="card-input">
-                        <span class="grey-badge mb-2 border-0">Home Address</span>
-                        <p class="font15">123 Oak Street, Springfield, IL 62701</p>
-                        <span class="icon-tick"></span>
-                        <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#EditAddressSidebar" aria-controls="EditAddressSidebar"> <span
-                                class="icon-edit"></span> Edit
-                            Address</button>
-                    </div>
-                </label>
-            </div>
-
-
-
-
-
-
-        </form>
-    </div>
-    <div class="sidebar-popup-bottom offcanvas-footer">
-        <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="submit"><span
-                class="icon-add"></span> Add Address</button>
-    </div>
+    <app-address-book></app-address-book>
 </div>
 
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="EditAddressSidebar"
