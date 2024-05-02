@@ -41,3 +41,53 @@
     }
   }
 }
+
+.booking-services-items {
+  border-bottom: 1px solid var(--border-color2);
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border: 0;
+  }
+  .booking-services-item-img {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    button {
+      font-size: 13px;
+      margin-top: -18px;
+    }
+    .btn-outline-primary {
+      background-color: var(--white);
+      &:hover {
+        background-color: var(--primary);
+        color: var(--white);
+      }
+    }
+  }
+}
+
+.service-modal-wrapper {
+  padding: 0 12px;
+  .service-modal-available-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    button {
+      width: calc(50% - 7.5px);
+      height: 38px;
+      font-size: 14px;
+      &:hover {
+        background-color: var(--light-primary);
+      }
+    }
+  }
+
+  .service-modal-right {
+    background-color: var(--light);
+  }
+}

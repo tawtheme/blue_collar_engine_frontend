@@ -1,52 +1,43 @@
 .job-top-steps {
   display: flex;
   align-items: center;
-  gap: 0;
+  gap: 25px;
   .job-step-item {
     flex: 1;
     position: relative;
-    position: relative;
-    padding: 0;
-    margin: 0 4px 0 0;
-    .job-step-item-btn {
-      margin-right: inherit;
-      line-height: inherit;
-      height: 58px;
-      border: inherit;
-      border-radius: inherit;
-      background-color: #edeff0;
-      border-color: #edeff0;
-      padding: 10px 15px;
-    }
+    border: 1px solid #edeff0;
+    padding: 10px 15px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
     h4 {
       font-size: 0.875rem;
-      font-weight: 600;
+      font-weight: 500;
       margin-bottom: 5px;
     }
     p {
       font-size: 12px;
       margin-bottom: 0;
     }
-    // &.active-job-step {
-    //   background-color: var(--primary);
-    //   border-color: var(--primary);
-    //   h4 {
-    //     color: var(--white);
-    //   }
-    //   p {
-    //     color: var(--white);
-    //   }
-    // }
-    // &.success-job-step {
-    //   background-color: var(--success);
-    //   border-color: var(--success);
-    //   h4 {
-    //     color: var(--white);
-    //   }
-    //   p {
-    //     color: var(--white);
-    //   }
-    // }
+    &.active-job-step {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      h4 {
+        color: var(--white);
+      }
+      p {
+        color: var(--white);
+      }
+    }
+    &.success-job-step {
+      background-color: var(--success);
+      border-color: var(--success);
+      h4 {
+        color: var(--white);
+      }
+      p {
+        color: var(--white);
+      }
+    }
   }
 }
 .createJobItemDetailsSection {
