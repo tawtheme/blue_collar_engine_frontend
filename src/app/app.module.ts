@@ -19,6 +19,7 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { BookingComponent } from './booking/booking.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CreateCustomerComponent } from './admin-panel/shared/create-customer/create-customer.component';
@@ -60,5 +61,4 @@ import { LoaderInterceptor } from './_helpers/loader.interceptor';
     ],
     bootstrap: [AppComponent]
 })
-
-export class AppModule { }
+export class AppModule {}
