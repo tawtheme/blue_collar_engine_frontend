@@ -10,9 +10,9 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { DashboardComponent } from './admin-panel/dashboard/dashboard.component';
-import { CustomerDetailsComponent } from './admin-panel/customer-details/customer-details.component';
-import { CustomerComponent } from './admin-panel/customer/customer.component';
-import { BookingComponent } from './booking/booking.component';
+import { CustomerDetailsComponent } from './admin-panel/customer-section/customer-details/customer-details.component';
+import { CustomerComponent } from './admin-panel/customer-section/customer/customer.component';
+import { BookingComponent } from './admin-panel/booking-section/booking/booking.component';
 
 const routes: Routes = [
   {

@@ -3,7 +3,7 @@
         <div class="d-flex items-center">
             <h3 class="page-title">Scheduler</h3>
             <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
-                <button class="primary-filled-button  w-100" type="button">
+                <button class="primary-filled-button  w-100" type="button" (click)="redirectToBooking()">
                     <span class="icon-add"></span>
                     Add New Booking</button>
             </div>
@@ -91,7 +91,7 @@
             <div class="d-flex align-items-center mb-4">
                 <div class="d-flex align-items-center g-3">
                     <div class="form-group me-4">
-                        <select id="employeesNumber" formControlName="employeesNumber" class="form-select pe-5">
+                        <select id="employeesNumber" class="form-select pe-5">
                             <option value="" selected>All Team</option>
                             <option value="Michael Williams">Michael Williams</option>
                             <option value="John Smith">John Smith</option>
@@ -100,7 +100,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <select id="employeesNumber" formControlName="employeesNumber" class="form-select pe-5">
+                        <select id="employeesNumber" class="form-select pe-5">
                             <option value="" selected>Status</option>
                             <option value="Michael Williams">Michael Williams</option>
                             <option value="John Smith">John Smith</option>

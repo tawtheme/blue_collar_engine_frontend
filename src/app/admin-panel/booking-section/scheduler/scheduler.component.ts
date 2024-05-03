@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-scheduler',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SchedulerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _route: Router) { }
 
   ngOnInit(): void {
   }
 
+  redirectToBooking() {
+    this._route.navigate(['/admin/create-booking']);
+  }
 }

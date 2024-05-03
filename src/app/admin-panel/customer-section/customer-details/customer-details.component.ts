@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
 import { first } from 'rxjs';
 
@@ -12,7 +12,7 @@ export class CustomerDetailsComponent implements OnInit {
   customerInfo: any;
   customerAddress: any = [];
   customerId: number = 0;
-  constructor(private route: ActivatedRoute, private _customerService: CustomerService) { }
+  constructor(private route: ActivatedRoute, private _customerService: CustomerService, private _router: Router) { }
 
   ngOnInit(): void {
     this.route.queryParams
@@ -27,7 +27,7 @@ export class CustomerDetailsComponent implements OnInit {
         this.get(customerId);
         this.getAddress(customerId);
       }
-    }); 
+    });
   }
 
   get(customerId: number) {
@@ -61,5 +61,8 @@ export class CustomerDetailsComponent implements OnInit {
         error: error => {
         }
       });
+  }
+  redirectToCreateJob() {
+    this._router.navigate(['/admin/create-job']);
   }
 }

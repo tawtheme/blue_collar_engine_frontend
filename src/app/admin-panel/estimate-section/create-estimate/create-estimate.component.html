@@ -3,14 +3,14 @@
         <div class="d-flex items-center">
             <div class="">
                 <div class="d-flex items-center mb-10">
-                    <h4 class="page-title">Add New Invoice</h4>
+                    <h4 class="page-title">Add New Estimate</h4>
                 </div>
                 <div class="breadcrumb">
                     <a>Dashboard</a>
                     <span class="separator">/</span>
-                    <a>Invoice</a>
+                    <a>Estimate</a>
                     <span class="separator">/</span>
-                    <span>Create Invoice</span>
+                    <span>Create Estimate</span>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="fname" class="form-label">Customer Name</label>
-                        <select id="employeesNumber" formControlName="employeesNumber" class="form-select">
+                        <select id="employeesNumber"  class="form-select">
                             <option value="" disabled selected>Select</option>
                             <option value="Michael Williams">Michael Williams</option>
                             <option value="John Smith">John Smith</option>
@@ -36,21 +36,21 @@
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="createDate" class="form-label">Create Date</label>
-                        <input type="date" id="createDate" formControlName="createDate" placeholder="Select date"
+                        <input type="date" id="createDate"  placeholder="Select date"
                             class="form-control">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="expiryDate" class="form-label">Expiry Date</label>
-                        <input type="date" id="expiryDate" formControlName="expiryDate" placeholder="Select date"
+                        <input type="date" id="expiryDate"  placeholder="Select date"
                             class="form-control">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="EstimateId" class="form-label">Estimate ID</label>
-                        <input type="text" id="EstimateId" formControlName="EstimateId" value="CZHC-00001"
+                        <input type="text" id="EstimateId"  value="CZHC-00001"
                             placeholder="EstimateId" class="form-control">
                     </div>
                 </div>
@@ -92,7 +92,6 @@
                 <div class="col-lg-6">
                     <div class="border p-3 rounded h-100 ">
                         <div class="font-muted font14 d-flex align-items-center gap-2 mb-2">Service Address
-
                         </div>
                         <div class="font14 d-flex align-items-center gap-2">
                             <span class="icon-address"></span>333 Cedar Drive, Mountain View, CA 94040
@@ -120,7 +119,7 @@
                         <tr>
                             <td class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <select id="item" formControlName="item" class="form-select">
+                                    <select id="item" class="form-select">
                                         <option value="" disabled selected>Type or click to select an item</option>
                                         <option value="Air conditioner repair">Air conditioner repair</option>
                                         <option value="Energy audit">Energy audit</option>
@@ -135,13 +134,13 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input type="number" id="Qty" formControlName="Qty" placeholder="Qty"
+                                    <input type="number" id="Qty" placeholder="Qty"
                                         class="form-control">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" id="UnitPrice" formControlName="UnitPrice" placeholder="$0.00"
+                                    <input type="text" id="UnitPrice"  placeholder="$0.00"
                                         class="form-control">
                                 </div>
                             </td>
@@ -157,57 +156,37 @@
                     </tbody>
                 </table>
                 <button class="light-primary-outlined-button"><span class="icon-add"></span>Add Service Item</button>
-
-            </div>
-            <div class="row mt-5 gx-5">
-                <div class="col-lg-7">
-                    <h4 class="mb-15 font16">Terms and conditions</h4>
-                    <ol class="ps-3">
-                        <li class="font-muted font14 mb-2">
-                            Payment is due within [number of days] from the invoice date. Late payments may incur
-                            penalties
-                            or interest charges at [rate]% per [period]. </li>
-                        <li class="font-muted font14 mb-2">Goods or services remain the property of [Your Company Name]
-                            until
-                            payment is received in full.
-                        </li>
-                        <li class="font-muted font14 mb-2">
-                            Any disputes or discrepancies regarding the invoice must be raised within [number of days]
-                            of
-                            receipt. Disputes will be resolved through [mediation/arbitration/court proceedings] in
-                            [jurisdiction].
-                        </li>
-
-                        <li class="font-muted font14 mb-2">
-                            This agreement is governed by the laws of [jurisdiction], and any disputes shall be resolved
-                            in
-                            [courts or arbitration in jurisdiction].
-                        </li>
-
-                    </ol>
-                </div>
-                <div class="col-lg-5">
-                    <div class="card p-3 bg-light">
-                        <div class="d-flex mb-3 align-items-center">
-                            <div class="font-muted font14 d-flex align-items-center gap-2">Discount <select id="item"
-                                    formControlName="item" class="form-select grey-badge pe-4">
-                                    <option selected>%</option>
-                                    <option value="1">Flat</option>
-                                </select>
+                <div class="row mt-4 gx-5">
+                    <div class="col-lg-7">
+                        <h4 class="mb-15 font16">Add Notes</h4>
+                        <div class="form-group mb-3">
+                            <textarea placeholder="Enter description of what you’re providing" class="form-control"
+                                rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="card p-3 bg-light">
+                            <div class="d-flex mb-3 align-items-center">
+                                <div class="font-muted font14 d-flex align-items-center gap-2">Discount <select
+                                        id="item"  class="form-select grey-badge pe-4">
+                                        <option selected>%</option>
+                                        <option value="1">Flat</option>
+                                    </select>
+                                </div>
+                                <div class="font14 ms-auto white-badge">$0.00 </div>
                             </div>
-                            <div class="font14 ms-auto white-badge">$0.00 </div>
-                        </div>
-                        <div class="d-flex mb-3 align-items-center">
-                            <div class="font-muted font14">Sub Total</div>
-                            <div class="font14 ms-auto">$0.00 </div>
-                        </div>
-                        <div class="d-flex mb-3 align-items-center">
-                            <div class="font-muted font14">Tax</div>
-                            <div class="font14 ms-auto text-primary">+ $0.00 </div>
-                        </div>
-                        <div class="d-flex mt-3 mb-2 align-items-center">
-                            <h4 class="font18">Estimate Total</h4>
-                            <h4 class="font18 ms-auto">$0.00</h4>
+                            <div class="d-flex mb-3 align-items-center">
+                                <div class="font-muted font14">Sub Total</div>
+                                <div class="font14 ms-auto">$0.00 </div>
+                            </div>
+                            <div class="d-flex mb-3 align-items-center">
+                                <div class="font-muted font14">Tax</div>
+                                <div class="font14 ms-auto text-primary">+ $0.00 </div>
+                            </div>
+                            <div class="d-flex mt-3 mb-2 align-items-center">
+                                <h4 class="font18">Estimate Total</h4>
+                                <h4 class="font18 ms-auto">$0.00</h4>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -222,56 +201,7 @@
 
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddressBookSidebar"
     aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header sidebar-popup-header">
-        <h6 class="offcanvas-title" id="offcanvasRightLabel">Address Book</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
-
-        </button>
-    </div>
-    <div class="offcanvas-body">
-        <form class="sidebar-popup-inner">
-
-            <div class="card-checkbox">
-                <label>
-                    <input type="radio" name="address" class="card-input-element" checked>
-                    <div class="card-input">
-                        <span class="grey-badge mb-2 border-0">Office Address</span>
-                        <p class="font15">123 Oak Street, Springfield, IL 62701</p>
-                        <span class="icon-tick"></span>
-                        <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#EditAddressSidebar" aria-controls="EditAddressSidebar"> <span
-                                class="icon-edit"></span> Edit
-                            Address</button>
-                    </div>
-                </label>
-            </div>
-
-            <div class="card-checkbox">
-                <label>
-                    <input type="radio" name="address" class="card-input-element">
-                    <div class="card-input">
-                        <span class="grey-badge mb-2 border-0">Home Address</span>
-                        <p class="font15">123 Oak Street, Springfield, IL 62701</p>
-                        <span class="icon-tick"></span>
-                        <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#EditAddressSidebar" aria-controls="EditAddressSidebar"> <span
-                                class="icon-edit"></span> Edit
-                            Address</button>
-                    </div>
-                </label>
-            </div>
-
-
-
-
-
-
-        </form>
-    </div>
-    <div class="sidebar-popup-bottom offcanvas-footer">
-        <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="submit"><span
-                class="icon-add"></span> Add Address</button>
-    </div>
+    <app-address-book></app-address-book>
 </div>
 
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="EditAddressSidebar"

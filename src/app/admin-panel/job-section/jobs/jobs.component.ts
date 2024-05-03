@@ -14,6 +14,6 @@ export class JobsComponent implements OnInit {
   }
 
   createJob() {
-    this._router.navigate(['/admin/create-job'])
+    this._router.navigate(['/admin/create-job']);
   }
 }
