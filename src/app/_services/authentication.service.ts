@@ -46,4 +46,23 @@ export class AuthenticationService {
         this.userSubject.next(null);
         this.router.navigate(['/login']);
     }
+
+    forgetPassword(email: string) {
+        var _params = {
+            'emailAddress': email
+        };
+        let reqHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/ForgetPassword`, JSON.stringify(_params), { headers: reqHeaders })
+            .pipe(map(res => {
+                return res;
+            }));
+    }
+
+    resetPassword(resetPassword: any) {        
+        let reqHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/ResetPassword`, JSON.stringify(resetPassword), { headers: reqHeaders })
+            .pipe(map(res => {
+                return res;
+            }));
+    }
 }

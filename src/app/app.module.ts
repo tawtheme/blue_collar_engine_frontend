@@ -17,14 +17,13 @@ import { LayoutComponent } from './admin-panel/layout/layout.component';
 import { SecureLayoutComponent } from './super-admin-panel/secure-layout/secure-layout.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LoaderService } from './_services/loader.service';
 import { LoaderInterceptor } from './_helpers/loader.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -33,7 +32,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         AppRoutingModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot({
-            timeOut: 15000, // 30 seconds
+            timeOut: 10000, // 10 seconds
             closeButton: true,
             progressBar: true,
         }),
@@ -47,9 +46,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         SecureLayoutComponent,
         ForgetPasswordComponent,
         OnlineRequestDemoComponent,
-        ResetPasswordComponent,
-        HeaderComponent
-
+        HeaderComponent,
+        ResetPasswordComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -63,7 +63,9 @@ export class CustomerComponent implements OnInit {
   onChangePage(pageOfItems: any) {
     // update current page of items
     this.pageOfItems = pageOfItems;
+    // this.pageOfItems = { ...this.pageOfItems!, ...{ ischeck: false } };
   }
+
   sortBy(property: string) {
     this.sortOrder = property === this.sortProperty ? (this.sortOrder * -1) : 1;
     this.sortProperty = property;
@@ -88,7 +90,6 @@ export class CustomerComponent implements OnInit {
   }
 
   onEnter(str: any): void {
-    console.log("You entered: ", str.target.value);
     var _param = {
       "id": 0,
       "pageNumber": 0,
@@ -96,5 +97,10 @@ export class CustomerComponent implements OnInit {
       "searchStr": str.target.value
     }
     this.getAll(_param);
+  }
+
+  checkAll(ev: any) {
+    this.pageOfItems!.forEach(x => x.ischeck = ev.target.checked)
+    console.log(this.pageOfItems)
   }
 }

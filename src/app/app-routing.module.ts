@@ -3,16 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 //import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import { AuthGuard } from './_helpers';
-import { Role } from './_models';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { DashboardComponent } from './admin-panel/dashboard/dashboard.component';
-import { CustomerDetailsComponent } from './admin-panel/customer-section/customer-details/customer-details.component';
-import { CustomerComponent } from './admin-panel/customer-section/customer/customer.component';
 import { BookingComponent } from './admin-panel/booking-section/booking/booking.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -42,10 +37,6 @@ const routes: Routes = [
     component: ForgetPasswordComponent,
   },
   {
-    path: 'reset-password',
-    component: ResetPasswordComponent,
-  },
-  {
     path: 'unauthorized',
     component: UnauthorizedComponent,
   },
@@ -57,6 +48,10 @@ const routes: Routes = [
     path: 'booking',
     component: BookingComponent,
   },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+  },
   // otherwise redirect to home
   { path: '**', redirectTo: '' },
 ];
@@ -65,4 +60,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
