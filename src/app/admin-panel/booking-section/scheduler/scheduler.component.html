@@ -87,7 +87,6 @@
             </div>
         </div>
         <div class="col-9">
-
             <div class="d-flex align-items-center mb-4">
                 <div class="d-flex align-items-center g-3">
                     <div class="form-group me-4">
@@ -110,13 +109,42 @@
                     </div>
                 </div>
                 <div class="ms-auto">
-                    <h5 class="font500 font15">Monday, Feb 04, 2024</h5>
+                    <h5 class="font500 font15">{{viewDate | date:'mediumDate'}}</h5>
                 </div>
             </div>
+
+            <app-calender-header [(view)]="view" [(viewDate)]="viewDate">
+            </app-calender-header>
+
+            <ng-template #customCellTemplate let-day="day" let-locale="locale">
+                <div class="cal-cell-top">
+                    <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+                    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+                </div>
+                <!-- <small style="margin: 5px">There are {{ day.events.length }} events on this day</small> -->
+            </ng-template>
+
+            <div [ngSwitch]="view">
+                <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh" (dayClicked)="dayClicked($event.day)" [activeDayIsOpen]="activeDayIsOpen"
+                    (eventClicked)="handleEvent('Clicked', $event.event)"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-month-view>
+                <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"
+                    [refresh]="refresh"
+                    (eventClicked)="handleEvent('Clicked', $event.event)"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-week-view>
+                <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"                    
+                    (eventClicked)="handleEvent('Clicked', $event.event)"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-day-view>
+            </div>
+
         </div>
+        <br />
     </div>
 </div>
-
 
 
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="BookingDetailsSidebar"
@@ -263,3 +291,27 @@ Our air conditioning unit has been making a strange rattling noise intermittentl
         <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="submit">Save</button>
     </div>
 </div>
+
+<ng-template #modalContent let-close="close">
+    <div class="modal-header">
+        <h5 class="modal-title">Event action occurred</h5>
+        <button type="button" class="close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div>
+            Action:
+            <pre>{{ modalData.action }}</pre>
+        </div>
+        <div>
+            Event:
+            <pre>{{ modalData.event | json }}</pre>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="close()">
+            OK
+        </button>
+    </div>
+</ng-template>

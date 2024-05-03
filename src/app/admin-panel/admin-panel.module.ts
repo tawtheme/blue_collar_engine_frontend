@@ -21,8 +21,19 @@ import { CreateCustomerAddressComponent } from './shared/create-customer-address
 import { PaginationComponent } from '@app/shared/Pagination/pagination.component';
 import { AddressBookComponent } from './shared/address-book/address-book.component';
 import { BookingComponent } from './booking-section/booking/booking.component';
-
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CalenderHeaderComponent } from './booking-section/scheduler/calander-header/calender-header/calender-header.component';
 @NgModule({
+  imports: [CommonModule,
+    AdminPanelRoutingModule,
+    TagInputModule,
+    ReactiveFormsModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),],
+
   declarations: [
     DashboardComponent,
     SchedulerComponent,
@@ -38,8 +49,9 @@ import { BookingComponent } from './booking-section/booking/booking.component';
     CreateCustomerAddressComponent,
     PaginationComponent,
     AddressBookComponent,
-    BookingComponent
+    BookingComponent,
+    CalenderHeaderComponent
   ],
-  imports: [CommonModule, AdminPanelRoutingModule, TagInputModule, ReactiveFormsModule]
+
 })
 export class AdminPanelModule { }

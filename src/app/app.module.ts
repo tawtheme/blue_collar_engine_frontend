@@ -19,12 +19,11 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { HeaderComponent } from './shared/header/header.component';
-import { BookingComponent } from './admin-panel/booking-section/booking/booking.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { CreateCustomerComponent } from './admin-panel/shared/create-customer/create-customer.component';
 import { LoaderService } from './_services/loader.service';
 import { LoaderInterceptor } from './_helpers/loader.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -38,6 +37,7 @@ import { LoaderInterceptor } from './_helpers/loader.interceptor';
             closeButton: true,
             progressBar: true,
         }),
+        NgbModule
     ],
     declarations: [
         AppComponent,
