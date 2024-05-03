@@ -1,6 +1,10 @@
+
 .cursor-loader {
     cursor: wait;
     * {
       cursor: wait !important;
+      //z-index: 1000px !important;
     }
   }
+
+  
