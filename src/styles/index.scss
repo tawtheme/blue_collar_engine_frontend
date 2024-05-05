@@ -1036,7 +1036,7 @@ table {
 
 table th {
   background-color: var(--light-primary);
-  padding: 8px 15px !important;
+  padding: 8px 12px !important;
   text-align: left !important;
   border-bottom: 1px solid #ddd !important;
   text-transform: uppercase;
@@ -1062,7 +1062,7 @@ table tr tr:last-child {
 table td {
   border: none;
   text-align: left;
-  padding: 20px 15px;
+  padding: 20px 12px;
   font-size: 0.875rem;
   font-weight: 400;
 }
@@ -1093,6 +1093,9 @@ table tbody td {
     padding: 0;
     margin-right: 5px;
   }
+}
+.offcanvas-w480 {
+  width: 480px !important;
 }
 
 .offcanvas-header {

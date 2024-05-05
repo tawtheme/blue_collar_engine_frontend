@@ -6,9 +6,9 @@
                     <h4 class="page-title">Add New Invoice</h4>
                 </div>
                 <div class="breadcrumb">
-                    <a>Dashboard</a>
+                    <a [routerLink]="['/admin']">Dashboard</a>
                     <span class="separator">/</span>
-                    <a>Invoice</a>
+                    <a [routerLink]="['/admin/invoice']">Invoice</a>
                     <span class="separator">/</span>
                     <span>Create Invoice</span>
                 </div>
@@ -24,7 +24,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="fname" class="form-label">Customer Name</label>
-                        <select id="employeesNumber"  class="form-select">
+                        <select id="employeesNumber" class="form-select">
                             <option value="" disabled selected>Select</option>
                             <option value="Michael Williams">Michael Williams</option>
                             <option value="John Smith">John Smith</option>
@@ -36,22 +36,20 @@
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="createDate" class="form-label">Create Date</label>
-                        <input type="date" id="createDate"  placeholder="Select date"
-                            class="form-control">
+                        <input type="date" id="createDate" placeholder="Select date" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="expiryDate" class="form-label">Expiry Date</label>
-                        <input type="date" id="expiryDate" placeholder="Select date"
-                            class="form-control">
+                        <input type="date" id="expiryDate" placeholder="Select date" class="form-control">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="EstimateId" class="form-label">Estimate ID</label>
-                        <input type="text" id="EstimateId"  value="CZHC-00001"
-                            placeholder="EstimateId" class="form-control">
+                        <input type="text" id="EstimateId" value="CZHC-00001" placeholder="EstimateId"
+                            class="form-control">
                     </div>
                 </div>
             </div>
@@ -135,14 +133,12 @@
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input type="number" id="Qty" placeholder="Qty"
-                                        class="form-control">
+                                    <input type="number" id="Qty" placeholder="Qty" class="form-control">
                                 </div>
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input type="text" id="UnitPrice"  placeholder="$0.00"
-                                        class="form-control">
+                                    <input type="text" id="UnitPrice" placeholder="$0.00" class="form-control">
                                 </div>
                             </td>
                             <td>
@@ -190,7 +186,7 @@
                     <div class="card p-3 bg-light">
                         <div class="d-flex mb-3 align-items-center">
                             <div class="font-muted font14 d-flex align-items-center gap-2">Discount <select id="item"
-                                     class="form-select grey-badge pe-4">
+                                    class="form-select grey-badge pe-4">
                                     <option selected>%</option>
                                     <option value="1">Flat</option>
                                 </select>

@@ -1,13 +1,9 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 .cursor-loader {
-    cursor: wait;
-    * {
-      cursor: wait !important;
-      //z-index: 1000px !important;
-    }
+  cursor: wait;
+  * {
+    cursor: wait !important;
+    //z-index: 1000px !important;
   }
-
-  
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+}

@@ -7,9 +7,9 @@
                     <span class="success-badge ml-10">{{customerInfo.tags}}</span>
                 </div>
                 <div class="breadcrumb">
-                    <a>Dashboard</a>
+                    <a [routerLink]="['/admin']">Dashboard</a>
                     <span class="separator">/</span>
-                    <a>Customers</a>
+                    <a [routerLink]="['/admin/customer']">Customers</a>
                     <span class="separator">/</span>
                     <span>Customer Details</span>
                 </div>
@@ -26,7 +26,7 @@
                             <a href="javascript:void(0);" data-bs-toggle="offcanvas"
                                 data-bs-target="#AddCustomerSidebar" aria-controls="AddCustomerSidebar"><span
                                     class="icon-edit-2"></span> Edit Details</a>
-                        </li>                       
+                        </li>
                         <li><a routerLink="/admin/create-estimate"><span class="icon-estimate"></span> Create
                                 Estimate</a></li>
                         <li><a routerLink="/admin/create-job"><span class="icon-job"></span> Create Job</a></li>
@@ -55,7 +55,8 @@
             </div>
             <div class="customers-card-item">
                 <p>Billing Address</p>
-                <h6>{{customerInfo.serviceAddress}} {{customerInfo.city}} {{customerInfo.state}} {{customerInfo.zipCode}}</h6>
+                <h6>{{customerInfo.serviceAddress}} {{customerInfo.city}} {{customerInfo.state}}
+                    {{customerInfo.zipCode}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Phone Number</p>
@@ -66,29 +67,53 @@
                 <h6><span class="icon-email"></span>{{customerInfo.emailAddress}}</h6>
             </div>
         </div>
-        <h4 class="mb-12 font16">Customer Summary</h4>
-        <div class="customers-widget-container">
-            <article class="customers-widget-card  lightPrimaryCardBox">
-                <p>Total Booking</p>
-                <h3>20</h3>
-            </article>
-            <article class="customers-widget-card  lightSuccessCardBox">
-                <p>Total Revenue</p>
-                <h3>$25,346</h3>
-            </article>
-            <article class="customers-widget-card lightGreyCardBox">
-                <p>Estimates</p>
-                <h3>20</h3>
-            </article>
-            <article class="customers-widget-card lightDangerCardBox">
-                <p>Current Due</p>
-                <h3>$345.89</h3>
-            </article>
+        <h4 class="mb-12 font16">Quick Summary</h4>
+        <div class="row customers-widget-container">
+            <div class="col-md-7">
+                <article class="border rounded h-100 py-3 px-4 d-flex justify-content-between">
+                    <div class="">
+                        <h3>30</h3>
+                        <p>Total Booking</p>
+                    </div>
+                    <div class="">
+                        <h3>09</h3>
+                        <p>Total Estimates</p>
+                    </div>
+                    <div class="">
+                        <h3>12</h3>
+                        <p>Total Jobs</p>
+                    </div>
+                    <div class="">
+                        <h3>25</h3>
+                        <p>Total Invoice</p>
+                    </div>
+
+                </article>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <div class="col-md-6">
+                        <article class="customers-widget-card lightSuccessCardBox">
+                            <h3>20</h3>
+                            <p>Estimates</p>
+                        </article>
+                    </div>
+                    <div class="col-md-6">
+                        <article class="customers-widget-card lightDangerCardBox">
+                            <h3>$345.89</h3>
+                            <p>Current Due</p>
+                        </article>
+                    </div>
+                </div>
+
+
+            </div>
         </div>
+
         <h4 class="mb-15 font16">Overview</h4>
 
 
-        <ul class="nav nav-pills mb-3 borderStyleTabs" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills mb-3 outlinedButtonStyleTabs" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="pills-booking-tab" data-bs-toggle="pill"
                     data-bs-target="#pills-booking" type="button" role="tab" aria-controls="pills-booking"

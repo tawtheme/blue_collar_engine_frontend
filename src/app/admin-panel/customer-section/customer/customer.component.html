@@ -55,17 +55,21 @@
                 </div>
             </article>
         </div>
-        <div class="table-top-filter-row">
-            <div class="table-top-filter-left">
-                <div class="top-search-group flexGrow2 startIconInputField">
-                    <input type="text" id="search" name="search" placeholder="Search with Name, Phone number here..."
-                        class="form-control" (keyup.enter)="onEnter($event)">
-                    <span class="icon-search iconPosition"></span>
+        <div class="table-top-filter-row row">
+            <div class="col-md-5">
+                <div class="table-top-filter-left">
+                    <div class="top-search-group flexGrow2 startIconInputField">
+                        <input type="text" id="search" name="search"
+                            placeholder="Search with Name, Address, Phone number here..." class="form-control"
+                            (keyup.enter)="onEnter($event)">
+                        <span class="icon-search iconPosition"></span>
+                    </div>
+                    <!-- <div class="top-search-group flexGrow1">
+                        <input type="date" id="date" name="date" placeholder="Select date..." class="form-control">
+                    </div> -->
                 </div>
-                <!-- <div class="top-search-group flexGrow1">
-                    <input type="date" id="date" name="date" placeholder="Select date..." class="form-control">
-                </div> -->
             </div>
+
             <div class="table-top-filter-right">
                 <button class="light-outlined-button"><span class="icon-import"></span> Export</button>
             </div>
@@ -85,6 +89,7 @@
                             <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
                             <th (click)="sortBy('mobileNumber')">Contact number{{sortIcon('mobileNumber')}}</th>
                             <th (click)="sortBy('serviceAddress')">Address{{sortIcon('serviceAddress')}}</th>
+                            <th>Customer Status</th>
                             <th>Balance Due</th>
                             <th>Last Booking</th>
                             <th>Action</th>
@@ -102,8 +107,21 @@
                             <td>{{ cust.createdDate | date:'mediumDate' }}</td>
                             <td>{{cust.firstName}} {{cust.lastName}}</td>
                             <td>{{cust.mobileNumber}}</td>
-                            <td>{{cust.serviceAddress}}</td>
+                            <td>
+                                <div class="tableAddressTd text-wrap">
+                                    {{cust.serviceAddress}}
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                                            checked>
+                                    </div>
+                                </div>
+                            </td>
                             <td>$00.0</td>
+
                             <td>--</td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-center">
@@ -123,7 +141,7 @@
     </div>
 </div>
 
-<div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddCustomerSidebar"
+<div class="offcanvas offcanvas-end sidebar-popup offcanvas-w480" tabindex="-1" id="AddCustomerSidebar"
     aria-labelledby="offcanvasRightLabel">
     <app-create-customer></app-create-customer>
 </div>
