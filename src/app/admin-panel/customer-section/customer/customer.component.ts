@@ -14,14 +14,13 @@ import { BehaviorSubject, Observable, debounce, first } from 'rxjs';
   styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
-
   loading = false;
   items: any[] = [];
   data = [];
   pageOfItems?: Array<any>;
   sortProperty: string = 'id';
   sortOrder = 1;
-  constructor(private formBuilder: FormBuilder, private _customerService: CustomerService, private _router: Router, private _toastrService: ToastrService) {
+  constructor(private _customerService: CustomerService, private _router: Router) {
 
   }
 

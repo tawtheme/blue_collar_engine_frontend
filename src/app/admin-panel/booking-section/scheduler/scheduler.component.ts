@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
 import { CalendarEvent, EventColor } from 'calendar-utils';
@@ -95,7 +95,7 @@ export class SchedulerComponent implements OnInit {
         end: addHours(new Date(), 2),
         title: 'A draggable and resizable event',
         color: { ...colors.yellow },
-       // actions: this.actions,
+        // actions: this.actions,
         resizable: {
           beforeStart: true,
           afterEnd: true,
@@ -123,6 +123,8 @@ export class SchedulerComponent implements OnInit {
     debugger
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
+    // let el: HTMLElement = this.viewEventModalEle.nativeElement;
+    // el.click();
   }
   eventTimesChanged({
     event,

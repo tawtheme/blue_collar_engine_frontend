@@ -131,11 +131,10 @@
                     (eventTimesChanged)="eventTimesChanged($event)">
                 </mwl-calendar-month-view>
                 <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events"
-                    [refresh]="refresh"
-                    (eventClicked)="handleEvent('Clicked', $event.event)"
+                    [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)"
                     (eventTimesChanged)="eventTimesChanged($event)">
                 </mwl-calendar-week-view>
-                <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"                    
+                <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh"
                     (eventClicked)="handleEvent('Clicked', $event.event)"
                     (eventTimesChanged)="eventTimesChanged($event)">
                 </mwl-calendar-day-view>
@@ -315,3 +314,4 @@ Our air conditioning unit has been making a strange rattling noise intermittentl
         </button>
     </div>
 </ng-template>
+

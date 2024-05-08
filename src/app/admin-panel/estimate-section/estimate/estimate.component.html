@@ -82,113 +82,47 @@
                     <tr>
                         <th>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input class="form-check-input" type="checkbox" id="gridCheck" (change)="checkAll($event)">
                             </div>
                         </th>
-                        <th>Estimate No.</th>
-                        <th>Create Date</th>
-                        <th>Customer Name</th>
-                        <th>Amount</th>
-                        <th>Job</th>
-                        <th>Status</th>
+                        <th (click)="sortBy('refNo')">Estimate No.{{sortIcon('refNo')}}</th>
+                        <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
+                        <th (click)="sortBy('customerName')">Customer Name{{sortIcon('customerName')}}</th>
+                        <th (click)="sortBy('totalAmount')">Amount{{sortIcon('totalAmount')}}</th>
+                        <th (click)="sortBy('jobId')">Job{{sortIcon('jobId')}}</th>
+                        <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let estimate of pageOfItems">
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input class="form-check-input" type="checkbox" id="gridCheck" [checked]="estimate.ischeck ==true">
                             </div>
                         </td>
-                        <td>23456</td>
-                        <td>Feb 26, 2024</td>
-                        <td>Ava Franklin</td>
-                        <td>$1,273.00</td>
-                        <td>#459574</td>
+                        <td>{{estimate.refNo}}</td>
+                        <td>{{estimate.createdDate | date:'mediumDate' }}</td>
+                        <td>{{estimate.customerName}}</td>
+                        <td>${{estimate.totalAmount | number : '1.2-2'}}</td>
+                        <td>{{estimate.jobId}}</td>
                         <td>
                             <div class="">
-                                <span class="success-badge">Accepted</span>
+                                <span class="success-badge">{{estimate.status}}</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button">View
+                                <button class=" light-outlined-button" (click)="redirectToCreateEstimate(estimate.estimateId)">View
                                     Details</button>
                             </div>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                            </div>
-                        </td>
-                        <td>23456</td>
-                        <td>Feb 26, 2024</td>
-                        <td>Ava Franklin</td>
-                        <td>$1,273.00</td>
-                        <td>#459574</td>
-                        <td>
-                            <div class="">
-                                <span class="success-badge">Accepted</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button">View
-                                    Details</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                            </div>
-                        </td>
-                        <td>23456</td>
-                        <td>Feb 26, 2024</td>
-                        <td>Ava Franklin</td>
-                        <td>$1,273.00</td>
-                        <td>#459574</td>
-                        <td>
-                            <div class="">
-                                <span class="success-badge">Accepted</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button">View
-                                    Details</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                            </div>
-                        </td>
-                        <td>23456</td>
-                        <td>Feb 26, 2024</td>
-                        <td>Ava Franklin</td>
-                        <td>$1,273.00</td>
-                        <td>#459574</td>
-                        <td>
-                            <div class="">
-                                <span class="success-badge">Accepted</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button">View
-                                    Details</button>
-                            </div>
-                        </td>
-                    </tr>
+                    </tr>                 
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer pb-0 pt-3">
+            <app-pagination [items]="items" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination>
         </div>
     </div>
 </div>

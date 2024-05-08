@@ -8,6 +8,7 @@ import { CustomerService } from '@app/_services/admin-panel/customer/customer.se
 })
 export class AddressBookComponent implements OnInit {
   @Input() items?: any;
+  @Input() IsShowAddEdit: boolean = true;
   @ViewChild('clickEvent') clickEvent!: ElementRef<HTMLElement>;
   constructor(private _customerService: CustomerService) { }
 
@@ -18,10 +19,14 @@ export class AddressBookComponent implements OnInit {
     //this.address = address;
     this._customerService.bindAddress.next(address);
     let el: HTMLElement = this.clickEvent.nativeElement;
-    el.click();    
+    el.click();
   }
-  addAdreess(){
+  addAdreess() {
     let el: HTMLElement = this.clickEvent.nativeElement;
-    el.click();   
+    el.click();
+  }
+
+  setAddress(address: any) {
+    this._customerService.bindAddress.next(address);
   }
 }
