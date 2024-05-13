@@ -19,37 +19,41 @@
 
 <div class="container-xxl">
     <div class="py-4">
-        <form class="">
+        <form [formGroup]="invoiceForm">
             <div class="row g-4 mb-4">
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="fname" class="form-label">Customer Name</label>
-                        <select id="employeesNumber" class="form-select">
-                            <option value="" disabled selected>Select</option>
-                            <option value="Michael Williams">Michael Williams</option>
-                            <option value="John Smith">John Smith</option>
-                            <option value="Sarah Johnso">Sarah Johnson</option>
-                            <option value="James Davis">James Davis</option>
+                        <select id="employeesNumber" class="form-select" (change)="bindCustomerInfo($event)"
+                            formControlName="customerId" [ngClass]="{ 'is-invalid': submitted && f.customerId.errors }">
+                            <option value="" selected>Select</option>
+                            <option value="{{cust.customerId}}" *ngFor="let cust of customerList">{{cust.firstName}}
+                                {{cust.lastName}}</option>
                         </select>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group ">
-                        <label for="createDate" class="form-label">Create Date</label>
-                        <input type="date" id="createDate" placeholder="Select date" class="form-control">
+                        <div *ngIf="submitted && f.customerId.errors" class="invalid-feedback">
+                            <div *ngIf="f.customerId.errors.required">Select a customer</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="expiryDate" class="form-label">Expiry Date</label>
-                        <input type="date" id="expiryDate" placeholder="Select date" class="form-control">
+                        <mat-form-field class="example-full-width">
+                            <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
+                                placeholder="Choose a date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <div *ngIf="submitted && f.expiryDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.expiryDate.errors.required">Expiry date is required</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3" *ngIf="isShowRegNo">
                     <div class="form-group ">
                         <label for="EstimateId" class="form-label">Estimate ID</label>
-                        <input type="text" id="EstimateId" value="CZHC-00001" placeholder="EstimateId"
-                            class="form-control">
+                        <input type="text" id="EstimateId" formControlName="refNo" placeholder="EstimateId"
+                            class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -62,7 +66,7 @@
                                 <div class="font-muted font14">Customer Name</div>
                             </div>
                             <div class="col-8">
-                                <div class="font14">John Smith </div>
+                                <div class="font14">{{customerInfo.firstName}} {{customerInfo.lastName}} </div>
                             </div>
                         </div>
                         <div class="row  mb-2">
@@ -71,8 +75,7 @@
                             </div>
                             <div class="col-8">
                                 <div class="font14 d-flex align-items-center gap-2"> <span
-                                        class="icon-call"></span>(555)
-                                    555 555 </div>
+                                        class="icon-call"></span>{{customerInfo.mobileNumber}}</div>
                             </div>
                         </div>
                         <div class="row ">
@@ -81,79 +84,102 @@
                             </div>
                             <div class="col-8">
                                 <div class="font14 d-flex align-items-center gap-2"><span
-                                        class="icon-email"></span>info&#64;comfortzonheating.com </div>
+                                        class="icon-email"></span>{{customerInfo.emailAddress}} </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="border p-3 rounded h-100 ">
                         <div class="font-muted font14 d-flex align-items-center gap-2 mb-2">Service Address
-
                         </div>
                         <div class="font14 d-flex align-items-center gap-2">
-                            <span class="icon-address"></span>333 Cedar Drive, Mountain View, CA 94040
+                            <span class="icon-address"></span>{{customerInfo.serviceAddress}}
                         </div>
+                        <input type="hidden" formControlName="customerAddressId">
                         <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#AddressBookSidebar" aria-controls="AddressBookSidebar"> <span
-                                class="icon-edit"></span> Change
+                            [disabled]="isDisabled" data-bs-target="#AddressBookSidebar"
+                            aria-controls="AddressBookSidebar" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')"> <span class="icon-edit"></span>
+                            Change
                             Address</button>
                     </div>
                 </div>
             </div>
             <h4 class="mb-15 font16">Item Details</h4>
-            <div class="itemDetailsTable">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product/Services</th>
-                            <th>Qty</th>
-                            <th>Unit price</th>
-                            <th>Amount</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="col-md-6">
-                                <div class="form-group mb-3">
-                                    <select id="item" class="form-select">
-                                        <option value="" disabled selected>Type or click to select an item</option>
-                                        <option value="Air conditioner repair">Air conditioner repair</option>
-                                        <option value="Energy audit">Energy audit</option>
-                                        <option value="Heat pump repair">Heat pump repair</option>
-                                        <option value="Duct cleaning">Duct cleaning</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <textarea placeholder="Description (Optional)" class="form-control"
-                                        rows="3"></textarea>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="number" id="Qty" placeholder="Qty" class="form-control">
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <input type="text" id="UnitPrice" placeholder="$0.00" class="form-control">
-                                </div>
-                            </td>
-                            <td>
-                                $0.00
-                            </td>
-                            <td>
-                                <button class="btn">
-                                    <span class="icon-delete"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="light-primary-outlined-button"><span class="icon-add"></span>Add Service Item</button>
+            <div formArrayName="products">
+                <div class="itemDetailsTable">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product/Services</th>
+                                <th>Qty</th>
+                                <th>Unit price</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let product of products().controls; let i=index" [formGroupName]="i">
+                                <td class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <select id="item" class="form-select" formControlName="productId"
+                                            (ngModelChange)="bindProductInfo($event,i)"
+                                            [ngClass]="{ 'is-invalid': submitted && product.get('productId')!.errors?.required }">
+                                            <option value="" selected>Type or click to select an item</option>
+                                            <option value="{{product.productId}}" *ngFor="let product of productList">
+                                                {{product.productName}}</option>
+                                        </select>
+                                        <div *ngIf="submitted && product.get('productId')!.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="product.get('productId')!.errors?.required">Select a product
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <textarea placeholder="Description (Optional)" formControlName="description"
+                                            class="form-control" rows="3"></textarea>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="number" id="Qty" placeholder="Qty" formControlName="qty"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && product.get('qty')!.errors?.required }"
+                                            (ngModelChange)="changeQty($event,i)">
+                                        <div *ngIf="submitted && product.get('qty')!.errors" class="invalid-feedback">
+                                            <div *ngIf="product.get('qty')!.errors?.required">Quantity is required</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <input type="text" id="UnitPrice" placeholder="$0.00" formControlName="price"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && product.get('price')!.errors?.required }"
+                                            readonly>
+                                        <div *ngIf="submitted && product.get('price')!.errors" class="invalid-feedback">
+                                            <div *ngIf="product.get('price')!.errors?.required">Price is required</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="text" id="UnitPrice" placeholder="$0.00" formControlName="totalPrice"
+                                        class="form-control" readonly>
+                                </td>
+                                <td>
+                                    <button class="btn" (click)="removeQuantity(i)" *ngIf="i > 0 && !isShowRegNo || (isShowRegNo && status=='Draft')">
+                                        <span class="icon-delete"></span>
+                                    </button>
+                                </td>
+                            </tr>
 
+                        </tbody>
+                    </table>
+
+                    <button class="light-primary-outlined-button" type="button" (click)="addProduct()"
+                        *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')"><span class="icon-add"></span>Add
+                        Service Item</button>
+                </div>
             </div>
             <div class="row mt-5 gx-5">
                 <div class="col-lg-7">
@@ -185,32 +211,35 @@
                 <div class="col-lg-5">
                     <div class="card p-3 bg-light">
                         <div class="d-flex mb-3 align-items-center">
-                            <div class="font-muted font14 d-flex align-items-center gap-2">Discount <select id="item"
-                                    class="form-select grey-badge pe-4">
-                                    <option selected>%</option>
-                                    <option value="1">Flat</option>
-                                </select>
+                            <div class="font-muted font14 d-flex align-items-center gap-2">Discount
                             </div>
-                            <div class="font14 ms-auto white-badge">$0.00 </div>
+                            <input type="number" formControlName="discount" placeholder="Discount" class="form-control"
+                                (change)="calculateTotal()">
                         </div>
                         <div class="d-flex mb-3 align-items-center">
                             <div class="font-muted font14">Sub Total</div>
-                            <div class="font14 ms-auto">$0.00 </div>
+                            <div class="font14 ms-auto">${{subTotal| number : '1.2-2'}} </div>
                         </div>
                         <div class="d-flex mb-3 align-items-center">
-                            <div class="font-muted font14">Tax</div>
-                            <div class="font14 ms-auto text-primary">+ $0.00 </div>
+                            <div class="font-muted font14">Tax(%)</div>
+                            <div class="font14 ms-auto text-primary">+ ${{taxPer| number : '1.2-2'}} </div>
                         </div>
                         <div class="d-flex mt-3 mb-2 align-items-center">
                             <h4 class="font18">Estimate Total</h4>
-                            <h4 class="font18 ms-auto">$0.00</h4>
+                            <h4 class="font18 ms-auto">${{estimateTotal | number : '1.2-2'}}</h4>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-end gap-3 mt-5">
-                <button class="light-outlined-button px-5" type="button">Save as draft</button>
-                <button class="primary-filled-button px-5" type="submit">Send</button>
+            <div class="d-flex justify-content-end gap-3 mt-5" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')">
+                <button class="light-outlined-button px-5" type="submit" [disabled]="loadingDraft"
+                    (click)="getAction('D')">
+                    <span *ngIf="loadingDraft" class="spinner-border spinner-border-sm me-1"></span>Save as
+                    draft</button>
+                <button class="primary-filled-button px-5" type="submit" [disabled]="loadingSend"
+                    (click)="getAction('S')">
+                    <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span>Save and
+                    Send</button>
             </div>
         </form>
     </div>
@@ -218,143 +247,5 @@
 
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddressBookSidebar"
     aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header sidebar-popup-header">
-        <h6 class="offcanvas-title" id="offcanvasRightLabel">Address Book</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
-
-        </button>
-    </div>
-    <div class="offcanvas-body">
-        <form class="sidebar-popup-inner">
-
-            <div class="card-checkbox">
-                <label>
-                    <input type="radio" name="address" class="card-input-element" checked>
-                    <div class="card-input">
-                        <span class="grey-badge mb-2 border-0">Office Address</span>
-                        <p class="font15">123 Oak Street, Springfield, IL 62701</p>
-                        <span class="icon-tick"></span>
-                        <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#EditAddressSidebar" aria-controls="EditAddressSidebar"> <span
-                                class="icon-edit"></span> Edit
-                            Address</button>
-                    </div>
-                </label>
-            </div>
-
-            <div class="card-checkbox">
-                <label>
-                    <input type="radio" name="address" class="card-input-element">
-                    <div class="card-input">
-                        <span class="grey-badge mb-2 border-0">Home Address</span>
-                        <p class="font15">123 Oak Street, Springfield, IL 62701</p>
-                        <span class="icon-tick"></span>
-                        <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
-                            data-bs-target="#EditAddressSidebar" aria-controls="EditAddressSidebar"> <span
-                                class="icon-edit"></span> Edit
-                            Address</button>
-                    </div>
-                </label>
-            </div>
-
-
-
-
-
-
-        </form>
-    </div>
-    <div class="sidebar-popup-bottom offcanvas-footer">
-        <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="submit"><span
-                class="icon-add"></span> Add Address</button>
-    </div>
-</div>
-
-<div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="EditAddressSidebar"
-    aria-labelledby="offcanvasRightLabel">
-    <div class="offcanvas-header sidebar-popup-header">
-        <h6 class="offcanvas-title" id="offcanvasRightLabel">Add Address</h6>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
-
-        </button>
-    </div>
-    <div class="offcanvas-body">
-        <form class="sidebar-popup-inner">
-
-            <div class="form-group mb-3">
-                <label for="addressLabel" class="form-label">Address Label</label>
-                <input type="text" id="addressLabel" name="addressLabel" placeholder="eg. office address, home address"
-                    class="form-control mb-15">
-            </div>
-
-            <div class="form-group mb-3">
-                <div class="address-map">
-                    <img src="../../../../../assets/images/map.png" class="img-fluid" />
-                </div>
-            </div>
-
-            <div class="form-group mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" id="address" name="address" placeholder="Address" class="form-control mb-15">
-            </div>
-
-            <div class="row g-3">
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label for="Country" class="form-label">Country</label>
-                        <select id="state" name="Country" class="form-select">
-                            <option value="" disabled selected>Country</option>
-                            <option value="USA">USA</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label for="State" class="form-label">State</label>
-                        <select id="state" name="state" class="form-select">
-                            <option value="" disabled selected>State</option>
-                            <option value="California">California</option>
-                            <option value="Texas">Texas</option>
-                            <option value="Florida">Florida</option>
-                            <option value="New York">New York</option>
-                            <option value="Pennsylvania">Pennsylvania</option>
-                            <option value="Illinois">Illinois</option>
-                            <option value="Ohio">Ohio</option>
-                            <option value="Georgia">Georgia</option>
-                            <option value="North Carolina">North Carolina</option>
-                            <option value="Michigan">Michigan</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label for="city" class="form-label">City</label>
-                        <input type="text" id="city" name="city" placeholder="City" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-6 ">
-                    <div class="form-group">
-                        <label for="zipcode" class="form-label">Zip Code</label>
-                        <input type="text" id="zipcode" name="zipcode" placeholder="Zip Code" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group mb-3">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked2"
-                                checked>
-                            <label class="form-check-label form-label" for="flexSwitchCheckChecked2"> User this for
-                                billing address as
-                                default</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </form>
-    </div>
-    <div class="sidebar-popup-bottom offcanvas-footer">
-        <button class="light-outlined-button outlined w-100" data-bs-dismiss="offcanvas" type="button">Cancel</button>
-        <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="submit">Save</button>
-    </div>
+    <app-address-book [items]="customerAddress" [IsShowAddEdit]="false"></app-address-book>
 </div>

@@ -24,6 +24,8 @@ import { BookingComponent } from './booking-section/booking/booking.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalenderHeaderComponent } from './booking-section/scheduler/calander-header/calender-header/calender-header.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   imports: [CommonModule,
     AdminPanelRoutingModule,
@@ -32,7 +34,9 @@ import { CalenderHeaderComponent } from './booking-section/scheduler/calander-he
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    }),],
+    }),
+    MatDatepickerModule, MatInputModule],
+    
 
   declarations: [
     DashboardComponent,
