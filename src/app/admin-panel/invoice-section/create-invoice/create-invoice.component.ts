@@ -149,7 +149,7 @@ export class CreateInvoiceComponent implements OnInit {
 
   bindCustomerInfo(ev: any) {
     var customerData = this.customerList.filter(function (event: { customerId: number; }) {
-      return event.customerId == ev;
+      return event.customerId == ev.target.value;
     });
     this.customerInfo = <CustomerModel>customerData[0];
     if (this.customerInfo.customerId > 0) {
