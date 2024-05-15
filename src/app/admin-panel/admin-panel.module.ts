@@ -18,7 +18,7 @@ import { CreateCustomerComponent } from './shared/create-customer/create-custome
 import { TagInputModule } from 'ngx-chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateCustomerAddressComponent } from './shared/create-customer-address/create-customer-address.component';
-import { PaginationComponent } from '@app/shared/Pagination/pagination.component';
+import { PaginationComponent } from '../shared/Pagination/pagination.component';
 import { AddressBookComponent } from './shared/address-book/address-book.component';
 import { BookingComponent } from './booking-section/booking/booking.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';

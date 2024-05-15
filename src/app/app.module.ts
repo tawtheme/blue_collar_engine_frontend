@@ -27,6 +27,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { MaterialModule } from '../material/material.module';
 import * as moment from 'moment';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import { PaginationComponent } from './shared/Pagination/pagination.component';
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
 }
@@ -55,10 +56,12 @@ Date.prototype.toISOString = function () {
         LayoutComponent,
         SecureLayoutComponent,
         ForgetPasswordComponent,
+        //PaginationComponent,
         OnlineRequestDemoComponent,
         HeaderComponent,
         ResetPasswordComponent,
         ConfirmDialogComponent
+        
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

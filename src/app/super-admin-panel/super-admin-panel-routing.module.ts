@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from '@app/_helpers';
 import { Role } from '@app/_models';
-import { RequestDemoComponent } from './request-demo/request-demo.component';
+
 import { SecureLayoutComponent } from './secure-layout/secure-layout.component';
+import { RequestDemoComponent } from './request-demo/list/request-demo.component';
 
 const routes: Routes = [
   {

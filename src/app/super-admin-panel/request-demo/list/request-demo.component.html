@@ -1,0 +1,76 @@
+<div class="page-title-box items-center">
+    <div class="container-xxl">
+        <div class="d-flex items-center">
+            <h3 class="page-title">Request Demo</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container-xxl">
+    <div class="py-4">
+        <div class="table-top-filter-row row">
+            <div class="col-md-5">
+                <div class="table-top-filter-left">
+                    <div class="top-search-group flexGrow2 startIconInputField">
+                        <input type="text" id="search" name="search"
+                            placeholder="Search with Name, Address, Phone number here..." class="form-control"
+                            (keyup.enter)="onEnter($event)">
+                        <span class="icon-search iconPosition"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="mt-20 customers-tables">
+                <table class="row-border">
+                    <thead>
+                        <tr>
+                            <th (click)="sortBy('firstName')">Full name{{sortIcon('firstName')}}</th>
+                            <th (click)="sortBy('companyName')">Company name{{sortIcon('companyName')}}</th>
+                            <th (click)="sortBy('phoneNumber')">Phone number{{sortIcon('phoneNumber')}}</th>
+                            <th (click)="sortBy('emailAddress')">Email address{{sortIcon('emailAddress')}}</th>
+                            <th (click)="sortBy('noOfEmpInCompany')">No of emplyee{{sortIcon('noOfEmpInCompany')}}</th>
+                            <th (click)="sortBy('howHearAboutUs')">How hear about us{{sortIcon('howHearAboutUs')}}</th>
+                            <th (click)="sortBy('industry')">Industry{{sortIcon('industry')}}</th>
+                            <th (click)="sortBy('timeZone')">Time Zone{{sortIcon('timeZone')}}</th>
+                            <th (click)="sortBy('isTenant')">Is Tenant{{sortIcon('isTenant')}}</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let request of requestDemo; index as i">
+                            <td>{{ request.firstName }} {{request.lastName}}</td>
+                            <td>{{request.companyName}}</td>
+                            <td>{{request.phoneNumber}}</td>
+                            <td>{{request.emailAddress}}</td>
+                            <td>{{request.noOfEmpInCompany}}</td>
+                            <td>{{request.howHearAboutUs}}</td>
+                            <td>{{request.industry}}</td>
+                            <td>{{request.timeZone}}</td>
+                            <td><mat-slide-toggle [checked]="request.isTenant"
+                                    (change)="onChange($event)"></mat-slide-toggle></td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <button class="light-outlined-button" (click)="viewDetail(request)">View
+                                        Details</button>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="card-footer pb-0 pt-3">
+                <app-pagination [items]="requestDemo" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<a href="javascript:void(0);" style="display:none;" data-bs-toggle="offcanvas" data-bs-target="#ViewRequestDemoSidebar"
+    aria-controls="ViewRequestDemoSidebar" #clickRqtDemoDetail><span class="icon-edit-2"></span></a>
+
+<div class="offcanvas offcanvas-end sidebar-popup offcanvas-w480" tabindex="-1" id="ViewRequestDemoSidebar"
+    aria-labelledby="offcanvasRightLabel">
+    <app-view-request-demo [items]="requestDemoInfo"></app-view-request-demo>
+</div>

@@ -36,8 +36,12 @@ export class CreateCustomerComponent implements OnInit {
       tags: ['', [Validators.required, Validators.maxLength(500)]],
       status: ['A', null],
     });
-    this.items = { ...this.items, ...{ tags: this.items.tags.split(',') } };
-    this.customerForm.patchValue(this.items);
+    if (this.items?.length > 0) {
+      this.items = { ...this.items, ...{ tags: this.items.tags.split(',') } };
+      this.customerForm.patchValue(this.items);
+    }
+
+
   }
   // convenience getter for easy access to form fields
   get f() { return this.customerForm.controls; }
