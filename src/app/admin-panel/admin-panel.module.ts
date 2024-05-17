@@ -26,6 +26,10 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalenderHeaderComponent } from './booking-section/scheduler/calander-header/calender-header/calender-header.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
+import { CategoryListComponent } from './price-book-section/category/category-list/category-list.component';
+import { CategoryAddUpdateComponent } from './price-book-section/category/category-add-update/category-add-update.component';
+import { ServiceListComponent } from './price-book-section/service/service-list/service-list.component';
+import { AddUpdateServiceComponent } from './price-book-section/service/add-update-service/add-update-service.component';
 @NgModule({
   imports: [CommonModule,
     AdminPanelRoutingModule,
@@ -54,7 +58,11 @@ import { MatInputModule } from '@angular/material/input';
     PaginationComponent,
     AddressBookComponent,
     BookingComponent,
-    CalenderHeaderComponent
+    CalenderHeaderComponent,
+    CategoryListComponent,
+    CategoryAddUpdateComponent,
+    ServiceListComponent,
+    AddUpdateServiceComponent
   ],
 
 })

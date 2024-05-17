@@ -6,7 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ResuableTableComponent } from '../shared/resuable-table/resuable-table.component';
 import { PaginationComponent } from '@app/shared/Pagination/pagination.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ViewRequestDemoComponent } from './request-demo/view-request-demo/view-request-demo.component';
+import { ViewRequestDemoComponent } from './view-request-demo/view-request-demo.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RequestDemoComponent } from './request-demo/list/request-demo.component';
 
@@ -15,14 +15,13 @@ import { RequestDemoComponent } from './request-demo/list/request-demo.component
     CommonModule,
     SuperAdminPanelRoutingModule,
     MatSlideToggleModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent,
     RequestDemoComponent,
     ResuableTableComponent,
-    ViewRequestDemoComponent,
-    
+    ViewRequestDemoComponent    
   ]
 })
 export class SuperAdminPanelModule { }

@@ -2,10 +2,10 @@
     <div class="top-header-wrap">
         <div class="container-xxl">
             <div class="d-flex align-items-center">
-                <a class="navbar-brand"  *ngIf="!isAdmin" [routerLink]="['/secure-panel/dashboard']">
+                <a class="navbar-brand" *ngIf="!isAdmin" [routerLink]="['/secure-panel/dashboard']">
                     <img src="../../../../assets/images/logo-white.svg" alt="logo" />
                 </a>
-                <a class="navbar-brand"  *ngIf="isAdmin" [routerLink]="['/admin']">
+                <a class="navbar-brand" *ngIf="isAdmin" [routerLink]="['/admin']">
                     <img src="../../../../assets/images/logo-white.svg" alt="logo" />
                 </a>
                 <div class="top-header-right ms-auto">
@@ -111,7 +111,8 @@
                             <span class="menu-title">Jobs</span>
                         </a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active"  [ngClass]="{'active': createEstimateActive.isActive }"
+                    <li class="nav-item" routerLinkActive="active"
+                        [ngClass]="{'active': createEstimateActive.isActive }"
                         [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link" [routerLink]="['/admin/estimate']">
                             <span class="icon-holder">
@@ -127,6 +128,16 @@
                                 <span class="icon-invoice"></span>
                             </span>
                             <span class="menu-title">Invoice</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" routerLinkActive="active"
+                        [ngClass]="{'active': customerInvoiceActive.isActive }">
+                        <a class="nav-link" [routerLink]="['/admin/price-book']">
+                            <span class="icon-holder">
+                                <span class="icon-invoice"></span>
+                            </span>
+                            <span class="menu-title">Price Book</span>
                         </a>
                     </li>
 
