@@ -3,7 +3,8 @@
         <div class="d-flex items-center">
             <h3 class="page-title">Invoices</h3>
             <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
-                <button class="primary-filled-button  w-100" type="button"  (click)="createInvoice()"><span class="icon-add"></span>
+                <button class="primary-filled-button  w-100" type="button" (click)="createInvoice()"><span
+                        class="icon-add"></span>
                     Add New Invoice</button>
             </div>
         </div>
@@ -82,84 +83,41 @@
                     <tr>
                         <th>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input class="form-check-input" type="checkbox" id="gridCheck"
+                                    (change)="checkAll($event)">
                             </div>
                         </th>
-                        <th>Invoice No.</th>
-                        <th>Create Date</th>
-                        <th>Customer Name</th>
-                        <th>Amount</th>
-                        <th>Job</th>
-                        <th>Status</th>
+                        <th (click)="sortBy('refNo')">Invoice No.{{sortIcon('refNo')}}</th>
+                        <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
+                        <th (click)="sortBy('customerName')">Customer Name{{sortIcon('customerName')}}</th>
+                        <th (click)="sortBy('totalAmount')">Amount{{sortIcon('totalAmount')}}</th>
+                        <th (click)="sortBy('jobId')">Job{{sortIcon('jobId')}}</th>
+                        <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr *ngFor="let invoice of pageOfItems">
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input class="form-check-input" type="checkbox" id="gridCheck"
+                                    [checked]="invoice.ischeck ==true">
                             </div>
                         </td>
-                        <td>23456</td>
-                        <td>Feb 26, 2024</td>
-                        <td>Ava Franklin</td>
-                        <td>$1,273.00</td>
-                        <td>#459574</td>
+                        <td>{{invoice.refNo}}</td>
+                        <td>{{invoice.createdDate | date:'mediumDate' }}</td>
+                        <td>{{invoice.firstName}} {{invoice.lastName}}</td>
+                        <td>${{invoice.totalAmount | number : '1.2-2'}}</td>
+                        <td>{{invoice.jobId}}</td>
                         <td>
                             <div class="">
-                                <span class="success-badge">Paid</span>
+                                <span class="success-badge">{{invoice.status}}</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button">View
-                                    Details</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                            </div>
-                        </td>
-                        <td>23456</td>
-                        <td>Feb 26, 2024</td>
-                        <td>Ava Franklin</td>
-                        <td>$1,273.00</td>
-                        <td>#459574</td>
-                        <td>
-                            <div class="">
-                                <span class="success-badge">Paid</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button">View
-                                    Details</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
-                            </div>
-                        </td>
-                        <td>23456</td>
-                        <td>Feb 26, 2024</td>
-                        <td>Ava Franklin</td>
-                        <td>$1,273.00</td>
-                        <td>#459574</td>
-                        <td>
-                            <div class="">
-                                <span class="success-badge">Paid</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button">View
+                                <button class=" light-outlined-button"
+                                    (click)="viewInvoice(invoice.invoiceId)">View
                                     Details</button>
                             </div>
                         </td>
@@ -167,6 +125,9 @@
 
                 </tbody>
             </table>
+        </div>
+        <div class="card-footer pb-0 pt-3">
+            <app-pagination [items]="items" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination>
         </div>
     </div>
 </div>

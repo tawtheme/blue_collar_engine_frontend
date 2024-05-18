@@ -18,22 +18,31 @@ import { CreateCustomerComponent } from './shared/create-customer/create-custome
 import { TagInputModule } from 'ngx-chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CreateCustomerAddressComponent } from './shared/create-customer-address/create-customer-address.component';
-import { PaginationComponent } from '@app/shared/Pagination/pagination.component';
+import { PaginationComponent } from '../shared/Pagination/pagination.component';
 import { AddressBookComponent } from './shared/address-book/address-book.component';
 import { BookingComponent } from './booking-section/booking/booking.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalenderHeaderComponent } from './booking-section/scheduler/calander-header/calender-header/calender-header.component';
-import { PricebookComponent } from './pricebook/pricebook.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { CategoryListComponent } from './price-book-section/category/category-list/category-list.component';
+import { CategoryAddUpdateComponent } from './price-book-section/category/category-add-update/category-add-update.component';
+import { ServiceListComponent } from './price-book-section/service/service-list/service-list.component';
+import { AddUpdateServiceComponent } from './price-book-section/service/add-update-service/add-update-service.component';
 @NgModule({
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     AdminPanelRoutingModule,
     TagInputModule,
     ReactiveFormsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    }),],
+    }),
+    MatDatepickerModule,
+    MatInputModule,
+  ],
 
   declarations: [
     DashboardComponent,
@@ -52,8 +61,10 @@ import { PricebookComponent } from './pricebook/pricebook.component';
     AddressBookComponent,
     BookingComponent,
     CalenderHeaderComponent,
-    PricebookComponent
+    CategoryListComponent,
+    CategoryAddUpdateComponent,
+    ServiceListComponent,
+    AddUpdateServiceComponent,
   ],
-
 })
-export class AdminPanelModule { }
+export class AdminPanelModule {}

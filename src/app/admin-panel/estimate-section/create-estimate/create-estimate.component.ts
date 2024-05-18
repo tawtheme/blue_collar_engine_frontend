@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConstantManager } from '@app/_helpers/constant/constantManager';
 import { CustomerModel } from '@app/_models/customer/customerModel';
@@ -8,8 +9,10 @@ import { CustomerService } from '@app/_services/admin-panel/customer/customer.se
 import { EstimateService } from '@app/_services/admin-panel/estimate/estimate.service';
 import { MasterService } from '@app/_services/admin-panel/master/master.service';
 import { ProductService } from '@app/_services/admin-panel/product/product.service';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs';
+import { debounce, first } from 'rxjs';
 
 @Component({
   selector: 'app-create-estimate',
@@ -34,7 +37,10 @@ export class CreateEstimateComponent implements OnInit {
   taxAmount: number = 0.00;
   isShowRegNo: boolean = false;
   expiryDateStr: string = '';
-  constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute) { }
+  status: string = '';
+  todayDate: Date = new Date();
+  isProceed: boolean = false;
+  constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this._customerService.bindAddress.subscribe((address: any) => {
@@ -49,7 +55,7 @@ export class CreateEstimateComponent implements OnInit {
       expiryDate: ['', [Validators.required]],
       notes: ['', null],
       discount: ['0', null],
-      tax: ['', null],
+      tax: ['', null],     
       products: this._formBuilder.array([this._formBuilder.group({
         productId: ['', [Validators.required]],
         qty: ['', [Validators.required]],
@@ -101,14 +107,20 @@ export class CreateEstimateComponent implements OnInit {
     this._estimateService.get(estimateId).subscribe(res => {
       this.products().clear();
       res.data.products.forEach((t: { batches: any[]; }) => {
-        var teacher: FormGroup = this.newProduct();
-        this.products().push(teacher);
+        var _product: FormGroup = this.newProduct();
+        this.products().push(_product);
       });
       this.estimateInvoiceForm.patchValue(res.data);
+    
+      this.customerInfo=<CustomerModel>res.data;
+      this.estimateInvoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
+      this.getAddress(this.customerInfo.customerId);
+      this.isDisabled = false;
       this.calculateTotal();
       this.expiryDateStr = res.data.expiryDate;
+      this.status = res.data.status;
     })
-   
+
   }
 
   getAllProduct() {
@@ -136,7 +148,7 @@ export class CreateEstimateComponent implements OnInit {
 
   bindCustomerInfo(ev: any) {
     var customerData = this.customerList.filter(function (event: { customerId: number; }) {
-      return event.customerId == ev;
+      return event.customerId == ev.target.value;
     });
     this.customerInfo = <CustomerModel>customerData[0];
     if (this.customerInfo.customerId > 0) {
@@ -174,6 +186,7 @@ export class CreateEstimateComponent implements OnInit {
       });
   }
 
+
   onSubmit() {
     this.submitted = true;
     if (this.estimateInvoiceForm.invalid) {
@@ -181,38 +194,54 @@ export class CreateEstimateComponent implements OnInit {
     }
     let param = this.estimateInvoiceForm.value as any;
     Object.assign(param, { status: this.clickType });
-    console.log(param);
     if (this.clickType == 'S') {
-      this.loadingSend = true;
+      const message = `Are you sure you want to do send?`;
+      const dialogData = new ConfirmDialogModel("Confirmation", message);
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        maxWidth: "400px",
+        data: dialogData
+      });
+      dialogRef.afterClosed().subscribe(dialogResult => {
+        if (dialogResult) {
+          this.loadingSend = true;
+          this.proceedSubmit(param);
+        }
+        else {
+          return;
+        }
+      });
     }
     else {
       this.loadingDraft = true;
+      this.proceedSubmit(param);
     }
-    this._estimateService.create(param)
-      .pipe(first())
-      .subscribe({
-        next: (res) => {
-          if (this.clickType == 'S') {
-            this.loadingSend = false;
-          }
-          else {
-            this.loadingDraft = false;
-          }
-          this._toastrService.success(res.message, 'Success');
-          console.log(res)
-          this._router.navigate(['/admin/estimate']);
-        },
-        error: error => {
-          if (this.clickType == 'S') {
-            this.loadingSend = false;
-          }
-          else {
-            this.loadingDraft = false;
-          }
-        }
-      });
   }
 
+  proceedSubmit(param: any) {
+    this._estimateService.create(param)
+        .pipe(first())
+        .subscribe({
+          next: (res) => {
+            if (this.clickType == 'S') {
+              this.loadingSend = false;
+            }
+            else {
+              this.loadingDraft = false;
+            }
+            this._toastrService.success(res.message, 'Success');
+            console.log(res)
+            this._router.navigate(['/admin/estimate']);
+          },
+          error: error => {
+            if (this.clickType == 'S') {
+              this.loadingSend = false;
+            }
+            else {
+              this.loadingDraft = false;
+            }
+          }
+        });
+  }
   products(): FormArray {
     return this.estimateInvoiceForm.get("products") as FormArray
   }
@@ -236,13 +265,11 @@ export class CreateEstimateComponent implements OnInit {
   }
 
   getAction(type: any) {
-    console.log(type)
     this.clickType = type;
     this.onSubmit();
   }
 
   changeQty(ev: any, index: number) {
-    console.log(ev)
     let _price = this.products().at(index).get('price')?.value;
     this.products().at(index).get('totalPrice')?.setValue(_price * ev);
     this.calculateTotal();
@@ -250,7 +277,6 @@ export class CreateEstimateComponent implements OnInit {
 
   calculateTotal() {
     let _totalAmt = 0;
-    debugger
     for (let i = 0; i < this.products().length; i++) {
       _totalAmt += this.products().at(i).get('totalPrice')?.value;
     }
@@ -258,4 +284,14 @@ export class CreateEstimateComponent implements OnInit {
     this.taxAmount = (this.subTotal * this.taxPer / 100);
     this.estimateTotal = this.subTotal + this.taxAmount;
   }
+
+  // formatDate(e: any) {
+  //   var d = new Date(e.target.value)
+  //   var convertDate = d.toISOString().substring(0, 10) + d.toISOString().substring(10,);
+  //   console.log(convertDate)
+  //   this.estimateInvoiceForm.get('expirayDate')?.setValue(convertDate, { onlyself: true });
+  //   let param = this.estimateInvoiceForm.value as any;
+  //   console.log(param.expiryDate)
+  //   console.log(moment(param.expiryDate).format('MM/DD/YYYY'))
+  // }
 }

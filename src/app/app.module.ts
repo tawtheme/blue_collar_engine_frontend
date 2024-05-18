@@ -24,6 +24,15 @@ import { LoaderService } from './_services/loader.service';
 import { LoaderInterceptor } from './_helpers/loader.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { MaterialModule } from '../material/material.module';
+import * as moment from 'moment';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import { PaginationComponent } from './shared/Pagination/pagination.component';
+Date.prototype.toISOString = function () {
+    return moment(this).format("YYYY-MM-DDTHH:mm:ss");
+}
+
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -36,7 +45,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
             closeButton: true,
             progressBar: true,
         }),
-        NgbModule
+        NgbModule,
+        MaterialModule
+
     ],
     declarations: [
         AppComponent,
@@ -45,16 +56,18 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
         LayoutComponent,
         SecureLayoutComponent,
         ForgetPasswordComponent,
+        //PaginationComponent,
         OnlineRequestDemoComponent,
         HeaderComponent,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        ConfirmDialogComponent
+        
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
         LoaderService,
-        // provider used to create fake backend
         fakeBackendProvider
     ],
     bootstrap: [AppComponent]
