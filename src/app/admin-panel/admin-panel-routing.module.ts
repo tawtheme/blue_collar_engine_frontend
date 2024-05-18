@@ -15,7 +15,7 @@ import { CreateInvoiceComponent } from './invoice-section/create-invoice/create-
 import { CreateJobComponent } from './job-section/create-job/create-job.component';
 import { EstimateComponent } from './estimate-section/estimate/estimate.component';
 import { BookingComponent } from './booking-section/booking/booking.component';
-
+import { PricebookComponent } from './pricebook/pricebook.component';
 
 const routes: Routes = [
   {
@@ -33,7 +33,7 @@ const routes: Routes = [
       },
       {
         path: 'customer-detail',
-        component: CustomerDetailsComponent
+        component: CustomerDetailsComponent,
       },
       {
         path: 'scheduler',
@@ -67,6 +67,10 @@ const routes: Routes = [
         path: 'create-booking',
         component: BookingComponent,
       },
+      {
+        path: 'price-book',
+        component: PricebookComponent,
+      },
     ],
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin] },
@@ -77,4 +81,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminPanelRoutingModule { }
+export class AdminPanelRoutingModule {}

@@ -24,6 +24,7 @@ import { BookingComponent } from './booking-section/booking/booking.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalenderHeaderComponent } from './booking-section/scheduler/calander-header/calender-header/calender-header.component';
+import { PricebookComponent } from './pricebook/pricebook.component';
 @NgModule({
   imports: [CommonModule,
     AdminPanelRoutingModule,
@@ -50,7 +51,8 @@ import { CalenderHeaderComponent } from './booking-section/scheduler/calander-he
     PaginationComponent,
     AddressBookComponent,
     BookingComponent,
-    CalenderHeaderComponent
+    CalenderHeaderComponent,
+    PricebookComponent
   ],
 
 })

@@ -1,0 +1,28 @@
+.pagination {
+  .page-item {
+    margin-right: 8px;
+    .page-link {
+      border: 1px solid #e5e7eb;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 13px;
+      min-width: 30px;
+      height: 30px;
+      background: #fff;
+    }
+    // &.disabled {
+    //   .page-link {
+    //     background-color: #e5e7eb;
+    //     border-color: #e5e7eb;
+    //     color: #000000;
+    //   }
+    // }
+    &.active {
+      .page-link {
+        background-color: #407cee;
+        border-color: #407cee;
+        color: #ffffff;
+      }
+    }
+  }
+}
