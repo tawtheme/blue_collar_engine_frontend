@@ -8,11 +8,23 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
 import { BookingComponent } from './admin-panel/booking-section/booking/booking.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
+    component: FrontendLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: HomePageComponent,
+        pathMatch: 'full',
+      },
+      {
+        path: 'online-request-demo',
+        component: OnlineRequestDemoComponent,
+      }]
   },
   {
     path: 'secure-panel',
@@ -29,6 +41,10 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'home',
+    component: HomePageComponent,
+  },
+  {
     path: 'login',
     component: LoginComponent,
   },
@@ -40,10 +56,7 @@ const routes: Routes = [
     path: 'unauthorized',
     component: UnauthorizedComponent,
   },
-  {
-    path: 'online-request-demo',
-    component: OnlineRequestDemoComponent,
-  },
+
   {
     path: 'booking',
     component: BookingComponent,

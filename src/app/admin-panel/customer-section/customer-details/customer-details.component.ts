@@ -36,6 +36,7 @@ export class CustomerDetailsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.customerInfo = res.data;
+          console.log('customer info...'+ JSON.stringify(this.customerInfo))
         },
         error: error => {
         }

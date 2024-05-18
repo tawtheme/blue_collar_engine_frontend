@@ -3,8 +3,8 @@
         <div class="d-flex items-center">
             <div class="">
                 <div class="d-flex items-center mb-10">
-                    <h4 class="page-title">{{customerInfo!.firstName}} {{customerInfo.lastName}} </h4>
-                    <span class="success-badge ml-10">{{customerInfo.tags}}</span>
+                    <h4 class="page-title">{{customerInfo?.firstName}} {{customerInfo?.lastName}} </h4>
+                    <span class="success-badge ml-10">{{customerInfo?.tags}}</span>
                 </div>
                 <div class="breadcrumb">
                     <a [routerLink]="['/admin']">Dashboard</a>
@@ -47,24 +47,24 @@
         <div class="customers-info-wrapper">
             <div class="customers-card-item">
                 <p>Customer ID</p>
-                <h6>{{customerInfo.customerId}}</h6>
+                <h6>{{customerInfo?.customerId}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Customer Since</p>
-                <h6>{{customerInfo.createdDate | date:'mediumDate'}}</h6>
+                <h6>{{customerInfo?.createdDate | date:'mediumDate'}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Billing Address</p>
-                <h6>{{customerInfo.serviceAddress}} {{customerInfo.city}} {{customerInfo.state}}
-                    {{customerInfo.zipCode}}</h6>
+                <h6>{{customerInfo?.serviceAddress}} {{customerInfo?.city}} {{customerInfo?.state}}
+                    {{customerInfo?.zipCode}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Phone Number</p>
-                <h6><span class="icon-call"></span>{{customerInfo.mobileNumber}}</h6>
+                <h6><span class="icon-call"></span>{{customerInfo?.mobileNumber}}</h6>
             </div>
             <div class="customers-card-item">
                 <p>Email Address</p>
-                <h6><span class="icon-email"></span>{{customerInfo.emailAddress}}</h6>
+                <h6><span class="icon-email"></span>{{customerInfo?.emailAddress}}</h6>
             </div>
         </div>
         <h4 class="mb-12 font16">Quick Summary</h4>

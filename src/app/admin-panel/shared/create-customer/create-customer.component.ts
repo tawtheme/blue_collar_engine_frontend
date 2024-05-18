@@ -36,12 +36,12 @@ export class CreateCustomerComponent implements OnInit {
       tags: ['', [Validators.required, Validators.maxLength(500)]],
       status: ['A', null],
     });
-    if (this.items?.length > 0) {
-      this.items = { ...this.items, ...{ tags: this.items.tags.split(',') } };
-      this.customerForm.patchValue(this.items);
-    }
 
-
+  }
+  ngOnChanges() {
+    console.log(this.items)
+    this.items = { ...this.items, ...{ tags: this.items.tags.length > 0 ? this.items.tags.split(',') : '' } };
+    this.customerForm.patchValue(this.items);
   }
   // convenience getter for easy access to form fields
   get f() { return this.customerForm.controls; }

@@ -1,1 +1,30 @@
-<p>category-add-update works!</p>
+<div class="offcanvas-header sidebar-popup-header">
+    <h6 class="offcanvas-title" id="offcanvasRightLabel">Add Category</h6>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" #customerCancelEle>
+    </button>
+</div>
+<form class="sidebar-popup-inner" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <div class="offcanvas-body">
+        <div class="form-group mb-3">
+            <label for="CategoryName" class="form-label">Category</label>
+            <input type="text" formControlName="name" class="form-control mb-3"
+                [ngClass]="{ 'is-invalid': submitted && f.name.errors }" placeholder="Enter Category Name"
+                maxlength="200" />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Category name is required</div>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="description" class="form-label">Description (Optional)</label>
+            <textarea formControlName="description" id="description" class="form-control  mb-3" rows="4"
+                placeholder="Enter Description (Optional)" resize="none" maxlength="4000"></textarea>
+        </div>
+
+    </div>
+    <div class="sidebar-popup-bottom offcanvas-footer">
+        <button class="light-outlined-button outlined w-100" data-bs-dismiss="offcanvas" type="button">Cancel</button>
+        <button class="btn btn-primary w-100">
+            Save
+        </button>
+    </div>
+</form>

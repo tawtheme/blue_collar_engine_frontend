@@ -28,6 +28,8 @@ import { MaterialModule } from '../material/material.module';
 import * as moment from 'moment';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { PaginationComponent } from './shared/Pagination/pagination.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
 }
@@ -60,7 +62,9 @@ Date.prototype.toISOString = function () {
         OnlineRequestDemoComponent,
         HeaderComponent,
         ResetPasswordComponent,
-        ConfirmDialogComponent
+        ConfirmDialogComponent,
+        HomePageComponent,
+        FrontendLayoutComponent
         
     ],
     providers: [

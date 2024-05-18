@@ -1,1 +1,53 @@
-<p>category-list works!</p>
+<div class="mt-20 table-middle-items-center">
+    <table class="row-border">
+        <thead>
+            <tr>
+                <th>
+                    Category Name
+                </th>
+                <th>
+                    Services
+                </th>
+                <th>
+                    Status
+                </th>
+
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let catgeory of pageOfItems">
+                <td class="col-8 px-4">
+                    <div class="table-service-info d-flex align-items-center gap-3">
+                        <div>
+                            <h4 class="font14 mb-1 font500">{{catgeory.name}}
+                            </h4>
+                            <p class="font14 mb-0  font-muted font400">{{catgeory.description}}</p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    0
+                </td>
+                <td>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center justify-content-end">
+                        <button class="light-outlined-button sm-btn" (click)="editCategory(catgeory.categoryId)"><span class="icon-edit-2"></span>
+                            Edit</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="card-footer pb-0 pt-3">
+    <app-pagination [items]="items" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination>
+</div>
