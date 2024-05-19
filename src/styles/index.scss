@@ -1136,7 +1136,11 @@ table tbody td {
     margin-right: 5px;
   }
 }
-
+.offcanvas app-create-customer,
+.offcanvas app-category-add-update,
+.offcanvas app-add-update-service {
+  height: 100%;
+}
 .offcanvas-w480 {
   width: 480px !important;
 }
@@ -1363,5 +1367,73 @@ form.sidebar-popup-inner {
   .container-xxl {
     padding-left: 50px;
     padding-right: 50px;
+  }
+}
+tag-input.form-control {
+  padding: 0px 12px;
+  .ng2-tags-container {
+    align-items: center;
+    gap: 5px;
+    tag {
+      font-family: "Lexend", sans-serif;
+      margin: 0;
+      height: 24px;
+      line-height: 24px;
+      font-size: 12px;
+      font-weight: 300;
+      background: #006eff !important;
+      &:hover {
+        box-shadow: none !important;
+      }
+      delete-icon {
+        span {
+          svg {
+            height: 24px !important;
+          }
+        }
+      }
+    }
+  }
+  .ng2-tag-input {
+    border: 0 !important;
+    padding: 0 !important;
+    input {
+      font-family: "Lexend", sans-serif;
+      padding: 0;
+      font-weight: 300;
+    }
+  }
+}
+
+.muiDatePickerFromField {
+  width: 100%;
+  .mat-mdc-text-field-wrapper {
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    font-size: 14px;
+    color: var(--dark);
+    background-color: var(--white) !important;
+    font-weight: 300;
+    border-radius: 5px;
+    height: 39px;
+    .mat-mdc-form-field-infix {
+      padding: 0 !important;
+      min-height: auto;
+      input {
+        font-family: "Lexend", sans-serif;
+        font-weight: 300;
+      }
+    }
+    .mat-mdc-icon-button {
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
+  }
+  .mdc-line-ripple {
+    &::before {
+      display: none;
+    }
   }
 }

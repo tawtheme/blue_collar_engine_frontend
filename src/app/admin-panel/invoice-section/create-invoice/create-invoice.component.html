@@ -38,7 +38,7 @@
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="expiryDate" class="form-label">Expiry Date</label>
-                        <mat-form-field class="example-full-width">
+                        <mat-form-field class="example-full-width muiDatePickerFromField">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
                                 placeholder="Choose a date">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -99,7 +99,8 @@
                         <input type="hidden" formControlName="customerAddressId">
                         <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
                             [disabled]="isDisabled" data-bs-target="#AddressBookSidebar"
-                            aria-controls="AddressBookSidebar" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')"> <span class="icon-edit"></span>
+                            aria-controls="AddressBookSidebar" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')">
+                            <span class="icon-edit"></span>
                             Change
                             Address</button>
                     </div>
@@ -167,7 +168,8 @@
                                         class="form-control" readonly>
                                 </td>
                                 <td>
-                                    <button class="btn" (click)="removeQuantity(i)" *ngIf="i > 0 && !isShowRegNo || (isShowRegNo && status=='Draft')">
+                                    <button class="btn" (click)="removeQuantity(i)"
+                                        *ngIf="i > 0 && !isShowRegNo || (isShowRegNo && status=='Draft')">
                                         <span class="icon-delete"></span>
                                     </button>
                                 </td>
