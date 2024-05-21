@@ -53,6 +53,18 @@ export class AddUpdateServiceComponent {
       isOnlineBooking: [true, [Validators.required]],
       files: ['', [Validators.required]]
     });
+
+    this._categoryService.categoryAdded.subscribe((data: boolean) => {
+      if (data) {
+        var _param = {
+          "id": 0,
+          "pageNumber": 0,
+          "pageSize": 0,
+          "searchStr": ""
+        }
+        this.getAllCatgeory(_param);
+      }
+    });
   }
 
   ngOnChanges() {
