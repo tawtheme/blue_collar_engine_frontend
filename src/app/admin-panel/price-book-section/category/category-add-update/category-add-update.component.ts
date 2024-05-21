@@ -30,8 +30,10 @@ export class CategoryAddUpdateComponent {
 
   ngOnChanges() {
     if (this.items == null) {
+      debugger
       this.categoryForm.reset();
-      // this.categoryServiceForm.controls['categoryId'].setValue('');
+       this.categoryForm.controls['categoryId'].setValue(0);
+       this.categoryForm.controls['status'].setValue('A');
       // this.categoryServiceForm.controls['isOnlineBooking'].setValue(true);
       // this.categoryServiceForm.controls['files'].setValue("");
       // this.categoryServiceForm.controls['files'].addValidators([Validators.required]);

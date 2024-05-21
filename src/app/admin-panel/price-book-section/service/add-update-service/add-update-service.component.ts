@@ -61,6 +61,7 @@ export class AddUpdateServiceComponent {
     this.categoryServiceForm.patchValue(this.items);
     if (this.items == null) {
       this.categoryServiceForm.reset();
+      this.categoryServiceForm.controls['categoryServiceId'].setValue(0);
       this.categoryServiceForm.controls['categoryId'].setValue('');
       this.categoryServiceForm.controls['isOnlineBooking'].setValue(true);
       this.categoryServiceForm.controls['files'].setValue("");

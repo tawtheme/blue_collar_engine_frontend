@@ -13,29 +13,24 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let error: any;
         return next.handle(request).pipe(catchError(err => {
-            debugger
             if ([401, 403].includes(err.status) && this.authenticationService.userValue) {
+                this.authenticationService.logout();
                 if (err.status == 401) {
                     this._toastrService.error("Unauthorized access", "Error");
                 }
                 else {
                     this._toastrService.error("Session has been expired", "Error");
                 }
-                this.authenticationService.logout();
                 return throwError(() => error);
             }
             else if (err.status == 400) {
-                error = err.error.data || err.error.message;
-                this._toastrService.error(error, "Error");
-                return throwError(() => error);
+                error = err.error.data;
             }
             else {
                 error = err.error.message || err.statusText;
-                //this._toastrService.error(error, "Error");
-                this._toastrService.error("Session has been expired", "Error");
-                this.authenticationService.logout();
-                return throwError(() => error);
             }
+            this._toastrService.error(error, "Error");
+            return throwError(() => error);
         }))
     }
 }
