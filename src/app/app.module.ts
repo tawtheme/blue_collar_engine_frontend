@@ -43,7 +43,7 @@ Date.prototype.toISOString = function () {
         AppRoutingModule,
         BrowserAnimationsModule,
         ToastrModule.forRoot({
-            timeOut: 10000, // 10 seconds
+            timeOut: 5000, // 10 seconds
             closeButton: true,
             progressBar: true,
         }),

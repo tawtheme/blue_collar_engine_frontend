@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 
 @Component({
@@ -16,7 +19,7 @@ export class CategoryListComponent {
   pageOfItems?: Array<any>;
   sortProperty: string = 'id';
   sortOrder = 1;
-  constructor(private _categoryService: CategoryService, private _router: Router) {
+  constructor(private _categoryService: CategoryService, private _router: Router, private _dialog: MatDialog, private _toastrService: ToastrService) {
 
   }
   ngOnInit(): void {
@@ -51,6 +54,7 @@ export class CategoryListComponent {
   }
 
   onChangePage(pageOfItems: any) {
+    //debugger
     // update current page of items
     this.pageOfItems = pageOfItems;
     // this.pageOfItems = { ...this.pageOfItems!, ...{ ischeck: false } };
@@ -90,6 +94,36 @@ export class CategoryListComponent {
   }
 
   editCategory(categoryId: number) {
-  this._categoryService.editCategory.next(categoryId);
+    this._categoryService.editCategory.next(categoryId);
   }
+
+  onChange(ev: any, category: any) {
+    console.log(ev.checked)
+    console.log(ev.source.checked)
+    //debugger
+    ev.source.checked = ev.checked == true ? false : true;
+    const message = `Are you sure you want to change status?`;
+    const dialogData = new ConfirmDialogModel("Confirmation", message);
+    const dialogRef = this._dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        var _param = {
+          'categoryId': category.categoryId,
+          'status': category.status == 'A' ? 'D' : 'A'
+        }
+        this._categoryService.ChangeStatus(_param).subscribe(res => {
+          this._toastrService.success("Status has been changed successfully.", 'Success');          
+          category.status = category.status == 'A' ? 'D' : 'A';
+        })
+      }
+      else {
+        ev.source.checked = ev.checked == true ? false : true;
+        return;
+      }
+    });
+  }
+
 }

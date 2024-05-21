@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
                 next: () => {
                     this.user = <any>this.authenticationService.userValue;
                     //debugger
+                    console.log(this.user)
                     this.loading = false;
                     // const returnUrl = this.route.snapshot.queryParams['returnUrl'] ||  '/';
                     if (this.user.data.role == Role.SuperAdmin) {

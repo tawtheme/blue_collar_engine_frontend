@@ -30,6 +30,7 @@ import { CategoryListComponent } from './price-book-section/category/category-li
 import { CategoryAddUpdateComponent } from './price-book-section/category/category-add-update/category-add-update.component';
 import { ServiceListComponent } from './price-book-section/service/service-list/service-list.component';
 import { AddUpdateServiceComponent } from './price-book-section/service/add-update-service/add-update-service.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 @NgModule({
   imports: [
     CommonModule,
@@ -42,6 +43,7 @@ import { AddUpdateServiceComponent } from './price-book-section/service/add-upda
     }),
     MatDatepickerModule,
     MatInputModule,
+    MatSlideToggleModule,
   ],
 
   declarations: [
