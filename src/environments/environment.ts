@@ -5,6 +5,8 @@
 export const environment = {
     production: false,
     apiUrl: 'https://localhost:5100',
+    baseUrlHostName: 'localhost',
+    tenantToken: "kwVEV6"
 };
 
 /*

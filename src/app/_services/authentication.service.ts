@@ -12,16 +12,26 @@ export class AuthenticationService {
     private userSubject: BehaviorSubject<User | null>;
     public user: Observable<User | null>;
 
+    private tenantSubject: BehaviorSubject<any | null>;
+    public tenant: Observable<any | null>;
+
     constructor(
         private router: Router,
         private http: HttpClient
     ) {
         this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
         this.user = this.userSubject.asObservable();
+
+        this.tenantSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('tenant')!));
+        this.tenant = this.tenantSubject.asObservable();
     }
 
     public get userValue() {
         return this.userSubject.value;
+    }
+
+    public get tenantValue() {
+        return this.tenantSubject.value;
     }
 
     login(username: string, password: string) {
@@ -58,9 +68,16 @@ export class AuthenticationService {
             }));
     }
 
-    resetPassword(resetPassword: any) {        
+    resetPassword(resetPassword: any) {
         let reqHeaders = new HttpHeaders().set('Content-Type', 'application/json');
         return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/ResetPassword`, JSON.stringify(resetPassword), { headers: reqHeaders })
+            .pipe(map(res => {
+                return res;
+            }));
+    }
+
+    getTenant(subdomain: any) {
+        return this.http.get<any>(`${environment.apiUrl}/api/v1/Account/GetTenant?subdomain=` + subdomain)
             .pipe(map(res => {
                 return res;
             }));

@@ -30,6 +30,7 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog/c
 import { PaginationComponent } from './shared/Pagination/pagination.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
 }
@@ -64,7 +65,8 @@ Date.prototype.toISOString = function () {
         ResetPasswordComponent,
         ConfirmDialogComponent,
         HomePageComponent,
-        FrontendLayoutComponent
+        FrontendLayoutComponent,
+        PagenotfoundComponent
         
     ],
     providers: [
