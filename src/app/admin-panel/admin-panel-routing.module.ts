@@ -17,6 +17,7 @@ import { EstimateComponent } from './estimate-section/estimate/estimate.componen
 import { BookingComponent } from './booking-section/booking/booking.component';
 import { CategoryListComponent } from './price-book-section/category/category-list/category-list.component';
 import { ServiceListComponent } from './price-book-section/service/service-list/service-list.component';
+import { MyProfileComponent } from './profile-section/my-profile/my-profile.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,10 @@ const routes: Routes = [
       {
         path: 'price-book',
         component: ServiceListComponent,
+      },
+      {
+        path: 'my-profile',
+        component: MyProfileComponent,
       },
     ],
     canActivate: [AuthGuard],

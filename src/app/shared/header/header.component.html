@@ -23,7 +23,6 @@
                         </a>
                         <a href="javascript:void(0);">
                             <span class="icon-notification"></span>
-
                         </a>
                     </div>
                     <div class="header-user">
@@ -35,7 +34,8 @@
                                 <span class="icon-down-arrow"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
-                                <li><a href="javascript:void(0);"><span class="icon-user"></span>Profile</a></li>
+                                <li><a [routerLink]="['/admin/my-profile']"><span class="icon-user"></span>Profile</a>
+                                </li>
                                 <li><a href="javascript:void(0);" (click)="logout()"><span
                                             class="icon-returning"></span>Logout</a></li>
                             </ul>

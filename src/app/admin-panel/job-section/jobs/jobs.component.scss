@@ -6,3 +6,94 @@
     border: 2px solid #4ade80;
   }
 }
+
+.booking-top-head {
+  margin-bottom: 25px;
+  font-size: 15px;
+  padding: 12px 15px;
+  border-radius: 6px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1019607843);
+  overflow: hidden;
+  font-weight: 500;
+  color: var(--dark);
+  border: 0;
+  border-top: 2px solid;
+}
+
+.booking-progress-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0;
+  max-width: 100%;
+  position: relative;
+  width: 85%;
+  &:before {
+    background-color: var(--border-color);
+    content: "";
+    height: 1px;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    z-index: -1;
+  }
+  .progress {
+    background-color: var(--success-secondary);
+    height: 1px;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 0.4s ease;
+    width: 0%;
+    z-index: -1;
+  }
+  .booking-progress-step {
+    .booking-progress-step-inner {
+      position: relative;
+      top: 9px;
+      span.checktick {
+        background: var(--white);
+        width: 18px;
+        display: inline-block;
+        height: 18px;
+        position: relative;
+        border: 1px solid var(--border-color);
+        border-radius: 50px;
+        &::before {
+          content: "";
+          height: 9px;
+          width: 4px;
+          border-bottom: 1px solid var(--muted);
+          border-right: 1px solid var(--muted);
+          transform: rotate(45deg);
+          position: absolute;
+          left: 6px;
+          top: 3px;
+        }
+      }
+      h5 {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 400;
+      }
+    }
+    &.active {
+      .booking-progress-step-inner {
+        span.checktick {
+          border: 1px solid var(--success-secondary);
+          &::before {
+            border-bottom: 1px solid var(--success-secondary);
+            border-right: 1px solid var(--success-secondary);
+          }
+        }
+        h5 {
+          font-size: 12px;
+          color: var(--muted);
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

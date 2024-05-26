@@ -30,6 +30,9 @@ import { CategoryListComponent } from './price-book-section/category/category-li
 import { CategoryAddUpdateComponent } from './price-book-section/category/category-add-update/category-add-update.component';
 import { ServiceListComponent } from './price-book-section/service/service-list/service-list.component';
 import { AddUpdateServiceComponent } from './price-book-section/service/add-update-service/add-update-service.component';
+import { MyProfileComponent } from './profile-section/my-profile/my-profile.component';
+import { AddNewAddressComponent } from './profile-section/add-new-address/add-new-address.component';
+import { AddTaxRateComponent } from './profile-section/add-tax-rate/add-tax-rate.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -65,6 +68,9 @@ import { AddUpdateServiceComponent } from './price-book-section/service/add-upda
     CategoryAddUpdateComponent,
     ServiceListComponent,
     AddUpdateServiceComponent,
+    MyProfileComponent,
+    AddNewAddressComponent,
+    AddTaxRateComponent,
   ],
 })
 export class AdminPanelModule {}

@@ -1,0 +1,29 @@
+.myprofileLeftTab {
+  background-color: var(--light-primary);
+  padding: 12px;
+  .nav-link {
+    text-align: left;
+    margin-bottom: 10px;
+    color: var(--light-muted);
+    font-size: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 400;
+    &.active {
+      box-shadow: 0px 1px 2px 0px #00000026;
+      background-color: var(--white);
+    }
+    &:focus {
+      box-shadow: 0px 1px 2px 0px #00000026 !important;
+    }
+    span {
+      margin-right: 5px;
+    }
+  }
+}
+
+.CompanyLogoUploadWrapper {
+  .uploadPhotoFormWrapper {
+    height: 206px;
+  }
+}

@@ -760,7 +760,7 @@ ul {
         }
       }
       p {
-        font-size: 12px;
+        font-size: 13px;
         color: var(--muted);
         margin: 0;
       }
@@ -786,6 +786,11 @@ ul {
 .lightSuccessBox {
   background-color: var(--light-success);
   color: var(--success);
+}
+
+.lightPrimaryBox {
+  background-color: var(--light-primary);
+  color: var(--primary);
 }
 
 .startIconInputField {
@@ -1138,7 +1143,9 @@ table tbody td {
 }
 .offcanvas app-create-customer,
 .offcanvas app-category-add-update,
-.offcanvas app-add-update-service {
+.offcanvas app-add-update-service,
+.offcanvas app-add-new-address,
+.offcanvas app-add-tax-rate {
   height: 100%;
 }
 .offcanvas-w480 {
@@ -1434,6 +1441,43 @@ tag-input.form-control {
   .mdc-line-ripple {
     &::before {
       display: none;
+    }
+  }
+}
+
+.ShapeBox38 {
+  @include square-circle(38px, square, 0);
+}
+
+.ShapeCircle20 {
+  @include square-circle(28px, circle, 50px);
+}
+
+.leftRotate90 {
+  transform: rotate(90deg);
+}
+
+.rightRotate90 {
+  transform: rotate(-90deg);
+}
+
+.userAvtarGroup-rounded-wrapper {
+  img {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--indigo);
+    margin: 0 0 0 -12px;
+    &:nth-child(1) {
+      border: 1px solid var(--yellow);
+    }
+    &:nth-child(2) {
+      border: 1px solid var(--primary80);
+    }
+    &:nth-child(3) {
+      border: 1px solid var(--info);
+    }
+    &:nth-child(4) {
+      border: 1px solid var(--border-success);
     }
   }
 }

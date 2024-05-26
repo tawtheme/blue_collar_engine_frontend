@@ -1,0 +1,29 @@
+<div class="offcanvas-header sidebar-popup-header">
+    <h6 class="offcanvas-title" id="offcanvasRightLabel">Add Tax Rate</h6>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" #customerCancelEle>
+    </button>
+</div>
+
+<form class="sidebar-popup-inner">
+    <div class="offcanvas-body">
+        <div class="form-group mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter name" class="form-control ">
+        </div>
+        <div class="form-group mb-3">
+            <label for="rate" class="form-label">Rate</label>
+            <input type="text" id="rate" name="rate" placeholder="Enter rate " class="form-control ">
+        </div>
+        <div class="form-group mb-3">
+            <label for="rate" class="form-label">Status</label>
+            <select id="state" name="Country" class="form-select">
+                <option value="Active" selected>Active</option>
+                <option value="In-active">In-active</option>
+            </select>
+        </div>
+    </div>
+    <div class="sidebar-popup-bottom offcanvas-footer">
+        <button class="light-outlined-button outlined w-100" data-bs-dismiss="offcanvas" type="button">Cancel</button>
+        <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="submit">Save</button>
+    </div>
+</form>

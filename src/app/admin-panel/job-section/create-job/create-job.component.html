@@ -1,267 +1,361 @@
 <div class="page-title-box items-center">
     <div class="container-xxl">
         <div class="d-flex items-center">
-            <div class="d-flex items-center">
-                <h4 class="page-title">#264826: HVAC Service</h4>
-                <button class="btn ms-2 ">
-                    <span class="icon-edit-2"></span>
-                </button>
-            </div>
-            <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle gap-2" data-bs-toggle="dropdown"
-                        data-bs-display="static" aria-expanded="false">
-                        More Action
-                        <span class="icon-down-arrow"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a href="#"><span class="icon-edit-2"></span> Edit Details</a></li>
-                        <li><a href="#"><span class="icon-estimate"></span> Create Estimate</a></li>
-                        <li><a href="#"><span class="icon-job"></span> Create Job</a></li>
-                        <li><a href="#"><span class="icon-invoice"></span> Create Invoice</a></li>
-                        <li><a href="#"><span class="icon-address"></span> Address Book</a></li>
-                    </ul>
+            <div class="">
+                <div class="d-flex items-center mb-10">
+                    <h4 class="page-title">Booking Details</h4>
+                </div>
+                <div class="breadcrumb">
+                    <a [routerLink]="['/admin']">Dashboard</a>
+                    <span class="separator">/</span>
+                    <a [routerLink]="['/admin/jobs']">Booking</a>
+                    <span class="separator">/</span>
+                    <span>Booking Details</span>
                 </div>
             </div>
+            <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
+                <button class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#BookingDetailsSidebar" aria-controls="BookingDetailsSidebar"><span
+                        class="icon-add"></span>
+                    Add New</button>
+            </div>
+
         </div>
     </div>
 </div>
 
 <div class="container-xxl">
     <div class="py-4">
-        <div class="job-top-steps">
-            <div class="job-step-item active-job-step">
-                <h4>Scheduled</h4>
-                <p>Apr 15, 2024, at 10:00AM</p>
+        <div class="row gy-3 gy-lg-0 gx-5">
+            <div class="col-lg-3">
+                <div class="border bg-light rounded overflow-hidden">
+                    <h4 class="p-3 font15 d-flex justify-content-between align-items-center font-muted font500">
+                        Booking ID <span class="text-dark">#458468</span>
+                    </h4>
+                    <div class="p-3 border-top">
+                        <h4 class="font16 mb-2">John Deo</h4>
+                        <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 text-black"> <span
+                                class="icon-call"></span>(555)
+                            555 555 </div>
+                        <div class="font14 d-flex align-items-center gap-2 text-black"><span
+                                class="icon-email"></span>info&#64;comfortzonheating.com </div>
+                    </div>
+                    <div class="p-3 border-top">
+                        <h4 class="font15 mb-2 font-muted font500">Estimate</h4>
+                        <div class="d-flex gap-2 flex-column">
+                            <span class="white-badge"><span class="icon-tick text-success me-1"></span> #CZHC-00001 -
+                                HVAC Service</span>
+                            <span class="white-badge"><span class="icon-close text-danger  me-1"></span> #CZHC-00001 -
+                                HVAC
+                                Service</span>
+                        </div>
+                    </div>
+                    <div class="p-3 border-top">
+                        <h4 class="font15 mb-2 font-muted font500">Invoice</h4>
+                        <div class="d-flex gap-2 flex-column">
+                            <span class="white-badge"><span class="icon-overdue text-warning me-1"></span> #CZHC-00001 -
+                                HVAC Service</span>
+                            <span class="white-badge"><span class="icon-close text-danger  me-1"></span> #CZHC-00001 -
+                                HVAC
+                                Service</span>
+                        </div>
+                    </div>
+                    <div class="p-3 border-top">
+                        <h4 class="font15 mb-2 font-muted font500">Assigned Team</h4>
+                        <div class="d-flex flex-wrap gap-3 ">
+                            <div class="booking-team-user">
+                                <img src="../../../../assets/images/tech1.png" class="w-100 h-100 object-fit-cover" />
+                            </div>
+                            <div class="booking-team-user">
+                                <img src="../../../../assets/images/tech2.png" class="w-100 h-100 object-fit-cover" />
+                            </div>
+                            <div class="booking-team-user border-primary text-primary">
+                                <span class="icon-add-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="job-step-item">
-                <h4>Estimate</h4>
-                <p>Apr 15, 2024, at 10:00AM</p>
-            </div>
-            <div class="job-step-item">
-                <h4>Job Start</h4>
-                <p>Apr 15, 2024, at 10:00AM</p>
-            </div>
-            <div class="job-step-item">
-                <h4>Job Finish</h4>
-                <p>Apr 15, 2024, at 10:00AM</p>
-            </div>
-            <div class="job-step-item">
-                <h4>Invoice</h4>
-                <p>Apr 15, 2024, at 10:00AM</p>
-            </div>
-            <div class="job-step-item success-job-step">
-                <h4>Get Paid</h4>
-                <p>Apr 15, 2024, at 10:00AM</p>
+            <div class="col-lg-9">
+                <div class="job-top-steps mb-4">
+                    <div class="job-step-item active-job-step">
+                        <h4>Scheduled</h4>
+                        <p>Apr 15, 2024, at 10:00AM</p>
+                    </div>
+                    <div class="job-step-item active-job-step">
+                        <h4>Estimate</h4>
+                        <p>Apr 15, 2024, at 10:00AM</p>
+                    </div>
+                    <div class="job-step-item active-job-step">
+                        <h4>Job Start</h4>
+                        <p>Apr 15, 2024, at 10:00AM</p>
+                    </div>
+                    <div class="job-step-item">
+                        <h4>Job Finish</h4>
+                        <p>-</p>
+                    </div>
+                    <div class="job-step-item">
+                        <h4>Invoice</h4>
+                        <p>-</p>
+                    </div>
+                    <div class="job-step-item success-job-step">
+                        <h4>Get Paid</h4>
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="border rounded overflow-hidden mb-4">
+                    <div class="row">
+                        <div class="col-lg-6  ">
+                            <div class="d-flex align-items-start gap-3 p-3 pe-lg-0">
+                                <div class="fs-3">
+                                    <span class="icon-calendar"></span>
+                                </div>
+                                <div class="">
+                                    <p class="font14 mb-0 font-muted">Date & Time</p>
+                                    <h4 class="font15 font600 my-1 ">11:00 Am - 01:00 PM
+                                        <span class="font14">Friday, Apr 14, 2024</span>
+                                    </h4>
+                                </div>
+                                <button class="btn light-outlined-button ShapeCircle20 p-0 ms-auto"> <span
+                                        class="icon-edit"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 border-start">
+                            <div class="d-flex align-items-start gap-3  p-3">
+                                <div class="fs-3">
+                                    <span class="icon-address"></span>
+                                </div>
+                                <div class="">
+                                    <p class="font14 mb-0 font-muted">Service Location</p>
+                                    <h4 class="font15 font600 my-1 ">333 Cedar Drive, Mountain View, CA 94040</h4>
+                                </div>
+                                <button class="btn light-outlined-button ShapeCircle20 p-0 ms-auto"> <span
+                                        class="icon-edit"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="createJobItemDetailsSection">
+                    <h4 class="mb-15 font16">Item Details</h4>
+                    <div class="itemDetailsTable">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product/Services</th>
+                                    <th>Qty</th>
+                                    <th>Unit price</th>
+                                    <th>Amount</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="col-md-6">
+                                        <div class="form-group mb-3">
+                                            <select id="item" class="form-select">
+                                                <option value="" disabled selected>Type or click to select an item
+                                                </option>
+                                                <option value="Air conditioner repair">Air conditioner repair</option>
+                                                <option value="Energy audit">Energy audit</option>
+                                                <option value="Heat pump repair">Heat pump repair</option>
+                                                <option value="Duct cleaning">Duct cleaning</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea placeholder="Description (Optional)" class="form-control"
+                                                rows="3"></textarea>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="number" id="Qty" placeholder="Qty" class="form-control">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" id="UnitPrice" placeholder="$0.00" class="form-control">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        $0.00
+                                    </td>
+                                    <td>
+                                        <button class="btn">
+                                            <span class="icon-delete"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="mb-3">
+                            <button class="light-primary-outlined-button"><span class="icon-add"></span>Add Service
+                                Item</button>
+                        </div>
+                        <div class="itemDetailsTableFooter">
+                            <h4>Total Amount</h4>
+                            <h4>$150.00</h4>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 mt-4">
+                        <label for="fname" class="form-label">Add Notes</label>
+                        <textarea placeholder="Please add notes to technician regarding the customer requirements"
+                            class="form-control" rows="4"></textarea>
+                    </div>
+                    <div class="d-flex justify-content-end gap-3 mt-3 mb-5">
+                        <button class="light-outlined-button px-5 lg-btn" type="button">Cancel</button>
+                        <button class="primary-filled-button px-5 lg-btn" type="submit">Submit</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row g-4">
-        <div class="col-lg-4">
-            <div class="border rounded overflow-hidden mb-4">
-                <div class="p-3">
-                    <h5 class="font14 font-muted font400 mb-2">Customer Details</h5>
-                    <h4 class="font18 my-2">John Deo</h4>
-                    <div class="font14 d-flex align-items-center gap-2 mb-2 "> <span class="icon-call"></span>(555)
-                        555 555 </div>
-                    <div class="font14 d-flex align-items-center gap-2"><span
-                            class="icon-email"></span>info&#64;comfortzonheating.com </div>
-                </div>
-            </div>
-            <div class="border rounded overflow-hidden mb-4">
-                <div class="p-3">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <p class="font15 mb-0 font-muted">Estimate</p>
-                        <button class="btn light-outlined-button xs-btn"> <span class="icon-add"></span> Add</button>
-                    </div>
-                    <div class="border-bottom pb-3">
-                        <span class="xs-btn success-badge mb-2">Accepted</span>
-                        <h4 class="font15 my-2 ">HVAC Service (CZHC-00001)</h4>
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="flex-fill">
-                                <p class="font14 mb-0 font-muted"><span class="font500">Created:</span> Feb 14, 2024</p>
-                            </div>
-                            <div class="flex-fill">
-                                <p class="font14  mb-0 font-muted"><span class="font500">Amount:</span> $ 23,456.00</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-3">
-                        <span class="xs-btn danger-badge mb-2">Cancelled</span>
-                        <h4 class="font15 my-2 ">HVAC Service (CZHC-00001)</h4>
-                        <div class="d-flex align-items-center gap-2">
-                            <div class="flex-fill">
-                                <p class="font14 mb-0 font-muted"><span class="font500 ">Created:</span> Feb 14, 2024
-                                </p>
-                            </div>
-                            <div class="flex-fill">
-                                <p class="font14  mb-0 font-muted"><span class="font500">Amount:</span> $ 23,456.00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="border rounded overflow-hidden mb-4">
-                <div class="p-3">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <p class="font15 mb-0 font-muted">Invoice</p>
-                        <button class="btn light-outlined-button xs-btn"> <span class="icon-add"></span> Add</button>
-                    </div>
-                    <div class="p-3 d-flex align-items-center justify-center">
-                        <div class="w-50 text-center">
-                            <img src="../../../../../assets/images/no-document.svg" class="img" />
-                            <p class="font14 mb-0 mt-3 font-muted">No Estimate has been sent
-                                to the customer</p>
-                        </div>
-                    </div>
+</div>
 
-                </div>
-            </div>
+
+
+
+
+<div class="offcanvas offcanvas-end sidebar-popup offcanvas-w480 " tabindex="-1" id="BookingDetailsSidebar"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header sidebar-popup-header">
+        <div class="d-flex align-items-center">
+            <h6 class="offcanvas-title" id="offcanvasRightLabel">Booking Details </h6>
+            <span class="danger-badge ms-3">Unassigned</span>
         </div>
-        <div class="col-lg-8">
-            <div class="border rounded overflow-hidden mb-4">
-                <div class="row gx-5">
-                    <div class="col-lg-6  ">
-                        <div class="d-flex align-items-start gap-3 p-3">
-                            <div class="fs-3">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
+
+        </button>
+    </div>
+    <div class="offcanvas-body">
+        <form class="sidebar-popup-inner">
+            <div class="p-3 rounded mb-4 border lightPrimaryCardBox">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="form-group">
+                            <label for="datetime" class="form-label">Date and time</label>
+                            <div class="bookingDateTimeWrapper">
                                 <span class="icon-calendar"></span>
+                                <input type="text" id="datetimepicker" name="datetimepicker" placeholder="Select Date"
+                                    class="form-control" value="">
+                                <button type="button" class="btn">
+                                    <span class="icon-edit-2"></span>
+                                </button>
                             </div>
-                            <div class="">
-                                <p class="font14 mb-0 font-muted">Date & Time</p>
-                                <h4 class="font16 font600 my-1 ">11:00 Am - 01:00 PM</h4>
-                                <p class="font14 mb-0 ">Friday, Apr 14, 2024</p>
-                            </div>
-                            <button class="btn light-outlined-button xs-btn ms-auto"> <span class="icon-edit"></span>
-                                Reschedule</button>
                         </div>
                     </div>
-                    <div class="col-lg-6 border-start">
-                        <div class="d-flex align-items-start gap-3  p-3">
-                            <div class="fs-3">
-                                <span class="icon-address"></span>
-                            </div>
-                            <div class="">
-                                <p class="font14 mb-0 font-muted">Service Location</p>
-                                <h4 class="font16 font600 my-1 ">333 Cedar Drive, Mountain View, CA 94040</h4>
-                                <div class="d-flex align-items-center gap-2 justify-content-start mt-2">
-                                    <button class="btn light-primary-outlined-button xs-btn">
-                                        Get direction</button>
-                                    <button class="btn light-outlined-button xs-btn ms-2"> <span
-                                            class="icon-edit-2"></span>
-                                        Edit Address</button>
+                    <div class="col-4">
+                        <div class="form-group text-end">
+                            <label for="datetime" class="form-label">Booking ID</label>
+                            <p class="mb-0 mt-1">23464323</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <h4 class="font18 mb-2">John Smith </h4>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="font15 d-flex align-items-center gap-2"> <span class="icon-call"></span>(555)
+                            555 555 </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="font15 d-flex align-items-center gap-2"><span
+                                class="icon-email"></span>info&#64;comfortzonheating.com </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="addressLabel" class="form-label font-muted">Services Address</label>
+                <div class="font15 d-flex align-items-center gap-2"><span class="icon-address"></span>123 Main Street,
+                    Anytown, USA </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="addressLabel" class="form-label font-muted">Services</label>
+                <div class="d-flex gap-2">
+                    <span class="grey-outlined-button">Air conditioner repair-00001</span>
+                    <span class="grey-outlined-button">Energy audit</span>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <textarea placeholder="Description (Optional)" class="form-control" rows="7">I've scheduled an appointment for HVAC servicing. 
+Our air conditioning unit has been making a strange rattling noise intermittently, especially during hot days. Also, our dog will be in the backyard, so please let us know when you're arriving. Looking forward to your visit. Thanks!
+                </textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" name="status" class="form-select">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="repeat" class="form-label">Repeat</label>
+                <select id="repeat" name="repeat" class="form-select">
+                    <option value="" disabled selected>Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="assignteam" class="form-label">Assigned Team</label>
+                <div class="dropdown position-relative">
+                    <button type="button" class="btn light-outlined-button dropdown-toggle w-100"
+                        data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        Select
+                        <span class="icon-down-arrow ms-auto"></span>
+                    </button>
+                    <ul class="dropdown-menu w-100 ">
+                        <li class="dropdown-team-item">
+                            <span class="success-badge rounded-pill dropdown-badge">Available</span>
+                            <div class="d-flex tech-info  align-items-center gap-3">
+                                <div class="tech-img">
+                                    <img src="../../../../../assets/images/tech2.png" alt="" class="img-fluid" />
+                                </div>
+                                <div class="">
+                                    <h5 class="font14 mb-1 font500"> Michael Johnson</h5>
+                                    <p class="font13 mb-0 font-muted font400">Air Duct Cleaning and Maintenance</p>
                                 </div>
                             </div>
+                        </li>
+                        <li class="dropdown-team-item">
+                            <span class="warning-badge rounded-pill dropdown-badge">2 Running jobs</span>
+                            <div class="d-flex tech-info  align-items-center gap-3">
+                                <div class="tech-img">
+                                    <img src="../../../../../assets/images/tech3.png" alt="" class="img-fluid" />
+                                </div>
+                                <div class="">
+                                    <h5 class="font14 mb-1 font500"> Robert Davis</h5>
+                                    <p class="font13 mb-0 font-muted font400">Mechanical Aptitude</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="border p-3 mt-3 rounded">
+                    <div class="d-flex tech-info align-items-center gap-3">
+                        <div class="tech-img">
+                            <img src="../../../../../assets/images/tech2.png" alt="" class="img-fluid" />
+                        </div>
+                        <div class="">
+                            <h5 class="font14 mb-1 font500"> Michael Johnson</h5>
+                            <p class="font13 mb-0 font-muted font400">Air Duct Cleaning and Maintenance</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="createJobItemDetailsSection">
-                <h4 class="mb-15 font16">Item Details</h4>
-                <div class="itemDetailsTable">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product/Services</th>
-                                <th>Qty</th>
-                                <th>Unit price</th>
-                                <th>Amount</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <select id="item" class="form-select">
-                                            <option value="" disabled selected>Type or click to select an item</option>
-                                            <option value="Air conditioner repair">Air conditioner repair</option>
-                                            <option value="Energy audit">Energy audit</option>
-                                            <option value="Heat pump repair">Heat pump repair</option>
-                                            <option value="Duct cleaning">Duct cleaning</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea placeholder="Description (Optional)" class="form-control"
-                                            rows="3"></textarea>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="number" id="Qty" placeholder="Qty"
-                                            class="form-control">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" id="UnitPrice"
-                                            placeholder="$0.00" class="form-control">
-                                    </div>
-                                </td>
-                                <td>
-                                    $0.00
-                                </td>
-                                <td>
-                                    <button class="btn">
-                                        <span class="icon-delete"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="mb-3">
-                        <button class="light-primary-outlined-button"><span class="icon-add"></span>Add Service
-                            Item</button>
-                    </div>
-                    <div class="itemDetailsTableFooter">
-                        <h4>Total Amount</h4>
-                        <h4>$150.00</h4>
-                    </div>
-                </div>
-                <div class="form-group mb-3 mt-4">
-                    <label for="fname" class="form-label">Assigned Team</label>
-                    <div class="d-flex gap-3 flex-wrap align-items-center">
-                        <button class="light-primary-outlined-button height55">
-                            <span class="icon-add-user"></span>
-                            Assign Team
-                        </button>
-                        <div class="d-flex tech-info  align-items-center gap-3 border rounded p-2">
-                            <div class="tech-img">
-                                <img src="../../../../../assets/images/tech2.png" alt="" class="img-fluid" />
-                            </div>
-                            <div class="">
-                                <h5 class="font14 mb-1 font500"> Michael Johnson</h5>
-                                <p class="font12 mb-0 font-muted font400">Air Duct Cleaning and Maintenance</p>
-                            </div>
-                            <button class="btn p-1" type="button">
-                                <span class="icon-delete"></span>
-                            </button>
-                        </div>
-                        <div class="d-flex tech-info  align-items-center gap-3 border rounded p-2">
-                            <div class="tech-img">
-                                <img src="../../../../../assets/images/tech3.png" alt="" class="img-fluid" />
-                            </div>
-                            <div class="">
-                                <h5 class="font14 mb-1 font500"> Michael Johnson</h5>
-                                <p class="font12 mb-0 font-muted font400">Air Duct Cleaning and Maintenance</p>
-                            </div>
-                            <button class="btn p-1" type="button">
-                                <span class="icon-delete"></span>
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="form-group mb-3 mt-4">
-                    <label for="fname" class="form-label">Add Notes</label>
-                    <textarea placeholder="Please add notes to technician regarding the customer requirements"
-                        class="form-control" rows="4"></textarea>
-                </div>
-                <div class="d-flex justify-content-start gap-3 mt-3 mb-5">
-                    <button class="primary-filled-button px-5 lg-btn" type="submit">Submit</button>
-                    <button class="light-outlined-button px-5 lg-btn" type="button">Cancel</button>
-
-                </div>
+            <div class="form-group mb-3 pb-4">
+                <label for="cancelreason" class="form-label">Cancel Reason</label>
+                <textarea placeholder="Enter Cancel Reasons" id="cancelreason" class="form-control" rows="4">
+                </textarea>
             </div>
-        </div>
+        </form>
+    </div>
+    <div class="sidebar-popup-bottom offcanvas-footer">
+        <button class="light-outlined-button outlined w-100" data-bs-dismiss="offcanvas" type="button">Cancel</button>
+        <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="submit">Save</button>
     </div>
 </div>
