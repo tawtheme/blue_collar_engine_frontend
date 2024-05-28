@@ -27,15 +27,12 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { MaterialModule } from '../material/material.module';
 import * as moment from 'moment';
 import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
-import { PaginationComponent } from './shared/Pagination/pagination.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
 }
-
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -50,7 +47,6 @@ Date.prototype.toISOString = function () {
         }),
         NgbModule,
         MaterialModule
-
     ],
     declarations: [
         AppComponent,
@@ -59,7 +55,6 @@ Date.prototype.toISOString = function () {
         LayoutComponent,
         SecureLayoutComponent,
         ForgetPasswordComponent,
-        //PaginationComponent,
         OnlineRequestDemoComponent,
         HeaderComponent,
         ResetPasswordComponent,

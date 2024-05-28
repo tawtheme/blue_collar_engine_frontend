@@ -29,13 +29,10 @@ import { CategoryListComponent } from './price-book-section/category/category-li
 import { CategoryAddUpdateComponent } from './price-book-section/category/category-add-update/category-add-update.component';
 import { ServiceListComponent } from './price-book-section/service/service-list/service-list.component';
 import { AddUpdateServiceComponent } from './price-book-section/service/add-update-service/add-update-service.component';
-<<<<<<< HEAD
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MyProfileComponent } from './profile-section/my-profile/my-profile.component';
 import { AddNewAddressComponent } from './profile-section/add-new-address/add-new-address.component';
 import { AddTaxRateComponent } from './profile-section/add-tax-rate/add-tax-rate.component';
-=======
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
->>>>>>> 2363cf58e6b1307b32fa031c17076b32c178a632
 @NgModule({
   imports: [
     CommonModule,
