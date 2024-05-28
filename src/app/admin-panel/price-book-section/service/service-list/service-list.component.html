@@ -10,12 +10,13 @@
                         <span class="icon-down-arrow"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a href="#" data-bs-toggle="offcanvas" data-bs-target="#AddCategorySidebar"
-                                aria-controls="AddCategorySidebar" #catgeorySideBarEle><span class="icon-edit-2"></span> Create Category</a>
+                        <li><a href="javascript:void(0);" (click)="openAddCategory()"><span class="icon-edit-2"></span>
+                                Create Category</a>
                         </li>
-                        <li><a href="#" data-bs-toggle="offcanvas" data-bs-target="#AddServiceSidebar"
-                                aria-controls="AddServiceSidebar">
-                                <span class="icon-estimate"></span> Add Services</a></li>
+                        <li><a href="javascript:void(0);" (click)="openAddService()">
+                                <span class="icon-estimate"></span> Add Services</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -40,46 +41,39 @@
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade active show" id="pills-services" role="tabpanel"
                 aria-labelledby="pills-services-tab" tabindex="0">
-                <div class="row">
+                <h4 class="mb-15 font16">Category</h4>
+                <!-- <div class="table-top-filter-row row">
+                    <div class="col-md-5">
+                        <div class="table-top-filter-left">
+                            <div class="top-search-group flexGrow2 startIconInputField">
+                                <input type="text" id="search" name="search"
+                                    placeholder="Search here..." class="form-control" (keyup.enter)="onEnter($event)">
+                                <span class="icon-search iconPosition"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div> -->
+                <div class="row" *ngFor="let catgeory of items;index as i">
                     <div class="col-lg-3">
-                        <h4 class="mb-15 font16">Category</h4>
                         <div class="nav flex-column nav-pills pe-5 booking-services-left-tab outlinedButtonStyleTabs"
                             id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <button class="nav-link active" id="v-pills-air-conditioning-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-air-conditioning" type="button" role="tab"
-                                aria-controls="v-pills-air-conditioning" aria-selected="true">
-                                Air Conditioning
-                            </button>
-                            <button class="nav-link" id="v-pills-plumbing-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-plumbing" type="button" role="tab"
-                                aria-controls="v-pills-plumbing" aria-selected="false">
-                                Plumbing
-                            </button>
-
-                            <button class="nav-link" id="v-pills-heating-tab" data-bs-toggle="pill"
-                                data-bs-target="#v-pills-heating" type="button" role="tab"
-                                aria-controls="v-pills-heating" aria-selected="false">
-                                Heating
+                            <button class="nav-link {{catgeory.categoryId==activeCategory ?'active':''}}"
+                                (click)="activeTab(catgeory.categoryId)" attr.id="leftPanel_{{catgeory.categoryId}}_tab"
+                                data-bs-toggle="pill" type="button" role="tab"
+                                attr.data-bs-target="#leftPanel_{{catgeory.categoryId}}"
+                                attr.aria-controls="leftPanel_{{catgeory.categoryId}}"
+                                attr.aria-selected="{{i==0 ?'true':'false'}}">
+                                {{catgeory.name}}
                             </button>
                         </div>
                     </div>
                     <div class="col-lg-9">
                         <div class="tab-content" id="v-pills-tabContent">
-                            <div class="tab-pane fade show active" id="v-pills-air-conditioning" role="tabpanel"
-                                aria-labelledby="v-pills-air-conditioning-tab" tabindex="0">
+                            <div class="tab-pane fade {{catgeory.categoryId==activeCategory ?'show active':''}}"
+                                attr.id="leftPanel_{{catgeory.categoryId}}" role="tabpanel"
+                                attr.aria-labelledby="leftPanel_{{catgeory.categoryId}}_tab" tabindex="0">
 
-                                <div class="table-top-filter-row row">
-                                    <div class="col-md-5">
-                                        <div class="table-top-filter-left">
-                                            <div class="top-search-group flexGrow2 startIconInputField">
-                                                <input type="text" id="search" name="search"
-                                                    placeholder="Search here..." class="form-control">
-                                                <span class="icon-search iconPosition"></span>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="mt-20 table-middle-items-center">
                                     <table class="row-border">
                                         <thead>
@@ -102,548 +96,51 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <tr *ngFor='let service of catgeory.categoryServices;index as j'>
                                                 <td class="col-6 px-4">
                                                     <div class="table-service-info d-flex align-items-center gap-3">
-                                                        <div class="service-info-img">
-                                                            <img src="../../../../../assets/images/services1.png"
-                                                                alt="" />
+                                                        <div class="service-info-img"
+                                                            *ngIf="service.uploadedFiles.length > 0">
+                                                            <img src="{{apiBaseUrl}}{{service.uploadedFiles[0].filePath}}"
+                                                                onerror="this.src='../assets/images/services1.png'">
+                                                        </div>
+                                                        <div class="service-info-img"
+                                                            *ngIf="service.uploadedFiles.length == 0">
+                                                            <img src="../assets/images/services1.png">
                                                         </div>
                                                         <div class="">
-                                                            <h4 class="font14 mb-1 font500">Furnace Service Call</h4>
-                                                            <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                facilisis iusto? Doloremque pellentesque pede
-                                                                torquent dolore assumenda adipiscing mi suspendisse
-                                                                viverra, potenti voluptatum incididunt anim.</p>
+                                                            <h4 class="font14 mb-1 font500">{{service.serviceName}}</h4>
+                                                            <p class="font14 mb-0  font-muted font400">
+                                                                {{service.description}}</p>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    $34.57
+                                                    ${{service.price | number : '1.2-2'}}
                                                 </td>
                                                 <td>
-                                                    $34.57
+                                                    ${{service.cost | number : '1.2-2'}}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-center">
                                                         <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="flexSwitchCheckChecked" checked>
+                                                            <mat-slide-toggle [checked]="service.isOnlineBooking"
+                                                                (change)="onChange($event, service)"></mat-slide-toggle>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-end">
-                                                        <button class="light-outlined-button sm-btn"><span
+                                                        <button class="light-outlined-button sm-btn"
+                                                            (click)="editCategoryService(service.categoryServiceId)"><span
                                                                 class="icon-edit-2"></span> Edit</button>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td class="col-6 px-4">
-                                                    <div class="table-service-info d-flex align-items-center gap-3">
-                                                        <div class="service-info-img">
-                                                            <img src="../../../../../assets/images/services1.png"
-                                                                alt="" />
-                                                        </div>
-                                                        <div class="">
-                                                            <h4 class="font14 mb-1 font500">Furnace Service Call</h4>
-                                                            <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                facilisis iusto? Doloremque pellentesque pede
-                                                                torquent dolore assumenda adipiscing mi suspendisse
-                                                                viverra, potenti voluptatum incididunt anim.</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    $34.57
-                                                </td>
-                                                <td>
-                                                    $34.57
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center justify-content-center">
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="flexSwitchCheckChecked" checked>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center justify-content-end">
-                                                        <button class="light-outlined-button sm-btn"><span
-                                                                class="icon-edit-2"></span> Edit</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-6 px-4">
-                                                    <div class="table-service-info d-flex align-items-center gap-3">
-                                                        <div class="service-info-img">
-                                                            <img src="../../../../../assets/images/services1.png"
-                                                                alt="" />
-                                                        </div>
-                                                        <div class="">
-                                                            <h4 class="font14 mb-1 font500">Furnace Service Call</h4>
-                                                            <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                facilisis iusto? Doloremque pellentesque pede
-                                                                torquent dolore assumenda adipiscing mi suspendisse
-                                                                viverra, potenti voluptatum incididunt anim.</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    $34.57
-                                                </td>
-                                                <td>
-                                                    $34.57
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center justify-content-center">
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="flexSwitchCheckChecked" checked>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center justify-content-end">
-                                                        <button class="light-outlined-button sm-btn"><span
-                                                                class="icon-edit-2"></span> Edit</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="col-6 px-4">
-                                                    <div class="table-service-info d-flex align-items-center gap-3">
-                                                        <div class="service-info-img">
-                                                            <img src="../../../../../assets/images/services1.png"
-                                                                alt="" />
-                                                        </div>
-                                                        <div class="">
-                                                            <h4 class="font14 mb-1 font500">Furnace Service Call</h4>
-                                                            <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                facilisis iusto? Doloremque pellentesque pede
-                                                                torquent dolore assumenda adipiscing mi suspendisse
-                                                                viverra, potenti voluptatum incididunt anim.</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    $34.57
-                                                </td>
-                                                <td>
-                                                    $34.57
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center justify-content-center">
-                                                        <div class="form-check form-switch">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="flexSwitchCheckChecked" checked>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex align-items-center justify-content-end">
-                                                        <button class="light-outlined-button sm-btn"><span
-                                                                class="icon-edit-2"></span> Edit</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
-
-                            </div>
-                            <div class="tab-pane fade" id="v-pills-plumbing" role="tabpanel"
-                                aria-labelledby="v-pills-plumbing-tab" tabindex="0">
-                                <h4 class="mb-15 font20">
-                                    <div class="table-top-filter-row row">
-                                        <div class="col-md-5">
-                                            <div class="table-top-filter-left">
-                                                <div class="top-search-group flexGrow2 startIconInputField">
-                                                    <input type="text" id="search" name="search"
-                                                        placeholder="Search here..." class="form-control">
-                                                    <span class="icon-search iconPosition"></span>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-20 table-middle-items-center">
-                                        <table class="row-border">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Service Name
-                                                    </th>
-                                                    <th>
-                                                        Price
-                                                    </th>
-                                                    <th>
-                                                        Cost
-                                                    </th>
-                                                    <th>
-                                                        Book online
-                                                    </th>
-                                                    <th>
-                                                        Action
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="col-6 px-4">
-                                                        <div class="table-service-info d-flex align-items-center gap-3">
-                                                            <div class="service-info-img">
-                                                                <img src="../../../../../assets/images/services1.png"
-                                                                    alt="" />
-                                                            </div>
-                                                            <div class="">
-                                                                <h4 class="font14 mb-1 font500">Furnace Service Call
-                                                                </h4>
-                                                                <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                    facilisis iusto? Doloremque pellentesque pede
-                                                                    torquent dolore assumenda adipiscing mi suspendisse
-                                                                    viverra, potenti voluptatum incididunt anim.</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="flexSwitchCheckChecked" checked>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-end">
-                                                            <button class="light-outlined-button sm-btn"><span
-                                                                    class="icon-edit-2"></span> Edit</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-6 px-4">
-                                                        <div class="table-service-info d-flex align-items-center gap-3">
-                                                            <div class="service-info-img">
-                                                                <img src="../../../../../assets/images/services1.png"
-                                                                    alt="" />
-                                                            </div>
-                                                            <div class="">
-                                                                <h4 class="font14 mb-1 font500">Furnace Service Call
-                                                                </h4>
-                                                                <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                    facilisis iusto? Doloremque pellentesque pede
-                                                                    torquent dolore assumenda adipiscing mi suspendisse
-                                                                    viverra, potenti voluptatum incididunt anim.</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="flexSwitchCheckChecked" checked>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-end">
-                                                            <button class="light-outlined-button sm-btn"><span
-                                                                    class="icon-edit-2"></span> Edit</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-6 px-4">
-                                                        <div class="table-service-info d-flex align-items-center gap-3">
-                                                            <div class="service-info-img">
-                                                                <img src="../../../../../assets/images/services1.png"
-                                                                    alt="" />
-                                                            </div>
-                                                            <div class="">
-                                                                <h4 class="font14 mb-1 font500">Furnace Service Call
-                                                                </h4>
-                                                                <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                    facilisis iusto? Doloremque pellentesque pede
-                                                                    torquent dolore assumenda adipiscing mi suspendisse
-                                                                    viverra, potenti voluptatum incididunt anim.</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="flexSwitchCheckChecked" checked>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-end">
-                                                            <button class="light-outlined-button sm-btn"><span
-                                                                    class="icon-edit-2"></span> Edit</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-6 px-4">
-                                                        <div class="table-service-info d-flex align-items-center gap-3">
-                                                            <div class="service-info-img">
-                                                                <img src="../../../../../assets/images/services1.png"
-                                                                    alt="" />
-                                                            </div>
-                                                            <div class="">
-                                                                <h4 class="font14 mb-1 font500">Furnace Service Call
-                                                                </h4>
-                                                                <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                    facilisis iusto? Doloremque pellentesque pede
-                                                                    torquent dolore assumenda adipiscing mi suspendisse
-                                                                    viverra, potenti voluptatum incididunt anim.</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="flexSwitchCheckChecked" checked>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-end">
-                                                            <button class="light-outlined-button sm-btn"><span
-                                                                    class="icon-edit-2"></span> Edit</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </h4>
-                            </div>
-                            <div class="tab-pane fade" id="v-pills-heating" role="tabpanel"
-                                aria-labelledby="v-pills-heating-tab" tabindex="0">
-                                <h4 class="mb-15 font20">
-                                    <div class="table-top-filter-row row">
-                                        <div class="col-md-5">
-                                            <div class="table-top-filter-left">
-                                                <div class="top-search-group flexGrow2 startIconInputField">
-                                                    <input type="text" id="search" name="search"
-                                                        placeholder="Search here..." class="form-control">
-                                                    <span class="icon-search iconPosition"></span>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-20 table-middle-items-center">
-                                        <table class="row-border">
-                                            <thead>
-                                                <tr>
-                                                    <th>
-                                                        Service Name
-                                                    </th>
-                                                    <th>
-                                                        Price
-                                                    </th>
-                                                    <th>
-                                                        Cost
-                                                    </th>
-                                                    <th>
-                                                        Book online
-                                                    </th>
-                                                    <th>
-                                                        Action
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="col-6 px-4">
-                                                        <div class="table-service-info d-flex align-items-center gap-3">
-                                                            <div class="service-info-img">
-                                                                <img src="../../../../../assets/images/services1.png"
-                                                                    alt="" />
-                                                            </div>
-                                                            <div class="">
-                                                                <h4 class="font14 mb-1 font500">Furnace Service Call
-                                                                </h4>
-                                                                <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                    facilisis iusto? Doloremque pellentesque pede
-                                                                    torquent dolore assumenda adipiscing mi suspendisse
-                                                                    viverra, potenti voluptatum incididunt anim.</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="flexSwitchCheckChecked" checked>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-end">
-                                                            <button class="light-outlined-button sm-btn"><span
-                                                                    class="icon-edit-2"></span> Edit</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-6 px-4">
-                                                        <div class="table-service-info d-flex align-items-center gap-3">
-                                                            <div class="service-info-img">
-                                                                <img src="../../../../../assets/images/services1.png"
-                                                                    alt="" />
-                                                            </div>
-                                                            <div class="">
-                                                                <h4 class="font14 mb-1 font500">Furnace Service Call
-                                                                </h4>
-                                                                <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                    facilisis iusto? Doloremque pellentesque pede
-                                                                    torquent dolore assumenda adipiscing mi suspendisse
-                                                                    viverra, potenti voluptatum incididunt anim.</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="flexSwitchCheckChecked" checked>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-end">
-                                                            <button class="light-outlined-button sm-btn"><span
-                                                                    class="icon-edit-2"></span> Edit</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-6 px-4">
-                                                        <div class="table-service-info d-flex align-items-center gap-3">
-                                                            <div class="service-info-img">
-                                                                <img src="../../../../../assets/images/services1.png"
-                                                                    alt="" />
-                                                            </div>
-                                                            <div class="">
-                                                                <h4 class="font14 mb-1 font500">Furnace Service Call
-                                                                </h4>
-                                                                <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                    facilisis iusto? Doloremque pellentesque pede
-                                                                    torquent dolore assumenda adipiscing mi suspendisse
-                                                                    viverra, potenti voluptatum incididunt anim.</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="flexSwitchCheckChecked" checked>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-end">
-                                                            <button class="light-outlined-button sm-btn"><span
-                                                                    class="icon-edit-2"></span> Edit</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="col-6 px-4">
-                                                        <div class="table-service-info d-flex align-items-center gap-3">
-                                                            <div class="service-info-img">
-                                                                <img src="../../../../../assets/images/services1.png"
-                                                                    alt="" />
-                                                            </div>
-                                                            <div class="">
-                                                                <h4 class="font14 mb-1 font500">Furnace Service Call
-                                                                </h4>
-                                                                <p class="font14 mb-0  font-muted font400">Ac rutrum,
-                                                                    facilisis iusto? Doloremque pellentesque pede
-                                                                    torquent dolore assumenda adipiscing mi suspendisse
-                                                                    viverra, potenti voluptatum incididunt anim.</p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        $34.57
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-center">
-                                                            <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="flexSwitchCheckChecked" checked>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="d-flex align-items-center justify-content-end">
-                                                            <button class="light-outlined-button sm-btn"><span
-                                                                    class="icon-edit-2"></span> Edit</button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </h4>
                             </div>
                         </div>
                     </div>
@@ -665,5 +162,13 @@
 
 <div class="offcanvas offcanvas-end sidebar-popup offcanvas-w480" tabindex="-1" id="AddServiceSidebar"
     aria-labelledby="offcanvasRightLabel">
-    <app-add-update-service></app-add-update-service>
+    <app-add-update-service [items]="categoryServiceInfo"></app-add-update-service>
 </div>
+
+<a href="javascript:void(0);" style="display:none;" data-bs-toggle="offcanvas" data-bs-target="#AddServiceSidebar"
+    aria-controls="AddServiceSidebar" #catgeoryServiceSideBarEle>
+    <span class="icon-estimate"></span> Add Services</a>
+
+<a href="javascript:void(0);" style="display:none;" data-bs-toggle="offcanvas" data-bs-target="#AddCategorySidebar"
+    aria-controls="AddCategorySidebar" #catgeorySideBarEle><span class="icon-edit-2"></span>
+    Create Category</a>

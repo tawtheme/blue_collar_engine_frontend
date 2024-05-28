@@ -2,16 +2,15 @@
     <table class="row-border">
         <thead>
             <tr>
-                <th>
-                    Category Name
+                <th (click)="sortBy('name')">
+                    Category Name{{sortIcon('name')}}
                 </th>
-                <th>
-                    Services
+                <th (click)="sortBy('totalServiceCount')">
+                    Services{{sortIcon('totalServiceCount')}}
                 </th>
                 <th>
                     Status
                 </th>
-
                 <th>
                     Action
                 </th>
@@ -29,18 +28,20 @@
                     </div>
                 </td>
                 <td>
-                    0
+                    {{catgeory.totalServiceCount}}
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+                            <mat-slide-toggle [checked]="catgeory.status=='A' ? true:false"
+                                (change)="onChange($event, catgeory)"></mat-slide-toggle>
                         </div>
                     </div>
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-end">
-                        <button class="light-outlined-button sm-btn" (click)="editCategory(catgeory.categoryId)"><span class="icon-edit-2"></span>
+                        <button class="light-outlined-button sm-btn" (click)="editCategory(catgeory.categoryId)"><span
+                                class="icon-edit-2"></span>
                             Edit</button>
                     </div>
                 </td>

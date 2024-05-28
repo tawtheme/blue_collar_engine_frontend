@@ -143,7 +143,7 @@ export class SchedulerComponent implements OnInit {
     });
     this.handleEvent('Dropped or resized', event);
   }
-  redirectToBooking() {
-    this._route.navigate(['/admin/create-booking']);
-  }
+  // redirectToBooking() {
+  //   this._route.navigate(['/admin/create-booking']);
+  // }
 }

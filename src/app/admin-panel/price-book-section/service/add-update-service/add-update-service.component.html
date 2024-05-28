@@ -9,8 +9,8 @@
             <label for="services" class="form-label">Category</label>
             <select id="services" formControlName="categoryId" name="services" class="form-select"
                 [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }">
-                <option value="0">Select Services</option>
-                <option value=" {{category.categoryId}}" *ngFor="let category of categories"> {{category.name}}</option>
+                <option value="">Select Services</option>
+                <option value="{{category.categoryId}}" *ngFor="let category of categories"> {{category.name}}</option>
             </select>
             <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
                 <div *ngIf="f.categoryId.errors.required">Category is required</div>
@@ -33,22 +33,28 @@
         <div class="form-group mb-3">
             <label for="uploadPhoto" class="form-label">Upload Photo</label>
             <div class="uploadPhotoFormWrapper" id="uploadPhoto">
-                <input type="file" accept="image/*" multiple (change)="selectFiles($event)" />
+                <input type="file" accept="image/*" (change)="selectFiles($event)" formControlName="files"
+                    [ngClass]="{ 'is-invalid': submitted && f.files.errors }" />
+                <div *ngIf="submitted && f.files.errors" class="invalid-feedback">
+                    <div *ngIf="f.files.errors.required">Image is required</div>
+                </div>
                 <div class="d-flex align-items-center">
                     <span class="icon-attachment fs-5"></span>
                     <div class="ms-2">
-                        <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose file to upload</h5>
-                        <p class="font13 font-muted font300 mb-0">Supported format: PNG, JPG</p>
+                        <h5 class="font14 font-muted font400 mb-2">Choose file to upload</h5>
+                        <p class="font13 font-muted font300 mb-0">Supported format: PNG, JPG, JPEG</p>
                     </div>
                 </div>
             </div>
             <div class="uploadedPhotoWrapper">
-                <div class="uploadedImagesItem" *ngFor='let preview of previews'>
-                    <button type="button" class="btn">
+                <div class="uploadedImagesItem" *ngFor='let preview of previews;index as i'>
+                    <button type="button" class="btn" (click)="removeServiceImage(preview.index, preview.uploadId)">
                         <span class="icon-close-1"></span>
                     </button>
-                    <img [src]="preview" class="preview img-fluid">
+                    <img [src]="preview.filePath" class="preview img-fluid">
                 </div>
+
+
             </div>
         </div>
         <div class="row">
@@ -76,8 +82,8 @@
         <div class="form-group mb-3">
             <label for="onlinebooking" class="form-label">Online Booking</label>
             <select id="onlinebooking" formControlName="isOnlineBooking" name="onlinebooking" class="form-select">
-                <option value="true" selected>Enabled</option>
-                <option value="false" disabled> Disable</option>
+                <option value="true">Enable</option>
+                <option value="false"> Disable</option>
             </select>
         </div>
     </div>

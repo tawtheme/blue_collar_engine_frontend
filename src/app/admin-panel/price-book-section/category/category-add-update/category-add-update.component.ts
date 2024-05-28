@@ -17,7 +17,6 @@ export class CategoryAddUpdateComponent {
   submitted = false;
   @ViewChild('customerCancelEle') customerCancelEle!: ElementRef<HTMLElement>;
   constructor(private formBuilder: FormBuilder, private _categoryService: CategoryService, private _router: Router, private _toastrService: ToastrService) {
-
   }
 
   ngOnInit(): void {
@@ -27,11 +26,24 @@ export class CategoryAddUpdateComponent {
       description: ['', null],
       status: ['A', null]
     });
-
   }
+
   ngOnChanges() {
-    console.log(this.items)
-    this.categoryForm.patchValue(this.items);
+    if (this.items == null) {
+      debugger
+      this.categoryForm.reset();
+       this.categoryForm.controls['categoryId'].setValue(0);
+       this.categoryForm.controls['status'].setValue('A');
+      // this.categoryServiceForm.controls['isOnlineBooking'].setValue(true);
+      // this.categoryServiceForm.controls['files'].setValue("");
+      // this.categoryServiceForm.controls['files'].addValidators([Validators.required]);
+      // this.categoryServiceForm.controls['files'].updateValueAndValidity();
+      return;
+    }
+    else{
+      this.categoryForm.patchValue(this.items);
+    }
+    
   }
   // convenience getter for easy access to form fields
   get f() { return this.categoryForm.controls; }
@@ -56,7 +68,6 @@ export class CategoryAddUpdateComponent {
           this._categoryService.categoryAdded.next(true);
         },
         error: error => {
-          debugger
           this.loading = false;
         }
       });

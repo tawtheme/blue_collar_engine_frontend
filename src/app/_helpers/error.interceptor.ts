@@ -14,7 +14,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         let error: any;
         return next.handle(request).pipe(catchError(err => {
             if ([401, 403].includes(err.status) && this.authenticationService.userValue) {
-                // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
                 this.authenticationService.logout();
                 if (err.status == 401) {
                     this._toastrService.error("Unauthorized access", "Error");

@@ -6,10 +6,11 @@ import { LoginComponent } from './login';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
-import { BookingComponent } from './admin-panel/booking-section/booking/booking.component';
+import { BookingComponent } from './contractor-panel/booking/booking.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
   {
@@ -24,7 +25,15 @@ const routes: Routes = [
       {
         path: 'online-request-demo',
         component: OnlineRequestDemoComponent,
-      }]
+      }
+    ]
+  },
+  {
+    path: 'booking',
+    loadChildren: () =>
+      import('./contractor-panel/contractor-panel.module').then(
+        (m) => m.ContractorPanelModule
+      )
   },
   {
     path: 'secure-panel',
@@ -56,17 +65,11 @@ const routes: Routes = [
     path: 'unauthorized',
     component: UnauthorizedComponent,
   },
-
-  {
-    path: 'booking',
-    component: BookingComponent,
-  },
   {
     path: 'reset-password',
     component: ResetPasswordComponent,
   },
-  // otherwise redirect to home
-  { path: '**', redirectTo: '' },
+  { path: '**', component: PagenotfoundComponent }
 ];
 
 @NgModule({

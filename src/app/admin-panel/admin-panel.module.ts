@@ -20,7 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CreateCustomerAddressComponent } from './shared/create-customer-address/create-customer-address.component';
 import { PaginationComponent } from '../shared/Pagination/pagination.component';
 import { AddressBookComponent } from './shared/address-book/address-book.component';
-import { BookingComponent } from './booking-section/booking/booking.component';
+import { BookingComponent } from '../contractor-panel/booking/booking.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { CalenderHeaderComponent } from './booking-section/scheduler/calander-header/calender-header/calender-header.component';
@@ -30,9 +30,13 @@ import { CategoryListComponent } from './price-book-section/category/category-li
 import { CategoryAddUpdateComponent } from './price-book-section/category/category-add-update/category-add-update.component';
 import { ServiceListComponent } from './price-book-section/service/service-list/service-list.component';
 import { AddUpdateServiceComponent } from './price-book-section/service/add-update-service/add-update-service.component';
+<<<<<<< HEAD
 import { MyProfileComponent } from './profile-section/my-profile/my-profile.component';
 import { AddNewAddressComponent } from './profile-section/add-new-address/add-new-address.component';
 import { AddTaxRateComponent } from './profile-section/add-tax-rate/add-tax-rate.component';
+=======
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+>>>>>>> 2363cf58e6b1307b32fa031c17076b32c178a632
 @NgModule({
   imports: [
     CommonModule,
@@ -45,6 +49,7 @@ import { AddTaxRateComponent } from './profile-section/add-tax-rate/add-tax-rate
     }),
     MatDatepickerModule,
     MatInputModule,
+    MatSlideToggleModule,
   ],
 
   declarations: [
