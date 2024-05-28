@@ -6,7 +6,6 @@ import { LoginComponent } from './login';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
-import { BookingComponent } from './contractor-panel/booking/booking.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';

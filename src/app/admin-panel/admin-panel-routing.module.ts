@@ -14,8 +14,6 @@ import { CreateEstimateComponent } from './estimate-section/create-estimate/crea
 import { CreateInvoiceComponent } from './invoice-section/create-invoice/create-invoice.component';
 import { CreateJobComponent } from './job-section/create-job/create-job.component';
 import { EstimateComponent } from './estimate-section/estimate/estimate.component';
-import { BookingComponent } from '../contractor-panel/booking/booking.component';
-import { CategoryListComponent } from './price-book-section/category/category-list/category-list.component';
 import { ServiceListComponent } from './price-book-section/service/service-list/service-list.component';
 import { MyProfileComponent } from './profile-section/my-profile/my-profile.component';
 
@@ -64,11 +62,7 @@ const routes: Routes = [
       {
         path: 'create-invoice',
         component: CreateInvoiceComponent,
-      },
-      {
-        path: 'create-booking',
-        component: BookingComponent,
-      },
+      },     
       {
         path: 'price-book',
         component: ServiceListComponent,
