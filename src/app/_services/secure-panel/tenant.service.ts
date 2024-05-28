@@ -16,4 +16,11 @@ export class TenantService {
         return res;
       }));
   }
+
+  getBusinesshours() {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetBusinessHours`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 }
