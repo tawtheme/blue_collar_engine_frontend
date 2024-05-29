@@ -97,3 +97,145 @@
     }
   }
 }
+
+.bookingDateTimeWrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  span.icon-calendar {
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    font-size: 14px;
+  }
+  .form-control {
+    padding-left: 35px;
+    height: 32px;
+  }
+  button {
+    position: absolute;
+    right: 10px;
+    padding: 0;
+    font-size: 14px;
+    top: 5px;
+  }
+}
+
+li.dropdown-team-item {
+  padding: 15px;
+  border-bottom: 1px solid var(--border-color2);
+  .dropdown-badge {
+    height: 22px;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 12px;
+  }
+  &:last-child {
+    border-bottom: 0;
+  }
+  .tech-img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50px;
+    overflow: hidden;
+  }
+}
+
+.selected-tech-team {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.booking-team-user {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  min-width: 35px;
+  border-radius: 50px;
+  border: 1px solid var(--border-color2);
+}
+
+.assigned-booking-item {
+  cursor: pointer;
+}
+
+.job-top-steps {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  .job-step-item {
+    flex: 1;
+    position: relative;
+    border: 1px solid #edeff0;
+    padding: 8px 8px;
+    border-radius: 15px;
+    text-align: center;
+    h4 {
+      font-size: 0.752rem;
+      font-weight: 500;
+      margin-bottom: 3px;
+      color: var(--light-info);
+    }
+    p {
+      font-size: 10px;
+      margin-bottom: 0;
+      color: var(--light-info);
+    }
+    &.active-job-step {
+      background-color: var(--light-primary);
+      border-color: var(--primary);
+      h4 {
+        color: var(--primary);
+      }
+      p {
+        color: var(--primary);
+      }
+    }
+    &.success-job-step {
+      background-color: var(--light-success);
+      border-color: var(--success);
+      h4 {
+        color: var(--success);
+      }
+      p {
+        color: var(--success);
+      }
+    }
+  }
+}
+
+.booking-services-items {
+  border-bottom: 1px solid var(--border-color2);
+  margin-bottom: 0;
+  padding: 20px;
+  &:last-child {
+    border: 0;
+  }
+  .booking-services-item-img {
+    position: relative;
+    img {
+      width: 150px;
+      height: 156px;
+      border-radius: 12px;
+    }
+  }
+  .booking-services-unit-actions {
+    justify-content: center;
+    .input-group-text {
+      width: 35px;
+      height: 35px;
+      padding: 0;
+      justify-content: center;
+    }
+    input.form-control {
+      min-width: 50px;
+      flex: inherit;
+      height: 35px;
+      padding: 5px;
+    }
+  }
+}
