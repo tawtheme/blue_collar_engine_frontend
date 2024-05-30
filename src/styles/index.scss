@@ -1058,6 +1058,7 @@ button.btn.dropdown-toggle {
 }
 .dropdown-toggle::after {
   border: 0;
+  display: none;
 }
 
 .btn:active {
