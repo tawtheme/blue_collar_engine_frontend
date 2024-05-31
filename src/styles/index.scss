@@ -1452,8 +1452,16 @@ tag-input.form-control {
   @include square-circle(38px, square, 0);
 }
 
-.ShapeCircle20 {
+.ShapeCircle28 {
   @include square-circle(28px, circle, 50px);
+}
+
+.ShapeCircle20 {
+  @include square-circle(20px, circle, 50px);
+}
+
+.ShapeCircle32 {
+  @include square-circle(32px, circle, 50px);
 }
 
 .leftRotate90 {
