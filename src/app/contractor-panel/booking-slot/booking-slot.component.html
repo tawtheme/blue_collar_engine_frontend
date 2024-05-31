@@ -1,0 +1,52 @@
+<div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Book Service</h4>
+            <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+        </div>
+        <div class="service-modal-wrapper">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="p-4 px-3">
+                        <h5 class="mb-2 font14 font500">Select Date</h5>
+                        <div class="service-modal-calendar mb-4">
+                            <mat-card class="demo-inline-calendar-card">
+                                <mat-calendar [(selected)]="bookingDate" [minDate]="todayDate"
+                                    (selectedChange)="onSelect($event)"></mat-calendar>
+
+                            </mat-card>
+                        </div>
+                        <h5 class="mb-2 font14 font500">Select Available Time</h5>
+                        <div class="service-modal-available-slots">
+                            <mat-radio-group aria-label="Select an option" [(ngModel)]="bookingTime">
+                                <mat-radio-button [value]="timeSlot.businessHourId"
+                                    *ngFor="let timeSlot of businessHours;index as i">{{timeSlot.openTime}}-{{timeSlot.closeTime}}</mat-radio-button>
+
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 service-modal-right">
+                    <div class="ps-3 p-4 d-flex flex-column h-100">
+                        <div class="">
+                            <div class="border-bottom mb-3 pb-3" *ngFor="let service of selectedServices">
+                                <span class="grey-badge border-0 rounded-pill mb-2">Starts at
+                                    ${{service.price}}</span>
+                                <h4 class="mb-3 font16">{{service.serviceName}}</h4>
+                                <button class="light-outlined-button bg-white xs-btn mt-2 px-2" type="button"
+                                    (click)="removeSelectedService(service.categoryServiceId)"> <span
+                                        class="icon-edit"></span> Remove</button>
+                            </div>
+                        </div>
+                        <div class="mt-auto">
+                            <button class="primary-filled-button px-5 lg-btn w-100" type="submit"
+                                (click)="openBookingAddress()"
+                                [disabled]="!isEnableNextBtn">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

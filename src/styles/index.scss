@@ -378,9 +378,7 @@ ul {
 .mb-1 {
   margin-bottom: 1px;
 }
-.mb-2 {
-  margin-bottom: 2px;
-}
+
 .mb-3 {
   margin-bottom: 3px;
 }
@@ -1060,6 +1058,7 @@ button.btn.dropdown-toggle {
 }
 .dropdown-toggle::after {
   border: 0;
+  display: none;
 }
 
 .btn:active {
@@ -1453,8 +1452,16 @@ tag-input.form-control {
   @include square-circle(38px, square, 0);
 }
 
-.ShapeCircle20 {
+.ShapeCircle28 {
   @include square-circle(28px, circle, 50px);
+}
+
+.ShapeCircle20 {
+  @include square-circle(20px, circle, 50px);
+}
+
+.ShapeCircle32 {
+  @include square-circle(32px, circle, 50px);
 }
 
 .leftRotate90 {

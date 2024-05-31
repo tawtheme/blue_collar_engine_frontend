@@ -1,0 +1,181 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Book Service</h4>
+        <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+    </div>
+    <div class="service-modal-wrapper">
+        <form [formGroup]="mobileVerifyForm" (ngSubmit)="onVerifyMobileNo()">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="p-4 px-3">
+                        <h5 class="mb-2 font14 font500 mt-4">Country Code</h5>
+                        <div class="form-group">
+                            <select formControlName="countryCode" class="form-select"
+                                [ngClass]="{ 'is-invalid': submitted && e.countryCode.errors }">
+                                <option value="">Select Country Code</option>
+                                <option value="+1">US</option>
+                                <option value="+91">India</option>
+                            </select>
+                            <div *ngIf="submitted && e.countryCode.errors" class="invalid-feedback">
+                                <div *ngIf="e.countryCode.errors.required">Country code is required</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mb-2 font14 font500">Mobile number</h5>
+                        <div class="form-group mb-3">
+                            <input type="text" placeholder="Enter mobile no." formControlName="mobileNo"
+                                class="form-control" appPhoneMask
+                                [ngClass]="{ 'is-invalid': submitted && e.mobileNo.errors }" maxlength="200"
+                                [disabled]="isVerifyOtp">
+                            <button class="primary-filled-button px-5 sm-btn" type="button"
+                                (click)="enableEditMobileNo()" *ngIf="IsShowEditBtn">Edit</button>
+                            <div *ngIf="submitted && e.mobileNo.errors" class="invalid-feedback">
+                                <div *ngIf="e.mobileNo.errors.required">Mobile number is required</div>
+                                <div *ngIf="e.mobileNo.errors.pattern">Enter valid mobile number</div>
+                            </div>
+                            <button class="primary-filled-button px-5 sm-btn" type="submit"
+                                *ngIf="!openVerifyOTP && !isVerifyOtp">Generate OTP</button>
+                        </div>
+
+                        <h5 class="mb-2 font14 font500" *ngIf="openVerifyOTP">Enter OTP</h5>
+                        <div class="form-group" *ngIf="openVerifyOTP">
+                            <input type="text" placeholder="Enter OTP" formControlName="otp" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && e.otp.errors }" maxlength="6">
+                            <div *ngIf="submitted && e.otp.errors" class="invalid-feedback">
+                                <div *ngIf="e.otp.errors.required">OTP is required</div>
+                                <div *ngIf="e.otp.errors.pattern">Enter valid OTP</div>
+                            </div>
+                            <button class="primary-filled-button px-5 sm-btn" type="submit">Verify</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <form [formGroup]="calanderBookingForm" *ngIf="isVerifyOtp" (ngSubmit)="proceedBooking()">
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="p-4 px-3">
+                        <h5 class="mb-2 font14 font500 mt-4">Customer Name</h5>
+                        <div class="row g-3">
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <input type="text" placeholder="First Name" class="form-control"
+                                        formControlName="firstName" maxlength="50"
+                                        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+                                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.firstName.errors.required">First name is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Last Name" class="form-control"
+                                        formControlName="lastName" maxlength="50"
+                                        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+                                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.lastName.errors.required">Last name is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h5 class="mb-2 font14 font500 mt-4">Email Address</h5>
+                        <div class="form-group">
+                            <input type="text" placeholder="Enter email address" class="form-control"
+                                formControlName="emailAddress" maxlength="200"
+                                [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                            <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
+                                <div *ngIf="f.emailAddress.errors.required">Email address is required</div>
+                                <div *ngIf="f.emailAddress.errors.pattern">Enter valid Email address</div>
+                            </div>
+                        </div>
+
+                        <h5 class="mb-2 font14 font500">Service Address</h5>
+                        <div class="form-group mb-3">
+                            <input type="text" formControlName="serviceAddress" placeholder="Service address"
+                                class="form-control mb-15" maxlength="500"
+                                [ngClass]="{ 'is-invalid': submitted && f.serviceAddress.errors }">
+                            <div *ngIf="submitted && f.serviceAddress.errors" class="invalid-feedback">
+                                <div *ngIf="f.serviceAddress.errors.required">Service address is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <select formControlName="state" class="form-select"
+                                [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                                <option value="" disabled>Select State</option>
+                                <option value="California">California</option>
+                                <option value="Texas">Texas</option>
+                                <option value="Florida">Florida</option>
+                                <option value="New York">New York</option>
+                                <option value="Pennsylvania">Pennsylvania</option>
+                                <option value="Illinois">Illinois</option>
+                                <option value="Ohio">Ohio</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="North Carolina">North Carolina</option>
+                                <option value="Michigan">Michigan</option>
+                            </select>
+                            <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                                <div *ngIf="f.state.errors.required">State is required</div>
+                            </div>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <input type="text" formControlName="city" placeholder="City" class="form-control"
+                                        maxlength="50" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                                    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                        <div *ngIf="f.city.errors.required">City is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-group">
+                                    <input type="text" formControlName="zipCode" placeholder="Zip Code"
+                                        class="form-control" maxlength="10"
+                                        [ngClass]="{ 'is-invalid': submitted && f.zipCode.errors }">
+                                    <div *ngIf="submitted && f.zipCode.errors" class="invalid-feedback">
+                                        <div *ngIf="f.zipCode.errors.required">Zip code is required</div>
+                                        <div *ngIf="f.zipCode.errors.pattern">Enter valid zipcode</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-5 service-modal-right">
+                    <div class="ps-3 p-4 d-flex flex-column h-100">
+                        <div class="">
+                            <div class="border-bottom mb-3 pb-3" *ngFor="let service of selectedServices">
+                                <span class="grey-badge border-0 rounded-pill mb-2">Starts at
+                                    ${{service.price}}</span>
+                                <h4 class="mb-3 font16">{{service.serviceName}}</h4>
+                                <button class="light-outlined-button bg-white xs-btn mt-2 px-2" type="button"
+                                    (click)="removeSelectedService(service.categoryServiceId)"> <span
+                                        class="icon-edit"></span> Remove</button>
+                            </div>
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="fs-3">
+                                    <span class="icon-calendar"></span>
+                                </div>
+                                <div class="">
+                                    <p class="font14 mb-0 font-muted">Date & Time</p>
+                                    <h4 class="font16 font600 my-1 ">{{businessHours[0].openTime}} -
+                                        {{businessHours[0].closeTime}}</h4>
+                                    <p class="font14 mb-0 ">{{bookingDate | date:'mediumDate' }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-auto">
+                            <button class="primary-filled-button px-5 lg-btn w-100" type="submit">Book
+                                Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
