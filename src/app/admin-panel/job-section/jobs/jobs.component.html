@@ -53,7 +53,7 @@
     </div>
     <div class="row gy-3 gy-lg-0 gx-5">
         <div class="col-lg-3">
-            <div class="booking-top-head border-danger">Unassigned (5)</div>
+            <div class="booking-top-head border-danger">Unassigned ({{unAssignedBooking.length}})</div>
             <div class="border rounded overflow-hidden">
                 <div class="bg-light p-3 d-flex justify-content-between align-items-center">
                     <span class="icon-down-arrow font18 leftRotate90"></span>
@@ -61,69 +61,22 @@
                     <span class="icon-down-arrow font18 rightRotate90"></span>
                 </div>
                 <div class="scheduler-left-lists">
-                    <div class="px-3 py-4 border-bottom">
+                    <div class="px-3 py-4 border-bottom" *ngFor="let booking of unAssignedBooking">
                         <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-time"></span> 10:00AM-11:00AM</span>
+                            <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingTime}}</span>
                             <button class="danger-badge" type="button" data-bs-toggle="offcanvas"
                                 data-bs-target="#BookingDetailsSidebar"
-                                aria-controls="BookingDetailsSidebar">Unassigned</button>
+                                aria-controls="BookingDetailsSidebar">{{booking.status}}</button>
                         </div>
-                        <h4 class="font16 mb-1">John Deo</h4>
-                        <p class="font14 mb-2 font-muted">123 Main Street, Anytown, USA</p>
+                        <h4 class="font16 mb-1">{{booking.customerName}}</h4>
+                        <p class="font14 mb-2 font-muted">{{booking.address}} {{booking.city}} {{booking.state}}
+                            {{booking.zipCode}}</p>
                         <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 font-muted"> <span
-                                class="icon-call"></span>(555)
-                            555 555 </div>
+                                class="icon-call"></span>{{booking.mobileNumber | usMobileNo}} </div>
                         <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                class="icon-email"></span>info&#64;comfortzonheating.com </div>
+                                class="icon-email"></span>{{booking.emailAddress}} </div>
                     </div>
-                    <div class="px-3 py-4 border-bottom">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-time"></span> 10:00AM-11:00AM</span>
-                            <button class="danger-badge" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#BookingDetailsSidebar"
-                                aria-controls="BookingDetailsSidebar">Unassigned</button>
-                        </div>
-                        <h4 class="font16 mb-1">John Deo</h4>
-                        <p class="font14 mb-2 font-muted">123 Main Street, Anytown, USA</p>
-                        <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 font-muted"> <span
-                                class="icon-call"></span>(555)
-                            555 555 </div>
-                        <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                class="icon-email"></span>info&#64;comfortzonheating.com </div>
-                    </div>
-                    <div class="px-3 py-4 border-bottom">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-time"></span> 10:00AM-11:00AM</span>
-                            <button class="danger-badge" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#BookingDetailsSidebar"
-                                aria-controls="BookingDetailsSidebar">Unassigned</button>
-                        </div>
-                        <h4 class="font16 mb-1">John Deo</h4>
-                        <p class="font14 mb-2 font-muted">123 Main Street, Anytown, USA</p>
-                        <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 font-muted"> <span
-                                class="icon-call"></span>(555)
-                            555 555 </div>
-                        <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                class="icon-email"></span>info&#64;comfortzonheating.com </div>
-                    </div>
-                    <div class="px-3 py-4 border-bottom">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-time"></span> 10:00AM-11:00AM</span>
-                            <button class="danger-badge" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#BookingDetailsSidebar"
-                                aria-controls="BookingDetailsSidebar">Unassigned</button>
-                        </div>
-                        <h4 class="font16 mb-1">John Deo</h4>
-                        <p class="font14 mb-2 font-muted">123 Main Street, Anytown, USA</p>
-                        <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 font-muted"> <span
-                                class="icon-call"></span>(555)
-                            555 555 </div>
-                        <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                class="icon-email"></span>info&#64;comfortzonheating.com </div>
-                    </div>
-
                 </div>
-
             </div>
         </div>
         <div class="col-lg-9">

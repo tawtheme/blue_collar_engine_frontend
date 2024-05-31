@@ -12,8 +12,11 @@ export class AuthenticationService {
     private userSubject: BehaviorSubject<User | null>;
     public user: Observable<User | null>;
 
-    private tenantSubject: BehaviorSubject<any | null>;
+    private tenantSubject: BehaviorSubject<any | null>;    
     public tenant: Observable<any | null>;
+
+    private tenantTokenSubject: BehaviorSubject<any | null>;
+    public tenantToken: Observable<any | null>;
 
     constructor(
         private router: Router,
@@ -24,6 +27,10 @@ export class AuthenticationService {
 
         this.tenantSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('tenant')!));
         this.tenant = this.tenantSubject.asObservable();
+
+
+        this.tenantTokenSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('tenantToken')!));
+        this.tenantToken = this.tenantSubject.asObservable();
     }
 
     public get userValue() {
@@ -32,6 +39,10 @@ export class AuthenticationService {
 
     public get tenantValue() {
         return this.tenantSubject.value;
+    }
+
+    public get tenantTokenValue() {
+        return this.tenantTokenSubject.value;
     }
 
     login(username: string, password: string) {
@@ -80,6 +91,36 @@ export class AuthenticationService {
         return this.http.get<any>(`${environment.apiUrl}/api/v1/Account/GetTenant?subdomain=` + subdomain)
             .pipe(map(res => {
                 return res;
+            }));
+    }
+
+    generateOTP(generateOTP: any) {
+        return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/GenerateOTP`, generateOTP)
+            .pipe(map(res => {
+                return res;
+            }));
+    }
+
+    verifyOTP(verifyOTP: any) {
+        return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/VerifyOTP`, verifyOTP)
+            .pipe(map(res => {
+                return res;
+            }));
+    }
+
+    authTenant(username: string, password: string) {
+        var _params = {
+            'username': username,
+            'password': password
+        };
+        let reqHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+        return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/Login`, JSON.stringify(_params), { headers: reqHeaders })
+            .pipe(map(tenant => {
+                //console.log(JSON.stringify(user))
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('tenantToken', JSON.stringify(tenant));
+                this.tenantTokenSubject.next(tenant);
+                return tenant;
             }));
     }
 }

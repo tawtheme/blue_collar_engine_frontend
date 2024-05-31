@@ -30,6 +30,9 @@ import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog/c
 import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
+import { PhoneMaskDirective } from './_helpers/directive/phone-mask.directive';
+import { UsMobileNoPipe } from './_helpers/pipe/us-mobile-no.pipe';
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
 }
@@ -46,7 +49,8 @@ Date.prototype.toISOString = function () {
             progressBar: true,
         }),
         NgbModule,
-        MaterialModule
+        MaterialModule,
+        JwtModule
     ],
     declarations: [
         AppComponent,
@@ -62,12 +66,13 @@ Date.prototype.toISOString = function () {
         HomePageComponent,
         FrontendLayoutComponent,
         PagenotfoundComponent
-        
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+        JwtHelperService,
         LoaderService,
         fakeBackendProvider
     ],

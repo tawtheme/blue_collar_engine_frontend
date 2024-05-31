@@ -35,7 +35,7 @@ export class OnlineRequestDemoComponent implements OnInit {
     this.requestDemoForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]{10}')]],
+      phoneNumber: ['', [Validators.required]],
       emailAddress: ['', [Validators.required]],
       companyName: ['', Validators.required],
       timeZone: ['', Validators.required],
@@ -77,17 +77,25 @@ export class OnlineRequestDemoComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
+    var _mobileNo = this.requestDemoForm.controls['phoneNumber'].value.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '');
+    var _param = this.requestDemoForm.value;
+    _param = { ..._param, ...{ phoneNumber: _mobileNo } };
+    console.log(_param)
     if (this.requestDemoForm.invalid) {
       return;
     }
 
     this.loading = true;
-    this._requestDemoService.saveRequestDemo(this.requestDemoForm.value)
+    this._requestDemoService.saveRequestDemo(_param)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.loading = false;
           this.requestDemoForm.reset();
+          this.requestDemoForm.controls['noOfEmpInCompany'].setValue('');
+          this.requestDemoForm.controls['industry'].setValue('');
+          this.requestDemoForm.controls['howHearAboutUs'].setValue('');
+          this.requestDemoForm.controls['timeZone'].setValue('');
           this.submitted = false;
           this._toastrService.success(res.message, 'Success');
         },

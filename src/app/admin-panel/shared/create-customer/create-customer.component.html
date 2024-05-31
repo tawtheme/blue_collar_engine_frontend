@@ -26,7 +26,7 @@
         <div class="form-group mb-3">
             <label for="email" class="form-label">Mobile No.</label>
             <input type="text" formControlName="mobileNumber" class="form-control" placeholder="Mobile number"
-                [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }" maxlength="200" />
+                [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }" appPhoneMask />
             <div *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
                 <div *ngIf="f.mobileNumber.errors.required">Mobile number is required</div>
                 <div *ngIf="f.mobileNumber.errors.pattern">Enter valid mobile number</div>

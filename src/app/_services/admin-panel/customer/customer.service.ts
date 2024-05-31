@@ -14,7 +14,7 @@ export class CustomerService {
   constructor(private http: HttpClient) {
     this.customerAdded = new Subject<boolean>();
     this.customerDetailAdded = new Subject<number>();
-    this.bindAddress=new Subject<any>();
+    this.bindAddress = new Subject<any>();
   }
 
   addUpdate(customerInfo: any) {
@@ -32,6 +32,13 @@ export class CustomerService {
   }
   get(customerId: number) {
     return this.http.get<any>(`${environment.apiUrl}/api/v1/Customer/Get?customerId=` + customerId)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  findCustomerByMobileNo(mobileNo: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Customer/FindCustomerByMobileNo?mobileNo=` + mobileNo, null)
       .pipe(map(res => {
         return res;
       }));

@@ -26,53 +26,64 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
         pathMatch: 'full',
+        canActivate: [AuthGuard]
       },
       {
         path: 'customer',
         component: CustomerComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'customer-detail',
         component: CustomerDetailsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'scheduler',
         component: SchedulerComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'jobs',
         component: JobsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'create-job',
         component: CreateJobComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'estimate',
         component: EstimateComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'create-estimate',
         component: CreateEstimateComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'invoice',
         component: InvoiceComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'create-invoice',
         component: CreateInvoiceComponent,
-      },     
+        canActivate: [AuthGuard]
+      },
       {
         path: 'price-book',
         component: ServiceListComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'my-profile',
         component: MyProfileComponent,
+        canActivate: [AuthGuard]
       },
     ],
-    canActivate: [AuthGuard],
     data: { roles: [Role.Admin] },
   },
 ];
@@ -81,4 +92,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AdminPanelRoutingModule {}
+export class AdminPanelRoutingModule { }

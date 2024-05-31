@@ -33,6 +33,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MyProfileComponent } from './profile-section/my-profile/my-profile.component';
 import { AddNewAddressComponent } from './profile-section/add-new-address/add-new-address.component';
 import { AddTaxRateComponent } from './profile-section/add-tax-rate/add-tax-rate.component';
+import { PhoneMaskDirective } from '@app/_helpers/directive/phone-mask.directive';
+import { UsMobileNoPipe } from '@app/_helpers/pipe/us-mobile-no.pipe';
+import { SharedModule } from '@app/shared/shared.module';
 @NgModule({
   imports: [
     CommonModule,
@@ -46,8 +49,8 @@ import { AddTaxRateComponent } from './profile-section/add-tax-rate/add-tax-rate
     MatDatepickerModule,
     MatInputModule,
     MatSlideToggleModule,
+    SharedModule    
   ],
-
   declarations: [
     DashboardComponent,
     SchedulerComponent,
@@ -72,5 +75,6 @@ import { AddTaxRateComponent } from './profile-section/add-tax-rate/add-tax-rate
     AddNewAddressComponent,
     AddTaxRateComponent,
   ],
+
 })
 export class AdminPanelModule {}

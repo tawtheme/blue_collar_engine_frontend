@@ -9,17 +9,14 @@ const routes: Routes = [
   {
     path: '',
     component: BookingComponent,
+    canActivate: [ContractorAuthGuard],
     children: [
       {
-        path: '',
+        path: 'online-form',
         component: BookingComponent,
         pathMatch: 'full',
-      },
-      {
-        path: 'online-form',
-        component: BookingComponent
-      }],
-    canActivate: [ContractorAuthGuard]
+        canActivate: [ContractorAuthGuard]
+      }]
   },
   { path: '**', component: PagenotfoundComponent }
 

@@ -11,20 +11,22 @@ const routes: Routes = [
   {
     path: '',
     component: SecureLayoutComponent,
-    children:[
+    canActivate: [AuthGuard],
+    children: [
       {
-        path:'dashboard',
-        component:DashboardComponent,
-        pathMatch: 'full'
+        path: 'dashboard',
+        component: DashboardComponent,
+        pathMatch: 'full',
+        canActivate: [AuthGuard]
       },
       {
         path: 'request-demo',
-        component: RequestDemoComponent       
-      }     
+        component: RequestDemoComponent,
+        canActivate: [AuthGuard]
+      }
     ],
-    canActivate: [AuthGuard],
     data: { roles: [Role.SuperAdmin] }
-  }  
+  }
 ];
 
 @NgModule({

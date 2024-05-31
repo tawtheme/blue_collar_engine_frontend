@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://localhost:5100',
+    apiUrl: 'https://api.tawfresh.com',
     baseUrlHostName: 'localhost',
     tenantToken: "kwVEV6"
 };

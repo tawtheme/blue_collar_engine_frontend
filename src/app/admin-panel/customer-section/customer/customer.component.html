@@ -105,7 +105,7 @@
                             </td>
                             <td>{{ cust.createdDate | date:'mediumDate' }}</td>
                             <td>{{cust.firstName}} {{cust.lastName}}</td>
-                            <td>{{cust.mobileNumber}}</td>
+                            <td>{{cust.mobileNumber | usMobileNo}}</td>
                             <td>
                                 <div class="tableAddressTd text-wrap">
                                     {{cust.serviceAddress}}

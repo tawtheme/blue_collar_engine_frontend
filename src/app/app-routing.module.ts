@@ -28,6 +28,26 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'home',
+    component: HomePageComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'forget-password',
+    component: ForgetPasswordComponent,
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+  },
+  {
     path: 'booking',
     loadChildren: () =>
       import('./contractor-panel/contractor-panel.module').then(
@@ -47,26 +67,6 @@ const routes: Routes = [
       import('./admin-panel/admin-panel.module').then(
         (m) => m.AdminPanelModule
       ),
-  },
-  {
-    path: 'home',
-    component: HomePageComponent,
-  },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'forget-password',
-    component: ForgetPasswordComponent,
-  },
-  {
-    path: 'unauthorized',
-    component: UnauthorizedComponent,
-  },
-  {
-    path: 'reset-password',
-    component: ResetPasswordComponent,
   },
   { path: '**', component: PagenotfoundComponent }
 ];

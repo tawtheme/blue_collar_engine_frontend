@@ -41,7 +41,7 @@
                         <tr *ngFor="let request of requestDemo; index as i">
                             <td>{{ request.firstName }} {{request.lastName}}</td>
                             <td>{{request.companyName}}</td>
-                            <td>{{request.phoneNumber}}</td>
+                            <td>{{request.phoneNumber | usMobileNo}}</td>
                             <td>{{request.emailAddress}}</td>
                             <td>{{request.noOfEmpInCompany}}</td>
                             <td>{{request.howHearAboutUs}}</td>

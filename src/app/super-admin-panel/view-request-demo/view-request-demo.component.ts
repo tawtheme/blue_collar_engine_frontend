@@ -87,6 +87,7 @@ export class ViewRequestDemoComponent {
   bindTimeZonesDDL() {
     this._masterService.getTimeZones().subscribe(res => {
       this.timezones = res.data;
+      console.log(this.timezones)
       this.loading = false;
     });
   }
@@ -115,6 +116,7 @@ export class ViewRequestDemoComponent {
   }
 
   ngOnChanges() {
+    console.log(this.items)
     this.requestDemoForm.patchValue(this.items);
     console.log(this.requestDemoForm.value.subDomainName)
     if (this.items.subDomainName != null) {

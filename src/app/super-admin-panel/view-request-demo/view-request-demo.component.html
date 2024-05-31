@@ -104,7 +104,7 @@
             <select id="timeZone" formControlName="timeZone" class="form-select"
                 [ngClass]="{ 'is-invalid': submitted && f.timeZone.errors }">
                 <option value="">Select</option>
-                <option value="{{timezone.utc}}" *ngFor="let timezone of timezones">{{timezone.name}}</option>
+                <option value="{{timezone.utc}}" *ngFor="let timezone of timezones">{{timezone.label}}</option>
             </select>
             <div *ngIf="submitted && f.timeZone.errors" class="invalid-feedback">
                 <div *ngIf="f.timeZone.errors.required">Time zone is required</div>

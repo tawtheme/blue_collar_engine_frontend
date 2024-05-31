@@ -43,7 +43,7 @@
                                     <label for="phonenumber" class="form-label">Phone Number</label>
                                     <input type="text" id="phonenumber" formControlName="phoneNumber"
                                         placeholder="Enter phone number" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" maxlength="10">
+                                        [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" appPhoneMask>
                                     <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
                                         <div *ngIf="f.phoneNumber.errors.required">Phone number is required</div>
                                         <div *ngIf="f.phoneNumber.errors.pattern">Enter valid phone number</div>

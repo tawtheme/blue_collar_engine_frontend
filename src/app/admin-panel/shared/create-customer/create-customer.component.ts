@@ -25,7 +25,7 @@ export class CreateCustomerComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.maxLength(50)]],
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
       companyName: ['', [Validators.maxLength(200)]],
-      mobileNumber: ['', [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]{10}')]],
+      mobileNumber: ['', [Validators.required]],
       landlineNo: ['', [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]{10}')]],
       emailAddress: ['', [Validators.required, Validators.maxLength(200)]],
       serviceAddress: ['', [Validators.required, Validators.maxLength(500)]],
@@ -40,7 +40,7 @@ export class CreateCustomerComponent implements OnInit {
   }
   ngOnChanges() {
     console.log(this.items)
-    this.items = { ...this.items, ...{ tags: this.items.tags.length > 0 ? this.items.tags.split(',') : '' } };
+    this.items = { ...this.items, ...{ tags: this.items.tags != null && this.items.tags.length > 0 ? this.items.tags.split(',') : '' } };
     this.customerForm.patchValue(this.items);
   }
   // convenience getter for easy access to form fields
@@ -48,13 +48,13 @@ export class CreateCustomerComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    let param = this.customerForm.value as any;
+    Object.assign(param, { latitude: '30.849536', longitude: '75.796101' });
+    param = { ...param, ...{ tags: param.tags != null && param.tag.length > 0 ? param.tags.toString() : '', mobileNumber: param.mobileNumber.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '') } }
+    console.log(param);
     if (this.customerForm.invalid) {
       return;
     }
-    let param = this.customerForm.value as any;
-    Object.assign(param, { latitude: '30.849536', longitude: '75.796101' });
-    param = { ...param, ...{ tags: param.tags.length > 0 ? param.tags.toString() : '' } }
-    console.log(param);
     this.loading = true;
     this._customerService.addUpdate(param)
       .pipe(first())

@@ -2,21 +2,29 @@
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { AuthenticationService } from '@app/_services';
-
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { ToastrService } from 'ngx-toastr';
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService,
+        private _jwtHelperService: JwtHelperService,
+        private _toastrService: ToastrService
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const user = this.authenticationService.userValue;
-        //debugger
+       // debugger
+        if (this._jwtHelperService.isTokenExpired(user?.data.token!)) {
+            this._toastrService.error("Session has been expired", "Error");
+            this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+            return false;
+        }
         //console.log(user?.data.role)
         if (user) {
-            // check if route is restricted by role
             const { roles } = route.data;
+            //debugger
             if (roles && !roles.includes(user.data.role)) {
                 // role not authorized so redirect to home page
                 //this.router.navigate(['/']);

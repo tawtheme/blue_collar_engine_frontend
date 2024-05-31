@@ -9,19 +9,23 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ViewRequestDemoComponent } from './view-request-demo/view-request-demo.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RequestDemoComponent } from './request-demo/list/request-demo.component';
+import { UsMobileNoPipe } from '@app/_helpers/pipe/us-mobile-no.pipe'; 
+import { PhoneMaskDirective } from '@app/_helpers/directive/phone-mask.directive';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     SuperAdminPanelRoutingModule,
     MatSlideToggleModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   declarations: [
     DashboardComponent,
     RequestDemoComponent,
     ResuableTableComponent,
-    ViewRequestDemoComponent    
+    ViewRequestDemoComponent
   ]
 })
 export class SuperAdminPanelModule { }
