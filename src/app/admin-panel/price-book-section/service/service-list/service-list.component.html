@@ -42,6 +42,84 @@
             <div class="tab-pane fade active show" id="pills-services" role="tabpanel"
                 aria-labelledby="pills-services-tab" tabindex="0">
                 <h4 class="mb-15 font16">Category</h4>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="nav flex-column nav-pills pe-5 booking-services-left-tab outlinedButtonStyleTabs"
+                            id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <button *ngFor="let category of items; index as i"
+                                class="nav-link {{category.categoryId == activeCategory ? 'active' : ''}}"
+                                (click)="activeTab(category.categoryId)" attr.id="leftPanel_{{category.categoryId}}_tab"
+                                data-bs-toggle="pill" type="button" role="tab"
+                                attr.data-bs-target="#leftPanel_{{category.categoryId}}"
+                                attr.aria-controls="leftPanel_{{category.categoryId}}"
+                                attr.aria-selected="{{i == 0 ? 'true' : 'false'}}">
+                                {{category.name}}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="tab-content" id="v-pills-tabContent">
+                            <div *ngFor="let category of items; index as i"
+                                class="tab-pane fade {{category.categoryId == activeCategory ? 'show active' : ''}}"
+                                attr.id="leftPanel_{{category.categoryId}}" role="tabpanel"
+                                attr.aria-labelledby="leftPanel_{{category.categoryId}}_tab" tabindex="0">
+                                <div class="table-middle-items-center">
+                                    <table class="row-border">
+                                        <thead>
+                                            <tr>
+                                                <th>Service Name</th>
+                                                <th>Price</th>
+                                                <th>Cost</th>
+                                                <th>Book online</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let service of category.categoryServices; index as j">
+                                                <td class="col-6 px-4">
+                                                    <div class="table-service-info d-flex align-items-center gap-3">
+                                                        <div class="service-info-img"
+                                                            *ngIf="service.uploadedFiles.length > 0">
+                                                            <img src="{{apiBaseUrl}}{{service.uploadedFiles[0].filePath}}"
+                                                                onerror="this.src='../assets/images/services1.png'">
+                                                        </div>
+                                                        <div class="service-info-img"
+                                                            *ngIf="service.uploadedFiles.length == 0">
+                                                            <img src="../assets/images/services1.png">
+                                                        </div>
+                                                        <div class="">
+                                                            <h4 class="font14 mb-1 font500">{{service.serviceName}}</h4>
+                                                            <p class="font14 mb-0 font-muted font400">
+                                                                {{service.description}}</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>${{service.price | number: '1.2-2'}}</td>
+                                                <td>${{service.cost | number: '1.2-2'}}</td>
+                                                <td>
+                                                    <div class="d-flex align-items-center justify-content-center">
+                                                        <div class="form-check form-switch">
+                                                            <mat-slide-toggle [checked]="service.isOnlineBooking"
+                                                                (change)="onChange($event, service)"></mat-slide-toggle>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex align-items-center justify-content-end">
+                                                        <button class="light-outlined-button sm-btn"
+                                                            (click)="editCategoryService(service.categoryServiceId)">
+                                                            <span class="icon-edit-2"></span> Edit
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- <div class="table-top-filter-row row">
                     <div class="col-md-5">
                         <div class="table-top-filter-left">
@@ -54,7 +132,8 @@
                         </div>
                     </div>
                 </div> -->
-                <div class="row" *ngFor="let catgeory of items;index as i">
+
+                <!-- <div class="row" *ngFor="let catgeory of items;index as i">
                     <div class="col-lg-3">
                         <div class="nav flex-column nav-pills pe-5 booking-services-left-tab outlinedButtonStyleTabs"
                             id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -144,7 +223,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="tab-pane fade" id="pills-category" role="tabpanel" aria-labelledby="pills-category-tab"
                 tabindex="0">
