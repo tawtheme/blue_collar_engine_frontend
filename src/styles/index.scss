@@ -607,7 +607,7 @@ ul {
 }
 
 .grey-badge {
-  @include badge(#e5e7eb, #4b5563, #d1d5db);
+  @include badge(#f3f4f6, #4b5563, #d1d5db);
 }
 
 .white-badge {
@@ -752,9 +752,10 @@ ul {
         margin-bottom: 5px;
         color: var(--dark);
         span {
-          font-size: 10px;
+          font-size: 11px;
           color: var(--dark);
           margin-left: 2px;
+          font-weight: 400;
         }
       }
       p {
@@ -774,6 +775,16 @@ ul {
 .lightYellowBox {
   background-color: var(--light-warning);
   color: var(--warning);
+}
+
+.lightYellowBox2 {
+  background-color: var(--light-yellow);
+  color: var(--mustard-brown);
+}
+
+.lightGreenBox {
+  background-color: var(--light-green);
+  color: var(--dark-green);
 }
 
 .lightDangerBox {
@@ -976,7 +987,7 @@ ul {
   background-color: var(--white);
   font-weight: 300;
   &::placeholder {
-    color: var(--light-info);
+    color: var(--muted);
     font-weight: 300;
   }
   &:focus {

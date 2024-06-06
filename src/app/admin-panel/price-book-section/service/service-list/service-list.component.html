@@ -11,10 +11,10 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a href="javascript:void(0);" (click)="openAddCategory()"><span class="icon-edit-2"></span>
-                                Create Category</a>
+                                Category</a>
                         </li>
                         <li><a href="javascript:void(0);" (click)="openAddService()">
-                                <span class="icon-estimate"></span> Add Services</a>
+                                <span class="icon-estimate"></span> Service</a>
                         </li>
 
                     </ul>
@@ -58,6 +58,19 @@
                         </div>
                     </div>
                     <div class="col-lg-9">
+                        <div class="row mb-3">
+                            <div class="col-md-5">
+                                <div class="table-top-filter-left">
+                                    <div class="top-search-group flexGrow2 startIconInputField">
+                                        <input type="text" id="search" name="search" placeholder="Search here"
+                                            class="form-control" (keyup.enter)="onEnter($event)">
+                                        <span class="icon-search iconPosition"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="tab-content" id="v-pills-tabContent">
                             <div *ngFor="let category of items; index as i"
                                 class="tab-pane fade {{category.categoryId == activeCategory ? 'show active' : ''}}"
@@ -106,7 +119,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-end">
-                                                        <button class="light-outlined-button sm-btn"
+                                                        <button class="light-outlined-button xs-btn px-3"
                                                             (click)="editCategoryService(service.categoryServiceId)">
                                                             <span class="icon-edit-2"></span> Edit
                                                         </button>

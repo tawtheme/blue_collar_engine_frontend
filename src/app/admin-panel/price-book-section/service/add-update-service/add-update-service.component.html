@@ -9,7 +9,7 @@
             <label for="services" class="form-label">Category</label>
             <select id="services" formControlName="categoryId" name="services" class="form-select"
                 [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }">
-                <option value="">Select Services</option>
+                <option value="">Select</option>
                 <option value="{{category.categoryId}}" *ngFor="let category of categories"> {{category.name}}</option>
             </select>
             <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
@@ -41,8 +41,8 @@
                 <div class="d-flex align-items-center">
                     <span class="icon-attachment fs-5"></span>
                     <div class="ms-2">
-                        <h5 class="font14 font-muted font400 mb-2">Choose file to upload</h5>
-                        <p class="font13 font-muted font300 mb-0">Supported format: PNG, JPG, JPEG</p>
+                        <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose file to upload</h5>
+                        <p class="font13 font-muted font300 mb-0">Supported format: CVS, XLS, PDF, PNG, JPG</p>
                     </div>
                 </div>
             </div>

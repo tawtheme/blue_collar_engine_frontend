@@ -3,7 +3,8 @@
         <div class="d-flex items-center">
             <h3 class="page-title">Estimates</h3>
             <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
-                <button class="primary-filled-button  w-100" type="button" (click)="createEstimate()"><span class="icon-add"></span>
+                <button class="primary-filled-button  w-100" type="button" (click)="createEstimate()"><span
+                        class="icon-add"></span>
                     Add New Estimate</button>
             </div>
         </div>
@@ -14,7 +15,7 @@
         <div class="widget-container">
             <article class="widget-card ">
                 <div class="widget-card-circle lightGrayBox">
-                    <span class="icon-estimate"></span>
+                    <span class="icon-invoice"></span>
                 </div>
                 <div class="widget-card-info">
                     <h6>234</h6>
@@ -27,7 +28,7 @@
                 </div>
                 <div class="widget-card-info">
                     <h6>$18,000</h6>
-                    <p>As Draft from 15 estimates</p>
+                    <p>Draft from 15 estimates</p>
                 </div>
             </article>
             <article class="widget-card ">
@@ -36,7 +37,7 @@
                 </div>
                 <div class="widget-card-info">
                     <h6>$25,000</h6>
-                    <p>As Pending from 35 estimates</p>
+                    <p>Overdue from 35 Invoices</p>
                 </div>
             </article>
             <article class="widget-card ">
@@ -45,7 +46,7 @@
                 </div>
                 <div class="widget-card-info">
                     <h6>75% </h6>
-                    <p>Conversion Date</p>
+                    <p>Need invoices for 26 jobs</p>
                 </div>
             </article>
         </div>
@@ -71,9 +72,9 @@
                 </div>
             </div>
             <div class="table-top-filter-right">
-                <button class="light-outlined-button"><span class="icon-import"></span> Mark as cancelled</button>
-                <button class="light-outlined-button"><span class="icon-import"></span> Send Reminder</button>
-                <button class="light-outlined-button"><span class="icon-import"></span> Export</button>
+                <button class="light-outlined-button"><span class="icon-send"></span> Send Estimate</button>
+                <button class="light-outlined-button"><span class="icon-time"></span> Send Reminder</button>
+                <button class="light-outlined-button"><span class="icon-export"></span> Export</button>
             </div>
         </div>
         <div class="mt-20">
@@ -82,13 +83,14 @@
                     <tr>
                         <th>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck" (change)="checkAll($event)">
+                                <input class="form-check-input" type="checkbox" id="gridCheck"
+                                    (change)="checkAll($event)">
                             </div>
                         </th>
                         <th (click)="sortBy('refNo')">Estimate No.{{sortIcon('refNo')}}</th>
                         <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
                         <th (click)="sortBy('customerName')">Customer Name{{sortIcon('customerName')}}</th>
-                        <th (click)="sortBy('totalAmount')">Amount{{sortIcon('totalAmount')}}</th>
+                        <th (click)="sortBy('totalAmount')">Amount Due{{sortIcon('totalAmount')}}</th>
                         <th (click)="sortBy('jobId')">Job{{sortIcon('jobId')}}</th>
                         <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
                         <th>Action</th>
@@ -98,7 +100,8 @@
                     <tr *ngFor="let estimate of pageOfItems">
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck" [checked]="estimate.ischeck ==true">
+                                <input class="form-check-input" type="checkbox" id="gridCheck"
+                                    [checked]="estimate.ischeck ==true">
                             </div>
                         </td>
                         <td>{{estimate.refNo}}</td>
@@ -108,16 +111,17 @@
                         <td>{{estimate.jobId}}</td>
                         <td>
                             <div class="">
-                                <span class="success-badge">{{estimate.status}}</span>
+                                <span class="warning-badge">{{estimate.status}}</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button" (click)="redirectToCreateEstimate(estimate.estimateId)">View
+                                <button class=" light-outlined-button"
+                                    (click)="redirectToCreateEstimate(estimate.estimateId)">View
                                     Details</button>
                             </div>
                         </td>
-                    </tr>                 
+                    </tr>
                 </tbody>
             </table>
         </div>

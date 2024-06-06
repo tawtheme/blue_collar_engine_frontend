@@ -16,7 +16,7 @@
         <div class="widget-container">
             <article class="widget-card ">
                 <div class="widget-card-circle lightGrayBox">
-                    <span class="icon-estimate"></span>
+                    <span class="icon-invoice"></span>
                 </div>
                 <div class="widget-card-info">
                     <h6>234</h6>
@@ -42,7 +42,7 @@
                 </div>
             </article>
             <article class="widget-card ">
-                <div class="widget-card-circle lightSuccessBox">
+                <div class="widget-card-circle lightGreenBox">
                     <span class="icon-job"></span>
                 </div>
                 <div class="widget-card-info">
@@ -63,7 +63,7 @@
                 </div>
                 <div class="top-search-group flexGrow1">
                     <select id="status" name="status" class="form-select pe-4">
-                        <option selected>Show only</option>
+                        <option selected> Show All </option>
                         <option value="">Paid</option>
                         <option value="">Pending</option>
                         <option value="">Overdue</option>
@@ -73,8 +73,8 @@
             </div>
             <div class="table-top-filter-right">
                 <button class="light-outlined-button"><span class="icon-send"></span> Send invoices</button>
-                <button class="light-outlined-button"><span class="icon-import"></span> Send Reminder</button>
-                <button class="light-outlined-button"><span class="icon-import"></span> Export</button>
+                <button class="light-outlined-button"><span class="icon-time"></span> Send Reminder</button>
+                <button class="light-outlined-button"><span class="icon-export"></span> Export</button>
             </div>
         </div>
         <div class="mt-20">
@@ -90,7 +90,7 @@
                         <th (click)="sortBy('refNo')">Invoice No.{{sortIcon('refNo')}}</th>
                         <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
                         <th (click)="sortBy('customerName')">Customer Name{{sortIcon('customerName')}}</th>
-                        <th (click)="sortBy('totalAmount')">Amount{{sortIcon('totalAmount')}}</th>
+                        <th (click)="sortBy('totalAmount')">Amount Due{{sortIcon('totalAmount')}}</th>
                         <th (click)="sortBy('jobId')">Job{{sortIcon('jobId')}}</th>
                         <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
                         <th>Action</th>
@@ -111,13 +111,12 @@
                         <td>{{invoice.jobId}}</td>
                         <td>
                             <div class="">
-                                <span class="success-badge">{{invoice.status}}</span>
+                                <span class="warning-badge">{{invoice.status}}</span>
                             </div>
                         </td>
                         <td>
                             <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button"
-                                    (click)="viewInvoice(invoice.invoiceId)">View
+                                <button class=" light-outlined-button" (click)="viewInvoice(invoice.invoiceId)">View
                                     Details</button>
                             </div>
                         </td>
