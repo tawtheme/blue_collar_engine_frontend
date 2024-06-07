@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group ">
-                        <label for="expiryDate" class="form-label">Expiry Date</label>
+                        <label for="expiryDate" class="form-label">Due Date</label>
                         <mat-form-field class="example-full-width muiDatePickerFromField">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
                                 placeholder="Choose a date">
@@ -240,8 +240,7 @@
                     draft</button>
                 <button class="primary-filled-button px-5" type="submit" [disabled]="loadingSend"
                     (click)="getAction('S')">
-                    <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span>Save and
-                    Send</button>
+                    <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span>Save</button>
             </div>
         </form>
     </div>

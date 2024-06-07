@@ -5,14 +5,13 @@
       border: 0;
       th {
         text-transform: capitalize;
-        color: var(--muted);
         border: 0 !important;
         background-color: #f2f2f2;
         padding: 8px 15px !important;
         text-align: left !important;
-        color: var(--muted);
-        font-size: 0.75rem;
-        font-weight: 400 !important;
+        color: var(--dark);
+        font-size: 13px;
+        font-weight: 500 !important;
       }
     }
   }

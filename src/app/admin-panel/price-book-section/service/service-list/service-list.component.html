@@ -111,10 +111,8 @@
                                                 <td>${{service.cost | number: '1.2-2'}}</td>
                                                 <td>
                                                     <div class="d-flex align-items-center justify-content-center">
-                                                        <div class="form-check form-switch">
-                                                            <mat-slide-toggle [checked]="service.isOnlineBooking"
-                                                                (change)="onChange($event, service)"></mat-slide-toggle>
-                                                        </div>
+                                                        <mat-slide-toggle [checked]="service.isOnlineBooking"
+                                                            (change)="onChange($event, service)"></mat-slide-toggle>
                                                     </div>
                                                 </td>
                                                 <td>

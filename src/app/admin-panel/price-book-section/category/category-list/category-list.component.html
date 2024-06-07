@@ -32,10 +32,8 @@
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-center">
-                        <div class="form-check form-switch">
-                            <mat-slide-toggle [checked]="catgeory.status=='A' ? true:false"
-                                (change)="onChange($event, catgeory)"></mat-slide-toggle>
-                        </div>
+                        <mat-slide-toggle [checked]="catgeory.status=='A' ? true:false"
+                            (change)="onChange($event, catgeory)"></mat-slide-toggle>
                     </div>
                 </td>
                 <td>

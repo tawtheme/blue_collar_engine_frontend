@@ -37,7 +37,22 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group ">
-                        <label for="expiryDate" class="form-label">Expiry Date</label>
+                        <label for="createDate" class="form-label">Create Date</label>
+                        <mat-form-field class="example-full-width muiDatePickerFromField">
+                            <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="createDate"
+                                placeholder="Choose a date" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="picker"
+                                [disableRipple]="true"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <div *ngIf="submitted && f.createDate.errors" class="invalid-feedback">
+                            <div *ngIf="f.createDate.errors.required">CreateDate date is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group ">
+                        <label for="expiryDate" class="form-label">Due Date</label>
                         <mat-form-field class="example-full-width muiDatePickerFromField">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
                                 placeholder="Choose a date" readonly>
@@ -224,8 +239,7 @@
                     draft</button>
                 <button class="primary-filled-button px-5" type="submit" [disabled]="loadingSend"
                     (click)="getAction('S')">
-                    <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span>Save and
-                    Send</button>
+                    <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span>Save </button>
             </div>
 
 
