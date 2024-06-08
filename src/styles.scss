@@ -131,3 +131,7 @@ button.primary-filled-button.mdc-button {
   .mdc-radio__outer-circle {
   border-color: var(--primary) !important;
 }
+
+.mat-calendar-body-selected {
+  background-color: var(--primary) !important;
+}
