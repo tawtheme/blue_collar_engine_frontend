@@ -16,7 +16,7 @@ import { CreateInvoiceComponent } from './invoice-section/create-invoice/create-
 import { CreateJobComponent } from './job-section/create-job/create-job.component';
 import { CreateCustomerComponent } from './shared/create-customer/create-customer.component';
 import { TagInputModule } from 'ngx-chips';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateCustomerAddressComponent } from './shared/create-customer-address/create-customer-address.component';
 import { PaginationComponent } from '../shared/Pagination/pagination.component';
 import { AddressBookComponent } from './shared/address-book/address-book.component';
@@ -33,12 +33,17 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MyProfileComponent } from './profile-section/my-profile/my-profile.component';
 import { AddNewAddressComponent } from './profile-section/add-new-address/add-new-address.component';
 import { AddTaxRateComponent } from './profile-section/add-tax-rate/add-tax-rate.component';
-import { PhoneMaskDirective } from '@app/_helpers/directive/phone-mask.directive';
-import { UsMobileNoPipe } from '@app/_helpers/pipe/us-mobile-no.pipe';
 import { SharedModule } from '@app/shared/shared.module';
+import { EditViewBookingComponent } from './job-section/edit-view-booking/edit-view-booking.component';
+import { IncrementInputComponent } from './shared/increment-input/increment-input.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MaterialModule } from 'src/material/material.module';
+import { BookingStepComponent } from './job-section/booking-step/booking-step.component';
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     AdminPanelRoutingModule,
     TagInputModule,
     ReactiveFormsModule,
@@ -46,10 +51,8 @@ import { SharedModule } from '@app/shared/shared.module';
       provide: DateAdapter,
       useFactory: adapterFactory,
     }),
-    MatDatepickerModule,
-    MatInputModule,
-    MatSlideToggleModule,
-    SharedModule    
+    SharedModule,
+    MaterialModule
   ],
   declarations: [
     DashboardComponent,
@@ -74,7 +77,10 @@ import { SharedModule } from '@app/shared/shared.module';
     MyProfileComponent,
     AddNewAddressComponent,
     AddTaxRateComponent,
+    EditViewBookingComponent,
+    IncrementInputComponent,
+    BookingStepComponent,
   ],
 
 })
-export class AdminPanelModule {}
+export class AdminPanelModule { }

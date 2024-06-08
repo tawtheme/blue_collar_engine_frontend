@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { BookingService } from '@app/_services/admin-panel/booking/booking.service';
 import { first } from 'rxjs';
+import { EditViewBookingComponent } from '../edit-view-booking/edit-view-booking.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-jobs',
@@ -12,24 +16,30 @@ import { first } from 'rxjs';
 export class JobsComponent implements OnInit {
   loading = false;
   unAssignedBooking: any[] = [];
-  constructor(private _router: Router, private _bookingService: BookingService) { }
+  todayDate = new FormControl(new Date());
+  constructor(private _router: Router, private _bookingService: BookingService, private _dialog: MatDialog,) {
+
+  }
 
   ngOnInit(): void {
     var _param = {
       "id": 0,
       "pageNumber": 0,
       "pageSize": 0,
-      "searchStr": ""
+      "searchStr": "",
+      "type": "",
+      "bookingDate": new Date()
     }
-    this.getAll(_param);
+    this.getAllUnAssignedBooking(_param);
   }
 
   createJob() {
     this._router.navigate(['/admin/create-job']);
   }
 
-  getAll(param: PaginationModel) {
+  getAllUnAssignedBooking(param: PaginationModel) {
     param = { ...param, ...{ type: 'U' } };
+    console.log(param)
     this._bookingService.getAll(param)
       .pipe(first())
       .subscribe({
@@ -42,5 +52,21 @@ export class JobsComponent implements OnInit {
           this.loading = false;
         }
       });
+  }
+
+  onUnassignedDateChange(event: MatDatepickerInputEvent<Date>): void {
+    var _param = {
+      "id": 0,
+      "pageNumber": 0,
+      "pageSize": 0,
+      "searchStr": "",
+      "type": "",
+      "bookingDate": event.value
+    }
+    this.getAllUnAssignedBooking(_param);
+  }
+
+  openEditViewBooking(booking: any) {
+    this._dialog.open(EditViewBookingComponent, { width: '1200px', height: '800px', data: booking, disableClose: true })
   }
 }

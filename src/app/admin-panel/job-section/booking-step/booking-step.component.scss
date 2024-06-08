@@ -1,0 +1,44 @@
+.job-top-steps {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    .job-step-item {
+      flex: 1;
+      position: relative;
+      border: 1px solid #edeff0;
+      padding: 8px 8px;
+      border-radius: 15px;
+      text-align: center;
+      h4 {
+        font-size: 0.752rem;
+        font-weight: 500;
+        margin-bottom: 3px;
+        color: var(--light-info);
+      }
+      p {
+        font-size: 10px;
+        margin-bottom: 0;
+        color: var(--light-info);
+      }
+      &.active-job-step {
+        background-color: var(--light-primary);
+        border-color: var(--primary);
+        h4 {
+          color: var(--primary);
+        }
+        p {
+          color: var(--primary);
+        }
+      }
+      &.success-job-step {
+        background-color: var(--light-success);
+        border-color: var(--success);
+        h4 {
+          color: var(--success);
+        }
+        p {
+          color: var(--success);
+        }
+      }
+    }
+  }

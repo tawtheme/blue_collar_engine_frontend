@@ -1,0 +1,9 @@
+<mat-form-field>
+    <button mat-icon-button aria-label="Remove" (click)="incrementValue(-_step)" [disabled]="shouldDisableDecrement(_value)">
+        <mat-icon>remove</mat-icon>
+    </button>
+    <input matInput type="number" [(ngModel)]="_value" (focus)="setColor('primary')" (blur)="setColor('default')" />
+    <button mat-icon-button aria-label="Add" (click)="incrementValue(_step)" [disabled]="shouldDisableIncrement(_value)">
+        <mat-icon>add</mat-icon>
+    </button>
+</mat-form-field>

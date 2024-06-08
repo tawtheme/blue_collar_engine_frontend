@@ -89,7 +89,7 @@ export class BookingAddressComponent {
     }
     if (this.mobileVerifyForm.controls['otp'].value == '') {
       this.authenticationService.generateOTP(_param).subscribe(res => {
-        //console.log(res);
+        console.log(res);
         this.IsShowEditBtn = true;
         this._toastrService.success("One time password have been sent on mobile no.")
       })

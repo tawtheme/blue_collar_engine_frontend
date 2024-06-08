@@ -33,6 +33,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { PhoneMaskDirective } from './_helpers/directive/phone-mask.directive';
 import { UsMobileNoPipe } from './_helpers/pipe/us-mobile-no.pipe';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { LoadingInterceptor } from './_helpers/loading.interceptor';
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
 }
@@ -65,12 +67,14 @@ Date.prototype.toISOString = function () {
         ConfirmDialogComponent,
         HomePageComponent,
         FrontendLayoutComponent,
-        PagenotfoundComponent
+        PagenotfoundComponent,
+        SpinnerComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+        //{  provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
         { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
         JwtHelperService,
         LoaderService,

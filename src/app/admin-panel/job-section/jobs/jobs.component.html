@@ -56,17 +56,22 @@
             <div class="booking-top-head border-danger">Unassigned ({{unAssignedBooking.length}})</div>
             <div class="border rounded overflow-hidden">
                 <div class="bg-light p-3 d-flex justify-content-between align-items-center">
-                    <span class="icon-down-arrow font18 leftRotate90"></span>
+                    <!-- <span class="icon-down-arrow font18 leftRotate90"></span>
                     <h4 class="font16">Feb 26, 2024</h4>
-                    <span class="icon-down-arrow font18 rightRotate90"></span>
+                    <span class="icon-down-arrow font18 rightRotate90"></span> -->
+                    <mat-form-field class="example-full-width muiDatePickerFromField">
+                        <input matInput [matDatepicker]="picker" [formControl]="todayDate" placeholder="Choose a date"
+                            (dateChange)="onUnassignedDateChange($event)" readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
                 </div>
                 <div class="scheduler-left-lists">
                     <div class="px-3 py-4 border-bottom" *ngFor="let booking of unAssignedBooking">
                         <div class="d-flex gap-3 mb-2">
                             <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingTime}}</span>
-                            <button class="danger-badge" type="button" data-bs-toggle="offcanvas"
-                                data-bs-target="#BookingDetailsSidebar"
-                                aria-controls="BookingDetailsSidebar">{{booking.status}}</button>
+                            <button class="danger-badge" type="button"
+                                (click)="openEditViewBooking(booking)">{{booking.status}}</button>
                         </div>
                         <h4 class="font16 mb-1">{{booking.customerName}}</h4>
                         <p class="font14 mb-2 font-muted">{{booking.address}} {{booking.city}} {{booking.state}}
@@ -75,6 +80,9 @@
                                 class="icon-call"></span>{{booking.mobileNumber | usMobileNo}} </div>
                         <div class="font14 d-flex align-items-center gap-2 font-muted"><span
                                 class="icon-email"></span>{{booking.emailAddress}} </div>
+                    </div>
+                    <div *ngIf="unAssignedBooking.length==0">
+                        <span>No data found</span>
                     </div>
                 </div>
             </div>
