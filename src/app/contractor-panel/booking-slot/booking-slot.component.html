@@ -5,7 +5,7 @@
             <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
         </div>
         <div class="service-modal-wrapper">
-            <div class="row">
+            <div class="row mx-0">
                 <div class="col-lg-7">
                     <div class="p-4 px-3">
                         <h5 class="mb-2 font14 font500">Select Date</h5>
@@ -13,7 +13,6 @@
                             <mat-card class="demo-inline-calendar-card">
                                 <mat-calendar [(selected)]="bookingDate" [minDate]="todayDate"
                                     (selectedChange)="onSelect($event)"></mat-calendar>
-
                             </mat-card>
                         </div>
                         <h5 class="mb-2 font14 font500">Select Available Time</h5>
@@ -40,8 +39,7 @@
                         </div>
                         <div class="mt-auto">
                             <button class="primary-filled-button px-5 lg-btn w-100" type="submit"
-                                (click)="openBookingAddress()"
-                                [disabled]="!isEnableNextBtn">Next</button>
+                                (click)="openBookingAddress()" [disabled]="!isEnableNextBtn">Next</button>
                         </div>
                     </div>
                 </div>
