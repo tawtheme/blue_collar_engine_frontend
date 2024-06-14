@@ -123,13 +123,23 @@
                             <tr *ngFor="let product of products().controls; let i=index" [formGroupName]="i">
                                 <td class="col-md-6">
                                     <div class="form-group mb-3">
-                                        <select id="item" class="form-select" formControlName="productId"
-                                            (ngModelChange)="bindProductInfo($event,i)"
-                                            [ngClass]="{ 'is-invalid': submitted && product.get('productId')!.errors?.required }">
-                                            <option value="" selected>Type or click to select an item</option>
-                                            <option value="{{product.productId}}" *ngFor="let product of productList">
-                                                {{product.productName}}</option>
-                                        </select>
+                                        <!-- <input matInput placeholder="Select Product" aria-label="State" [matAutocomplete]="auto"
+                                            formControlName="productId" [formControl]="productCtrl"
+                                            [ngClass]="{ 'is-invalid': submitted && product.get('productId')!.errors?.required }" class="form-control">
+                                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)='getPosts($event.option.value, i)' [displayWith]="getTitle.bind(this)">
+                                            <mat-option *ngFor="let product of filteredProducts | async"
+                                                [value]="product.productId">{{product.productName}}
+                                            </mat-option>
+                                        </mat-autocomplete> -->
+                                        
+                                            <select id="item" class="form-select" formControlName="productId"
+                                                (ngModelChange)="bindProductInfo($event,i)"
+                                                [ngClass]="{ 'is-invalid': submitted && product.get('productId')!.errors?.required }">
+                                                <option value="" selected>Type or click to select an item</option>
+                                                <option value="{{product.categoryServiceId}}"
+                                                    *ngFor="let product of productList">
+                                                    {{product.serviceName}}</option>
+                                            </select>
                                         <div *ngIf="submitted && product.get('productId')!.errors"
                                             class="invalid-feedback">
                                             <div *ngIf="product.get('productId')!.errors?.required">Select a product

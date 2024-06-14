@@ -181,6 +181,7 @@ export class BookingAddressComponent {
             //console.log(res)
             this._toastrService.success(res.message, "Success");
             this._bookingSharedService.emptryCart();
+            window.location.reload();
             this.dialogRef.close();
           })
         }

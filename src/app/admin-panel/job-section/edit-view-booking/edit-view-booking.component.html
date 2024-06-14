@@ -6,7 +6,6 @@
         </div>
         <div class="row mx-0">
             <div class="border-end bg-light overflow-hidden col-3 px-0">
-
                 <div class="p-3">
                     <h4 class="font16 mb-2">{{bookingInfo.customerName}}</h4>
                     <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 text-black"> <span
@@ -46,8 +45,18 @@
                 </div> -->
                 <div class="p-3 border-top">
                     <h4 class="font15 mb-2  font500">Assigned Team</h4>
-                    <div class="dropdown position-relative">
-                        <button type="button" class="btn light-outlined-button bg-white dropdown-toggle w-100 mb-2"
+                    <div class="dropdown position-relative" *ngIf="bookingInfo.status=='U'">
+                        <mat-form-field>
+                            <mat-label>Select Team</mat-label>
+                            <mat-select multiple>
+                                <mat-option [value]="member.userId" *ngFor="let member of assignTeam"
+                                    (onSelectionChange)="selectionChange($event)" multiLineOption>
+                                    {{member.fullName}}
+                                    <span><small>{{member.designation}}</small></span>
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <!-- <button type="button" class="btn light-outlined-button bg-white dropdown-toggle w-100 mb-2"
                             data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                             Select Team
                             <span class="icon-down-arrow ms-auto"></span>
@@ -78,9 +87,12 @@
                                     </div>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
-                    <div class="d-flex flex-wrap gap-3 ">
+                    <div class="custom-assigned-members" *ngIf="bookingInfo.status=='A'">
+                        <span *ngFor="let _members of bookingInfo.assignedTeamMembers">{{_members.fullName}}</span>
+                    </div>
+                    <!-- <div class="d-flex flex-wrap gap-3 ">
                         <div class="booking-team-user">
                             <img src="../../../../assets/images/tech1.png" class="w-100 h-100 object-fit-cover" />
                         </div>
@@ -90,11 +102,11 @@
                         <div class="booking-team-user border-primary text-primary">
                             <span class="icon-add-user"></span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="p-4 col-9">
-               <app-booking-step></app-booking-step>
+                <app-booking-step></app-booking-step>
                 <div class="mb-4">
                     <div class="row">
                         <div class="col-lg-6  ">
@@ -108,9 +120,9 @@
                                         <span class="font14">{{bookingInfo.bookingDate | date:'mediumDate' }}</span>
                                     </h4>
                                 </div>
-                                <button class="btn light-outlined-button ShapeCircle28 p-0 ms-auto"> <span
+                                <!-- <button class="btn light-outlined-button ShapeCircle28 p-0 ms-auto"> <span
                                         class="icon-edit"></span>
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -123,9 +135,9 @@
                                     <h4 class="font15 font600 mb-0">{{bookingInfo.address}}, {{bookingInfo.city}},
                                         {{bookingInfo.state}}, {{bookingInfo.zipCode}}</h4>
                                 </div>
-                                <button class="btn light-outlined-button ShapeCircle28 p-0 ms-auto"> <span
+                                <!-- <button class="btn light-outlined-button ShapeCircle28 p-0 ms-auto"> <span
                                         class="icon-edit"></span>
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                     </div>
@@ -133,52 +145,60 @@
                 <div class="booking-details-popup-services">
                     <h4 class="mb-15 font18">Services</h4>
                     <div class="border rounded">
-                        <div class="booking-services-items">
-                            <div class="row">
-                                <div class="col-lg-9">
-                                    <div class="d-flex gap-4">
-                                        <div class="booking-services-item-img">
-                                            <img src="../../../../../assets/images/services1.png" class="img-fluid" />
+                        <div *ngFor="let category of bookingInfo.categories">
+                            <div class="booking-services-items" *ngFor="let product of category.products">
+                                <div class="row">
+                                    <div class="col-lg-9">
+                                        <div class="d-flex gap-4">
+                                            <div class="booking-services-item-img">
+                                                <img src="{{product.imagePath}}" class="img-fluid"
+                                                    (error)="product.imagePath = '../../../../../assets/images/services1.png'" />
+                                            </div>
+                                            <div class="">
+                                                <span class="grey-badge border-0 rounded-pill mb-2">Starts at
+                                                    ${{product.price}}</span>
+                                                <h4 class="mb-3 font16">{{product.serviceName}}</h4>
+                                                <ul class="ps-3 mb-2">
+                                                    <p>{{product.description}}</p>
+                                                    <!-- <li class="font-muted font13 mb-2">Advanced Foam-jet cleaning of
+                                                        indoor
+                                                        unit
+                                                    </li>
+                                                    <li class="font-muted font13 mb-2">Thorough cleaning of outdoor unit
+                                                    </li>
+                                                    <li class="font-muted font13">Final checks & cleanup</li> -->
+                                                </ul>
+                                                <!-- <a class="text-decoration-underline font13"
+                                                    href="javascript:void(0);">View
+                                                    Details</a> -->
+                                            </div>
                                         </div>
-                                        <div class="">
-                                            <span class="grey-badge border-0 rounded-pill mb-2">Starts at
-                                                $340</span>
-                                            <h4 class="mb-3 font16">Anti-rust deep clean AC services</h4>
-                                            <ul class="ps-3 mb-2">
-                                                <li class="font-muted font13 mb-2">Advanced Foam-jet cleaning of
-                                                    indoor
-                                                    unit
-                                                </li>
-                                                <li class="font-muted font13 mb-2">Thorough cleaning of outdoor unit
-                                                </li>
-                                                <li class="font-muted font13">Final checks & cleanup</li>
-                                            </ul>
-                                            <a class="text-decoration-underline font13" href="#">View Details</a>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="ms-auto text-center">
+                                            <!-- <p class="font-muted font14 mb-2">Unit of Services</p>
+                                            <app-increment-input [value]="_value || 0" [step]="_step" [min]="_min"
+                                                [max]="_max" [wrap]="_wrap"></app-increment-input> -->
+                                            <!-- <div class="mb-2">
+                                                <span class="white-badge bg-white px-3 font15">1</span>
+                                            </div>
+                                            <div class="input-group mb-3 booking-services-unit-actions">
+                                                <span class="input-group-text">
+                                                    <span class="icon-add font14"></span>
+                                                </span>
+                                                <input type="text" class="form-control" />
+                                                <span class="input-group-text">
+                                                    <span class="icon-add font14"></span>
+                                                </span>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3">                                   
-                                    <div class="ms-auto text-center">
-                                        <p class="font-muted font14 mb-2">Unit of Services</p>                                      
-                                        <app-increment-input [value]="_value || 0" [step]="_step" [min]="_min" [max]="_max" [wrap]="_wrap"></app-increment-input>
-                                        <!-- <div class="mb-2">
-                                            <span class="white-badge bg-white px-3 font15">1</span>
-                                        </div>
-                                        <div class="input-group mb-3 booking-services-unit-actions">
-                                            <span class="input-group-text">
-                                                <span class="icon-add font14"></span>
-                                            </span>
-                                            <input type="text" class="form-control" />
-                                            <span class="input-group-text">
-                                                <span class="icon-add font14"></span>
-                                            </span>
-                                        </div> -->
-                                    </div>
-                                </div>
-                            </div>
 
+                            </div>
                         </div>
-                        <div class="booking-services-items">
+
+                        <!-- <div class="booking-services-items">
                             <div class="row">
                                 <div class="col-lg-9">
                                     <div class="d-flex gap-4">
@@ -217,12 +237,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="d-flex justify-content-end gap-3 mt-5 mb-3">
+                    <div class="d-flex justify-content-end gap-3 mt-5 mb-3" *ngIf="bookingInfo.status=='U'">
                         <button class="light-outlined-button px-5 lg-btn" type="button"
                             (click)="cancel()">Cancel</button>
-                        <button class="primary-filled-button px-5 lg-btn" type="submit">Save</button>
+                        <button class="primary-filled-button px-5 lg-btn" type="button" (click)="save()">Save</button>
                     </div>
                 </div>
             </div>

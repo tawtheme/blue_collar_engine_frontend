@@ -40,6 +40,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MaterialModule } from 'src/material/material.module';
 import { BookingStepComponent } from './job-section/booking-step/booking-step.component';
+import { BookingStepDashboardComponent } from './job-section/booking-step-dashboard/booking-step-dashboard.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -80,6 +81,7 @@ import { BookingStepComponent } from './job-section/booking-step/booking-step.co
     EditViewBookingComponent,
     IncrementInputComponent,
     BookingStepComponent,
+    BookingStepDashboardComponent,
   ],
 
 })

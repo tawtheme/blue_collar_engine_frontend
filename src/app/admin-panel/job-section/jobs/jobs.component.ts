@@ -14,9 +14,11 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./jobs.component.scss'],
 })
 export class JobsComponent implements OnInit {
-  loading = false;
+  loadUnAssigned = false;
+  loadAssigned = false;
   unAssignedBooking: any[] = [];
   todayDate = new FormControl(new Date());
+  assignedBooking: any[] = [];
   constructor(private _router: Router, private _bookingService: BookingService, private _dialog: MatDialog,) {
 
   }
@@ -31,6 +33,13 @@ export class JobsComponent implements OnInit {
       "bookingDate": new Date()
     }
     this.getAllUnAssignedBooking(_param);
+    this.getAllAssignedBooking(_param);
+    this._bookingService.bookingTeamMemberAssign.subscribe((data: boolean) => {
+      if (data) {
+        this.getAllUnAssignedBooking(_param);
+        this.getAllAssignedBooking(_param);
+      }
+    });
   }
 
   createJob() {
@@ -38,22 +47,40 @@ export class JobsComponent implements OnInit {
   }
 
   getAllUnAssignedBooking(param: PaginationModel) {
+    this.loadUnAssigned=true;
     param = { ...param, ...{ type: 'U' } };
     console.log(param)
     this._bookingService.getAll(param)
       .pipe(first())
       .subscribe({
         next: (res) => {
-          this.loading = false;
+          this.loadUnAssigned = false;
           this.unAssignedBooking = res.data;
           console.log(this.unAssignedBooking)
         },
         error: error => {
-          this.loading = false;
+          this.loadUnAssigned = false;
         }
       });
   }
 
+  getAllAssignedBooking(param: PaginationModel) {
+    this.loadAssigned=true;
+    param = { ...param, ...{ type: 'A', bookingDate: null } };
+    console.log(param)
+    this._bookingService.getAll(param)
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.loadAssigned = false;
+          this.assignedBooking = res.data;
+          console.log(this.assignedBooking)
+        },
+        error: error => {
+          this.loadAssigned = false;
+        }
+      });
+  }
   onUnassignedDateChange(event: MatDatepickerInputEvent<Date>): void {
     var _param = {
       "id": 0,

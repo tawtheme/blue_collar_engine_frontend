@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConstantManager } from '@app/_helpers/constant/constantManager';
 import { CustomerModel } from '@app/_models/customer/customerModel';
 import { PaginationModel } from '@app/_models/pagination';
+import { CategoryService } from '@app/_services/admin-panel/category/category.service';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
 import { InvoiceService } from '@app/_services/admin-panel/invoice/invoice.service';
 import { MasterService } from '@app/_services/admin-panel/master/master.service';
 import { ProductService } from '@app/_services/admin-panel/product/product.service';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs';
+import { Observable, first, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-create-invoice',
@@ -40,7 +41,20 @@ export class CreateInvoiceComponent implements OnInit {
   todayDate: Date = new Date();
   result: string = '';
   isProceed: boolean = false;
-  constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog) { }
+  filteredProducts: Observable<any[]>;
+  productCtrl = new FormControl();
+  constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService) {
+    this.filteredProducts = this.productCtrl.valueChanges
+      .pipe(
+        startWith(''),
+        map(state => state ? this._filterStates(state) : this.productList.slice())
+      );
+  }
+
+  private _filterStates(value: string): any[] {
+    const filterValue = value.toString().toLowerCase();
+    return this.productList.filter((product: { productName: string; }) => product.productName.toLowerCase().indexOf(filterValue) === 0);
+  }
 
   ngOnInit(): void {
     this._customerService.bindAddress.subscribe((address: any) => {
@@ -72,7 +86,7 @@ export class CreateInvoiceComponent implements OnInit {
       "searchStr": ""
     }
     this.getAll(_param);
-    this.getAllProduct();
+    this.getAllProduct(_param);
     this.bindTax(ConstantManager.TaxType);
 
     this._activeRoute.queryParams
@@ -112,7 +126,7 @@ export class CreateInvoiceComponent implements OnInit {
       });
       this.invoiceForm.patchValue(res.data);
 
-      this.customerInfo=<CustomerModel>res.data;
+      this.customerInfo = <CustomerModel>res.data;
       this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
       this.getAddress(this.customerInfo.customerId);
       this.isDisabled = false;
@@ -124,12 +138,24 @@ export class CreateInvoiceComponent implements OnInit {
 
   }
 
-  getAllProduct() {
-    this._productService.getAll()
+  getAllProduct(_param: any) {
+    // this._productService.getAll()
+    //   .pipe(first())
+    //   .subscribe({
+    //     next: (res) => {
+    //       this.loading = false;
+    //       this.productList = res.data;
+    //       console.log(this.productList)
+    //     },
+    //     error: error => {
+    //       this.loading = false;
+    //     }
+    //   });
+
+    this._categoryService.getAllServices(_param)
       .pipe(first())
       .subscribe({
         next: (res) => {
-          this.loading = false;
           this.productList = res.data;
           console.log(this.productList)
         },
@@ -160,8 +186,8 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   bindProductInfo(ev: any, index: number) {
-    var productData = this.productList.filter(function (event: { productId: number; }) {
-      return event.productId == ev;
+    var productData = this.productList.filter(function (event: { categoryServiceId: number; }) {
+      return event.categoryServiceId == ev;
     });
     this.products().at(index).get('price')?.setValue(productData[0].price);
     this.calculateTotal();
@@ -194,27 +220,28 @@ export class CreateInvoiceComponent implements OnInit {
     }
     let param = this.invoiceForm.value as any;
     Object.assign(param, { status: this.clickType });
-    if (this.clickType == 'S') {
-      const message = `Are you sure you want to do send?`;
-      const dialogData = new ConfirmDialogModel("Confirmation", message);
-      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-        maxWidth: "400px",
-        data: dialogData
-      });
-      dialogRef.afterClosed().subscribe(dialogResult => {
-        if (dialogResult) {
-          this.loadingSend = true;
-          this.proceedSubmit(param);
-        }
-        else {
-          return;
-        }
-      });
-    }
-    else {
-      this.loadingDraft = true;
-      this.proceedSubmit(param);
-    }
+    console.log(param)
+    // if (this.clickType == 'S') {
+    //   const message = `Are you sure you want to do send?`;
+    //   const dialogData = new ConfirmDialogModel("Confirmation", message);
+    //   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    //     maxWidth: "400px",
+    //     data: dialogData
+    //   });
+    //   dialogRef.afterClosed().subscribe(dialogResult => {
+    //     if (dialogResult) {
+    //       this.loadingSend = true;
+    //       this.proceedSubmit(param);
+    //     }
+    //     else {
+    //       return;
+    //     }
+    //   });
+    // }
+    // else {
+    //   this.loadingDraft = true;
+    //   this.proceedSubmit(param);
+    // }
 
   }
 
@@ -259,6 +286,7 @@ export class CreateInvoiceComponent implements OnInit {
 
   addProduct() {
     this.products().push(this.newProduct());
+    //this.products().at(index).get('productId')?.setValue(productData[0].productId);
     console.log(this.f)
   }
 
@@ -285,6 +313,21 @@ export class CreateInvoiceComponent implements OnInit {
     this.subTotal = _totalAmt - this.invoiceForm.controls['discount'].value;
     this.taxAmount = (this.subTotal * this.taxPer / 100);
     this.estimateTotal = this.subTotal + this.taxAmount;
+  }
+
+  getPosts(value: any, index: number) {
+    var productData = this.productList.filter(function (event: { productId: number; }) {
+      return event.productId == value;
+    });
+    this.products().at(index).get('price')?.setValue(productData[0].price);
+    this.products().at(index).get('productId')?.setValue(productData[0].productId);
+    this.calculateTotal();
+  }
+
+  getTitle(productId: number) {
+    if (productId > 0) {
+      return this.productList.find((product: { productId: number; }) => product.productId === productId).productName;
+    }
   }
 
 }
