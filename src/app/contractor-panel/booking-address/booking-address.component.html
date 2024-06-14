@@ -5,11 +5,11 @@
     </div>
     <div class="service-modal-wrapper">
         <form [formGroup]="mobileVerifyForm" (ngSubmit)="onVerifyMobileNo()">
-            <div class="row">
+            <div class="row mx-0">
                 <div class="col-lg-7">
-                    <div class="p-4 px-3">
+                    <div class="px-3">
                         <h5 class="mb-2 font14 font500 mt-4">Country Code</h5>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <select formControlName="countryCode" class="form-select"
                                 [ngClass]="{ 'is-invalid': submitted && e.countryCode.errors }">
                                 <option value="">Select Country Code</option>
@@ -33,12 +33,12 @@
                                 <div *ngIf="e.mobileNo.errors.required">Mobile number is required</div>
                                 <div *ngIf="e.mobileNo.errors.pattern">Enter valid mobile number</div>
                             </div>
-                            <button class="primary-filled-button px-5 sm-btn" type="submit"
+                            <button class="primary-filled-button px-5 sm-btn mt-3" type="submit"
                                 *ngIf="!openVerifyOTP && !isVerifyOtp">Generate OTP</button>
                         </div>
 
                         <h5 class="mb-2 font14 font500" *ngIf="openVerifyOTP">Enter OTP</h5>
-                        <div class="form-group" *ngIf="openVerifyOTP">
+                        <div class="form-group mb-3" *ngIf="openVerifyOTP">
                             <input type="text" placeholder="Enter OTP" formControlName="otp" class="form-control"
                                 [ngClass]="{ 'is-invalid': submitted && e.otp.errors }" maxlength="6">
                             <div *ngIf="submitted && e.otp.errors" class="invalid-feedback">
@@ -85,7 +85,8 @@
                         <div class="form-group">
                             <input type="text" placeholder="Enter email address" class="form-control"
                                 formControlName="emailAddress" maxlength="200"
-                                [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                                [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"
+                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
                             <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
                                 <div *ngIf="f.emailAddress.errors.required">Email address is required</div>
                                 <div *ngIf="f.emailAddress.errors.pattern">Enter valid Email address</div>
@@ -147,7 +148,7 @@
 
                 </div>
                 <div class="col-lg-5 service-modal-right">
-                    <div class="ps-3 p-4 d-flex flex-column h-100">
+                    <div class="ps-0 p-4 d-flex flex-column h-100">
                         <div class="">
                             <div class="border-bottom mb-3 pb-3" *ngFor="let service of selectedServices">
                                 <span class="grey-badge border-0 rounded-pill mb-2">Starts at

@@ -9,9 +9,9 @@
   }
 }
 
-.cdk-overlay-pane {
-  width: 400px;
-}
+// .cdk-overlay-pane {
+//   width: 400px;
+// }
 
 .mat-mdc-dialog-container .mdc-dialog__title {
   font-family: "Lexend", sans-serif !important;
@@ -60,4 +60,78 @@ button.primary-filled-button.mdc-button {
   border: 1px solid;
   border-color: var(--primary);
   box-shadow: none;
+}
+
+.mat-mdc-slide-toggle.mat-accent {
+  --mdc-switch-selected-focus-state-layer-color: #2d64d6 !important;
+  --mdc-switch-selected-handle-color: #2d64d6 !important;
+  --mdc-switch-selected-hover-state-layer-color: #2d64d6 !important;
+  --mdc-switch-selected-pressed-state-layer-color: #2d64d6 !important;
+  --mdc-switch-selected-focus-handle-color: #2d64d6 !important;
+  --mdc-switch-selected-hover-handle-color: #2d64d6 !important;
+  --mdc-switch-selected-pressed-handle-color: #2d64d6 !important;
+  --mdc-switch-selected-focus-track-color: #2d64d6 !important;
+  --mdc-switch-selected-hover-track-color: #2d64d6 !important;
+  --mdc-switch-selected-pressed-track-color: #2d64d6 !important;
+  --mdc-switch-selected-track-color: #6992e7 !important;
+}
+
+.mat-datepicker-content {
+  border-radius: 16px !important;
+}
+
+.mat-calendar-table {
+  border: 0 !important;
+}
+
+.mat-calendar-table-header th {
+  text-align: center !important;
+  padding: 0 0 8px 0 !important;
+  background: transparent;
+  border: 0 !important;
+}
+.mat-calendar-body-label {
+  text-align: left !important;
+  padding-left: 4.7142857143% !important;
+  padding-right: 4.7142857143% !important;
+}
+.mat-calendar-body tr,
+.mat-calendar-table tr {
+  border-bottom: 0 !important;
+}
+
+.mat-calendar {
+  font-family: "Lexend", sans-serif !important;
+}
+
+.modal-header {
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+.modal-header .btn-close {
+  margin-left: auto;
+}
+
+.mdc-button,
+.mdc-form-field {
+  font-family: "Lexend", sans-serif !important;
+}
+
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled
+  + .mdc-radio__background
+  .mdc-radio__inner-circle {
+  border-color: var(--primary) !important;
+}
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled:checked
+  + .mdc-radio__background
+  .mdc-radio__outer-circle {
+  border-color: var(--primary) !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: var(--primary) !important;
 }
