@@ -48,7 +48,10 @@ export class AddNewAddressComponent {
       else {
         this.submitted=false;
         this.addressForm.reset();
+        this.addressForm.controls['tenantAddressId'].setValue(0);
+        this.addressForm.controls['tenantId'].setValue(0);
         this.addressForm.controls['state'].setValue('');
+        this.addressForm.controls['isDefault'].setValue(false);
       }
     }
   
