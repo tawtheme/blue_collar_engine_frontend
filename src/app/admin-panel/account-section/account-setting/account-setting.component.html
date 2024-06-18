@@ -1,0 +1,79 @@
+<div class="page-title-box items-center">
+    <div class="container-xxl">
+        <div class="d-flex items-center">
+            <h4 class="page-title">Account Setting</h4>
+        </div>
+    </div>
+</div>
+<div class="container-xxl">
+    <div class="py-4">
+        <div class="row">
+            <div class="col-lg-3 pe-lg-5">
+                <div class="nav flex-column nav-pills  myprofileLeftTab border rounded outlinedButtonStyleTabs"
+                    id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <button class="nav-link active" id="v-pills-myprofile-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-myprofile" type="button" role="tab" aria-controls="v-pills-myprofile"
+                        aria-selected="true">
+                        <span class="icon-user"></span> My Profile
+                    </button>
+                    <button class="nav-link" id="v-pills-business-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-business" type="button" role="tab" aria-controls="v-pills-business"
+                        aria-selected="false">
+                        <span class="icon-time"></span> Business Hours
+                    </button>
+                    <button class="nav-link" id="v-pills-address-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-address" type="button" role="tab" aria-controls="v-pills-address"
+                        aria-selected="false">
+                        <span class="icon-time"></span> Address Book
+                    </button>
+                    <button class="nav-link" id="v-pills-tax-tab" data-bs-toggle="pill" data-bs-target="#v-pills-tax"
+                        type="button" role="tab" aria-controls="v-pills-tax" aria-selected="false">
+                        <span class="icon-invoice"></span> Tax Rates
+                    </button>
+
+                    <button class="nav-link" id="v-pills-notification-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-notification" type="button" role="tab"
+                        aria-controls="v-pills-notification" aria-selected="false">
+                        <span class="icon-notification"></span> Notification
+                    </button>
+
+                    <button class="nav-link" id="v-pills-security-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-security" type="button" role="tab" aria-controls="v-pills-security"
+                        aria-selected="false">
+                        <span class="icon-report-1"></span> Security
+                    </button>
+
+
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-myprofile" role="tabpanel"
+                        aria-labelledby="v-pills-myprofile-tab" tabindex="0">
+                        <app-my-profile></app-my-profile>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-business" role="tabpanel"
+                        aria-labelledby="v-pills-business-tab" tabindex="0">
+                        <!-- <app-business-hours></app-business-hours> -->
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-address" role="tabpanel"
+                        aria-labelledby="v-pills-address-tab" tabindex="0">
+                        <app-contractor-address-book></app-contractor-address-book>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-tax" role="tabpanel" aria-labelledby="v-pills-tax-tab"
+                        tabindex="0">
+                        <app-tax></app-tax>
+                    </div>
+                    <!-- <div class="tab-pane fade" id="v-pills-notification" role="tabpanel"
+                        aria-labelledby="v-pills-notification-tab" tabindex="0">
+                        <app-notification></app-notification>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-security" role="tabpanel"
+                        aria-labelledby="v-pills-security-tab" tabindex="0">
+                        <app-security></app-security>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

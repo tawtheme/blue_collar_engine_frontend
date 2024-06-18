@@ -1,0 +1,74 @@
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
+import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
+import { MasterService } from '@app/_services/master.service';
+import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs';
+
+@Component({
+  selector: 'app-add-new-address',
+  templateUrl: './add-new-address.component.html',
+  styleUrls: ['./add-new-address.component.scss']
+})
+export class AddNewAddressComponent {
+  addressForm!: FormGroup;
+  submitted = false;
+  loading = false;
+  @Input() items?: any;
+  @ViewChild('addNewAddressCancelEle') addNewAddressCancelEle!: ElementRef<HTMLElement>;
+  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _toastrService: ToastrService) {
+
+  }
+  ngOnInit() {
+    this.addressForm = this.formBuilder.group({
+      tenantAddressId: [0, null],
+      tenantId: [0, null],
+      addressLabel: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      zipCode: ['', [Validators.required, Validators.pattern('[0-9]{5,6}')]],
+      latitude: ['', null],
+      longitude: ['', null],
+      isDefault: [true, null]
+    });
+  }
+
+  // convenience getter for easy access to form fields
+  get f() { return this.addressForm.controls; }
+
+  ngOnChanges() {
+    if(this.addressForm!=undefined){
+      if (this.items != null) {
+        this.addressForm.patchValue(this.items);
+      }
+      else {
+        this.submitted=false;
+        this.addressForm.reset();
+        this.addressForm.controls['state'].setValue('');
+      }
+    }
+  
+  }
+
+  onSubmit() {
+    this.submitted = true;
+    var param = this.addressForm.getRawValue();
+    if (this.addressForm.invalid) {
+      return;
+    }
+    console.log(param)
+    this.loading = true;
+    this._accountSettingService.addTenantAddress(param).subscribe(res => {
+      this.loading = false;
+      console.log(res)
+      let el: HTMLElement = this.addNewAddressCancelEle.nativeElement;
+      el.click();
+      this._toastrService.success(res.message, 'Success');
+      this._accountSettingService.tenantAddressAdded.next(true);
+    });
+  }
+}

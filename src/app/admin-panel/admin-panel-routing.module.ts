@@ -15,7 +15,7 @@ import { CreateInvoiceComponent } from './invoice-section/create-invoice/create-
 import { CreateJobComponent } from './job-section/create-job/create-job.component';
 import { EstimateComponent } from './estimate-section/estimate/estimate.component';
 import { ServiceListComponent } from './price-book-section/service/service-list/service-list.component';
-import { MyProfileComponent } from './profile-section/my-profile/my-profile.component';
+import { AccountSettingComponent } from './account-section/account-setting/account-setting.component';
 
 const routes: Routes = [
   {
@@ -79,8 +79,8 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'my-profile',
-        component: MyProfileComponent,
+        path: 'account-setting',
+        component: AccountSettingComponent,
         canActivate: [AuthGuard]
       },
     ],

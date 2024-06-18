@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConstantManager } from '@app/_helpers/constant/constantManager';
 import { CustomerModel } from '@app/_models/customer/customerModel';
 import { PaginationModel } from '@app/_models/pagination';
+import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
 import { EstimateService } from '@app/_services/admin-panel/estimate/estimate.service';
 import { MasterService } from '@app/_services/admin-panel/master/master.service';
@@ -40,7 +41,7 @@ export class CreateEstimateComponent implements OnInit {
   status: string = '';
   todayDate: Date = new Date();
   isProceed: boolean = false;
-  constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, private dialog: MatDialog) { }
+  constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, private dialog: MatDialog, private _accountSettingService: AccountSettingService) { }
 
   ngOnInit(): void {
     this._customerService.bindAddress.subscribe((address: any) => {
@@ -139,7 +140,7 @@ export class CreateEstimateComponent implements OnInit {
   }
 
   bindTax(type: any) {
-    this._masterService.get(type).subscribe(res => {
+    this._accountSettingService.getTax(type).subscribe(res => {
       console.log(res.data.tax)
       this.estimateInvoiceForm.controls['tax'].setValue(res.data.tax);
       this.taxPer = res.data.tax;

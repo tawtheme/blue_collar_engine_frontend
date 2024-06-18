@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConstantManager } from '@app/_helpers/constant/constantManager';
 import { CustomerModel } from '@app/_models/customer/customerModel';
 import { PaginationModel } from '@app/_models/pagination';
+import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
 import { InvoiceService } from '@app/_services/admin-panel/invoice/invoice.service';
@@ -43,7 +44,7 @@ export class CreateInvoiceComponent implements OnInit {
   isProceed: boolean = false;
   filteredProducts: Observable<any[]>;
   productCtrl = new FormControl();
-  constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService) {
+  constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService) {
     this.filteredProducts = this.productCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -166,7 +167,7 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   bindTax(type: any) {
-    this._masterService.get(type).subscribe(res => {
+    this._accountSettingService.getTax(type).subscribe(res => {
       console.log(res.data.tax)
       this.invoiceForm.controls['tax'].setValue(res.data.tax);
       this.taxPer = res.data.tax;

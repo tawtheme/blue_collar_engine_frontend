@@ -10,10 +10,10 @@ export class MasterService {
 
   constructor(private http: HttpClient) { }
 
-  get(type: any) {
-    return this.http.get<any>(`${environment.apiUrl}/api/v1/Master/GetTax?taxType=`+ type)
-      .pipe(map(res => {
-        return res;
-      }));
-  }
+  // get(type: any) {
+  //   return this.http.get<any>(`${environment.apiUrl}/api/v1/Master/GetTax?taxType=`+ type)
+  //     .pipe(map(res => {
+  //       return res;
+  //     }));
+  // }
 }

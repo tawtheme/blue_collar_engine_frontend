@@ -1,0 +1,176 @@
+<div class="mb-4">
+    <h4 class="mb-1 font20">My Profile</h4>
+    <p class="font14 mb-0 font-muted">View and edit your company details such as name, email
+        address, phone number, service area and about company</p>
+</div>
+<form class="sidebar-popup-inner" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="form-group mb-3">
+                <label for="CompanyName" class="form-label">Company Name</label>
+                <input type="text" formControlName="companyName" class="form-control" placeholder="Enter company name"
+                    [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" maxlength="200" />
+                <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+                    <div *ngIf="f.companyName.errors.required">Company name is required</div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="firstName" class="form-label">Contact Person Name</label>
+                <div class="row gy-3">
+                    <div class="col-lg-6">
+                        <input type="text" formControlName="firstName" class="form-control"
+                            placeholder="Enter first name" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                            maxlength="50" />
+                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                            <div *ngIf="f.firstName.errors.required">First name is required</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <input type="text" formControlName="lastName" class="form-control "
+                            placeholder="Enter last name" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                            maxlength="50" />
+                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                            <div *ngIf="f.lastName.errors.required">Last name is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group mb-3">
+                        <label for="Email" class="form-label">Email Address</label>
+                        <input type="text" formControlName="emailAddress" class="form-control mb-3"
+                            placeholder="Enter email address" maxlength="200"
+                            [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"  [disabled]="true"/>
+                        <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
+                            <div *ngIf="f.emailAddress.errors.required">Email address is required</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group mb-3">
+                        <label for="Business" class="form-label">Business Number</label>
+                        <input type="text" formControlName="phoneNumber" class="form-control mb-3"
+                            placeholder="Enter business number"
+                            [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" appPhoneMask />
+                        <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                            <div *ngIf="f.phoneNumber.errors.required">Business number is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-5">
+            <div class="form-group mb-3 h-100">
+                <label for="CompanyLogo" class="form-label">Company Logo</label>
+                <div class="CompanyLogoUploadWrapper">
+                    <div class="uploadPhotoFormWrapper" id="uploadPhoto">
+                        <input type="file" accept="image/*" (change)="selectFiles($event)" />
+                        <div class="d-flex align-items-center">
+                            <span class="icon-attachment fs-5"></span>
+                            <div class="ms-2">
+                                <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose
+                                    file to
+                                    upload</h5>
+                                <p class="font13 font-muted font300 mb-0">Supported format: PNG, JPG
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uploadedPhotoWrapper">
+                        <div class="uploadedImagesItem" *ngFor='let preview of previews;index as i'>
+                            <button type="button" class="btn"
+                                (click)="removeServiceImage(preview.index, preview.uploadId)">
+                                <span class="icon-close-1"></span>
+                            </button>
+                            <img [src]="preview.filePath" class="preview img-fluid" (error)="preview.filePath = './../../../../assets/images/services3.png'">
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-lg-3">
+        <div class="col-lg-6">
+            <div class="form-group mb-3">
+                <label for="CompanySize" class="form-label">Company Size</label>
+                <select formControlName="noOfEmpInCompany" class="form-select"
+                    [ngClass]="{ 'is-invalid': submitted && f.noOfEmpInCompany.errors }">
+                    <option value="">Select</option>
+                    <option value="{{_emp.text}}" *ngFor="let _emp of noOfEmplyees">{{_emp.value}}
+                    </option>
+                </select>
+                <div *ngIf="submitted && f.noOfEmpInCompany.errors" class="invalid-feedback">
+                    <div *ngIf="f.noOfEmpInCompany.errors.required">Number of employee is required
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group mb-3">
+                <label for="Industry" class="form-label">Industry</label>
+                <select formControlName="industry" class="form-select"
+                    [ngClass]="{ 'is-invalid': submitted && f.industry.errors }">
+                    <option value="">Select</option>
+                    <option value="{{industry.text}}" *ngFor="let industry of industries">
+                        {{industry.value}}</option>
+                </select>
+                <div *ngIf="submitted && f.industry.errors" class="invalid-feedback">
+                    <div *ngIf="f.industry.errors.required">Industry is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group mb-3">
+                <label for="WebsiteURL" class="form-label">Website URL</label>
+                <input type="text" formControlName="websiteUrl" class="form-control" placeholder="Enter url"
+                    [ngClass]="{ 'is-invalid': submitted && f.websiteUrl.errors }" />
+                <div *ngIf="submitted && f.websiteUrl.errors" class="invalid-feedback">
+                    <div *ngIf="f.websiteUrl.errors.required">Website Url is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group mb-3">
+                <label for="DomainName" class="form-label">Domain Name</label>
+                <input type="text" formControlName="subDomainName" class="form-control bg-light" placeholder="Enter url"
+                    value="newyorkhvac.bluecollarengine.com"
+                    [ngClass]="{ 'is-invalid': submitted && f.subDomainName.errors }" />
+                <div *ngIf="submitted && f.subDomainName.errors" class="invalid-feedback">
+                    <div *ngIf="f.subDomainName.errors.required">Sub Domain name is required</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <label for="AboutCompany" class="form-label">About Company</label>
+                <textarea formControlName="aboutCompany" class="form-control" rows="4" placeholder="Enter about company"
+                    resize="none" maxlength="4000"></textarea>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="ContactName" class="form-label">Service Area</label>
+            <div class="row gy-3">
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" placeholder="Service area" />
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" class="form-control " placeholder="Enter radius" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="profile-map rounded overflow-hidden">
+            <img src="../../../../assets/images/map-2.png" class="img-fluid" />
+        </div>
+    </div>
+    <div class="d-flex justify-content-start gap-3 mt-4">
+        <button class="primary-filled-button px-5" type="submit">
+            Save Changes</button>
+    </div>
+</form>
