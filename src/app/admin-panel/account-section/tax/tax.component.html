@@ -6,8 +6,7 @@
                 like the service to be active in.</p>
         </div>
         <div class="ms-auto">
-            <button class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#AddTaxRateSidebar" aria-controls="AddTaxRateSidebar"><span class="icon-add"></span>
+            <button class="primary-filled-button  w-100" type="button" (click)="addNewTax()"><span class="icon-add"></span>
                 Add New</button>
         </div>
     </div>
@@ -43,15 +42,20 @@
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-end">
-                        <button class="light-outlined-button sm-btn"><span class="icon-edit-2"></span> Edit</button>
+                        <button class="light-outlined-button sm-btn" (click)="editTax(tax)"><span
+                                class="icon-edit-2"></span> Edit</button>
                     </div>
                 </td>
-            </tr>           
+            </tr>
         </tbody>
     </table>
 </div>
 
+<button style="display:none;" class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas"
+    data-bs-target="#AddTaxRateSidebar" aria-controls="AddTaxRateSidebar" #addTaxCancelEle><span class="icon-add"></span>
+    Add New</button>
+
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddTaxRateSidebar"
     aria-labelledby="offcanvasRightLabel">
-    <app-add-tax-rate></app-add-tax-rate>
+    <app-add-tax-rate [items]="taxInfo"></app-add-tax-rate>
 </div>

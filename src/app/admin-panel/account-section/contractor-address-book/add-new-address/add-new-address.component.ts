@@ -53,8 +53,7 @@ export class AddNewAddressComponent {
         this.addressForm.controls['state'].setValue('');
         this.addressForm.controls['isDefault'].setValue(false);
       }
-    }
-  
+    }  
   }
 
   onSubmit() {

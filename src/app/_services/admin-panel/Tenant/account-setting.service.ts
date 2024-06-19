@@ -57,7 +57,21 @@ export class AccountSettingService {
   }
 
   getTax(type: any) {
-    return this.http.get<any>(`${environment.apiUrl}/api/v1/Master/GetTax?taxType=`+ type)
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetTax?taxName=` + type)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  addTenantTax(taxInfo: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/AddUpdateTax`, taxInfo)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  changePassword(changePasswordInfo: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/ChangePassword`, changePasswordInfo)
       .pipe(map(res => {
         return res;
       }));
