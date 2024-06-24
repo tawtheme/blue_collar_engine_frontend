@@ -115,14 +115,19 @@ form.hero_newsletter_form button {
   color: #2d64d6;
 }
 
-.about-bluecollar-card h4 {
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.about-bluecollar-card p {
-  color: #6b7280;
+.about-bluecollar-card {
+  border: 1px solid #d1d5db;
+  padding: 20px;
+  border-radius: 15px;
+  h4 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  p {
+    color: #6b7280;
+    font-weight: 300;
+  }
 }
 
 .icon-box-circle {
@@ -163,7 +168,6 @@ form.hero_newsletter_form button {
 }
 
 .section-feature-content p {
-  font-size: 15px;
   color: #4b5563;
 }
 
@@ -197,43 +201,6 @@ form.hero_newsletter_form button {
   align-items: center;
   gap: 15px;
   color: #2d64d6;
-  font-size: 18px;
-}
-
-.section-hvac-insights {
-  background-image: url(../../assets/images/frontend/images/hvac-insights-bg.png);
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: right;
-  height: 350px;
-  display: flex;
-  align-items: center;
-}
-
-.section-hvac-insights h2 {
-  color: #fff;
-  font-size: 35px;
-  font-weight: 700;
-}
-
-.section-hvac-insights p {
-  color: #fff;
-  font-size: 20px;
-  margin: 0;
-  font-weight: 300;
-}
-
-.section-hvac-insights .btn-light {
-  padding-left: 35px;
-  padding-right: 35px;
-  display: inline-flex;
-  align-items: center;
-  gap: 15px;
-  color: #2d64d6;
-  font-size: 18px;
-}
-
-.section-faq .section-feature-content p {
   font-size: 18px;
 }
 
