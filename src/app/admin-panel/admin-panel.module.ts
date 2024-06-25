@@ -42,6 +42,7 @@ import { SecurityComponent } from './account-section/security/security.component
 import { TaxComponent } from './account-section/tax/tax.component';
 import { MyProfileComponent } from './account-section/my-profile/my-profile.component';
 import { ContractorAddressBookComponent } from './account-section/contractor-address-book/contractor-address-book.component';
+
 @NgModule({
   imports: [
     CommonModule,

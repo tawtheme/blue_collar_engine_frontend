@@ -18,7 +18,7 @@
                     <span class="icon-invoice"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>234</h6>
+                    <h6>{{items.length}}</h6>
                     <p>Total Estimates</p>
                 </div>
             </article>
@@ -124,6 +124,7 @@
                     </tr>
                 </tbody>
             </table>
+            <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
         </div>
         <div class="card-footer pb-0 pt-3">
             <app-pagination [items]="items" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination>

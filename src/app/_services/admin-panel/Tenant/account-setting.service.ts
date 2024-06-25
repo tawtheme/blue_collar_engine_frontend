@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { Subject, map } from 'rxjs';
@@ -8,8 +8,10 @@ import { Subject, map } from 'rxjs';
 })
 export class AccountSettingService {
   public tenantAddressAdded: Subject<boolean>;
+  public tenentProfileInfo: Subject<any>;
   constructor(private http: HttpClient) {
     this.tenantAddressAdded = new Subject<boolean>();
+    this.tenentProfileInfo = new Subject<any>();
   }
   getProfileInfo() {
     return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/Get`)
@@ -72,6 +74,29 @@ export class AccountSettingService {
 
   changePassword(changePasswordInfo: any) {
     return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/ChangePassword`, changePasswordInfo)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  getBusinessHoursDays() {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetBusinessHourDays`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  addUpdateBusinessHours(businessHoursInfo: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/AddUpdateBusinessHours`, businessHoursInfo)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  deleteBusinesshour(businessHourId: any) {
+    let httpParams = new HttpParams().set('businessHourId', businessHourId);
+    let options = { params: httpParams };
+    return this.http.delete<any>(`${environment.apiUrl}/api/v1/Tenant/DeleteBusinessHour`, options)
       .pipe(map(res => {
         return res;
       }));

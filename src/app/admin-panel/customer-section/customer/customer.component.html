@@ -19,7 +19,7 @@
                     <span class="icon-team"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>234</h6>
+                    <h6>{{items.length}}</h6>
                     <p>Total Customers</p>
                 </div>
             </article>
@@ -64,18 +64,18 @@
                             (keyup.enter)="onEnter($event)">
                         <span class="icon-search iconPosition"></span>
                     </div>
-                    <div class="top-search-group flexGrow1">
+                    <div class="top-search-group flexGrow1" style="display: none;">
                         <input type="date" id="date" name="date" placeholder="Select date..." class="form-control">
                     </div>
                 </div>
             </div>
 
-            <div class="table-top-filter-right">
+            <div class="table-top-filter-right" style="display: none;">
                 <button class="light-outlined-button"><span class="icon-export"></span> Export</button>
             </div>
         </div>
         <div class="row mt-3 mb-3">
-            <div class="mt-20 customers-tables">
+            <div class="mt-20 customers-tables">               
                 <table class="row-border">
                     <thead>
                         <tr>
@@ -132,6 +132,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
             </div>
             <div class="card-footer pb-0 pt-3">
                 <app-pagination [items]="items" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination>

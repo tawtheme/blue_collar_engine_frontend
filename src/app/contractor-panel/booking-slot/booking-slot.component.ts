@@ -5,6 +5,7 @@ import { BookingSharedService } from '@app/_services/site-panel/booking/booking-
 import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import moment from 'moment';
 import { BookingAddressComponent } from '../booking-address/booking-address.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-booking-slot',
@@ -19,10 +20,11 @@ export class BookingSlotComponent {
   selectedServices: any[] = [];
   submitted = false;
   isEnableNextBtn: boolean = false;
+  loading:boolean=true;
   constructor(
     public dialogRef: MatDialogRef<BookingSlotComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: any[] = [], private _tenantService: TenantService, private _dialog: MatDialog, private _bookingSharedService: BookingSharedService
+    public data: any[] = [], private _tenantService: TenantService, private _dialog: MatDialog, private _bookingSharedService: BookingSharedService, private _toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -39,17 +41,20 @@ export class BookingSlotComponent {
 
   bindBusinessHours(dayId: number) {
     this._tenantService.getBusinesshours().subscribe(res => {
-      this.businessHours = res.data.filter((time: { dayId: any; }) => {
-        return time.dayId === dayId;
+      this.loading=false;
+      console.log(res.data)
+      this.businessHours = res.data.filter((time: { dayId: any; isDayActive:boolean }) => {
+        return time.dayId === dayId && time.isDayActive==true;
       })
+      console.log(this.businessHours)
       if (this.businessHours.length > 0) {
         this.bookingTime = this.businessHours[0].businessHourId;
+        this.isEnableNextBtn = true;
       }
-      else {
+      else {        
         this.bookingTime = 0;
+        this.isEnableNextBtn = false;
       }
-
-      //console.log(this.businessHours)
     });
   }
 

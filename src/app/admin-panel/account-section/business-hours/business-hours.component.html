@@ -1,4 +1,3 @@
-
 <div class="mb-4">
     <h4 class="mb-1 font20">Business Hours</h4>
     <p class="font14 mb-0 font-muted">Choose the hours and days of the week you would like the
@@ -11,310 +10,85 @@
                 <div class="col-lg-3">
                     <div class="">
                         <h5 class="font15 mb-2">Timezone</h5>
-                        <p class="font12">Setup your timezone</p>
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="form-group">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
+                        <select id="timeZone" class="form-select" [(ngModel)]='timeZone'
+                            [ngModelOptions]="{standalone: true}" [disabled]="true">
+                            <option value="">Select</option>
+                            <option value="{{timezone.utc}}" *ngFor="let timezone of timezones">{{timezone.label}}
+                            </option>
                         </select>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="business-hours-row row mb-3">
-            <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+        <mat-progress-bar mode="indeterminate" *ngIf="preLoading"></mat-progress-bar>
+        <form [formGroup]="businessHourForm" (ngSubmit)="onSubmit()">
+            <div formArrayName="days">
+                <div class="business-hours-row row mb-3" *ngFor="let day of days().controls;let empIndex=index"
+                    [formGroupName]="empIndex">
+                    <div class="col-lg-3">
+                        <div class="d-flex align-items-center mt-2">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                                    [checked]="day.value.isActive" formControlName="isActive">
+                            </div>
+                            <h5 class="font16 mb-0 font500">{{day.value.dayName}}</h5>
+                        </div>
                     </div>
-                    <h5 class="font16 mb-0 font500">Monday</h5>
+                    <div class="col-lg-9" formArrayName="businessHours">
+                        <div class="d-flex align-items-center gap-3 mb-3"
+                            *ngFor="let hours of businessHours(empIndex).controls; let skillIndex=index"
+                            [formGroupName]="skillIndex">
+                            <div class="form-group flex-grow-1" *ngIf="!hours.value.isDeleted">
+                                <input aria-label="default time" class="form-control" formControlName="openTime"
+                                    [ngxTimepicker]="defaultValue" [value]="hours.value.openTime"
+                                    placeholder="Open time"
+                                    [ngClass]="{ 'is-invalid': submitted && hours.get('openTime')!.errors?.required }"
+                                    readonly>
+                                <div *ngIf="submitted && hours.get('openTime')!.errors" class="invalid-feedback">
+                                    <div *ngIf="hours.get('openTime')!.errors?.required">Open time is required
+                                    </div>
+                                </div>
+                                <ngx-material-timepicker #defaultValue (timeSet)="onOpenTimeset($event)"
+                                    [defaultTime]="'10:00 am'"></ngx-material-timepicker>
+                            </div>
+                            <span *ngIf="!hours.value.isDeleted">to</span>
+                            <div class="form-group flex-grow-1" *ngIf="!hours.value.isDeleted">
+                                <input aria-label="default time1" class="form-control" formControlName="closeTime"
+                                    [ngxTimepicker]="defaultValue1" placeholder="Close time"
+                                    [value]="hours.value.closeTime"
+                                    [ngClass]="{ 'is-invalid': submitted && hours.get('closeTime')!.errors?.required }"
+                                    readonly>
+                                <div *ngIf="submitted && hours.get('closeTime')!.errors" class="invalid-feedback">
+                                    <div *ngIf="hours.get('closeTime')!.errors?.required">Close time is required
+                                    </div>
+                                </div>
+                                <ngx-material-timepicker #defaultValue1 (timeSet)="onCloseTimeset($event)"
+                                    [defaultTime]="'10:00 pm'"></ngx-material-timepicker>
+                            </div>
+                            <button type="button" class="light-outlined-button rounded-circle p-0 ShapeBox38"
+                                *ngIf="skillIndex == 0" (click)="add(empIndex, day.value.dayId)"><span
+                                    class="icon-add"></span>
+                            </button>
+                            <button class="btn" type="button" (click)="remove(empIndex, skillIndex)"
+                                *ngIf="skillIndex > 0 && !hours.value.isDeleted">
+                                <span class="icon-delete"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-9">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <span>to</span>
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <button class="light-outlined-button rounded-circle p-0 ShapeBox38"><span
-                            class="icon-add"></span>
-                    </button>
-                </div>
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <span>to</span>
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <button class="light-outlined-button rounded-circle p-0 ShapeBox38"><span
-                            class="icon-delete"></span>
-                    </button>
-                </div>
 
+            <div class="d-flex justify-content-start gap-3 mt-4">
+                <button [disabled]="loading" class="primary-filled-button px-5">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                    Save Changes
+                </button>
             </div>
-        </div>
-        <div class="business-hours-row row  mb-3">
-            <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    </div>
-                    <h5 class="font16 mb-0 font500">Tuesday</h5>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <span>to</span>
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <button class="light-outlined-button rounded-circle p-0 ShapeBox38"><span
-                            class="icon-add"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="business-hours-row row  mb-3">
-            <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    </div>
-                    <h5 class="font16 mb-0 font500">Wednesday</h5>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <span>to</span>
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <button class="light-outlined-button rounded-circle p-0 ShapeBox38"><span
-                            class="icon-add"></span>
-                    </button>
-                </div>
+        </form>
 
-
-            </div>
-        </div>
-        <div class="business-hours-row row  mb-3">
-            <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    </div>
-                    <h5 class="font16 mb-0 font500">Thursday</h5>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <span>to</span>
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <button class="light-outlined-button rounded-circle p-0 ShapeBox38"><span
-                            class="icon-add"></span>
-                    </button>
-                </div>
-
-
-            </div>
-        </div>
-        <div class="business-hours-row row  mb-3">
-            <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    </div>
-                    <h5 class="font16 mb-0 font500">Friday</h5>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <span>to</span>
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <button class="light-outlined-button rounded-circle p-0 ShapeBox38"><span
-                            class="icon-add"></span>
-                    </button>
-                </div>
-
-
-            </div>
-        </div>
-        <div class="business-hours-row row  mb-3">
-            <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    </div>
-                    <h5 class="font16 mb-0 font500">Saturday</h5>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <span>to</span>
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <button class="light-outlined-button rounded-circle p-0 ShapeBox38"><span
-                            class="icon-add"></span>
-                    </button>
-                </div>
-
-
-            </div>
-        </div>
-        <div class="business-hours-row row  mb-3">
-            <div class="col-lg-3">
-                <div class="d-flex align-items-center mt-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                    </div>
-                    <h5 class="font16 mb-0 font500">Sunday</h5>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="d-flex align-items-center gap-3 mb-3">
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <span>to</span>
-                    <div class="form-group flex-grow-1">
-                        <select id="CompanySize" formControlName="CompanySize" name="services" class="form-select">
-                            <option value="0">Select Time</option>
-                            <option>09:00 AM</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                        </select>
-                    </div>
-                    <button class="light-outlined-button rounded-circle p-0 ShapeBox38"><span
-                            class="icon-add"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="d-flex justify-content-start gap-3 mt-4">
-            <button class="primary-filled-button px-5" type="submit">
-                Save Changes</button>
-        </div>
     </div>
 </div>

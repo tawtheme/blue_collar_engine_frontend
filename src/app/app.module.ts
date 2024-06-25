@@ -35,6 +35,9 @@ import { PhoneMaskDirective } from './_helpers/directive/phone-mask.directive';
 import { UsMobileNoPipe } from './_helpers/pipe/us-mobile-no.pipe';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './_helpers/loading.interceptor';
+import {NgxStripeModule} from "ngx-stripe";
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
 }
@@ -52,7 +55,8 @@ Date.prototype.toISOString = function () {
         }),
         NgbModule,
         MaterialModule,
-        JwtModule
+        JwtModule,
+        NgxStripeModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -69,6 +73,7 @@ Date.prototype.toISOString = function () {
         FrontendLayoutComponent,
         PagenotfoundComponent,
         SpinnerComponent,
+        PaymentSuccessComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

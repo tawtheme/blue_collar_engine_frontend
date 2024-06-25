@@ -6,6 +6,7 @@ import { ConstantManager } from '@app/_helpers/constant/constantManager';
 import { CustomerModel } from '@app/_models/customer/customerModel';
 import { PaginationModel } from '@app/_models/pagination';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
+import { CategoryService } from '@app/_services/admin-panel/category/category.service';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
 import { EstimateService } from '@app/_services/admin-panel/estimate/estimate.service';
 import { MasterService } from '@app/_services/admin-panel/master/master.service';
@@ -41,7 +42,7 @@ export class CreateEstimateComponent implements OnInit {
   status: string = '';
   todayDate: Date = new Date();
   isProceed: boolean = false;
-  constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, private dialog: MatDialog, private _accountSettingService: AccountSettingService) { }
+  constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, private dialog: MatDialog, private _accountSettingService: AccountSettingService, private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this._customerService.bindAddress.subscribe((address: any) => {
@@ -73,7 +74,7 @@ export class CreateEstimateComponent implements OnInit {
       "searchStr": ""
     }
     this.getAll(_param);
-    this.getAllProduct();
+    this.getAllProduct(_param);
     this.bindTax(ConstantManager.TaxType);
 
     this._activeRoute.queryParams
@@ -124,20 +125,7 @@ export class CreateEstimateComponent implements OnInit {
 
   }
 
-  getAllProduct() {
-    this._productService.getAll()
-      .pipe(first())
-      .subscribe({
-        next: (res) => {
-          this.loading = false;
-          this.productList = res.data;
-          console.log(this.productList)
-        },
-        error: error => {
-          this.loading = false;
-        }
-      });
-  }
+ 
 
   bindTax(type: any) {
     this._accountSettingService.getTax(type).subscribe(res => {
@@ -160,8 +148,8 @@ export class CreateEstimateComponent implements OnInit {
   }
 
   bindProductInfo(ev: any, index: number) {
-    var productData = this.productList.filter(function (event: { productId: number; }) {
-      return event.productId == ev;
+    var productData = this.productList.filter(function (event: { categoryServiceId: number; }) {
+      return event.categoryServiceId == ev;
     });
     this.products().at(index).get('price')?.setValue(productData[0].price);
     this.calculateTotal();
@@ -196,7 +184,7 @@ export class CreateEstimateComponent implements OnInit {
     let param = this.estimateInvoiceForm.value as any;
     Object.assign(param, { status: this.clickType });
     if (this.clickType == 'S') {
-      const message = `Are you sure you want to do send?`;
+      const message = `Are you sure you want to do save?`;
       const dialogData = new ConfirmDialogModel("Confirmation", message);
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         maxWidth: "400px",
@@ -286,13 +274,30 @@ export class CreateEstimateComponent implements OnInit {
     this.estimateTotal = this.subTotal + this.taxAmount;
   }
 
-  // formatDate(e: any) {
-  //   var d = new Date(e.target.value)
-  //   var convertDate = d.toISOString().substring(0, 10) + d.toISOString().substring(10,);
-  //   console.log(convertDate)
-  //   this.estimateInvoiceForm.get('expirayDate')?.setValue(convertDate, { onlyself: true });
-  //   let param = this.estimateInvoiceForm.value as any;
-  //   console.log(param.expiryDate)
-  //   console.log(moment(param.expiryDate).format('MM/DD/YYYY'))
-  // }
+  getAllProduct(_param: any) {
+    // this._productService.getAll()
+    //   .pipe(first())
+    //   .subscribe({
+    //     next: (res) => {
+    //       this.loading = false;
+    //       this.productList = res.data;
+    //       console.log(this.productList)
+    //     },
+    //     error: error => {
+    //       this.loading = false;
+    //     }
+    //   });
+
+    this._categoryService.getAllServices(_param)
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.productList = res.data;
+          console.log(this.productList)
+        },
+        error: error => {
+          this.loading = false;
+        }
+      });
+  }
 }

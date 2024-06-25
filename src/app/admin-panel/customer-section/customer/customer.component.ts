@@ -41,6 +41,7 @@ export class CustomerComponent implements OnInit {
   }
 
   getAll(param: PaginationModel) {
+    this.loading=true;
     this._customerService.getAll(param)
       .pipe(first())
       .subscribe({

@@ -20,8 +20,10 @@
                             <mat-radio-group aria-label="Select an option" [(ngModel)]="bookingTime">
                                 <mat-radio-button [value]="timeSlot.businessHourId"
                                     *ngFor="let timeSlot of businessHours;index as i">{{timeSlot.openTime}}-{{timeSlot.closeTime}}</mat-radio-button>
-
-                            </mat-radio-group>
+                            </mat-radio-group>   
+                            <div *ngIf="businessHours.length==0 && !loading">
+                                <span>No slot found</span>
+                            </div>                         
                         </div>
                     </div>
                 </div>
@@ -39,7 +41,7 @@
                         </div>
                         <div class="mt-auto">
                             <button class="primary-filled-button px-5 lg-btn w-100" type="submit"
-                                (click)="openBookingAddress()" [disabled]="!isEnableNextBtn">Next</button>
+                                (click)="openBookingAddress()" [ngClass]="{ disabled: isEnableNextBtn === true }" [disabled]="!isEnableNextBtn">Next</button>
                         </div>
                     </div>
                 </div>

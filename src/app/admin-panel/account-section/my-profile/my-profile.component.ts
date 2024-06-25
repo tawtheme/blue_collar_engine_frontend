@@ -70,7 +70,8 @@ export class MyProfileComponent {
       .subscribe({
         next: (res) => {
           this.profileInfo = res.data;
-          console.log(this.profileInfo)
+          //console.log(this.profileInfo)
+          this._accountSettingService.tenentProfileInfo.next(this.profileInfo);
           this.profileForm.patchValue(this.profileInfo);
           if (this.profileForm.controls['companyImagePath'].value != '') {
             var _data = {
@@ -88,7 +89,7 @@ export class MyProfileComponent {
   bindNoOFEmplyeeDDL() {
     this._masterService.getNoOFEmployee().subscribe(res => {
       this.noOfEmplyees = res.data;
-      console.log(this.noOfEmplyees)
+     // console.log(this.noOfEmplyees)
     });
   }
 
@@ -123,10 +124,9 @@ export class MyProfileComponent {
       }
     }
     else {
-      debugger
       this.selectedFiles = null;
       this.submitted = false;
-      this.profileForm.controls['companyImage'].setValue("");
+      this.profileForm.controls['companyImagePath'].setValue("");
       this._toastrService.error("Only png, jpeg, jpg extension files are allowed", "Error");
     }
   }
@@ -159,7 +159,7 @@ export class MyProfileComponent {
     }
     param = { ...param, ...{ file: this.selectedFiles } };
     const formData = new FormData();
-    console.log(param)
+   // console.log(param)
     formData.append('firstName', param.firstName);
     formData.append('lastName', param.lastName);
     formData.append('phoneNumber', param.phoneNumber);

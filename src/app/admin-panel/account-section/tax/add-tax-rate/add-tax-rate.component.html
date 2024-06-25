@@ -26,16 +26,13 @@
             <label for="expiryDate" class="form-label">Effective Date</label>
             <mat-form-field class="example-full-width muiDatePickerFromField">
                 <input matInput [matDatepicker]="picker" formControlName="effectiveDate" placeholder="Choose a date"
-                    [ngClass]="{ 'is-invalid': submitted && f.effectiveDate.errors }">
+                    [ngClass]="{ 'is-invalid': submitted && addTaxForm.get('effectiveDate')?.hasError('required') }">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <mat-error *ngIf="submitted && addTaxForm.get('effectiveDate')?.hasError('required')">
                 Effective date is required
-            </mat-error>
-            <div *ngIf="submitted && f.effectiveDate.errors" class="invalid-feedback">
-                <div *ngIf="f.effectiveDate.errors.required">Effective date is required</div>
-            </div>
+            </mat-error>           
         </div>
     </div>
     <div class="sidebar-popup-bottom offcanvas-footer">

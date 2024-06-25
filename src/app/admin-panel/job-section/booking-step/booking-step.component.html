@@ -2,22 +2,23 @@
     <!-- --active-job-step -->
     <div class="job-step-item ">
         <h4>Assigned</h4>
-        <p>-</p>
+        <p>{{bookingStepInfo?.assignedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
     </div>
     <div class="job-step-item">
         <h4>Estimate</h4>
-        <p>-</p>
+        <p>{{bookingStepInfo?.estimateInvoiceCreatedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
     </div>
     <div class="job-step-item">
         <h4>Job Start</h4>
-        <p>-</p>
+        <p>{{bookingStepInfo?.jobStartedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
     </div>
     <div class="job-step-item">
         <h4>Job Finish</h4>
-        <p>-</p>
+        <p>{{bookingStepInfo?.jobFinishedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
     </div>
     <div class="job-step-item">
         <h4>Invoice</h4>
-        <p>-</p>
+        <p>{{bookingStepInfo?.invoiceCreatedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
     </div>
 </div>
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>

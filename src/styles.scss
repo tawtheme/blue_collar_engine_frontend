@@ -135,3 +135,7 @@ button.primary-filled-button.mdc-button {
 .mat-calendar-body-selected {
   background-color: var(--primary) !important;
 }
+button:disabled {
+  opacity: 0.3;
+}
+

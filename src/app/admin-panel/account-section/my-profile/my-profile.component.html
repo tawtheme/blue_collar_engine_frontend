@@ -41,7 +41,7 @@
                         <label for="Email" class="form-label">Email Address</label>
                         <input type="text" formControlName="emailAddress" class="form-control mb-3"
                             placeholder="Enter email address" maxlength="200"
-                            [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"  [disabled]="true"/>
+                            [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"/>
                         <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
                             <div *ngIf="f.emailAddress.errors.required">Email address is required</div>
                         </div>

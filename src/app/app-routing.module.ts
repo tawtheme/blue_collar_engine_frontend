@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,10 @@ const routes: Routes = [
       import('./admin-panel/admin-panel.module').then(
         (m) => m.AdminPanelModule
       ),
+  },
+  {
+    path: 'payment-success',
+    component: PaymentSuccessComponent,
   },
   { path: '**', component: PagenotfoundComponent }
 ];

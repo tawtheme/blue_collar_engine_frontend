@@ -8,7 +8,7 @@ import { Subject, map } from 'rxjs';
 })
 export class BookingService {
   public bookingTeamMemberAssign: Subject<boolean>;
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.bookingTeamMemberAssign = new Subject<boolean>();
   }
 
@@ -28,6 +28,13 @@ export class BookingService {
 
   assignTeamMember(teammemberList: any) {
     return this.http.post<any>(`${environment.apiUrl}/api/v1/Booking/AssignTeam`, teammemberList)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  getBookingSteps(bookingStepInputInfo: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Booking/GetBookingSteps`, bookingStepInputInfo)
       .pipe(map(res => {
         return res;
       }));

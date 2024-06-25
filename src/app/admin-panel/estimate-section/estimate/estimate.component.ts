@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
+import { CategoryService } from '@app/_services/admin-panel/category/category.service';
 import { EstimateService } from '@app/_services/admin-panel/estimate/estimate.service';
 import { first } from 'rxjs';
 
@@ -15,6 +16,7 @@ export class EstimateComponent implements OnInit {
   pageOfItems?: Array<any>;
   sortProperty: string = 'id';
   sortOrder = 1;
+  productList: any = [];
   constructor(private _router: Router, private _estimateService: EstimateService) { }
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class EstimateComponent implements OnInit {
 
 
   getAll(param: PaginationModel) {
+    this.loading=true;
     this._estimateService.getAll(param)
       .pipe(first())
       .subscribe({
@@ -92,4 +95,6 @@ export class EstimateComponent implements OnInit {
   redirectToCreateEstimate(estimateId: number) {
     this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } })
   }
+
+ 
 }

@@ -34,7 +34,8 @@
                                 <span class="icon-down-arrow"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
-                                <li><a [routerLink]="['/admin/account-setting']"><span class="icon-user"></span>Profile</a>
+                                <li><a [routerLink]="['/admin/account-setting']"><span
+                                            class="icon-user"></span>Profile</a>
                                 </li>
                                 <li><a href="javascript:void(0);" (click)="logout()"><span
                                             class="icon-returning"></span>Logout</a></li>
@@ -82,8 +83,7 @@
                             <span class="menu-title">Overview</span>
                         </a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active"
-                        [ngClass]="{'active': customerDetailActive.isActive }">
+                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': customerDetailActive.isActive }" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link" [routerLink]="['/admin/customer']">
                             <span class="icon-holder">
                                 <span class="icon-user"></span>
@@ -93,8 +93,7 @@
 
 
                     </li>
-                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': createBookingActive.isActive }"
-                        [routerLinkActiveOptions]="{exact: true}">
+                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': createBookingActive.isActive }" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link" [routerLink]="['/admin/scheduler']">
                             <span class="icon-holder">
                                 <span class="icon-calendar"></span>
@@ -102,8 +101,7 @@
                             <span class="menu-title">Scheduler</span>
                         </a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': createJobActive.isActive }"
-                        [routerLinkActiveOptions]="{exact: true}">
+                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': createJobActive.isActive }" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link" [routerLink]="['/admin/jobs']">
                             <span class="icon-holder">
                                 <span class="icon-job"></span>
@@ -111,9 +109,7 @@
                             <span class="menu-title">Jobs</span>
                         </a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active"
-                        [ngClass]="{'active': createEstimateActive.isActive }"
-                        [routerLinkActiveOptions]="{exact: true}">
+                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': createEstimateActive.isActive }" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link" [routerLink]="['/admin/estimate']">
                             <span class="icon-holder">
                                 <span class="icon-estimate"></span>
@@ -121,8 +117,7 @@
                             <span class="menu-title">Estimate</span>
                         </a>
                     </li>
-                    <li class="nav-item" routerLinkActive="active"
-                        [ngClass]="{'active': customerInvoiceActive.isActive }">
+                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': customerInvoiceActive.isActive}" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link" [routerLink]="['/admin/invoice']">
                             <span class="icon-holder">
                                 <span class="icon-invoice"></span>
@@ -131,9 +126,7 @@
                         </a>
                     </li>
 
-
-                    <li class="nav-item" routerLinkActive="active"
-                        [ngClass]="{'active': customerInvoiceActive.isActive }">
+                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': priceBookActive.isActive }" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link" [routerLink]="['/admin/price-book']">
                             <span class="icon-holder">
                                 <span class="icon-invoice"></span>
@@ -142,6 +135,8 @@
                         </a>
                     </li>
 
+                    <a routerLink="/admin/customer" routerLinkActive #customerListActive="routerLinkActive"
+                        style="display: none"></a>
                     <a routerLink="/admin/customer-detail" routerLinkActive #customerDetailActive="routerLinkActive"
                         style="display: none"></a>
                     <a routerLink="/admin/create-booking" routerLinkActive #createBookingActive="routerLinkActive"
@@ -152,6 +147,9 @@
                         style="display: none"></a>
                     <a routerLink="/admin/create-invoice" routerLinkActive #customerInvoiceActive="routerLinkActive"
                         style="display: none"></a>
+                    <a routerLink="/admin//price-book" routerLinkActive #priceBookActive="routerLinkActive"
+                        style="display: none"></a>
+
 
 
                 </ul>

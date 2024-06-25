@@ -28,6 +28,7 @@ export class InvoiceComponent implements OnInit {
   }
 
   getAll(param: PaginationModel) {
+    this.loading=true;
     this._invoiceService.getAll(param)
       .pipe(first())
       .subscribe({

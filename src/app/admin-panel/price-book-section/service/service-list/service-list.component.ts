@@ -73,6 +73,7 @@ export class ServiceListComponent {
   }
 
   getAll(param: PaginationModel) {
+    this.loading=true;
     this._categoryService.getAll(param)
       .pipe(first())
       .subscribe({
