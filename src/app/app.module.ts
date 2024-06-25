@@ -37,6 +37,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './_helpers/loading.interceptor';
 import {NgxStripeModule} from "ngx-stripe";
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.component';
+import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
 
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
@@ -74,6 +76,8 @@ Date.prototype.toISOString = function () {
         PagenotfoundComponent,
         SpinnerComponent,
         PaymentSuccessComponent,
+        FeatureInvoiceComponent,
+        FeatureEstimateComponent,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

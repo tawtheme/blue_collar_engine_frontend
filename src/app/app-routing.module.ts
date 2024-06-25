@@ -11,6 +11,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.component';
+import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
 
 const routes: Routes = [
   {
@@ -25,8 +27,16 @@ const routes: Routes = [
       {
         path: 'online-request-demo',
         component: OnlineRequestDemoComponent,
-      }
-    ]
+      },
+      {
+        path: 'page/invoice',
+        component: FeatureInvoiceComponent,
+      },
+      {
+        path: 'page/estimate',
+        component: FeatureEstimateComponent,
+      },
+    ],
   },
   {
     path: 'home',
@@ -48,12 +58,13 @@ const routes: Routes = [
     path: 'reset-password',
     component: ResetPasswordComponent,
   },
+
   {
     path: 'booking',
     loadChildren: () =>
       import('./contractor-panel/contractor-panel.module').then(
         (m) => m.ContractorPanelModule
-      )
+      ),
   },
   {
     path: 'secure-panel',
@@ -73,11 +84,11 @@ const routes: Routes = [
     path: 'payment-success',
     component: PaymentSuccessComponent,
   },
-  { path: '**', component: PagenotfoundComponent }
+  { path: '**', component: PagenotfoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
