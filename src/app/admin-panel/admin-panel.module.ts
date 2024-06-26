@@ -42,6 +42,9 @@ import { SecurityComponent } from './account-section/security/security.component
 import { TaxComponent } from './account-section/tax/tax.component';
 import { MyProfileComponent } from './account-section/my-profile/my-profile.component';
 import { ContractorAddressBookComponent } from './account-section/contractor-address-book/contractor-address-book.component';
+import { SystemConfigurationComponent } from './account-section/system-configuration/system-configuration.component';
+import { TeamManagementComponent } from './account-section/team-management/team-management.component';
+import { AddTeamMemberComponent } from './account-section/team-management/add-team-member/add-team-member.component';
 
 @NgModule({
   imports: [
@@ -90,7 +93,10 @@ import { ContractorAddressBookComponent } from './account-section/contractor-add
     TaxComponent,
     AddTaxRateComponent,
     MyProfileComponent,
-    ContractorAddressBookComponent
+    ContractorAddressBookComponent,
+    SystemConfigurationComponent,
+    TeamManagementComponent,
+    AddTeamMemberComponent
   ],
 
 })

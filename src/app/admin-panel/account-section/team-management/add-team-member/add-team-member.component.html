@@ -1,0 +1,113 @@
+<div class="offcanvas-header sidebar-popup-header">
+    <h6 class="offcanvas-title" id="offcanvasRightLabel">Add New </h6>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" #addTeamMemberEle>
+    </button>
+</div>
+
+<form class="sidebar-popup-inner">
+    <div class="offcanvas-body">
+        <div class="form-group mb-3">
+            <label for="fname" class="form-label">Full Name</label>
+            <input type="text" formControlName="firstName" class="form-control mb-3" placeholder="First name"
+                maxlength="50" />
+
+            <input type="text" formControlName="lastName" class="form-control" placeholder="Last name" maxlength="50" />
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="mobileNumber" class="form-label">Mobile No.</label>
+            <input type="text" formControlName="mobileNumber" class="form-control" placeholder="Mobile number" />
+
+        </div>
+        <div class="form-group mb-3">
+            <label for="alternativemobileNumber" class="form-label">Alternative Number</label>
+            <input type="text" formControlName="alternativemobileNumber" class="form-control"
+                placeholder="Alternative mobile number" />
+        </div>
+        <div class="form-group mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="text" formControlName="emailAddress" class="form-control" placeholder="Email address"
+                maxlength="200" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+        </div>
+        <div class="form-group mb-3">
+            <label for="fname" class="form-label">Address</label>
+            <input type="text" formControlName="serviceAddress" class="form-control mb-3" placeholder="Service Address"
+                maxlength="500" />
+            <div class="row g-3">
+                <div class="col-md-6 ">
+                    <select id="country" formControlName="state" name="state" class="form-select">
+                        <option value="" selected disabled>Select</option>
+                        <option value="USA">USA</option>
+                        <option value="India">India</option>
+                    </select>
+
+                </div>
+                <div class="col-md-6 ">
+                    <select id="state" formControlName="state" name="state" class="form-select">
+                        <option value="" selected disabled>Select</option>
+                        <option value="California">California</option>
+                        <option value="Texas">Texas</option>
+                        <option value="Florida">Florida</option>
+                        <option value="New York">New York</option>
+                        <option value="Pennsylvania">Pennsylvania</option>
+                        <option value="Illinois">Illinois</option>
+                        <option value="Ohio">Ohio</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="North Carolina">North Carolina</option>
+                        <option value="Michigan">Michigan</option>
+                    </select>
+
+                </div>
+                <div class="col-md-6 ">
+                    <input type="text" formControlName="city" class="form-control" placeholder="City" maxlength="50" />
+
+                </div>
+                <div class="col-md-6">
+                    <input type="text" formControlName="zipCode" class="form-control" placeholder="ZipCode"
+                        maxlength="10" />
+
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label for="serviceMaintenance" class="form-label">Role</label>
+            <select id="serviceMaintenance" formControlName="serviceMaintenance" name="serviceMaintenance"
+                class="form-select">
+                <option value="" selected disabled>Select</option>
+                <option value="AC Maintenance">AC Maintenance</option>
+                <option value="AC Maintenance">AC Maintenance</option>
+                <option value="AC Maintenance">AC Maintenance</option>
+
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <label for="uploadPhoto" class="form-label">Upload Photo</label>
+            <div class="uploadPhotoFormWrapper" id="uploadPhoto">
+                <input type="file" accept="image/*" formControlName="files" />
+                <div class="d-flex align-items-center">
+                    <span class="icon-attachment fs-5"></span>
+                    <div class="ms-2">
+                        <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose file to upload</h5>
+                        <p class="font13 font-muted font300 mb-0">Supported format: CVS, XLS, PDF, PNG, JPG</p>
+                    </div>
+                </div>
+            </div>
+            <div class="uploadedPhotoWrapper">
+                <div class="uploadedImagesItem">
+                    <button type="button" class="btn">
+                        <span class="icon-close-1"></span>
+                    </button>
+                    <img src="../../../../../assets/images/services2.png" class="preview img-fluid">
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="sidebar-popup-bottom offcanvas-footer">
+        <button class="light-outlined-button outlined w-100" data-bs-dismiss="offcanvas" type="button">Cancel</button>
+        <button class="primary-filled-button filled w-100" type="submit">Save</button>
+    </div>
+</form>

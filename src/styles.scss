@@ -139,3 +139,8 @@ button:disabled {
   opacity: 0.3;
 }
 
+app-add-team-member {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

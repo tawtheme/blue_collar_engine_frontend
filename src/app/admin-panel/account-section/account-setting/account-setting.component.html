@@ -26,6 +26,11 @@
                         aria-selected="false">
                         <span class="icon-time"></span> Address Book
                     </button>
+                    <button class="nav-link" id="v-pills-teammanagement-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-teammanagement" type="button" role="tab"
+                        aria-controls="v-pills-teammanagement" aria-selected="false">
+                        <span class="icon-team"></span> Team Management
+                    </button>
                     <button class="nav-link" id="v-pills-tax-tab" data-bs-toggle="pill" data-bs-target="#v-pills-tax"
                         type="button" role="tab" aria-controls="v-pills-tax" aria-selected="false">
                         <span class="icon-invoice"></span> Tax Rates
@@ -42,6 +47,12 @@
                         aria-selected="false">
                         <span class="icon-report-1"></span> Security
                     </button>
+                    <button class="nav-link" id="v-pills-systemconfiguration-tab" data-bs-toggle="pill"
+                        data-bs-target="#v-pills-systemconfiguration" type="button" role="tab"
+                        aria-controls="v-pills-systemconfiguration" aria-selected="false">
+                        <span class="icon-report-1"></span> System Configuration
+                    </button>
+
 
 
                 </div>
@@ -71,6 +82,14 @@
                     <div class="tab-pane fade" id="v-pills-security" role="tabpanel"
                         aria-labelledby="v-pills-security-tab" tabindex="0">
                         <app-security></app-security>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-systemconfiguration" role="tabpanel"
+                        aria-labelledby="v-pills-systemconfiguration-tab" tabindex="0">
+                        <app-system-configuration></app-system-configuration>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-teammanagement" role="tabpanel"
+                        aria-labelledby="v-pills-teammanagement-tab" tabindex="0">
+                        <app-team-management></app-team-management>
                     </div>
                 </div>
             </div>
