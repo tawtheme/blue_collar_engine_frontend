@@ -40,13 +40,13 @@
                         <label for="expiryDate" class="form-label">Due Date</label>
                         <mat-form-field class="example-full-width muiDatePickerFromField">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
-                                placeholder="Choose a date">
+                                placeholder="Choose a date"  [ngClass]="{ 'is-invalid': submitted && invoiceForm.get('expiryDate')?.hasError('required') }">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-                        <div *ngIf="submitted && f.expiryDate.errors" class="invalid-feedback">
-                            <div *ngIf="f.expiryDate.errors.required">Expiry date is required</div>
-                        </div>
+                        </mat-form-field>                       
+                        <mat-error *ngIf="submitted && invoiceForm.get('expiryDate')?.hasError('required')">
+                            Due date is required
+                        </mat-error>
                     </div>
                 </div>
                 <div class="col-md-3" *ngIf="isShowRegNo">
@@ -116,7 +116,7 @@
                                 <th>Qty</th>
                                 <th>Unit price</th>
                                 <th>Amount</th>
-                                <th>Action</th>
+                                <th *ngIf="(bookingId == 0)">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -179,7 +179,7 @@
                                 </td>
                                 <td>
                                     <button class="btn" (click)="removeQuantity(i)"
-                                        *ngIf="i > 0 && !isShowRegNo || (isShowRegNo && status=='Draft')">
+                                        *ngIf="i > 0 && (!isShowRegNo || (isShowRegNo && status=='Draft')) && (bookingId == 0)">
                                         <span class="icon-delete"></span>
                                     </button>
                                 </td>
@@ -188,8 +188,8 @@
                         </tbody>
                     </table>
 
-                    <button class="light-primary-outlined-button" type="button" (click)="addProduct()"
-                        *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')"><span class="icon-add"></span>Add
+                    <button class="light-primary-outlined-button {{bookingId}}" type="button" (click)="addProduct()"
+                        *ngIf="(!isShowRegNo || (isShowRegNo && status=='Draft')) && (bookingId == 0)"><span class="icon-add"></span>Add
                         Service Item</button>
                 </div>
             </div>
@@ -245,12 +245,12 @@
             </div>
             <div class="d-flex justify-content-end gap-3 mt-5" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')">
                 <button class="light-outlined-button px-5" type="submit" [disabled]="loadingDraft"
-                    (click)="getAction('D')">
+                    (click)="getAction('D')" *ngIf="(bookingId == 0)">
                     <span *ngIf="loadingDraft" class="spinner-border spinner-border-sm me-1"></span>Save as
                     draft</button>
                 <button class="primary-filled-button px-5" type="submit" [disabled]="loadingSend"
                     (click)="getAction('S')">
-                    <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span>Save</button>
+                    <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span>Save & Send</button>
             </div>
         </form>
     </div>

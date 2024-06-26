@@ -2,28 +2,34 @@
 <div class="booking-progress-container">
     <div class="progress" id="progress" style="width: 0%;"></div>
     <!-- active -->
-    <div class="booking-progress-step ">
+    <div class="booking-progress-step" [ngClass]="bookingStepInfo?.isAssigned  ? 'active' : ''">
         <div class="booking-progress-step-inner">
             <span class="checktick"></span>
-            <h5>Scheduled</h5>
+            <h5>Assigned</h5>
         </div>
     </div>
-    <div class="booking-progress-step">
+    <div class="booking-progress-step" [ngClass]="bookingStepInfo?.isJobStarted  ? 'active' : ''">
         <div class="booking-progress-step-inner">
             <span class="checktick"></span>
-            <h5>In-Progress</h5>
+            <h5>Job Started</h5>
         </div>
     </div>
-    <div class="booking-progress-step">
+    <div class="booking-progress-step" [ngClass]="bookingStepInfo?.isJobFinished  ? 'active' : ''">
         <div class="booking-progress-step-inner">
             <span class="checktick"></span>
-            <h5>Estimate</h5>
+            <h5>Job Finished</h5>
         </div>
     </div>
-    <div class="booking-progress-step">
+    <div class="booking-progress-step" [ngClass]="bookingStepInfo?.invoiceCreatedDate ===null  ? '' : 'active'">
         <div class="booking-progress-step-inner text-end">
             <span class="checktick"></span>
             <h5>Invoice</h5>
+        </div>
+    </div>
+    <div class="booking-progress-step" [ngClass]="bookingStepInfo?.isPaid ? 'active' : ''" *ngIf="bookingStatus==='C'">
+        <div class="booking-progress-step-inner text-end">
+            <span class="checktick"></span>
+            <h5>Completed</h5>
         </div>
     </div>
 </div>

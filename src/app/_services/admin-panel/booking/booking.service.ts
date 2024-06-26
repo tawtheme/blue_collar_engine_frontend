@@ -8,8 +8,19 @@ import { Subject, map } from 'rxjs';
 })
 export class BookingService {
   public bookingTeamMemberAssign: Subject<boolean>;
+  public bookingStepData: Subject<any>;
+  public openEditBookingPage: Subject<number>;
   constructor(private http: HttpClient) {
     this.bookingTeamMemberAssign = new Subject<boolean>();
+    this.bookingStepData = new Subject<any>();
+    this.openEditBookingPage = new Subject<number>();
+  }
+
+  get(bookingId: number) {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Booking/Get?bookingId=` + bookingId)
+      .pipe(map(res => {
+        return res;
+      }));
   }
 
   getAll(PaginationModel: any) {
@@ -26,6 +37,12 @@ export class BookingService {
       }));
   }
 
+  getBookingAssignedTeam(bookingId: number) {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Booking/GetBookingAssignedTeam`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
   assignTeamMember(teammemberList: any) {
     return this.http.post<any>(`${environment.apiUrl}/api/v1/Booking/AssignTeam`, teammemberList)
       .pipe(map(res => {

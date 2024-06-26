@@ -6,6 +6,7 @@ import { ConstantManager } from '@app/_helpers/constant/constantManager';
 import { CustomerModel } from '@app/_models/customer/customerModel';
 import { PaginationModel } from '@app/_models/pagination';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
+import { BookingService } from '@app/_services/admin-panel/booking/booking.service';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
 import { InvoiceService } from '@app/_services/admin-panel/invoice/invoice.service';
@@ -44,7 +45,8 @@ export class CreateInvoiceComponent implements OnInit {
   isProceed: boolean = false;
   filteredProducts: Observable<any[]>;
   productCtrl = new FormControl();
-  constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService) {
+  bookingId: number = 0;
+  constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService, private _bookingService: BookingService) {
     this.filteredProducts = this.productCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -77,7 +79,8 @@ export class CreateInvoiceComponent implements OnInit {
         price: ['', null],
         totalPrice: ['', null],
         description: ['', null]
-      })])
+      })]),
+      bookingId: ['', null]
     });
 
     var _param = {
@@ -95,6 +98,11 @@ export class CreateInvoiceComponent implements OnInit {
         if (params.invoiceId != undefined && params.invoiceId > 0) {
           this.isShowRegNo = true;
           this.get(params.invoiceId);
+        }
+        if (params.bookingId != undefined && params.bookingId > 0) {
+          // this.isShowRegNo = true;          
+          this.bookingId = params.bookingId;
+          this.getBookingInfo(this.bookingId);
         }
       });
   }
@@ -136,23 +144,9 @@ export class CreateInvoiceComponent implements OnInit {
       this.expiryDateStr = res.data.expiryDate;
       this.status = res.data.status;
     })
-
   }
 
   getAllProduct(_param: any) {
-    // this._productService.getAll()
-    //   .pipe(first())
-    //   .subscribe({
-    //     next: (res) => {
-    //       this.loading = false;
-    //       this.productList = res.data;
-    //       console.log(this.productList)
-    //     },
-    //     error: error => {
-    //       this.loading = false;
-    //     }
-    //   });
-
     this._categoryService.getAllServices(_param)
       .pipe(first())
       .subscribe({
@@ -222,28 +216,27 @@ export class CreateInvoiceComponent implements OnInit {
     let param = this.invoiceForm.value as any;
     Object.assign(param, { status: this.clickType });
     console.log(param)
-    // if (this.clickType == 'S') {
-    //   const message = `Are you sure you want to do send?`;
-    //   const dialogData = new ConfirmDialogModel("Confirmation", message);
-    //   const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-    //     maxWidth: "400px",
-    //     data: dialogData
-    //   });
-    //   dialogRef.afterClosed().subscribe(dialogResult => {
-    //     if (dialogResult) {
-    //       this.loadingSend = true;
-    //       this.proceedSubmit(param);
-    //     }
-    //     else {
-    //       return;
-    //     }
-    //   });
-    // }
-    // else {
-    //   this.loadingDraft = true;
-    //   this.proceedSubmit(param);
-    // }
-
+    if (this.clickType == 'S') {
+      const message = `Are you sure you want to do send?`;
+      const dialogData = new ConfirmDialogModel("Confirmation", message);
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        maxWidth: "400px",
+        data: dialogData
+      });
+      dialogRef.afterClosed().subscribe(dialogResult => {
+        if (dialogResult) {
+          this.loadingSend = true;
+          this.proceedSubmit(param);
+        }
+        else {
+          return;
+        }
+      });
+    }
+    else {
+      this.loadingDraft = true;
+      this.proceedSubmit(param);
+    }
   }
 
   proceedSubmit(param: any) {
@@ -259,7 +252,13 @@ export class CreateInvoiceComponent implements OnInit {
           }
           this._toastrService.success(res.message, 'Success');
           console.log(res)
-          this._router.navigate(['/admin/invoice']);
+          if(this.bookingId > 0){
+            this._router.navigate(['/admin/jobs']);
+           this._bookingService.openEditBookingPage.next(this.bookingId);
+          }
+          else{
+            this._router.navigate(['/admin/invoice']);
+          }          
         },
         error: error => {
           if (this.clickType == 'S') {
@@ -287,7 +286,6 @@ export class CreateInvoiceComponent implements OnInit {
 
   addProduct() {
     this.products().push(this.newProduct());
-    //this.products().at(index).get('productId')?.setValue(productData[0].productId);
     console.log(this.f)
   }
 
@@ -329,6 +327,37 @@ export class CreateInvoiceComponent implements OnInit {
     if (productId > 0) {
       return this.productList.find((product: { productId: number; }) => product.productId === productId).productName;
     }
+  }
+
+  getBookingInfo(bookingId: number) {
+    var productArr: any[] = [];
+    this._bookingService.get(bookingId).subscribe(res => {
+      this.products().clear();
+      res.data.categories.forEach((t: { products: any[]; }) => {
+        t.products.forEach((q: any) => {
+          var obj = {
+            'productId': q.categoryServiceId,
+            'qty': 1,
+            'price': q.price,
+            'totalPrice': q.price,
+            'description': ''
+          }
+          productArr.push(obj);
+          var teacher: FormGroup = this.newProduct();
+          this.products().push(teacher);
+        })
+      });
+      res.data = { ...res.data, ...{ products: productArr } }
+      this.invoiceForm.patchValue(res.data);
+      this.customerInfo = <CustomerModel>res.data;
+      this.customerInfo = { ...this.customerInfo, ...{ serviceAddress: res.data.address } };
+      this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
+      this.getAddress(this.customerInfo.customerId);
+      this.isDisabled = false;
+      this.calculateTotal();
+      this.expiryDateStr = res.data.expiryDate;
+      this.status = res.data.status;
+    })
   }
 
 }

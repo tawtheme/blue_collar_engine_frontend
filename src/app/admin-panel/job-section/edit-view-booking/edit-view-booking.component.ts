@@ -6,6 +6,7 @@ import { first } from 'rxjs';
 import { MatSelectModule } from '@angular/material/select';
 import { environment } from '@environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit-view-booking',
   templateUrl: './edit-view-booking.component.html',
@@ -22,15 +23,17 @@ export class EditViewBookingComponent {
   assignTeam: any = [];
   selectedValues: any = [];
   basePath: string = environment.apiUrl;
+  bookingIsJobFinished: boolean = false;
+  bookingInvoiceCreated: boolean = false;
   constructor(
     public dialogRef: MatDialogRef<EditViewBookingComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: any[] = [], private _tenantService: TenantService, private _dialog: MatDialog, private _bookingService: BookingService, private _toastrService: ToastrService
+    public data: any[] = [], private _tenantService: TenantService, private _dialog: MatDialog, private _bookingService: BookingService, private _toastrService: ToastrService, private _router: Router
   ) { }
 
   ngOnInit() {
     this.bookingInfo = this.data;
-    console.log(this.bookingInfo)
+    //console.log(this.bookingInfo)
     if (this.bookingInfo.categories.length > 0) {
       this.bookingInfo.categories.forEach(function (service: any) {
         if (service.products.length > 0) {
@@ -39,6 +42,14 @@ export class EditViewBookingComponent {
       })
     }
     this.bindAssignTeamList();
+
+    this._bookingService.bookingStepData.subscribe(res => {
+      if (res != null) {
+        //console.log(res)
+        this.bookingIsJobFinished = res.isJobFinished;
+        this.bookingInvoiceCreated = res.invoiceCreatedDate == null ? false : true
+      }
+    });
   }
 
   cancel() {
@@ -52,7 +63,7 @@ export class EditViewBookingComponent {
         next: (res) => {
           this.loading = false;
           this.assignTeam = res.data;
-          console.log(this.assignTeam)
+          ////console.log(this.assignTeam)
         },
         error: error => {
           this.loading = false;
@@ -71,7 +82,7 @@ export class EditViewBookingComponent {
         this.selectedValues.splice(index, 1);
       }
     }
-    console.log(this.selectedValues)
+    //console.log(this.selectedValues)
   }
 
   save() {
@@ -99,4 +110,11 @@ export class EditViewBookingComponent {
         });
     }
   }
+
+  redirectToInvoice(bookingId: number) {
+    //console.log(bookingId)
+    this._router.navigate(['/admin/create-invoice'], { queryParams: { bookingId: bookingId } });
+    this.cancel();
+  }
+  
 }

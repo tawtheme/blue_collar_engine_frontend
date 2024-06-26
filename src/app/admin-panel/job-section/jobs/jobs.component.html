@@ -2,10 +2,10 @@
     <div class="container-xxl">
         <div class="d-flex items-center">
             <h3 class="page-title">Booking</h3>
-            <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
+            <!-- <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
                 <button class="primary-filled-button  w-100" type="button" (click)="createJob()">
                     <span class=" icon-add"></span> Add New Booking</button>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -54,7 +54,8 @@
 
     <div class="row gy-3 gy-lg-0 gx-5">
         <div class="col-lg-3">
-            <div class="booking-top-head border-danger">Unassigned ({{unAssignedBooking.length}})</div>
+            <div class="booking-top-head border-danger">Unassigned ({{unAssignedBooking.length > 0 ?
+                unAssignedBooking[0].totalCount:0}})</div>
             <div class="border rounded overflow-hidden">
                 <div class="bg-light p-3 d-flex justify-content-between align-items-center">
                     <!-- <span class="icon-down-arrow font18 leftRotate90"></span>
@@ -68,9 +69,7 @@
                     </mat-form-field>
                 </div>
                 <div class="scheduler-left-lists">
-                    <mat-spinner *ngIf="loadUnAssigned"></mat-spinner>
                     <div class="px-3 py-4 border-bottom" *ngFor="let booking of unAssignedBooking">
-
                         <div class="d-flex gap-3 mb-2">
                             <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingTime}}</span>
                             <button class="danger-badge" type="button"
@@ -84,17 +83,21 @@
                         <div class="font14 d-flex align-items-center gap-2 font-muted"><span
                                 class="icon-email"></span>{{booking.emailAddress}} </div>
                     </div>
-                    <div *ngIf="unAssignedBooking.length==0">
+                    <mat-progress-bar mode="indeterminate" *ngIf="loadUnAssigned"></mat-progress-bar>
+                    <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned">
                         <span>No data found</span>
                     </div>
+                    <mat-paginator [length]="unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0"  *ngIf="unAssignedBooking.length > 0"
+                        [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                        (page)="onPageChanged($event, 'U')"></mat-paginator>
                 </div>
             </div>
         </div>
         <div class="col-lg-9">
             <div class="row gx-4 gy-3 gy-lg-0 gx-lg-5">
                 <div class="col-lg-6">
-                    <div class="booking-top-head border-warning">Assigned ({{assignedBooking.length}})</div>
-                    <mat-spinner *ngIf="loadAssigned"></mat-spinner>
+                    <div class="booking-top-head border-warning">Assigned ({{assignedBooking.length > 0 ?
+                        assignedBooking[0].totalCount:0}})</div>
                     <div class="p-4 border rounded mb-3 assigned-booking-item" (click)="openEditViewBooking(booking)"
                         *ngFor="let booking of assignedBooking">
                         <div class="d-flex gap-3 mb-2 align-items-center ">
@@ -118,80 +121,50 @@
                                     *ngFor="let service of cat.products">{{service.serviceName}}</span>
                             </div>
                         </div>
-                        <app-booking-step-dashboard></app-booking-step-dashboard>
+                        <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
                     </div>
+                    <mat-progress-bar mode="indeterminate" *ngIf="loadAssigned"></mat-progress-bar>
+                    <div *ngIf="assignedBooking.length==0 && !loadAssigned">
+                        <span>No data found</span>
+                    </div>
+                    <mat-paginator [length]="assignedBooking.length > 0 ? assignedBooking[0].totalCount:0" *ngIf="assignedBooking.length > 0"
+                        [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                        (page)="onPageChanged($event, 'A')"></mat-paginator>
                 </div>
                 <div class="col-lg-6">
-                    <div class="booking-top-head border-success-subtle">Completed (2)</div>
-                    <div class="p-4 border rounded mb-3 assigned-booking-item">
+                    <div class="booking-top-head border-success-subtle">Completed ({{compeletedBooking.length > 0 ?
+                        compeletedBooking[0].totalCount:0}})</div>
+                    <div class="p-4 border rounded mb-3 assigned-booking-item" *ngFor="let booking of compeletedBooking"
+                        (click)="openEditViewBooking(booking)">
                         <div class="d-flex gap-3 mb-2 align-items-center ">
-                            <span class="white-badge"> 10:00AM-11:00AM</span>
+                            <span class="white-badge"> {{booking.bookingTime}}</span>
                             <div class="userAvtarGroup-rounded-wrapper d-flex align-items-center  ms-auto">
                                 <img src="../../../../assets/images/tech2.png" alt="" class="rounded-circle">
                                 <img src="../../../../assets/images/tech1.png" alt="" class="rounded-circle">
                             </div>
                         </div>
-                        <h4 class="font18 mb-2 mt-1">John Deo</h4>
+                        <h4 class="font18 mb-2 mt-1">{{booking.customerName}}</h4>
                         <div class="d-flex align-items-center gap-4 ">
                             <div class="font14 d-flex align-items-center gap-2  font-muted"> <span
-                                    class="icon-call"></span>(345) 847 459</div>
+                                    class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}</div>
                             <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                    class="icon-email"></span>johndeo@example.com</div>
+                                    class="icon-email"></span>{{booking.emailAddress}}</div>
                         </div>
                         <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                        <div class="d-flex gap5 items-center">
-                            <span class="white-badge bg-light">Duct repair</span>
-                            <span class="white-badge bg-light">Furnace repair</span>
+                        <div *ngFor="let cat of booking.categories">
+                            <span class="white-badge bg-light"
+                                *ngFor="let service of cat.products">{{service.serviceName}}</span>
                         </div>
-
-
+                        <app-booking-step-dashboard [bookingId]="booking.bookingId"
+                            [bookingStatus]="booking.status"></app-booking-step-dashboard>
                     </div>
-                    <div class="p-4 border rounded mb-3 assigned-booking-item">
-                        <div class="d-flex gap-3 mb-2 align-items-center ">
-                            <span class="white-badge"> 10:00AM-11:00AM</span>
-                            <div class="userAvtarGroup-rounded-wrapper d-flex align-items-center  ms-auto">
-                                <img src="../../../../assets/images/tech2.png" alt="" class="rounded-circle">
-                                <img src="../../../../assets/images/tech1.png" alt="" class="rounded-circle">
-                            </div>
-                        </div>
-                        <h4 class="font18 mb-2 mt-1">John Deo</h4>
-                        <div class="d-flex align-items-center gap-4 ">
-                            <div class="font14 d-flex align-items-center gap-2  font-muted"> <span
-                                    class="icon-call"></span>(345) 847 459</div>
-                            <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                    class="icon-email"></span>johndeo@example.com</div>
-                        </div>
-                        <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                        <div class="d-flex gap5 items-center">
-                            <span class="white-badge bg-light">Duct repair</span>
-                            <span class="white-badge bg-light">Furnace repair</span>
-                        </div>
-
-
+                    <mat-progress-bar mode="indeterminate" *ngIf="loadCompeleted"></mat-progress-bar>
+                    <div *ngIf="compeletedBooking.length==0 && !loadCompeleted">
+                        <span>No data found</span>
                     </div>
-                    <div class="p-4 border rounded mb-3 assigned-booking-item">
-                        <div class="d-flex gap-3 mb-2 align-items-center ">
-                            <span class="white-badge"> 10:00AM-11:00AM</span>
-                            <div class="userAvtarGroup-rounded-wrapper d-flex align-items-center  ms-auto">
-                                <img src="../../../../assets/images/tech2.png" alt="" class="rounded-circle">
-                                <img src="../../../../assets/images/tech1.png" alt="" class="rounded-circle">
-                            </div>
-                        </div>
-                        <h4 class="font18 mb-2 mt-1">John Deo</h4>
-                        <div class="d-flex align-items-center gap-4 ">
-                            <div class="font14 d-flex align-items-center gap-2  font-muted"> <span
-                                    class="icon-call"></span>(345) 847 459</div>
-                            <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                    class="icon-email"></span>johndeo@example.com</div>
-                        </div>
-                        <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                        <div class="d-flex gap5 items-center">
-                            <span class="white-badge bg-light">Duct repair</span>
-                            <span class="white-badge bg-light">Furnace repair</span>
-                        </div>
-
-
-                    </div>
+                    <mat-paginator [length]="compeletedBooking.length > 0 ? compeletedBooking[0].totalCount:0"  *ngIf="compeletedBooking.length > 0"
+                        [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                        (page)="onPageChanged($event, 'C')"></mat-paginator>
                 </div>
             </div>
         </div>

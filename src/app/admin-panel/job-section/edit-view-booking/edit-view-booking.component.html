@@ -22,27 +22,26 @@
                             HVAC
                             Service</span>
                     </div>
-                    <div class="mt-3">
-                        <button class="light-outlined-button w-100 bg-white h-auto">
+                    <div class="mt-3" *ngIf="bookingIsAssigned">
+                        <button class="light-outlined-button w-100 bg-white h-auto"
+                            (click)="redirectToCreateEstimate(bookingInfo.bookingId)">
                             <span class="icon-add me-2"></span> Create
                             Estimate</button>
                     </div>
-                </div>
-                <div class="p-3 border-top">
+                </div> -->
+                <div class="p-3 border-top" *ngIf="bookingIsJobFinished">
                     <h4 class="font15 mb-2 font500">Invoice</h4>
-                    <div class="d-flex gap-2 flex-column">
-                        <span class="white-badge"><span class="icon-overdue text-warning me-1"></span> #CZHC-00001 -
-                            HVAC Service</span>
-                        <span class="white-badge"><span class="icon-close text-danger  me-1"></span> #CZHC-00001 -
-                            HVAC
-                            Service</span>
+                    <div class="d-flex gap-2 flex-column" *ngIf="bookingInfo.invoiceId > 0">
+                        <span class="white-badge"><span class="icon-overdue text-warning me-1"></span>
+                            #{{bookingInfo.invoiceNo}}</span>
                     </div>
-                    <div class="mt-3">
-                        <button class="light-outlined-button w-100 bg-white h-auto">
+                    <div class="mt-3" *ngIf="!bookingInvoiceCreated">
+                        <button class="light-outlined-button w-100 bg-white h-auto"
+                            (click)="redirectToInvoice(bookingInfo.bookingId)">
                             <span class="icon-add me-2"></span> Create
                             Invoice</button>
                     </div>
-                </div> -->
+                </div>
                 <div class="p-3 border-top">
                     <h4 class="font15 mb-2  font500">Assigned Team</h4>
                     <div class="dropdown position-relative" *ngIf="bookingInfo.status=='U'">
@@ -56,53 +55,10 @@
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <!-- <button type="button" class="btn light-outlined-button bg-white dropdown-toggle w-100 mb-2"
-                            data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
-                            Select Team
-                            <span class="icon-down-arrow ms-auto"></span>
-                        </button>
-                        <ul class="dropdown-menu w-100 ">
-                            <li class="dropdown-team-item">
-                                <span class="success-badge rounded-pill dropdown-badge">Available</span>
-                                <div class="d-flex tech-info  align-items-center gap-3">
-                                    <div class="tech-img">
-                                        <img src="../../../../../assets/images/tech2.png" alt="" class="img-fluid" />
-                                    </div>
-                                    <div class="">
-                                        <h5 class="font14 mb-1 font500"> Michael Johnson</h5>
-                                        <p class="font13 mb-0 font-muted font400">Air Duct Cleaning and Maintenance
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="dropdown-team-item">
-                                <span class="warning-badge rounded-pill dropdown-badge">2 Running jobs</span>
-                                <div class="d-flex tech-info  align-items-center gap-3">
-                                    <div class="tech-img">
-                                        <img src="../../../../../assets/images/tech3.png" alt="" class="img-fluid" />
-                                    </div>
-                                    <div class="">
-                                        <h5 class="font14 mb-1 font500"> Robert Davis</h5>
-                                        <p class="font13 mb-0 font-muted font400">Mechanical Aptitude</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul> -->
                     </div>
-                    <div class="custom-assigned-members" *ngIf="bookingInfo.status=='A'">
+                    <div class="custom-assigned-members" *ngIf="bookingInfo.status!='U'">
                         <span *ngFor="let _members of bookingInfo.assignedTeamMembers">{{_members.fullName}}</span>
                     </div>
-                    <!-- <div class="d-flex flex-wrap gap-3 ">
-                        <div class="booking-team-user">
-                            <img src="../../../../assets/images/tech1.png" class="w-100 h-100 object-fit-cover" />
-                        </div>
-                        <div class="booking-team-user">
-                            <img src="../../../../assets/images/tech2.png" class="w-100 h-100 object-fit-cover" />
-                        </div>
-                        <div class="booking-team-user border-primary text-primary">
-                            <span class="icon-add-user"></span>
-                        </div>
-                    </div> -->
                 </div>
             </div>
             <div class="p-4 col-9">
@@ -197,47 +153,6 @@
 
                             </div>
                         </div>
-
-                        <!-- <div class="booking-services-items">
-                            <div class="row">
-                                <div class="col-lg-9">
-                                    <div class="d-flex gap-4">
-                                        <div class="booking-services-item-img">
-                                            <img src="../../../../../assets/images/services1.png" class="img-fluid" />
-                                        </div>
-                                        <div class="">
-                                            <span class="grey-badge border-0 rounded-pill mb-2">Starts at
-                                                $340</span>
-                                            <h4 class="mb-3 font16">Anti-rust deep clean AC services</h4>
-                                            <ul class="ps-3 mb-2">
-                                                <li class="font-muted font13 mb-2">Advanced Foam-jet cleaning of
-                                                    indoor
-                                                    unit
-                                                </li>
-                                                <li class="font-muted font13 mb-2">Thorough cleaning of outdoor unit
-                                                </li>
-                                                <li class="font-muted font13">Final checks & cleanup</li>
-                                            </ul>
-                                            <a class="text-decoration-underline font13" href="#">View Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="ms-auto text-center">
-                                        <p class="font-muted font14 mb-2">Unit of Services</p>
-                                        <div class="input-group mb-3 booking-services-unit-actions">
-                                            <span class="input-group-text">
-                                                <span class="icon-add font14"></span>
-                                            </span>
-                                            <input type="text" class="form-control" />
-                                            <span class="input-group-text">
-                                                <span class="icon-add font14"></span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="d-flex justify-content-end gap-3 mt-5 mb-3" *ngIf="bookingInfo.status=='U'">
                         <button class="light-outlined-button px-5 lg-btn" type="button"

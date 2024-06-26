@@ -1,24 +1,28 @@
 <div class="job-top-steps mb-4">
     <!-- --active-job-step -->
-    <div class="job-step-item ">
+    <div class="job-step-item" [ngClass]="bookingStepInfo?.isAssigned  ? 'active-job-step' : ''">
         <h4>Assigned</h4>
         <p>{{bookingStepInfo?.assignedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
     </div>
-    <div class="job-step-item">
+    <!-- <div class="job-step-item">
         <h4>Estimate</h4>
         <p>{{bookingStepInfo?.estimateInvoiceCreatedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
-    </div>
-    <div class="job-step-item">
-        <h4>Job Start</h4>
+    </div> -->
+    <div class="job-step-item" [ngClass]="bookingStepInfo?.isJobStarted  ? 'active-job-step' : ''">
+        <h4>Job Started</h4>
         <p>{{bookingStepInfo?.jobStartedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
     </div>
-    <div class="job-step-item">
-        <h4>Job Finish</h4>
+    <div class="job-step-item" [ngClass]="bookingStepInfo?.isJobFinished  ? 'active-job-step' : ''">
+        <h4>Job Finished</h4>
         <p>{{bookingStepInfo?.jobFinishedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
     </div>
-    <div class="job-step-item">
+    <div class="job-step-item" [ngClass]="bookingStepInfo?.invoiceCreatedDate ===null ? '' : 'active-job-step'">
         <h4>Invoice</h4>
         <p>{{bookingStepInfo?.invoiceCreatedDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
+    </div>
+    <div class="job-step-item" [ngClass]="bookingStepInfo?.paymentDate ===null ? '' : 'active-job-step'">
+        <h4>Completed</h4>
+        <p>{{bookingStepInfo?.paymentDate | date: 'MM/dd/yyyy hh:mm a'}}</p>
     </div>
 </div>
 <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
