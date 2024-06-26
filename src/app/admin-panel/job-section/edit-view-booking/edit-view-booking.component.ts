@@ -33,7 +33,8 @@ export class EditViewBookingComponent {
 
   ngOnInit() {
     this.bookingInfo = this.data;
-    //console.log(this.bookingInfo)
+    console.log(this.bookingInfo)
+    debugger
     if (this.bookingInfo.categories.length > 0) {
       this.bookingInfo.categories.forEach(function (service: any) {
         if (service.products.length > 0) {

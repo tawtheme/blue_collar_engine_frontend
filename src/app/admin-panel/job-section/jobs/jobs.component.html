@@ -17,7 +17,10 @@
                     <span class="icon-job"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>{{unAssignedBooking.length+assignedBooking.length}}</h6>
+                    <h6>{{(unAssignedBooking.length > 0 ?
+                        unAssignedBooking[0].totalCount:0)+(assignedBooking.length > 0 ?
+                        assignedBooking[0].totalCount:0)+(compeletedBooking.length > 0 ?
+                        compeletedBooking[0].totalCount:0)}}</h6>
                     <p>Total Booking</p>
                 </div>
             </article>
@@ -26,7 +29,8 @@
                     <span class="icon-info"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>{{unAssignedBooking.length}}</h6>
+                    <h6>{{unAssignedBooking.length > 0 ?
+                        unAssignedBooking[0].totalCount:0}}</h6>
                     <p>Unassigned Booking</p>
                 </div>
             </article>
@@ -35,7 +39,8 @@
                     <span class="icon-tick"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>{{assignedBooking.length}}</h6>
+                    <h6>{{assignedBooking.length > 0 ?
+                        assignedBooking[0].totalCount:0}}</h6>
                     <p>Assigned Booking</p>
                 </div>
             </article>

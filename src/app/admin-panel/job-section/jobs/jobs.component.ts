@@ -148,6 +148,7 @@ export class JobsComponent implements OnInit {
   }
 
   openEditViewBooking(booking: any) {
+    debugger
     this._dialog.open(EditViewBookingComponent, { width: '1200px', height: '800px', data: booking, disableClose: true })
   }
 }
