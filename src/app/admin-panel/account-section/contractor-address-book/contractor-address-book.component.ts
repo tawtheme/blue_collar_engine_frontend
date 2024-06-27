@@ -37,7 +37,7 @@ export class ContractorAddressBookComponent {
       .subscribe({
         next: (res) => {
           this.items = res.data;
-         // console.log(this.items)
+         // //console.log(this.items)
         }
       });
   }

@@ -36,7 +36,7 @@ export class TeamManagementComponent {
             res.profileImagePath = this.apiBaseUrl + res.profileImagePath
           })
           this.loading = false;
-          console.log(this.users)
+          //console.log(this.users)
         }
       });
   }

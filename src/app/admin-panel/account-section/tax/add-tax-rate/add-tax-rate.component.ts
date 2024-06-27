@@ -48,11 +48,11 @@ export class AddTaxRateComponent {
     if (this.addTaxForm.invalid) {
       return;
     }
-    console.log(param)
+    //console.log(param)
     this.loading = true;
     this._accountSettingService.addTenantTax(param).subscribe(res => {
       this.loading = false;
-      console.log(res)
+      //console.log(res)
       let el: HTMLElement = this.addTaxCancelEle.nativeElement;
       el.click();
       this._toastrService.success(res.message, 'Success');

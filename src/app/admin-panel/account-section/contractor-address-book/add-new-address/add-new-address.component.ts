@@ -62,11 +62,11 @@ export class AddNewAddressComponent {
     if (this.addressForm.invalid) {
       return;
     }
-    console.log(param)
+    //console.log(param)
     this.loading = true;
     this._accountSettingService.addTenantAddress(param).subscribe(res => {
       this.loading = false;
-      console.log(res)
+      //console.log(res)
       let el: HTMLElement = this.addNewAddressCancelEle.nativeElement;
       el.click();
       this._toastrService.success(res.message, 'Success');

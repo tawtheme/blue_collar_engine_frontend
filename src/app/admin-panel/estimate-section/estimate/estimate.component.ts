@@ -46,7 +46,7 @@ export class EstimateComponent implements OnInit {
         next: (res) => {
           this.loading = false;
           this.items = res.data;
-          console.log(this.items)
+          //console.log(this.items)
         },
         error: error => {
           this.loading = false;
@@ -93,9 +93,9 @@ export class EstimateComponent implements OnInit {
     this.getAll(_param);
   }
   checkAll(ev: any) {
-    debugger
+    //debugger
     this.items!.forEach(x => x.ischeck = ev.target.checked)
-    console.log(this.pageOfItems)
+    //console.log(this.pageOfItems)
   }
 
   redirectToCreateEstimate(estimateId: number) {

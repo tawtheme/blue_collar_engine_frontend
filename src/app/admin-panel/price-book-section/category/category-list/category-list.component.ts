@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
@@ -19,14 +20,18 @@ export class CategoryListComponent {
   pageOfItems?: Array<any>;
   sortProperty: string = 'id';
   sortOrder = 1;
+
+  pageSize: number = 5;
+  pageSizeOptions: number[] = [5, 10, 20, 50];
+  pageEvent: PageEvent | undefined;
   constructor(private _categoryService: CategoryService, private _router: Router, private _dialog: MatDialog, private _toastrService: ToastrService) {
 
   }
   ngOnInit(): void {
     var _param = {
       "id": 0,
-      "pageNumber": 0,
-      "pageSize": 0,
+      "pageNumber": 1,
+      "pageSize": this.pageSize,
       "searchStr": ""
     }
     this.getAll(_param);
@@ -45,7 +50,7 @@ export class CategoryListComponent {
         next: (res) => {
           this.loading = false;
           this.items = res.data;
-          console.log(this.items)
+          //console.log(this.items)
         },
         error: error => {
           this.loading = false;
@@ -54,7 +59,7 @@ export class CategoryListComponent {
   }
 
   onChangePage(pageOfItems: any) {
-    //debugger
+    ////debugger
     // update current page of items
     this.pageOfItems = pageOfItems;
     // this.pageOfItems = { ...this.pageOfItems!, ...{ ischeck: false } };
@@ -98,9 +103,9 @@ export class CategoryListComponent {
   }
 
   onChange(ev: any, category: any) {
-    console.log(ev.checked)
-    console.log(ev.source.checked)
-    //debugger
+    //console.log(ev.checked)
+    //console.log(ev.source.checked)
+    ////debugger
     ev.source.checked = ev.checked == true ? false : true;
     const message = `Are you sure you want to change status?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
@@ -124,6 +129,20 @@ export class CategoryListComponent {
         return;
       }
     });
+  }
+
+  onPageChanged(e: any, type: any) {
+    let firstCut = e.pageIndex * e.pageSize;
+    let secondCut = firstCut + e.pageSize;
+    var _param = {
+      "id": 0,
+      "pageNumber": e.pageIndex + 1,
+      "pageSize": e.pageSize,
+      "searchStr": "",
+      "type": "",
+      "bookingDate": new Date()
+    }
+    this.getAll(_param);
   }
 
 }

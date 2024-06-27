@@ -29,14 +29,14 @@ export class TaxComponent {
       .subscribe({
         next: (res) => {
           this.taxes = res.data;
-          //console.log(this.taxes)
+          ////console.log(this.taxes)
         }
       });
   }
 
   editTax(taxInfo: any) {
     this.taxInfo = taxInfo;
-   // console.log(this.taxInfo)
+   // //console.log(this.taxInfo)
     let el: HTMLElement = this.addTaxCancelEle.nativeElement;
     el.click();
   }

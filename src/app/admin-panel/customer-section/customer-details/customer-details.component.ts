@@ -71,7 +71,7 @@ export class CustomerDetailsComponent implements OnInit {
         next: (res) => {
           this.loadBooking = false;
           this.bookings = res.data;
-          console.log(this.bookings)
+          //console.log(this.bookings)
         },
         error: error => {
           this.loadBooking = false;
@@ -87,7 +87,7 @@ export class CustomerDetailsComponent implements OnInit {
         next: (res) => {
           this.loadInvoice = false;
           this.invoices = res.data;
-          console.log(this.invoices)
+          //console.log(this.invoices)
         },
         error: error => {
           this.loadInvoice = false;
@@ -103,7 +103,7 @@ export class CustomerDetailsComponent implements OnInit {
         next: (res) => {
           this.loadEstimateInvoice = false;
           this.estimateInvoice = res.data;
-          console.log(this.estimateInvoice)
+          //console.log(this.estimateInvoice)
         },
         error: error => {
           this.loadEstimateInvoice = false;
@@ -137,7 +137,7 @@ export class CustomerDetailsComponent implements OnInit {
           this.customerAddress = res.data.filter(function (el: { customerId: number; }) {
             return el.customerId == customerId;
           });
-          // console.log(this.customerAddress)
+          // //console.log(this.customerAddress)
         },
         error: error => {
         }
@@ -156,7 +156,7 @@ export class CustomerDetailsComponent implements OnInit {
         next: (res) => {
           this.customerStatsLoading = false;
           this.customerStats = res.data;
-          //console.log(this.customerStats)
+          ////console.log(this.customerStats)
         },
         error: error => {
           this.customerStatsLoading = false;

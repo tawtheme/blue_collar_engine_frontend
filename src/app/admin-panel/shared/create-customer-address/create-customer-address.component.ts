@@ -23,9 +23,9 @@ export class CreateCustomerAddressComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data)
+    //console.log(this.data)
     this._customerService.bindAddress.subscribe((address: any) => {
-      console.log(address);
+      //console.log(address);
       this.customerAddressForm.patchValue(address);
     });
 
@@ -47,7 +47,7 @@ export class CreateCustomerAddressComponent implements OnInit {
       longitude: ['', null],
       isDefault: [true, null]
     });
-    //debugger
+    ////debugger
 
   }
   // convenience getter for easy access to form fields
@@ -59,7 +59,7 @@ export class CreateCustomerAddressComponent implements OnInit {
     }
     let param = this.customerAddressForm.value as any;
     Object.assign(param, { latitude: '30.849536', longitude: '75.796101' });
-    console.log(param);
+    //console.log(param);
     this.loading = true;
     this._customerService.addUpdateAddress(param)
       .pipe(first())

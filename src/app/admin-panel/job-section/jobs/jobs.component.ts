@@ -137,7 +137,7 @@ export class JobsComponent implements OnInit {
   getAllCompletedBooking(param: PaginationModel) {
     this.loadCompeleted = true;
     param = { ...param, ...{ type: 'C', bookingDate: null } };
-    //console.log(param)
+    ////console.log(param)
     this._bookingService.getAll(param)
       .pipe(first())
       .subscribe({
@@ -173,7 +173,7 @@ export class JobsComponent implements OnInit {
   }
 
   openEditViewBooking(booking: any) {
-    debugger
+    //debugger
     this._dialog.open(EditViewBookingComponent, { width: '1200px', height: '800px', data: { 'bookingInfo': booking, isEnableEdit: true }, disableClose: true })
   }
 }

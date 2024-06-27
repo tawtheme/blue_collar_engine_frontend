@@ -53,7 +53,7 @@ export class CreateCustomerComponent implements OnInit {
     let param = this.customerForm.value as any;
     Object.assign(param, { latitude: '30.849536', longitude: '75.796101' });
     param = { ...param, ...{ tags: param.tags != null && param.tags.length > 0 ? param.tags.toString() : '', mobileNumber: param.mobileNumber.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '') } }
-    console.log(param);
+    //console.log(param);
     if (this.customerForm.invalid) {
       return;
     }
@@ -63,7 +63,7 @@ export class CreateCustomerComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.loading = false;
-          console.log(res)
+          //console.log(res)
           let el: HTMLElement = this.customerCancelEle.nativeElement;
           el.click();
           this._toastrService.success(res.message, 'Success');
@@ -73,7 +73,7 @@ export class CreateCustomerComponent implements OnInit {
           }
         },
         error: error => {
-          debugger
+          //debugger
           this.loading = false;
         }
       });

@@ -56,11 +56,11 @@ export class AddTeamMemberComponent {
     this.previews = [];
     if (this.userForm != undefined) {
       if (this.items != null) {
-        console.log(this.items)
+        //console.log(this.items)
         this.userForm.patchValue(this.items);
         this.userForm.controls['mobileNo'].disable();
         this.userForm.controls['emailAddress'].disable();
-        console.log(this.userForm.controls['profileImagePath'].value)
+        //console.log(this.userForm.controls['profileImagePath'].value)
         if (this.userForm.controls['profileImagePath'].value != '' && this.userForm.controls['profileImagePath'].value != null) {
           var _data = {
             'filePath': this.userForm.controls['profileImagePath'].value,
@@ -157,7 +157,7 @@ export class AddTeamMemberComponent {
   }
 
   removeServiceImage(index: number, uploadId: number) {
-    //console.log(this.categoryServiceForm.value.categoryServiceId)
+    ////console.log(this.categoryServiceForm.value.categoryServiceId)
     const message = `Are you sure you want to remove?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {

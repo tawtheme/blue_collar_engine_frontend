@@ -33,9 +33,9 @@ export class BookingAddressComponent {
     @Inject(MAT_DIALOG_DATA) public data: any, private _bookingService: BookingService) {
     this.tenantInfo = <any>this.authenticationService.tenantValue;
     this.user = <any>this.authenticationService.userValue;
-    // //console.log(this.tenantInfo)
-    // //console.log(this.user)
-    ////console.log(this.data)
+    // ////console.log(this.tenantInfo)
+    // ////console.log(this.user)
+    //////console.log(this.data)
     this.businessHours = this.data.businessHours;
     this.bookingTime = this.data.bookingTime;
     this.bookingDate = this.data.bookingDate;
@@ -89,7 +89,6 @@ export class BookingAddressComponent {
     }
     if (this.mobileVerifyForm.controls['otp'].value == '') {
       this.authenticationService.generateOTP(_param).subscribe(res => {
-        console.log(res);
         this.IsShowEditBtn = true;
         this._toastrService.success("One time password have been sent on mobile no.")
       })
@@ -97,12 +96,12 @@ export class BookingAddressComponent {
     else {
       _param.otp = this.mobileVerifyForm.controls['otp'].value;
       this.authenticationService.verifyOTP(_param).subscribe(res => {
-        //console.log(res)
+        ////console.log(res)
         this._toastrService.success(res.message);
         this.openVerifyOTP = false;
         this.isVerifyOtp = true;
         this._customerService.findCustomerByMobileNo(_param.sendTo).subscribe(res => {
-          //console.log(res)
+          ////console.log(res)
           if (res.data.response != -1 && res.data.response != -2) {
             this.calanderBookingForm.patchValue(res.data.result);
           }
@@ -144,7 +143,7 @@ export class BookingAddressComponent {
       if (res.length > 0) {
         this.selectedServices = res;
         this.isEnableNextBtn = true;
-        //console.log(this.selectedServices)
+        ////console.log(this.selectedServices)
       }
       else {
         this.isEnableNextBtn = false;
@@ -176,9 +175,9 @@ export class BookingAddressComponent {
           let _param = this.calanderBookingForm.value as any;
           var _mobileNo = this.mobileVerifyForm.controls['mobileNo'].value.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '');
           _param = { ..._param, ...{ mobileNo: _mobileNo, bookingDate: this.bookingDate, timeSlot: this.bookingTime, bookingDetails: this.selectedServices, customerId: (_param.customerId == '' ? 0 : _param.customerId), addressId: (_param.customerAddressId == '' ? 0 : _param.customerAddressId), status: 'U' } };
-          //console.log(_param)
+          ////console.log(_param)
           this._bookingService.createBooking(_param).subscribe(res => {
-            //console.log(res)
+            ////console.log(res)
             this._toastrService.success(res.message, "Success");
             this._bookingSharedService.emptryCart();
             window.location.reload();

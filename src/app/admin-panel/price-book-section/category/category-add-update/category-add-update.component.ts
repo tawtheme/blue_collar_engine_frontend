@@ -31,18 +31,14 @@ export class CategoryAddUpdateComponent {
   ngOnChanges() {
     if (this.items == null) {
       this.categoryForm.reset();
-       this.categoryForm.controls['categoryId'].setValue(0);
-       this.categoryForm.controls['status'].setValue('A');
-      // this.categoryServiceForm.controls['isOnlineBooking'].setValue(true);
-      // this.categoryServiceForm.controls['files'].setValue("");
-      // this.categoryServiceForm.controls['files'].addValidators([Validators.required]);
-      // this.categoryServiceForm.controls['files'].updateValueAndValidity();
+      this.categoryForm.controls['categoryId'].setValue(0);
+      this.categoryForm.controls['status'].setValue('A');
       return;
     }
-    else{
+    else {
       this.categoryForm.patchValue(this.items);
     }
-    
+
   }
   // convenience getter for easy access to form fields
   get f() { return this.categoryForm.controls; }
@@ -53,14 +49,14 @@ export class CategoryAddUpdateComponent {
       return;
     }
     let param = this.categoryForm.value as any;
-    console.log(param);
+    //console.log(param);
     this.loading = true;
     this._categoryService.addUpdate(param)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.loading = false;
-          console.log(res)
+          //console.log(res)
           let el: HTMLElement = this.customerCancelEle.nativeElement;
           el.click();
           this._toastrService.success(res.message, 'Success');

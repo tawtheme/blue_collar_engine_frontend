@@ -15,16 +15,16 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const user = this.authenticationService.userValue;
-       // debugger
+       // //debugger
         if (this._jwtHelperService.isTokenExpired(user?.data.token!)) {
             this._toastrService.error("Session has been expired", "Error");
             this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
             return false;
         }
-        //console.log(user?.data.role)
+        ////console.log(user?.data.role)
         if (user) {
             const { roles } = route.data;
-            //debugger
+            ////debugger
             if (roles && !roles.includes(user.data.role)) {
                 // role not authorized so redirect to home page
                 //this.router.navigate(['/']);

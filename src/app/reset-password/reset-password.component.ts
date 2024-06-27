@@ -57,7 +57,7 @@ export class ResetPasswordComponent {
       .subscribe({
         next: (res) => {
           this.loading = false;
-          console.log(res)
+          //console.log(res)
           this.submitted = false;
           this.resetPasswordForm.reset();
           this._toastrService.success(res.message, 'Success');          

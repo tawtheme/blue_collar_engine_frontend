@@ -73,15 +73,17 @@ export class ServiceListComponent {
   }
 
   getAll(param: PaginationModel) {
-    this.loading=true;
+    this.loading = true;
     this._categoryService.getAll(param)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.loading = false;
           this.items = res.data;
-          this.activeCategory = this.items[0].categoryId;
-          console.log(this.items)
+          if (this.items.length > 0) {
+            this.activeCategory = this.items[0].categoryId;
+          }
+          //console.log(this.items)
         },
         error: error => {
           this.loading = false;
@@ -97,7 +99,7 @@ export class ServiceListComponent {
           this.loading = false;
           this.serviceItems = res.data;
 
-          console.log(this.serviceItems)
+          //console.log(this.serviceItems)
         },
         error: error => {
           this.loading = false;
@@ -180,14 +182,14 @@ export class ServiceListComponent {
     this.getAll(_param);
   }
 
-  openAddService(){
-    this.categoryServiceInfo=null;
+  openAddService() {
+    this.categoryServiceInfo = null;
     let el: HTMLElement = this.catgeoryServiceSideBarEle.nativeElement;
     el.click();
   }
 
-  openAddCategory(){
-    this.categoryInfo=null;
+  openAddCategory() {
+    this.categoryInfo = null;
     let el: HTMLElement = this.catgeorySideBarEle.nativeElement;
     el.click();
   }

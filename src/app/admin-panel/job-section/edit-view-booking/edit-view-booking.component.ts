@@ -35,7 +35,7 @@ export class EditViewBookingComponent {
   ngOnInit() {
     this.bookingInfo = this.data.bookingInfo;
     this.isEnableEdit = this.data.isEnableEdit;
-    console.log(this.bookingInfo)
+    //console.log(this.bookingInfo)
     if (this.bookingInfo.categories.length > 0) {
       this.bookingInfo.categories.forEach(function (service: any) {
         if (service.products.length > 0) {
@@ -47,7 +47,7 @@ export class EditViewBookingComponent {
 
     this._bookingService.bookingStepData.subscribe(res => {
       if (res != null) {
-        //console.log(res)
+        ////console.log(res)
         this.bookingIsJobFinished = res.isJobFinished;
         this.bookingInvoiceCreated = res.invoiceCreatedDate == null ? false : true
       }
@@ -65,7 +65,7 @@ export class EditViewBookingComponent {
         next: (res) => {
           this.loading = false;
           this.assignTeam = res.data;
-          ////console.log(this.assignTeam)
+          //////console.log(this.assignTeam)
         },
         error: error => {
           this.loading = false;
@@ -84,7 +84,7 @@ export class EditViewBookingComponent {
         this.selectedValues.splice(index, 1);
       }
     }
-    //console.log(this.selectedValues)
+    ////console.log(this.selectedValues)
   }
 
   save() {
@@ -114,7 +114,7 @@ export class EditViewBookingComponent {
   }
 
   redirectToInvoice(bookingId: number) {
-    //console.log(bookingId)
+    ////console.log(bookingId)
     this._router.navigate(['/admin/create-invoice'], { queryParams: { bookingId: bookingId } });
     this.cancel();
   }

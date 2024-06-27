@@ -57,7 +57,7 @@ export class CreateEstimateComponent implements OnInit {
       expiryDate: ['', [Validators.required]],
       notes: ['', null],
       discount: ['0', null],
-      tax: ['', null],     
+      tax: ['', null],
       products: this._formBuilder.array([this._formBuilder.group({
         productId: ['', [Validators.required]],
         qty: ['', [Validators.required]],
@@ -97,7 +97,7 @@ export class CreateEstimateComponent implements OnInit {
         next: (res) => {
           this.loading = false;
           this.customerList = res.data;
-          console.log(this.customerList)
+          //console.log(this.customerList)
         },
         error: error => {
           this.loading = false;
@@ -113,8 +113,8 @@ export class CreateEstimateComponent implements OnInit {
         this.products().push(_product);
       });
       this.estimateInvoiceForm.patchValue(res.data);
-    
-      this.customerInfo=<CustomerModel>res.data;
+
+      this.customerInfo = <CustomerModel>res.data;
       this.estimateInvoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
       this.getAddress(this.customerInfo.customerId);
       this.isDisabled = false;
@@ -125,11 +125,9 @@ export class CreateEstimateComponent implements OnInit {
 
   }
 
- 
-
   bindTax(type: any) {
     this._accountSettingService.getTax(type).subscribe(res => {
-      console.log(res.data.tax)
+      //console.log(res.data.tax)
       this.estimateInvoiceForm.controls['tax'].setValue(res.data.tax);
       this.taxPer = res.data.tax;
     })
@@ -208,28 +206,28 @@ export class CreateEstimateComponent implements OnInit {
 
   proceedSubmit(param: any) {
     this._estimateService.create(param)
-        .pipe(first())
-        .subscribe({
-          next: (res) => {
-            if (this.clickType == 'S') {
-              this.loadingSend = false;
-            }
-            else {
-              this.loadingDraft = false;
-            }
-            this._toastrService.success(res.message, 'Success');
-            console.log(res)
-            this._router.navigate(['/admin/estimate']);
-          },
-          error: error => {
-            if (this.clickType == 'S') {
-              this.loadingSend = false;
-            }
-            else {
-              this.loadingDraft = false;
-            }
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          if (this.clickType == 'S') {
+            this.loadingSend = false;
           }
-        });
+          else {
+            this.loadingDraft = false;
+          }
+          this._toastrService.success(res.message, 'Success');
+          //console.log(res)
+          this._router.navigate(['/admin/estimate']);
+        },
+        error: error => {
+          if (this.clickType == 'S') {
+            this.loadingSend = false;
+          }
+          else {
+            this.loadingDraft = false;
+          }
+        }
+      });
   }
   products(): FormArray {
     return this.estimateInvoiceForm.get("products") as FormArray
@@ -246,7 +244,7 @@ export class CreateEstimateComponent implements OnInit {
 
   addProduct() {
     this.products().push(this.newProduct());
-    console.log(this.f)
+    //console.log(this.f)
   }
 
   removeQuantity(i: number) {
@@ -269,9 +267,11 @@ export class CreateEstimateComponent implements OnInit {
     for (let i = 0; i < this.products().length; i++) {
       _totalAmt += this.products().at(i).get('totalPrice')?.value;
     }
+    //console.log(_totalAmt)
     this.subTotal = _totalAmt - this.estimateInvoiceForm.controls['discount'].value;
     this.taxAmount = (this.subTotal * this.taxPer / 100);
     this.estimateTotal = this.subTotal + this.taxAmount;
+    //console.log('estimateTotal :' + _totalAmt)
   }
 
   getAllProduct(_param: any) {
@@ -281,7 +281,7 @@ export class CreateEstimateComponent implements OnInit {
     //     next: (res) => {
     //       this.loading = false;
     //       this.productList = res.data;
-    //       console.log(this.productList)
+    //       //console.log(this.productList)
     //     },
     //     error: error => {
     //       this.loading = false;
@@ -293,7 +293,7 @@ export class CreateEstimateComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.productList = res.data;
-          console.log(this.productList)
+          //console.log(this.productList)
         },
         error: error => {
           this.loading = false;

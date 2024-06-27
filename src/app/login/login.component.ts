@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService
     ) {
-        //debugger
+        ////debugger
         // redirect to home if already logged in
         if (this.authenticationService.userValue) {
             this.router.navigate(['/login']);
@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit {
             .subscribe({
                 next: () => {
                     this.user = <any>this.authenticationService.userValue;
-                    // debugger
-                    // console.log(this.user)
+                    // //debugger
+                    // //console.log(this.user)
                     this.loading = false;
                     // const returnUrl = this.route.snapshot.queryParams['returnUrl'] ||  '/';
                     if (this.user.data.role == Role.SuperAdmin) {

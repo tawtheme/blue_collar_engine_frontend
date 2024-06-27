@@ -70,7 +70,7 @@ export class MyProfileComponent {
       .subscribe({
         next: (res) => {
           this.profileInfo = res.data;
-          //console.log(this.profileInfo)
+          ////console.log(this.profileInfo)
           this._accountSettingService.tenentProfileInfo.next(this.profileInfo);
           this.profileForm.patchValue(this.profileInfo);
           if (this.profileForm.controls['companyImagePath'].value != '') {
@@ -89,7 +89,7 @@ export class MyProfileComponent {
   bindNoOFEmplyeeDDL() {
     this._masterService.getNoOFEmployee().subscribe(res => {
       this.noOfEmplyees = res.data;
-     // console.log(this.noOfEmplyees)
+     // //console.log(this.noOfEmplyees)
     });
   }
 
@@ -132,7 +132,7 @@ export class MyProfileComponent {
   }
 
   removeServiceImage(index: number, uploadId: number) {
-    //console.log(this.categoryServiceForm.value.categoryServiceId)
+    ////console.log(this.categoryServiceForm.value.categoryServiceId)
     const message = `Are you sure you want to remove?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
@@ -159,7 +159,7 @@ export class MyProfileComponent {
     }
     param = { ...param, ...{ file: this.selectedFiles } };
     const formData = new FormData();
-   // console.log(param)
+   // //console.log(param)
     formData.append('firstName', param.firstName);
     formData.append('lastName', param.lastName);
     formData.append('phoneNumber', param.phoneNumber);

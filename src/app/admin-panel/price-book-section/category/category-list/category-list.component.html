@@ -17,7 +17,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let catgeory of pageOfItems">
+            <tr *ngFor="let catgeory of items">
                 <td class="col-8 px-4">
                     <div class="table-service-info d-flex align-items-center gap-3">
                         <div>
@@ -43,6 +43,9 @@
                             Edit</button>
                     </div>
                 </td>
+            </tr>
+            <tr *ngIf="items.length==0 && !loading">
+                <span>No data found</span>
             </tr>
         </tbody>
     </table>

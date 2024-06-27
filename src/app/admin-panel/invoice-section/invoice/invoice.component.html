@@ -116,7 +116,9 @@
                             </div>
                         </td>
                     </tr>
-
+                    <tr *ngIf="items.length==0 && !loading">
+                        <span>No data found</span>
+                    </tr>
                 </tbody>
             </table>
             <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>

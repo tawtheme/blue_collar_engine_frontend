@@ -83,7 +83,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>                           
+                            <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
                         </th>
                         <th (click)="sortBy('refNo')">Estimate No.{{sortIcon('refNo')}}</th>
                         <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
@@ -97,7 +97,7 @@
                 <tbody>
                     <tr *ngFor="let estimate of items">
                         <td>
-                            <mat-checkbox class="example-margin" [checked]="estimate.ischeck ==true"></mat-checkbox>                           
+                            <mat-checkbox class="example-margin" [checked]="estimate.ischeck ==true"></mat-checkbox>
                         </td>
                         <td>{{estimate.refNo}}</td>
                         <td>{{estimate.createdDate | date:'mediumDate' }}</td>
@@ -116,6 +116,9 @@
                                     Details</button>
                             </div>
                         </td>
+                    </tr>
+                    <tr *ngIf="items.length==0 && !loading">
+                        <span>No data found</span>
                     </tr>
                 </tbody>
             </table>

@@ -41,8 +41,8 @@ export class BookingComponent implements OnInit {
     this.tenantInfo = <any>this.authenticationService.tenantValue;
     this.user = <any>this.authenticationService.userValue;
     this.baseUrl = environment.apiUrl;
-    // //console.log(this.tenantInfo)
-    // //console.log(this.user)
+    // ////console.log(this.tenantInfo)
+    // ////console.log(this.user)
   }
 
   ngOnInit(): void {
@@ -80,7 +80,7 @@ export class BookingComponent implements OnInit {
             this.activeCategory = this.items[0].categoryId;
             this.isAdded = new Array(_totalCount);
           }
-          //////console.log(this.isAdded)
+          ////////console.log(this.isAdded)
         },
         error: error => {
           this.loading = false;
@@ -93,7 +93,7 @@ export class BookingComponent implements OnInit {
       if (res.length > 0) {
         this.selectedServices = res;
         this.isEnableNextBtn = true;
-        ////console.log(this.selectedServices)
+        //////console.log(this.selectedServices)
       }
       else {
         this.isEnableNextBtn = false;
@@ -122,7 +122,7 @@ export class BookingComponent implements OnInit {
       for (let i = 0; i < this.items.length; i++) {
         if (this.items[i].categoryServices.length > 0) {
           for (let j = 0; j < this.items[i].categoryServices.length; j++) {
-            //////console.log(j)
+            ////////console.log(j)
             if (this.items[i].categoryServices[j].categoryServiceId === serviceId) {
               this.isAdded[this.items[i].categoryServices[j].categoryServiceId] = true;
               this.singleCategory = this.items[i].categoryServices[j];
