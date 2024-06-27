@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
@@ -17,13 +18,17 @@ export class EstimateComponent implements OnInit {
   sortProperty: string = 'id';
   sortOrder = 1;
   productList: any = [];
+
+  pageSize: number = 5;
+  pageSizeOptions: number[] = [5, 10, 20, 50];
+  pageEvent: PageEvent | undefined;
   constructor(private _router: Router, private _estimateService: EstimateService) { }
 
   ngOnInit(): void {
     var _param = {
       "id": 0,
-      "pageNumber": 0,
-      "pageSize": 0,
+      "pageNumber": 1,
+      "pageSize": this.pageSize,
       "searchStr": ""
     }
     this.getAll(_param);
@@ -34,7 +39,7 @@ export class EstimateComponent implements OnInit {
 
 
   getAll(param: PaginationModel) {
-    this.loading=true;
+    this.loading = true;
     this._estimateService.getAll(param)
       .pipe(first())
       .subscribe({
@@ -88,7 +93,8 @@ export class EstimateComponent implements OnInit {
     this.getAll(_param);
   }
   checkAll(ev: any) {
-    this.pageOfItems!.forEach(x => x.ischeck = ev.target.checked)
+    debugger
+    this.items!.forEach(x => x.ischeck = ev.target.checked)
     console.log(this.pageOfItems)
   }
 
@@ -96,5 +102,15 @@ export class EstimateComponent implements OnInit {
     this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } })
   }
 
- 
+  onPageChanged(e: any) {
+    let firstCut = e.pageIndex * e.pageSize;
+    let secondCut = firstCut + e.pageSize;
+    var _param = {
+      "id": 0,
+      "pageNumber": e.pageIndex + 1,
+      "pageSize": e.pageSize,
+      "searchStr": ""
+    }
+    this.getAll(_param);
+  }
 }

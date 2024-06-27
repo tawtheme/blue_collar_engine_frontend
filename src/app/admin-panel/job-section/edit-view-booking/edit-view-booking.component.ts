@@ -25,16 +25,17 @@ export class EditViewBookingComponent {
   basePath: string = environment.apiUrl;
   bookingIsJobFinished: boolean = false;
   bookingInvoiceCreated: boolean = false;
+  isEnableEdit: boolean = false;
   constructor(
     public dialogRef: MatDialogRef<EditViewBookingComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: any[] = [], private _tenantService: TenantService, private _dialog: MatDialog, private _bookingService: BookingService, private _toastrService: ToastrService, private _router: Router
+    public data: any, private _tenantService: TenantService, private _dialog: MatDialog, private _bookingService: BookingService, private _toastrService: ToastrService, private _router: Router
   ) { }
 
   ngOnInit() {
-    this.bookingInfo = this.data;
+    this.bookingInfo = this.data.bookingInfo;
+    this.isEnableEdit = this.data.isEnableEdit;
     console.log(this.bookingInfo)
-    debugger
     if (this.bookingInfo.categories.length > 0) {
       this.bookingInfo.categories.forEach(function (service: any) {
         if (service.products.length > 0) {
@@ -117,5 +118,5 @@ export class EditViewBookingComponent {
     this._router.navigate(['/admin/create-invoice'], { queryParams: { bookingId: bookingId } });
     this.cancel();
   }
-  
+
 }

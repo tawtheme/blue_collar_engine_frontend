@@ -55,8 +55,7 @@ export class SecurityComponent {
         }
       });
   }
-
-
+  
 }
 
 export function ConfirmPasswordValidator(controlName: string, matchingControlName: string) {

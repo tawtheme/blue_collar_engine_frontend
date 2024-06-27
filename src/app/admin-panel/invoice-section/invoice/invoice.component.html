@@ -19,7 +19,8 @@
                     <span class="icon-invoice"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>{{items.length}}</h6>
+                    <h6>{{items.length > 0 ?
+                        items[0].totalCount:0}}</h6>
                     <p>Total Invoice</p>
                 </div>
             </article>
@@ -82,10 +83,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck"
-                                    (change)="checkAll($event)">
-                            </div>
+                            <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
                         </th>
                         <th (click)="sortBy('refNo')">Invoice No.{{sortIcon('refNo')}}</th>
                         <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
@@ -97,12 +95,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let invoice of pageOfItems">
+                    <tr *ngFor="let invoice of items">
                         <td>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck"
-                                    [checked]="invoice.ischeck ==true">
-                            </div>
+                            <mat-checkbox class="example-margin" [checked]="invoice.ischeck ==true"></mat-checkbox>
                         </td>
                         <td>{{invoice.refNo}}</td>
                         <td>{{invoice.createdDate | date:'mediumDate' }}</td>
@@ -127,7 +122,9 @@
             <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
         </div>
         <div class="card-footer pb-0 pt-3">
-            <app-pagination [items]="items" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination>
+            <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"
+                [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                (page)="onPageChanged($event)"></mat-paginator>
         </div>
     </div>
 </div>

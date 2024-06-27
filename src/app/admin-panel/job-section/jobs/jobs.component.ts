@@ -8,6 +8,7 @@ import { first } from 'rxjs';
 import { EditViewBookingComponent } from '../edit-view-booking/edit-view-booking.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-jobs',
@@ -24,9 +25,9 @@ export class JobsComponent implements OnInit {
   compeletedBooking: any[] = [];
   pageSize: number = 5;
   pageSizeOptions: number[] = [5, 10, 20, 50];
-  // MatPaginator Output
   pageEvent: PageEvent | undefined;
   activePageDataChunkAssigned: any = []
+  apiBaseUrl: string = environment.apiUrl + '/';
   constructor(private _router: Router, private _bookingService: BookingService, private _dialog: MatDialog,) {
 
   }
@@ -64,14 +65,21 @@ export class JobsComponent implements OnInit {
   getAllUnAssignedBooking(param: PaginationModel) {
     this.loadUnAssigned = true;
     param = { ...param, ...{ type: 'U' } };
-    ////console.log(param)
     this._bookingService.getAll(param)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.loadUnAssigned = false;
           this.unAssignedBooking = res.data;
-          //console.log(this.unAssignedBooking)
+          this.unAssignedBooking.forEach(res => {
+            if (res.assignedTeamMembers.length > 0) {
+              res.assignedTeamMembers.forEach((r: any) => {
+                if (r.profileImagePath != '' && r.profileImagePath != null) {
+                  r.profileImagePath = this.apiBaseUrl + r.profileImagePath
+                }
+              })
+            }
+          })
         },
         error: error => {
           this.loadUnAssigned = false;
@@ -88,6 +96,15 @@ export class JobsComponent implements OnInit {
         next: (res) => {
           this.loadAssigned = false;
           this.assignedBooking = res.data;
+          this.assignedBooking.forEach(res => {
+            if (res.assignedTeamMembers.length > 0) {
+              res.assignedTeamMembers.forEach((r: any) => {
+                if (r.profileImagePath != '' && r.profileImagePath != null) {
+                  r.profileImagePath = this.apiBaseUrl + r.profileImagePath
+                }
+              })
+            }
+          })
         },
         error: error => {
           this.loadAssigned = false;
@@ -127,7 +144,15 @@ export class JobsComponent implements OnInit {
         next: (res) => {
           this.loadCompeleted = false;
           this.compeletedBooking = res.data;
-          console.log(this.compeletedBooking)
+          this.compeletedBooking.forEach(res => {
+            if (res.assignedTeamMembers.length > 0) {
+              res.assignedTeamMembers.forEach((r: any) => {
+                if (r.profileImagePath != '' && r.profileImagePath != null) {
+                  r.profileImagePath = this.apiBaseUrl + r.profileImagePath
+                }
+              })
+            }
+          })
         },
         error: error => {
           this.loadCompeleted = false;
@@ -149,6 +174,6 @@ export class JobsComponent implements OnInit {
 
   openEditViewBooking(booking: any) {
     debugger
-    this._dialog.open(EditViewBookingComponent, { width: '1200px', height: '800px', data: booking, disableClose: true })
+    this._dialog.open(EditViewBookingComponent, { width: '1200px', height: '800px', data: { 'bookingInfo': booking, isEnableEdit: true }, disableClose: true })
   }
 }

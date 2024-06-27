@@ -30,7 +30,6 @@ export class CategoryAddUpdateComponent {
 
   ngOnChanges() {
     if (this.items == null) {
-      debugger
       this.categoryForm.reset();
        this.categoryForm.controls['categoryId'].setValue(0);
        this.categoryForm.controls['status'].setValue('A');

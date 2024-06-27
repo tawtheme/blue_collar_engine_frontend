@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { InvoiceService } from '@app/_services/admin-panel/invoice/invoice.service';
@@ -15,13 +16,17 @@ export class InvoiceComponent implements OnInit {
   pageOfItems?: Array<any>;
   sortProperty: string = 'id';
   sortOrder = 1;
+
+  pageSize: number = 5;
+  pageSizeOptions: number[] = [5, 10, 20, 50];
+  pageEvent: PageEvent | undefined;
   constructor(private _router: Router, private _invoiceService: InvoiceService) { }
 
   ngOnInit(): void {
     var _param = {
       "id": 0,
-      "pageNumber": 0,
-      "pageSize": 0,
+      "pageNumber": 1,
+      "pageSize": this.pageSize,
       "searchStr": ""
     }
     this.getAll(_param);
@@ -92,5 +97,17 @@ export class InvoiceComponent implements OnInit {
 
   viewInvoice(invoiceId: number) {
     this._router.navigate(['/admin/create-invoice'], { queryParams: { invoiceId: invoiceId } })
+  }
+
+  onPageChanged(e: any) {
+    let firstCut = e.pageIndex * e.pageSize;
+    let secondCut = firstCut + e.pageSize;
+    var _param = {
+      "id": 0,
+      "pageNumber": e.pageIndex + 1,
+      "pageSize": e.pageSize,
+      "searchStr": ""
+    }
+    this.getAll(_param);
   }
 }

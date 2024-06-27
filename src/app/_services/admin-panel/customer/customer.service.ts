@@ -57,4 +57,12 @@ export class CustomerService {
         return res;
       }));
   }
+
+  getCustomerStats(customerId: number) {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Customer/GetCustomerStats?customerId=` + customerId)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
 }

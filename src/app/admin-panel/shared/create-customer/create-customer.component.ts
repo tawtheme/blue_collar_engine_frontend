@@ -39,9 +39,11 @@ export class CreateCustomerComponent implements OnInit {
 
   }
   ngOnChanges() {
-    console.log(this.items)
-    this.items = { ...this.items, ...{ tags: this.items.tags != null && this.items.tags.length > 0 ? this.items.tags.split(',') : '' } };
-    this.customerForm.patchValue(this.items);
+    if(this.items!=undefined){
+      this.items = { ...this.items, ...{ tags: this.items.tags != null && this.items.tags.length > 0 ? this.items.tags.split(',') : '' } };
+      this.customerForm.patchValue(this.items);
+    }
+    
   }
   // convenience getter for easy access to form fields
   get f() { return this.customerForm.controls; }

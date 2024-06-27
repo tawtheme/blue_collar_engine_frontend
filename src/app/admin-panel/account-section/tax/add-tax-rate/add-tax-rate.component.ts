@@ -41,6 +41,7 @@ export class AddTaxRateComponent {
       }
     }  
   }
+  
   onSubmit() {
     this.submitted = true;
     var param = this.addTaxForm.getRawValue();

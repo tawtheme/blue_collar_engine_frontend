@@ -53,4 +53,13 @@ export class ContractorAddressBookComponent {
     let el: HTMLElement = this.editAddressEle.nativeElement;
     el.click();
   }
+
+  onChange(ev: any) {
+    if (ev.checked) {
+      ev.source.checked = false;
+    }
+    else {
+      ev.source.checked = true;
+    }
+  }
 }

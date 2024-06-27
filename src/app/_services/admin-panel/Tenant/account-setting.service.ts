@@ -9,9 +9,11 @@ import { Subject, map } from 'rxjs';
 export class AccountSettingService {
   public tenantAddressAdded: Subject<boolean>;
   public tenentProfileInfo: Subject<any>;
+  public userAdded: Subject<boolean>;
   constructor(private http: HttpClient) {
     this.tenantAddressAdded = new Subject<boolean>();
     this.tenentProfileInfo = new Subject<any>();
+    this.userAdded = new Subject<boolean>();
   }
   getProfileInfo() {
     return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/Get`)
@@ -100,5 +102,36 @@ export class AccountSettingService {
       .pipe(map(res => {
         return res;
       }));
+  }
+
+  addUpdateStripeConfiguration(stripeConfigurationInfo: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/AddUpdateStripeConfiguration`, stripeConfigurationInfo)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  getStripeConfiguration() {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetStripeConfiguration`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  getAllUsers() {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetAllUsers`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  addUpdateUser(userInfo: any) {
+    const httpOptions = {
+      headers: new HttpHeaders().set('skip', 'true')
+    };
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/AddUpdateUser`, userInfo, httpOptions)
+      .pipe(map(res => {
+        return res;
+      }));   
   }
 }

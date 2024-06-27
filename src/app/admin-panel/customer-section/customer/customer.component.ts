@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
@@ -20,6 +21,10 @@ export class CustomerComponent implements OnInit {
   pageOfItems?: Array<any>;
   sortProperty: string = 'id';
   sortOrder = 1;
+
+  pageSize: number = 5;
+  pageSizeOptions: number[] = [5, 10, 20, 50];
+  pageEvent: PageEvent | undefined;
   constructor(private _customerService: CustomerService, private _router: Router) {
 
   }
@@ -27,8 +32,8 @@ export class CustomerComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     var _param = {
       "id": 0,
-      "pageNumber": 0,
-      "pageSize": 0,
+      "pageNumber": 1,
+      "pageSize": this.pageSize,
       "searchStr": ""
     }
     this.getAll(_param);
@@ -41,7 +46,7 @@ export class CustomerComponent implements OnInit {
   }
 
   getAll(param: PaginationModel) {
-    this.loading=true;
+    this.loading = true;
     this._customerService.getAll(param)
       .pipe(first())
       .subscribe({
@@ -92,8 +97,8 @@ export class CustomerComponent implements OnInit {
   onEnter(str: any): void {
     var _param = {
       "id": 0,
-      "pageNumber": 0,
-      "pageSize": 0,
+      "pageNumber": 1,
+      "pageSize": this.pageSize,
       "searchStr": str.target.value
     }
     this.getAll(_param);
@@ -103,4 +108,26 @@ export class CustomerComponent implements OnInit {
     this.pageOfItems!.forEach(x => x.ischeck = ev.target.checked)
     console.log(this.pageOfItems)
   }
+
+  onPageChanged(e: any) {
+    let firstCut = e.pageIndex * e.pageSize;
+    let secondCut = firstCut + e.pageSize;
+    var _param = {
+      "id": 0,
+      "pageNumber": e.pageIndex + 1,
+      "pageSize": e.pageSize,
+      "searchStr": ""
+    }
+    this.getAll(_param);
+  }
+
+  onChange(ev: any) {
+    if (ev.checked) {
+      ev.source.checked = false;
+    }
+    else {
+      ev.source.checked = true;
+    }
+  }
+
 }

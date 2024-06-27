@@ -24,11 +24,7 @@
                     {{address.address}}, {{address.state}}, {{address.city}}, {{address.zipCode}}</p>
             </div>
             <div class="d-flex justify-content-between align-items-center ">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
-                        [(ngModel)]="address.isDefault">
-                    Set as default
-                </div>
+                <mat-slide-toggle [(ngModel)]="address.isDefault" (change)="onChange($event)">Set as default</mat-slide-toggle>
                 <button class="btn light-outlined-button xs-btn" (click)="editAddress(address)"> <span
                         class="icon-edit"></span>
                     Edit</button>
