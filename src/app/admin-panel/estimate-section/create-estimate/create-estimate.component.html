@@ -34,7 +34,7 @@
                             <div *ngIf="f.customerId.errors.required">Select a customer</div>
                         </div>
                     </div>
-                </div>            
+                </div>
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="expiryDate" class="form-label">Due Date</label>
@@ -226,7 +226,7 @@
                     draft</button>
                 <button class="primary-filled-button px-5" type="submit" [disabled]="loadingSend"
                     (click)="getAction('S')">
-                    <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span>Save & Send </button>
+                    <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span> Send </button>
             </div>
 
 

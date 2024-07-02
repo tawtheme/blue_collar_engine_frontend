@@ -65,7 +65,7 @@
                             (keyup.enter)="onEnter($event)">
                         <span class="icon-search iconPosition"></span>
                     </div>
-                    <div class="top-search-group flexGrow1" style="display: none;">
+                    <div class="top-search-group flexGrow1">
                         <input type="date" id="date" name="date" placeholder="Select date..." class="form-control">
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     <thead>
                         <tr>
                             <th>
-                                <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>                               
+                                <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
                             </th>
                             <th (click)="sortBy('createdDate')">Create date{{sortIcon('createdDate')}}</th>
                             <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
@@ -96,7 +96,7 @@
                     <tbody>
                         <tr *ngFor="let cust of items">
                             <td>
-                                <mat-checkbox class="example-margin" [checked]="cust.ischeck ==true"></mat-checkbox>                             
+                                <mat-checkbox class="example-margin" [checked]="cust.ischeck ==true"></mat-checkbox>
                             </td>
                             <td>{{cust.createdDate | date:'mediumDate' }}</td>
                             <td>{{cust.firstName}} {{cust.lastName}}</td>
@@ -106,7 +106,8 @@
                                     {{cust.serviceAddress}}
                                 </div>
                             </td>
-                            <td> <mat-slide-toggle [checked]="cust.status=='A'" (change)="onChange($event)"></mat-slide-toggle>                                 
+                            <td> <mat-slide-toggle [checked]="cust.status=='A'"
+                                    (change)="onChange($event)"></mat-slide-toggle>
                             </td>
                             <td>$00.0</td>
 

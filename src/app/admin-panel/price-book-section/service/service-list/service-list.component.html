@@ -6,7 +6,7 @@
                 <div class="dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle gap-2" data-bs-toggle="dropdown"
                         data-bs-display="static" aria-expanded="false">
-                        More Action
+                        Add New
                         <span class="icon-down-arrow"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -138,6 +138,18 @@
             </div>
             <div class="tab-pane fade" id="pills-category" role="tabpanel" aria-labelledby="pills-category-tab"
                 tabindex="0">
+                <div class="row mb-3">
+                    <div class="col-md-5">
+                        <div class="table-top-filter-left">
+                            <div class="top-search-group flexGrow2 startIconInputField">
+                                <input type="text" id="search" name="search" placeholder="Search here"
+                                    class="form-control">
+                                <span class="icon-search iconPosition"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                 <app-category-list></app-category-list>
                 <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
             </div>
