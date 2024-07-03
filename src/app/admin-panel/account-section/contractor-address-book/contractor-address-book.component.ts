@@ -1,8 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
-import { first } from 'rxjs';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-contractor-address-book',
@@ -14,7 +16,7 @@ export class ContractorAddressBookComponent {
   addressInfo: any;
   loading: boolean = false;
   @ViewChild('editAddressEle') editAddressEle!: ElementRef<HTMLElement>;
-  constructor(private _accountSettingService: AccountSettingService, private _router: Router) {
+  constructor(private _accountSettingService: AccountSettingService, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -56,12 +58,36 @@ export class ContractorAddressBookComponent {
     el.click();
   }
 
-  onChange(ev: any) {
-    if (ev.checked) {
-      ev.source.checked = false;
+  onChange(ev: any, addressInfo: any) {
+    ev.source.checked = ev.checked == true ? false : true;
+    if(ev.source.checked){
+      return;
     }
-    else {
-      ev.source.checked = true;
-    }
+    const message = `Are you sure you want to set as default?`;
+    const dialogData = new ConfirmDialogModel("Confirmation", message);
+    const dialogRef = this._dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        addressInfo = { ...addressInfo, ...{ isDefault: ev.checked } };
+        this._accountSettingService.setAsDefaultAddress(addressInfo).subscribe(res => {
+          this._snackBar.open(res.message);
+          var _param = {
+            "id": 0,
+            "pageNumber": 0,
+            "pageSize": 0,
+            "searchStr": ""
+          }
+          this.getAllAddress(_param);
+        })
+      }
+      else {
+        ev.source.checked = ev.checked == true ? false : true;
+        addressInfo.isDefault=ev.source.checked;
+        return;
+      }
+    });
   }
 }

@@ -64,12 +64,20 @@ export class BookingComponent implements OnInit {
         next: (res) => {
           this.loading = false;
           this.items = res.data;
+          console.log(this.items)
           if (this.items.length > 0) {
-            this.items = this.items.filter(function (event) {
+            // this.items = this.items.filter(function (event) {
+            //   return event.categoryServices.length > 0;
+            // });
+            this.items = this.items.map((element) => {
+              return { ...element, categoryServices: (element.categoryServices.filter((subElement: any) => subElement.isOnlineBooking === true)) }
+            })
+              this.items = this.items.filter(function (event) {
               return event.categoryServices.length > 0;
             });
-            this.items.forEach(function (item: any) {
+            console.log(this.items)
 
+            this.items.forEach(function (item: any) {
               item.categoryServices.forEach(function (service: any) {
                 _totalCount += service.categoryServiceId;
                 if (service.uploadedFiles.length > 0) {

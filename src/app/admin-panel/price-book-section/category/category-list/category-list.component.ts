@@ -57,7 +57,7 @@ export class CategoryListComponent {
         next: (res) => {
           this.loading = false;
           this.items = res.data;
-          //console.log(this.items)
+         // console.log(this.items)
         },
         error: error => {
           this.loading = false;
@@ -65,12 +65,6 @@ export class CategoryListComponent {
       });
   }
 
-  onChangePage(pageOfItems: any) {
-    ////debugger
-    // update current page of items
-    this.pageOfItems = pageOfItems;
-    // this.pageOfItems = { ...this.pageOfItems!, ...{ ischeck: false } };
-  }
 
   sortBy(property: string) {
     this.sortOrder = property === this.sortProperty ? (this.sortOrder * -1) : 1;
@@ -138,16 +132,12 @@ export class CategoryListComponent {
     });
   }
 
-  onPageChanged(e: any, type: any) {
-    let firstCut = e.pageIndex * e.pageSize;
-    let secondCut = firstCut + e.pageSize;
+  onPageChanged(e: any) {
     var _param = {
       "id": 0,
       "pageNumber": e.pageIndex + 1,
       "pageSize": e.pageSize,
-      "searchStr": "",
-      "type": "",
-      "bookingDate": new Date()
+      "searchStr": ""
     }
     this.getAll(_param);
   }

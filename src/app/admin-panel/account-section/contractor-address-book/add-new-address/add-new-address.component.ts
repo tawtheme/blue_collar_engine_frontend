@@ -44,8 +44,9 @@ export class AddNewAddressComponent {
   ngOnChanges() {
     if (this.addressForm != undefined) {
       if (this.items != null) {
+        console.log(this.items)
         this.addressForm.patchValue(this.items);
-        //console.log(this.items)
+        this.addressForm.controls['isDefault'].setValue(this.items?.isDefault);
       }
       else {
         this.submitted = false;

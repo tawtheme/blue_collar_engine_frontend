@@ -7,8 +7,7 @@ import { AuthenticationService } from '@app/_services';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
 import { MasterService } from '@app/_services/master.service';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
-import { ToastrService } from 'ngx-toastr';
-import { first } from 'rxjs';
+
 
 @Component({
   selector: 'app-business-hours',
@@ -76,6 +75,7 @@ export class BusinessHoursComponent {
 
   add(empIndex: number, dayId: number) {
     this.businessHours(empIndex).push(this.newbusinessHours(dayId));
+   // console.log(this.businessHours(empIndex).value[0])
   }
 
   remove(empIndex: number, skillIndex: number) {
@@ -123,7 +123,7 @@ export class BusinessHoursComponent {
             dayId: [value.dayId],
             openTime: [value.openTime],
             closeTime: [value.closeTime],
-            isDeleted: [value.isDeleted],
+            isDeleted: [value.isDeleted]
           }));
         });
       });
@@ -141,7 +141,7 @@ export class BusinessHoursComponent {
     //console.log(JSON.stringify(param))
     this._accountSettingService.addUpdateBusinessHours(param).subscribe(res => {
       this.loading = false;
-      this._snackBar.open(res.message);          
+      this._snackBar.open(res.message);
     });
   }
   onOpenTimeset(event: any) {
