@@ -40,10 +40,11 @@
                         <label for="expiryDate" class="form-label">Due Date</label>
                         <mat-form-field class="example-full-width muiDatePickerFromField">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
-                                placeholder="Choose a date"  [ngClass]="{ 'is-invalid': submitted && invoiceForm.get('expiryDate')?.hasError('required') }">
+                                placeholder="Choose a date"
+                                [ngClass]="{ 'is-invalid': submitted && invoiceForm.get('expiryDate')?.hasError('required') }">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>                       
+                        </mat-form-field>
                         <mat-error *ngIf="submitted && invoiceForm.get('expiryDate')?.hasError('required')">
                             Due date is required
                         </mat-error>
@@ -131,15 +132,15 @@
                                                 [value]="product.productId">{{product.productName}}
                                             </mat-option>
                                         </mat-autocomplete> -->
-                                        
-                                            <select id="item" class="form-select" formControlName="productId"
-                                                (ngModelChange)="bindProductInfo($event,i)"
-                                                [ngClass]="{ 'is-invalid': submitted && product.get('productId')!.errors?.required }">
-                                                <option value="" selected>Type or click to select an item</option>
-                                                <option value="{{product.categoryServiceId}}"
-                                                    *ngFor="let product of productList">
-                                                    {{product.serviceName}}</option>
-                                            </select>
+
+                                        <select id="item" class="form-select" formControlName="productId"
+                                            (ngModelChange)="bindProductInfo($event,i)"
+                                            [ngClass]="{ 'is-invalid': submitted && product.get('productId')!.errors?.required }">
+                                            <option value="" selected>Type or click to select an item</option>
+                                            <option value="{{product.categoryServiceId}}"
+                                                *ngFor="let product of productList">
+                                                {{product.serviceName}}</option>
+                                        </select>
                                         <div *ngIf="submitted && product.get('productId')!.errors"
                                             class="invalid-feedback">
                                             <div *ngIf="product.get('productId')!.errors?.required">Select a product
@@ -189,7 +190,8 @@
                     </table>
 
                     <button class="light-primary-outlined-button {{bookingId}}" type="button" (click)="addProduct()"
-                        *ngIf="(!isShowRegNo || (isShowRegNo && status=='Draft')) && (bookingId == 0)"><span class="icon-add"></span>Add
+                        *ngIf="(!isShowRegNo || (isShowRegNo && status=='Draft')) && (bookingId == 0)"><span
+                            class="icon-add"></span>Add
                         Service Item</button>
                 </div>
             </div>
