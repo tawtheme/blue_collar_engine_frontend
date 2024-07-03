@@ -59,7 +59,7 @@
                             <div class="form-group flex-grow-1" *ngIf="!hours.value.isDeleted">
                                 <input aria-label="default time1" class="form-control" formControlName="closeTime"
                                     [ngxTimepicker]="defaultValue1" placeholder="Close time"
-                                    [value]="hours.value.closeTime"
+                                    [value]="hours.value.closeTime" 
                                     [ngClass]="{ 'is-invalid': submitted && hours.get('closeTime')!.errors?.required }"
                                     readonly>
                                 <div *ngIf="submitted && hours.get('closeTime')!.errors" class="invalid-feedback">
@@ -67,7 +67,7 @@
                                     </div>
                                 </div>
                                 <ngx-material-timepicker #defaultValue1 (timeSet)="onCloseTimeset($event)"
-                                    [defaultTime]="'10:00 pm'"></ngx-material-timepicker>
+                                    [defaultTime]="'10:00 pm'" ></ngx-material-timepicker>
                             </div>
                             <button type="button" class="light-outlined-button rounded-circle p-0 ShapeBox38"
                                 *ngIf="skillIndex == 0" (click)="add(empIndex, day.value.dayId)"><span

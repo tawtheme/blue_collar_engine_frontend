@@ -39,6 +39,13 @@ export class AccountSettingService {
       }));
   }
 
+  setAsDefaultAddress(addressInfo:any){
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/SetAsDefaultAddress`, addressInfo)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
   getTenantAddresses(PaginationModel: any) {
     return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/GetAllAddress`, PaginationModel)
       .pipe(map(res => {
