@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@app/_services';
 import { MasterService } from '@app/_services/master.service';
@@ -24,7 +25,7 @@ export class OnlineRequestDemoComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private _masterService: MasterService, private _requestDemoService: RequestDemoService, private _toastrService: ToastrService) {
+    private _masterService: MasterService, private _requestDemoService: RequestDemoService, private _snackBar: MatSnackBar) {
     this.bindNoOFEmplyeeDDL();
     this.bindIndustriesDDL();
     this.bindHereAboutUsDDL();
@@ -97,7 +98,7 @@ export class OnlineRequestDemoComponent implements OnInit {
           this.requestDemoForm.controls['howHearAboutUs'].setValue('');
           this.requestDemoForm.controls['timeZone'].setValue('');
           this.submitted = false;
-          this._toastrService.success(res.message, 'Success');
+          this._snackBar.open(res.message);
         },
         error: error => {
           this.loading = false;

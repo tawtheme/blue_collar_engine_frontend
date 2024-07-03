@@ -51,11 +51,11 @@ export class JobsComponent implements OnInit {
       }
     });
 
-    this._bookingService.openEditBookingPage.subscribe(bookingId => {
-      if (bookingId > 0) {
-        this.openEditViewBooking(bookingId);
-      }
-    })
+    // this._bookingService.openEditBookingPage.subscribe(bookingId => {
+    //   if (bookingId > 0) {
+    //     this.openEditViewBooking(bookingId);
+    //   }
+    // })
   }
 
   createJob() {

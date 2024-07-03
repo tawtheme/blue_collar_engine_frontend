@@ -52,23 +52,32 @@
             </article>
         </div>
         <div class="table-top-filter-row">
-            <div class="table-top-filter-left">
+            <div class="table-top-filter-left"  [formGroup]="estimateRagePickerForm">
                 <div class="top-search-group flexGrow2 startIconInputField">
-                    <input type="text" id="search" name="search" placeholder="Search estimates here..."
-                        class="form-control">
+                    <input type="text" id="search" name="search" formControlName="searchStr"
+                        placeholder="Search with Name, Address, Phone number here..." class="form-control"
+                        (keyup.enter)="onEnter($event)">
                     <span class="icon-search iconPosition"></span>
                 </div>
                 <div class="top-search-group flexGrow1">
-                    <input type="date" id="date" name="date" placeholder="Select date..." class="form-control">
+                    <mat-form-field>
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate formControlName="start" placeholder="Start date">
+                            <input matEndDate formControlName="end" placeholder="End date"
+                                (dateChange)="rangeChangeEvent()">
+                        </mat-date-range-input>
+                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                    <!-- <input type="date" id="date" name="date" placeholder="Select date..." class="form-control"> -->
                 </div>
                 <div class="top-search-group flexGrow1">
-
-                    <select id="status" name="status" class="form-select">
-                        <option selected>Show All</option>
-                        <option value="Accepted">Accepted</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Draft">Draft</option>
-                        <option value="Cancelled">Cancelled</option>
+                    <select id="status" name="status" class="form-select" formControlName="status" (change)="filterGrid()">
+                        <option value="">Show All</option>                        
+                        <option value="D">Draft</option>
+                        <option value="S">Sent</option>
                     </select>
                 </div>
             </div>
@@ -87,9 +96,9 @@
                         </th>
                         <th (click)="sortBy('refNo')">Estimate No.{{sortIcon('refNo')}}</th>
                         <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
-                        <th (click)="sortBy('customerName')">Customer Name{{sortIcon('customerName')}}</th>
+                        <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
                         <th (click)="sortBy('totalAmount')">Amount Due{{sortIcon('totalAmount')}}</th>
-                        <th (click)="sortBy('jobId')">Job{{sortIcon('jobId')}}</th>
+                        <!-- <th (click)="sortBy('jobId')">Job{{sortIcon('jobId')}}</th> -->
                         <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
                         <th>Action</th>
                     </tr>
@@ -103,7 +112,7 @@
                         <td>{{estimate.createdDate | date:'mediumDate' }}</td>
                         <td>{{estimate.firstName}} {{estimate.lastName}}</td>
                         <td>${{estimate.totalAmount | number : '1.2-2'}}</td>
-                        <td>{{estimate.jobId}}</td>
+                        <!-- <td>{{estimate.jobId}}</td> -->
                         <td>
                             <div class="">
                                 <span class="warning-badge">{{estimate.status}}</span>
@@ -122,7 +131,7 @@
                     </tr>
                 </tbody>
             </table>
-            <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+            <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
         </div>
         <div class="card-footer pb-0 pt-3">
             <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"

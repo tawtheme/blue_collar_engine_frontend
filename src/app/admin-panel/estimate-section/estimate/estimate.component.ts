@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
@@ -22,23 +23,24 @@ export class EstimateComponent implements OnInit {
   pageSize: number = 5;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   pageEvent: PageEvent | undefined;
-  constructor(private _router: Router, private _estimateService: EstimateService) { }
+
+  estimateRagePickerForm!: FormGroup;
+  constructor(private _router: Router, private _estimateService: EstimateService, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    var _param = {
-      "id": 0,
-      "pageNumber": 1,
-      "pageSize": this.pageSize,
-      "searchStr": ""
-    }
-    this.getAll(_param);
+    this.estimateRagePickerForm = this._formBuilder.group({
+      start: [null, null],
+      end: [null, null],
+      searchStr: ['', null],
+      status: ['', null]
+    });
+    this.getAll(this.bindSearchcParam());
   }
   createEstimate() {
     this._router.navigate(['/admin/create-estimate'])
   }
 
-
-  getAll(param: PaginationModel) {
+  getAll(param: any) {
     this.loading = true;
     this._estimateService.getAll(param)
       .pipe(first())
@@ -46,7 +48,6 @@ export class EstimateComponent implements OnInit {
         next: (res) => {
           this.loading = false;
           this.items = res.data;
-          //console.log(this.items)
         },
         error: error => {
           this.loading = false;
@@ -54,10 +55,47 @@ export class EstimateComponent implements OnInit {
       });
   }
 
-  onChangePage(pageOfItems: any) {
-    // update current page of items
-    this.pageOfItems = pageOfItems;
-    // this.pageOfItems = { ...this.pageOfItems!, ...{ ischeck: false } };
+  onEnter(str: any): void {
+    var _param = this.bindSearchcParam();
+    this.getAll(_param);
+  }
+
+  rangeChangeEvent() {
+    this.getAll(this.bindSearchcParam());
+  }
+
+  checkAll(ev: any) {
+    //debugger
+    this.items!.forEach(x => x.ischeck = ev.target.checked)
+    //console.log(this.pageOfItems)
+  }
+
+  redirectToCreateEstimate(estimateId: number) {
+    this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } })
+  }
+
+  onPageChanged(e: any) {
+    var _param = this.bindSearchcParam();
+    _param.pageNumber = e.pageIndex + 1,
+      _param.pageSize = e.pageSize
+    this.getAll(_param);
+  }
+
+  filterGrid() {
+    this.getAll(this.bindSearchcParam())
+  }
+
+  bindSearchcParam() {
+    var _param = {
+      "id": 0,
+      "pageNumber": 1,
+      "pageSize": this.pageSize,
+      "searchStr": this.estimateRagePickerForm.value.searchStr,
+      "status": this.estimateRagePickerForm.value.status,
+      "startDate": this.estimateRagePickerForm.value.start,
+      "endDate": this.estimateRagePickerForm.value.end,
+    }
+    return _param;
   }
 
   sortBy(property: string) {
@@ -81,36 +119,5 @@ export class EstimateComponent implements OnInit {
       return this.sortOrder === 1 ? '☝️' : '👇';
     }
     return '';
-  }
-
-  onEnter(str: any): void {
-    var _param = {
-      "id": 0,
-      "pageNumber": 0,
-      "pageSize": 0,
-      "searchStr": str.target.value
-    }
-    this.getAll(_param);
-  }
-  checkAll(ev: any) {
-    //debugger
-    this.items!.forEach(x => x.ischeck = ev.target.checked)
-    //console.log(this.pageOfItems)
-  }
-
-  redirectToCreateEstimate(estimateId: number) {
-    this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } })
-  }
-
-  onPageChanged(e: any) {
-    let firstCut = e.pageIndex * e.pageSize;
-    let secondCut = firstCut + e.pageSize;
-    var _param = {
-      "id": 0,
-      "pageNumber": e.pageIndex + 1,
-      "pageSize": e.pageSize,
-      "searchStr": ""
-    }
-    this.getAll(_param);
   }
 }

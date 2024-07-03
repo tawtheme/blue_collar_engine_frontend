@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConstantManager } from '@app/_helpers/constant/constantManager';
 import { CustomerModel } from '@app/_models/customer/customerModel';
@@ -42,7 +43,7 @@ export class CreateEstimateComponent implements OnInit {
   status: string = '';
   todayDate: Date = new Date();
   isProceed: boolean = false;
-  constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, private dialog: MatDialog, private _accountSettingService: AccountSettingService, private _categoryService: CategoryService) { }
+  constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _snackBar: MatSnackBar, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, private dialog: MatDialog, private _accountSettingService: AccountSettingService, private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this._customerService.bindAddress.subscribe((address: any) => {
@@ -215,7 +216,7 @@ export class CreateEstimateComponent implements OnInit {
           else {
             this.loadingDraft = false;
           }
-          this._toastrService.success(res.message, 'Success');
+          this._snackBar.open(res.message);
           //console.log(res)
           this._router.navigate(['/admin/estimate']);
         },

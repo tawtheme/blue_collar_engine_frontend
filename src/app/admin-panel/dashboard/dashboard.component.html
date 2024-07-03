@@ -2,7 +2,7 @@
     <div class="container-xxl">
         <div class="d-flex items-center">
             <h4 class="page-title">Dashboard</h4>
-            <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
+            <!-- <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
                 <div class="dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle gap-2" data-bs-toggle="dropdown"
                         data-bs-display="static" aria-expanded="false">
@@ -21,8 +21,8 @@
                                 Create Invoice</a>
                         </li>
                     </ul>
-                </div>
-            </div>
+                </div> 
+            </div>-->
         </div>
     </div>
 </div>
@@ -70,6 +70,7 @@
             <div class="">
                 <img src="../../../assets/images/dashboard-graph.png" class="img-fluid" />
             </div>
+            <!-- <div id="container"></div> -->
         </div>
     </div>
     <div class="py-4">
@@ -81,32 +82,20 @@
                         <span class="icon-job text-primary"></span>
                     </div>
                     <h4 class="font18 ms-2 font600">Today’s Booking</h4>
-                    <a href="#" class="ms-auto font14">View All</a>
+                    <a href="/admin/jobs" class="ms-auto font14">View All</a>
                 </div>
                 <div class="border rounded">
-                    <div class="p-3 border-bottom">
+                    <div class="p-3 border-bottom" *ngFor="let booking of todayBooking">
                         <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-time"></span> 10:00AM-11:00AM</span>
-                            <button class="danger-badge" type="button">Unassigned</button>
+                            <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingTime}}</span>
+                            <button class="danger-badge" type="button">{{booking.statusText}}</button>
                         </div>
-                        <h4 class="font16 mb-1">John Deo</h4>
-                        <p class="font14 mb-0 font-muted">123 Main Street, Anytown, USA</p>
+                        <h4 class="font16 mb-1">{{booking.customerName}}</h4>
+                        <p class="font14 mb-0 font-muted">{{booking.address}}, {{booking.city}}, {{booking.state}},
+                            {{booking.zipCode}}</p>
                     </div>
-                    <div class="p-3 border-bottom">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-time"></span> 10:00AM-11:00AM</span>
-                            <button class="danger-badge" type="button">Unassigned</button>
-                        </div>
-                        <h4 class="font16 mb-1">John Deo</h4>
-                        <p class="font14 mb-0 font-muted">123 Main Street, Anytown, USA</p>
-                    </div>
-                    <div class="p-3">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-time"></span> 10:00AM-11:00AM</span>
-                            <button class="danger-badge" type="button">Unassigned</button>
-                        </div>
-                        <h4 class="font16 mb-1">John Deo</h4>
-                        <p class="font14 mb-0 font-muted">123 Main Street, Anytown, USA</p>
+                    <div *ngIf="todayBooking.length==0 && !todayBookingLoaded">
+                        <span>No data found</span>
                     </div>
                 </div>
             </div>
@@ -115,44 +104,25 @@
                     <div class="ShapeCircle32 lightYellowBox2 d-flex align-items-center justify-content-center">
                         <span class="icon-estimate"></span>
                     </div>
-                    <h4 class="font18 ms-2 font600">Open Estimate</h4>
-                    <a href="#" class="ms-auto font14">View All</a>
+                    <h4 class="font18 ms-2 font600">Latest Estimate Invoices</h4>
+                    <a href="/admin/estimate" class="ms-auto font14">View All</a>
                 </div>
                 <div class="border rounded">
-                    <div class="p-3 border-bottom">
+                    <div class="p-3 border-bottom" *ngFor="let estimate of estimateInvoices">
                         <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-calendar"></span> Feb 26, 2024</span>
-                            <button class="warning-badge" type="button">Send</button>
+                            <span class="grey-badge"><span class="icon-calendar"></span> {{estimate.createdDate |
+                                date:'mediumDate'}}</span>
+                            <button class="warning-badge" type="button">{{estimate.status}}</button>
                         </div>
                         <div class="d-flex align-items-center gap-3">
-                            <h4 class="font16 mb-1">Ava Franklin</h4>
-                            <h4 class="font16 mb-1 ms-auto">$23,4759.00</h4>
+                            <h4 class="font16 mb-1">{{estimate.firstName}} {{estimate.lastName}}</h4>
+                            <h4 class="font16 mb-1 ms-auto">${{estimate.totalAmount | number : '1.2-2'}}</h4>
                         </div>
-                        <p class="font14 mb-0 font-muted">123 Main Street, Anytown, USA</p>
+                        <p class="font14 mb-0 font-muted">{{estimate.serviceAddress}}</p>
                     </div>
-                    <div class="p-3 border-bottom">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-calendar"></span> Feb 26, 2024</span>
-                            <button class="warning-badge" type="button">Send</button>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            <h4 class="font16 mb-1">Ava Franklin</h4>
-                            <h4 class="font16 mb-1 ms-auto">$23,4759.00</h4>
-                        </div>
-                        <p class="font14 mb-0 font-muted">123 Main Street, Anytown, USA</p>
+                    <div *ngIf="estimateInvoices.length==0 && !estimateInvoiceLoaded">
+                        <span>No data found</span>
                     </div>
-                    <div class="p-3">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-calendar"></span> Feb 26, 2024</span>
-                            <button class="warning-badge" type="button">Send</button>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            <h4 class="font16 mb-1">Ava Franklin</h4>
-                            <h4 class="font16 mb-1 ms-auto">$23,4759.00</h4>
-                        </div>
-                        <p class="font14 mb-0 font-muted">123 Main Street, Anytown, USA</p>
-                    </div>
-
                 </div>
             </div>
             <div class="col-lg-4">
@@ -160,42 +130,24 @@
                     <div class="ShapeCircle32 lightGreenBox d-flex align-items-center justify-content-center">
                         <span class="icon-invoice"></span>
                     </div>
-                    <h4 class="font18 ms-2 font600">Pending Invoices</h4>
-                    <a href="#" class="ms-auto font14">View All</a>
+                    <h4 class="font18 ms-2 font600">Latest Invoices</h4>
+                    <a href="/admin/invoice" class="ms-auto font14">View All</a>
                 </div>
                 <div class="border rounded">
-                    <div class="p-3 border-bottom">
+                    <div class="p-3 border-bottom" *ngFor="let invoice of invoices">
                         <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-calendar"></span> Feb 26, 2024</span>
-                            <button class="warning-badge">Pending</button>
+                            <span class="grey-badge"><span class="icon-calendar"></span> {{invoice.createdDate |
+                                date:'mediumDate'}}</span>
+                            <button class="warning-badge">{{invoice.status}}</button>
                         </div>
                         <div class="d-flex align-items-center gap-3">
-                            <h4 class="font16 mb-1">Ava Franklin</h4>
-                            <h4 class="font16 mb-1 ms-auto">$23,4759.00</h4>
+                            <h4 class="font16 mb-1">{{invoice.firstName}} {{invoice.lastName}}</h4>
+                            <h4 class="font16 mb-1 ms-auto">${{invoice.totalAmount | number : '1.2-2'}}</h4>
                         </div>
-                        <p class="font14 mb-0 font-muted">123 Main Street, Anytown, USA</p>
+                        <p class="font14 mb-0 font-muted">{{invoice.serviceAddress}}</p>
                     </div>
-                    <div class="p-3 border-bottom">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-calendar"></span> Feb 26, 2024</span>
-                            <button class="warning-badge">Pending</button>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            <h4 class="font16 mb-1">Ava Franklin</h4>
-                            <h4 class="font16 mb-1 ms-auto">$23,4759.00</h4>
-                        </div>
-                        <p class="font14 mb-0 font-muted">123 Main Street, Anytown, USA</p>
-                    </div>
-                    <div class="p-3">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-calendar"></span> Feb 26, 2024</span>
-                            <button class="warning-badge">Pending</button>
-                        </div>
-                        <div class="d-flex align-items-center gap-3">
-                            <h4 class="font16 mb-1">Ava Franklin</h4>
-                            <h4 class="font16 mb-1 ms-auto">$23,4759.00</h4>
-                        </div>
-                        <p class="font14 mb-0 font-muted">123 Main Street, Anytown, USA</p>
+                    <div *ngIf="invoices.length==0 && !invoiceLoaded">
+                        <span>No data found</span>
                     </div>
                 </div>
             </div>
@@ -218,99 +170,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr *ngFor="let tech of technician">
                                 <td>
                                     <div class="d-flex align-items-center gap-2">
                                         <div class="ShapeCircle20">
-                                            <img src="../../../../assets/images/tech1.png"
-                                                class="w-100 h-100 object-fit-cover">
+                                            <img [src]="tech.profileImagePath" class="img-fluid rounded-2"
+                                                (error)="tech.profileImagePath = '../../../../assets/images/blank-img.png'">
                                         </div>
-                                        Franklin
+                                        {{tech.fullName}}
                                     </div>
                                 </td>
-                                <td>$35,395.00</td>
-                                <td>35</td>
-                                <td>65%</td>
+                                <td>${{tech.totalRevenue | number : '1.2-2'}}</td>
+                                <td>{{tech.totalSalesCount}}</td>
+                                <td>{{tech.successRate}}%</td>
                                 <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center">
+                                    <div class="d-flex gap-2 align-items-center justify-content-center custom-star">
+                                        <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
+                                            (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
+                                        <!-- <span class="icon-notification"></span>
                                         <span class="icon-notification"></span>
                                         <span class="icon-notification"></span>
                                         <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
+                                        <span class="icon-notification"></span> -->
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="ShapeCircle20">
-                                            <img src="../../../../assets/images/tech1.png"
-                                                class="w-100 h-100 object-fit-cover">
-                                        </div>
-                                        Franklin
-                                    </div>
-                                </td>
-                                <td>$35,395.00</td>
-                                <td>35</td>
-                                <td>65%</td>
-                                <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center">
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                    </div>
-                                </td>
+                            <tr *ngIf="technician.length==0 && !technicianLoaded">
+                                <span>No data found</span>
                             </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="ShapeCircle20">
-                                            <img src="../../../../assets/images/tech1.png"
-                                                class="w-100 h-100 object-fit-cover">
-                                        </div>
-                                        Franklin
-                                    </div>
-                                </td>
-                                <td>$35,395.00</td>
-                                <td>35</td>
-                                <td>65%</td>
-                                <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center">
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="ShapeCircle20">
-                                            <img src="../../../../assets/images/tech1.png"
-                                                class="w-100 h-100 object-fit-cover">
-                                        </div>
-                                        Franklin
-                                    </div>
-                                </td>
-                                <td>$35,395.00</td>
-                                <td>35</td>
-                                <td>65%</td>
-                                <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center">
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                    </div>
-                                </td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -328,65 +215,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td> Air Condition Repair </td>
-                                <td>35</td>
-                                <td>$35,395.00</td>
+                            <tr *ngFor="let service of topServices">
+                                <td> {{service.serviceName}} </td>
+                                <td>{{service.totalSalesCount}}</td>
+                                <td>${{service.totalRevenue | number : '1.2-2'}}</td>
                                 <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center">
+                                    <div class="d-flex gap-2 align-items-center justify-content-center custom-star">
+                                        <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
+                                            (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
+                                        <!-- <span class="icon-notification"></span>
                                         <span class="icon-notification"></span>
                                         <span class="icon-notification"></span>
                                         <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
+                                        <span class="icon-notification"></span> -->
                                     </div>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td> Air Condition Repair </td>
-                                <td>35</td>
-                                <td>$35,395.00</td>
-                                <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center">
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> Air Condition Repair </td>
 
-                                <td>35</td>
-                                <td>$35,395.00</td>
-                                <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center">
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                    </div>
-                                </td>
                             </tr>
-                            <tr>
-                                <td> Air Condition Repair </td>
-
-                                <td>35</td>
-                                <td>$35,395.00</td>
-                                <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center">
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                    </div>
-                                </td>
+                            <tr *ngIf="topServices.length==0 && !topServicesLoaded">
+                                <span>No data found</span>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>

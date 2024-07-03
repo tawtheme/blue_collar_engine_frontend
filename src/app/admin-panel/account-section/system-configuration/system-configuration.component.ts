@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
@@ -13,7 +14,7 @@ export class SystemConfigurationComponent {
   configurationForm!: FormGroup;
   submitted = false;
   loading = false;
-  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _toastrService: ToastrService) {
+  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) {
 
   }
   ngOnInit() {
@@ -39,7 +40,7 @@ export class SystemConfigurationComponent {
       .subscribe({
         next: (res) => {
           this.submitted = false;
-          this._toastrService.success(res.message, 'Success');
+          this._snackBar.open(res.message);
         },
         error: (e) => {
           this.loading = false;

@@ -8,7 +8,7 @@
             <div class="row mx-0">
                 <div class="col-lg-7">
                     <div class="px-3">
-                        <h5 class="mb-2 font14 font500 mt-4">Country Code</h5>
+                        <!-- <h5 class="mb-2 font14 font500 mt-4">Country Code</h5>
                         <div class="form-group mb-3">
                             <select formControlName="countryCode" class="form-select"
                                 [ngClass]="{ 'is-invalid': submitted && e.countryCode.errors }">
@@ -19,7 +19,7 @@
                             <div *ngIf="submitted && e.countryCode.errors" class="invalid-feedback">
                                 <div *ngIf="e.countryCode.errors.required">Country code is required</div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <h5 class="mb-2 font14 font500">Mobile number</h5>
                         <div class="form-group mb-3">
@@ -170,9 +170,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-auto">
-                            <button class="primary-filled-button px-5 lg-btn w-100" type="submit">Book
-                                Now</button>
+                        <div class="mt-auto">                            
+                            <button class="primary-filled-button px-5 lg-btn w-100" type="submit">
+                                 <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span> -->
+                                 Book Now</button>
                         </div>
                     </div>
                 </div>

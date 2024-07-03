@@ -1,9 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '@app/_services';
 import { Role, User } from '@app/_models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     loginForm!: FormGroup;
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private authenticationService: AuthenticationService, private snackBar: MatSnackBar
     ) {
         ////debugger
         // redirect to home if already logged in
@@ -27,8 +28,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
+            username: ['', [Validators.required, UsernameValidator.cannotContainSpace]],
+            password: ['', [Validators.required]]
         });
     }
 
@@ -70,3 +71,13 @@ export class LoginComponent implements OnInit {
             });
     }
 }
+
+export class UsernameValidator {  
+    static cannotContainSpace(control: AbstractControl) : ValidationErrors | null {  
+        if((control.value as string).indexOf(' ') >= 0){  
+            return {cannotContainSpace: true}  
+        }  
+    
+        return null;  
+    }  
+}  

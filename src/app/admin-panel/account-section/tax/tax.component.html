@@ -6,7 +6,8 @@
                 like the service to be active in.</p>
         </div>
         <div class="ms-auto">
-            <button class="primary-filled-button  w-100" type="button" (click)="addNewTax()"><span class="icon-add"></span>
+            <button class="primary-filled-button  w-100" type="button" (click)="addNewTax()"><span
+                    class="icon-add"></span>
                 Add New</button>
         </div>
     </div>
@@ -47,12 +48,17 @@
                     </div>
                 </td>
             </tr>
+            <tr *ngIf="taxes.length==0 && !loading">
+                <span>No data found</span>
+            </tr>
         </tbody>
     </table>
+    <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
 </div>
 
 <button style="display:none;" class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas"
-    data-bs-target="#AddTaxRateSidebar" aria-controls="AddTaxRateSidebar" #addTaxCancelEle><span class="icon-add"></span>
+    data-bs-target="#AddTaxRateSidebar" aria-controls="AddTaxRateSidebar" #addTaxCancelEle><span
+        class="icon-add"></span>
     Add New</button>
 
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddTaxRateSidebar"

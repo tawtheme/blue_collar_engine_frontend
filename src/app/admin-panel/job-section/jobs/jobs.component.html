@@ -22,7 +22,7 @@
                         assignedBooking[0].totalCount:0)+(compeletedBooking.length > 0 ?
                         compeletedBooking[0].totalCount:0)}}</h6>
                     <p>Total Booking</p>
-                    <mat-progress-bar mode="query" *ngIf="loadUnAssigned"></mat-progress-bar>
+                    <!-- <mat-progress-bar mode="query" *ngIf="loadUnAssigned"></mat-progress-bar> -->
                 </div>
             </article>
             <article class="widget-card ">
@@ -33,7 +33,7 @@
                     <h6>{{unAssignedBooking.length > 0 ?
                         unAssignedBooking[0].totalCount:0}}</h6>
                     <p>Unassigned Booking</p>
-                    <mat-progress-bar mode="query" *ngIf="loadUnAssigned"></mat-progress-bar>
+                    <!-- <mat-progress-bar mode="query" *ngIf="loadUnAssigned"></mat-progress-bar> -->
                 </div>
             </article>
             <article class="widget-card ">
@@ -44,7 +44,7 @@
                     <h6>{{assignedBooking.length > 0 ?
                         assignedBooking[0].totalCount:0}}</h6>
                     <p>Assigned Booking</p>
-                    <mat-progress-bar mode="query" *ngIf="loadAssigned"></mat-progress-bar>
+                    <!-- <mat-progress-bar mode="query" *ngIf="loadAssigned"></mat-progress-bar> -->
                 </div>
             </article>
             <article class="widget-card ">
@@ -91,7 +91,7 @@
                         <div class="font14 d-flex align-items-center gap-2 font-muted"><span
                                 class="icon-email"></span>{{booking.emailAddress}} </div>
                     </div>
-                    <mat-progress-bar mode="indeterminate" *ngIf="loadUnAssigned"></mat-progress-bar>
+                    <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadUnAssigned"></mat-progress-bar> -->
                     <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned">
                         <span>No data found</span>
                     </div>
@@ -133,7 +133,7 @@
                         </div>
                         <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
                     </div>
-                    <mat-progress-bar mode="indeterminate" *ngIf="loadAssigned"></mat-progress-bar>
+                    <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadAssigned"></mat-progress-bar> -->
                     <div *ngIf="assignedBooking.length==0 && !loadAssigned">
                         <span>No data found</span>
                     </div>
@@ -170,7 +170,7 @@
                         <app-booking-step-dashboard [bookingId]="booking.bookingId"
                             [bookingStatus]="booking.status"></app-booking-step-dashboard>
                     </div>
-                    <mat-progress-bar mode="indeterminate" *ngIf="loadCompeleted"></mat-progress-bar>
+                    <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadCompeleted"></mat-progress-bar> -->
                     <div *ngIf="compeletedBooking.length==0 && !loadCompeleted">
                         <span>No data found</span>
                     </div>

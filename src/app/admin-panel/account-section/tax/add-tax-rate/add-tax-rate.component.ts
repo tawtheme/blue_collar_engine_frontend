@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,7 +16,7 @@ export class AddTaxRateComponent {
   loading: boolean = true;
   @Input() items?: any;
   @ViewChild('addTaxCancelEle') addTaxCancelEle!: ElementRef<HTMLElement>;
-  constructor(private _formBuilder: FormBuilder, private _toastrService: ToastrService, private _accountSettingService: AccountSettingService) { }
+  constructor(private _formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _accountSettingService: AccountSettingService) { }
 
 
   ngOnInit(): void {
@@ -38,6 +39,8 @@ export class AddTaxRateComponent {
       else {
         this.submitted=false;
         this.addTaxForm.reset();
+        this.addTaxForm.controls['taxId'].setValue(0);
+        this.addTaxForm.controls['name'].setValue('');
       }
     }  
   }
@@ -55,7 +58,7 @@ export class AddTaxRateComponent {
       //console.log(res)
       let el: HTMLElement = this.addTaxCancelEle.nativeElement;
       el.click();
-      this._toastrService.success(res.message, 'Success');
+      this._snackBar.open(res.message);
       this._accountSettingService.tenantAddressAdded.next(true);
     });
   }

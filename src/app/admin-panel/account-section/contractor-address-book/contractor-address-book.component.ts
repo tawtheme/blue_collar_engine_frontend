@@ -12,6 +12,7 @@ import { first } from 'rxjs';
 export class ContractorAddressBookComponent {
   items: any[] = [];
   addressInfo: any;
+  loading: boolean = false;
   @ViewChild('editAddressEle') editAddressEle!: ElementRef<HTMLElement>;
   constructor(private _accountSettingService: AccountSettingService, private _router: Router) {
   }
@@ -33,11 +34,12 @@ export class ContractorAddressBookComponent {
   }
 
   getAllAddress(param: PaginationModel) {
+    this.loading = true;
     this._accountSettingService.getTenantAddresses(param)
       .subscribe({
         next: (res) => {
           this.items = res.data;
-         // //console.log(this.items)
+          this.loading = false;
         }
       });
   }

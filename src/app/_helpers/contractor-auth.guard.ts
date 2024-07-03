@@ -44,16 +44,27 @@ export class ContractorAuthGuard implements CanActivate {
             if (result.message === 'Success') {
               localStorage.setItem('tenant', JSON.stringify(result.data));
               this.tenantSubject.next(result.data);
+              var _tenantInfo = <any>this.authenticationService.tenantValue;
+             // console.log(_tenantInfo)
               const user = this.authenticationService.userValue;
-              if (this._jwtHelperService.isTokenExpired(user?.data.token!)) {
+              if (user?.data.tenantInfo.subDomainName == subdomain) {
+                if (this._jwtHelperService.isTokenExpired(user?.data.token!)) {
+                  this.authenticationService.login(result.data.emailAddress, environment.tenantToken).subscribe(
+                    (response) => {
+                      res(true);
+                    });
+                }
+                else {
+                  res(true);
+                }
+              }
+              else {
                 this.authenticationService.login(result.data.emailAddress, environment.tenantToken).subscribe(
                   (response) => {
                     res(true);
                   });
               }
-              else {
-                res(true);
-              }
+
             } else {
               this.router.navigate(['/unauthorized'], { queryParams: { returnUrl: '/booking/online-form' } });
               res(false);

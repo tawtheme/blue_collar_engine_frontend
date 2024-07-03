@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { environment } from '@environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-edit-view-booking',
   templateUrl: './edit-view-booking.component.html',
@@ -29,7 +30,7 @@ export class EditViewBookingComponent {
   constructor(
     public dialogRef: MatDialogRef<EditViewBookingComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: any, private _tenantService: TenantService, private _dialog: MatDialog, private _bookingService: BookingService, private _toastrService: ToastrService, private _router: Router
+    public data: any, private _tenantService: TenantService, private _dialog: MatDialog, private _bookingService: BookingService, private _snackBar: MatSnackBar, private _router: Router
   ) { }
 
   ngOnInit() {
@@ -89,7 +90,7 @@ export class EditViewBookingComponent {
 
   save() {
     if (this.selectedValues.length == 0) {
-      this._toastrService.error("Please assign atleast one team member", "Error");
+      this._snackBar.open("Please assign atleast one team member", "Error");
       return;
     }
     else {
@@ -102,7 +103,7 @@ export class EditViewBookingComponent {
         .subscribe({
           next: (res) => {
             this.loading = false;
-            this._toastrService.success(res.message, 'Success');
+            this._snackBar.open(res.message);
             this.cancel();
             this._bookingService.bookingTeamMemberAssign.next(true);
           },

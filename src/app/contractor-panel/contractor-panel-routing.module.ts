@@ -15,7 +15,7 @@ const routes: Routes = [
         path: 'online-form',
         component: BookingComponent,
         pathMatch: 'full',
-        canActivate: [ContractorAuthGuard]
+       // canActivate: [ContractorAuthGuard]
       }]
   },
   { path: '**', component: PagenotfoundComponent }

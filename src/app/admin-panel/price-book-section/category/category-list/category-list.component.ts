@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
@@ -24,7 +25,7 @@ export class CategoryListComponent {
   pageSize: number = 5;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   pageEvent: PageEvent | undefined;
-  constructor(private _categoryService: CategoryService, private _router: Router, private _dialog: MatDialog, private _toastrService: ToastrService) {
+  constructor(private _categoryService: CategoryService, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar) {
 
   }
   ngOnInit(): void {
@@ -120,7 +121,7 @@ export class CategoryListComponent {
           'status': category.status == 'A' ? 'D' : 'A'
         }
         this._categoryService.ChangeStatus(_param).subscribe(res => {
-          this._toastrService.success("Status has been changed successfully.", 'Success');          
+          this._snackBar.open("Status has been changed successfully.");          
           category.status = category.status == 'A' ? 'D' : 'A';
         })
       }

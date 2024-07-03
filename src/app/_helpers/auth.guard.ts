@@ -1,4 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 import { AuthenticationService } from '@app/_services';
@@ -10,14 +11,14 @@ export class AuthGuard implements CanActivate {
         private router: Router,
         private authenticationService: AuthenticationService,
         private _jwtHelperService: JwtHelperService,
-        private _toastrService: ToastrService
+        private _snackBar: MatSnackBar
     ) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const user = this.authenticationService.userValue;
        // //debugger
         if (this._jwtHelperService.isTokenExpired(user?.data.token!)) {
-            this._toastrService.error("Session has been expired", "Error");
+            this._snackBar.open("Session has been expired");
             this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
             return false;
         }

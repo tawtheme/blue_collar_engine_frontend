@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +17,7 @@ export class CreateCustomerComponent implements OnInit {
   loading = false;
   submitted = false;
   @ViewChild('customerCancelEle') customerCancelEle!: ElementRef<HTMLElement>;
-  constructor(private formBuilder: FormBuilder, private _customerService: CustomerService, private _router: Router, private _toastrService: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private _customerService: CustomerService, private _router: Router, private _snackBar: MatSnackBar) {
 
   }
   ngOnInit(): void {
@@ -66,7 +67,7 @@ export class CreateCustomerComponent implements OnInit {
           //console.log(res)
           let el: HTMLElement = this.customerCancelEle.nativeElement;
           el.click();
-          this._toastrService.success(res.message, 'Success');
+          this._snackBar.open(res.message);
           this._customerService.customerAdded.next(true);
           if (param.customerId > 0) {
             this._customerService.customerDetailAdded.next(param.customerId);

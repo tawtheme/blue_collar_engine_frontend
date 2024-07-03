@@ -63,7 +63,7 @@ export class BookingSlotComponent {
       return time.businessHourId === this.bookingTime;
     });
 
-    this._dialog.open(BookingAddressComponent, { width: '640px', height: '400px', data: { bookingDate: this.bookingDate, bookingTime: this.bookingTime, businessHours: this.businessHours, selectedServices: this.selectedServices }, disableClose: true });
+    this._dialog.open(BookingAddressComponent, { width: '900px', height: '600px', data: { bookingDate: this.bookingDate, bookingTime: this.bookingTime, businessHours: this.businessHours, selectedServices: this.selectedServices }, disableClose: true });
     this.dialogRef.close();
   }
 

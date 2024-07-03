@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from '@app/_models';
 import { AuthenticationService } from '@app/_services';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
@@ -27,7 +28,7 @@ export class BusinessHoursComponent {
   minTime: string = '';
   maxTime: string = '';
 
-  constructor(private authenticationService: AuthenticationService, private _accountSettingService: AccountSettingService, private _masterService: MasterService, private _formBuilder: FormBuilder, private _toastrService: ToastrService, public dialog: MatDialog) {
+  constructor(private authenticationService: AuthenticationService, private _accountSettingService: AccountSettingService, private _masterService: MasterService, private _formBuilder: FormBuilder, private _snackBar: MatSnackBar, public dialog: MatDialog) {
     this.user = <any>this.authenticationService.userValue;
     ////console.log(this.user);
   }
@@ -140,7 +141,7 @@ export class BusinessHoursComponent {
     //console.log(JSON.stringify(param))
     this._accountSettingService.addUpdateBusinessHours(param).subscribe(res => {
       this.loading = false;
-      this._toastrService.success(res.message, 'Success');
+      this._snackBar.open(res.message);          
     });
   }
   onOpenTimeset(event: any) {

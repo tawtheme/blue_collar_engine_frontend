@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
@@ -27,7 +28,7 @@ export class ServiceListComponent {
   @ViewChild('catgeorySideBarEle') catgeorySideBarEle!: ElementRef<HTMLElement>;
   @ViewChild('catgeoryServiceSideBarEle') catgeoryServiceSideBarEle!: ElementRef<HTMLElement>;
   apiBaseUrl: string = environment.apiUrl + '/';
-  constructor(private _categoryService: CategoryService, private _router: Router, private _dialog: MatDialog, private _toastrService: ToastrService) {
+  constructor(private _categoryService: CategoryService, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar) {
 
   }
   ngOnInit(): void {
@@ -131,7 +132,7 @@ export class ServiceListComponent {
           'status': service.isOnlineBooking == true ? false : true
         }
         this._categoryService.ChangeBookingStatus(_param).subscribe(res => {
-          this._toastrService.success("Booking status has been changed successfully.", 'Success');
+          this._snackBar.open("Booking status has been changed successfully.");
           service.isOnlineBooking = (service.isOnlineBooking == true ? false : true);
           //this._categoryService.categoryServiceAdded.next(true);
         })

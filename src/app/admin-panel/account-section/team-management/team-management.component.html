@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </td>
-                <td>{{user.mobileNo}}</td>
+                <td>{{user.mobileNo | usMobileNo}}</td>
                 <td>{{user.emailAddress}}</td>
                 <td>---</td>
                 <td>
@@ -63,9 +63,16 @@
 
                 </td>
             </tr>
+            <tr *ngIf="users.length==0 && !loading">
+                <span>No data found</span>
+            </tr>
         </tbody>
     </table>
-    <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
+</div>
+<div class="card-footer pb-0 pt-3">
+    <mat-paginator [length]="users.length > 0 ? users[0].totalCount:0" *ngIf="users.length > 0" [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>
 </div>
 
 <button style="display:none;" class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas"

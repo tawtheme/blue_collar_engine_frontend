@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConstantManager } from '@app/_helpers/constant/constantManager';
 import { CustomerModel } from '@app/_models/customer/customerModel';
@@ -46,7 +47,7 @@ export class CreateInvoiceComponent implements OnInit {
   filteredProducts: Observable<any[]>;
   productCtrl = new FormControl();
   bookingId: number = 0;
-  constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _toastrService: ToastrService, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService, private _bookingService: BookingService) {
+  constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _snackBar: MatSnackBar, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService, private _bookingService: BookingService) {
     this.filteredProducts = this.productCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -80,7 +81,7 @@ export class CreateInvoiceComponent implements OnInit {
         totalPrice: ['', null],
         description: ['', null]
       })]),
-      bookingId: ['', null]
+      bookingId: [0, null]
     });
 
     var _param = {
@@ -250,11 +251,11 @@ export class CreateInvoiceComponent implements OnInit {
           else {
             this.loadingDraft = false;
           }
-          this._toastrService.success(res.message, 'Success');
+          this._snackBar.open(res.message);
           ////console.log(res)
           if (this.bookingId > 0) {
             this._router.navigate(['/admin/jobs']);
-            this._bookingService.openEditBookingPage.next(this.bookingId);
+            //this._bookingService.openEditBookingPage.next(this.bookingId);
           }
           else {
             this._router.navigate(['/admin/invoice']);

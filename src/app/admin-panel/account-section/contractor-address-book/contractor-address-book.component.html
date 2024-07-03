@@ -24,13 +24,18 @@
                     {{address.address}}, {{address.state}}, {{address.city}}, {{address.zipCode}}</p>
             </div>
             <div class="d-flex justify-content-between align-items-center ">
-                <mat-slide-toggle [(ngModel)]="address.isDefault" (change)="onChange($event)">Set as default</mat-slide-toggle>
+                <mat-slide-toggle [(ngModel)]="address.isDefault" (change)="onChange($event)">Set as
+                    default</mat-slide-toggle>
                 <button class="btn light-outlined-button xs-btn" (click)="editAddress(address)"> <span
                         class="icon-edit"></span>
                     Edit</button>
             </div>
         </div>
     </div>
+    <div *ngIf="items.length==0 && !loading">
+        <span>No data found</span>
+    </div>
+    <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
 </div>
 
 <button style="display:none;" class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas"

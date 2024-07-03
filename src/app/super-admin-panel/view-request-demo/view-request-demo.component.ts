@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MasterService } from '@app/_services/master.service';
 import { RequestDemoService } from '@app/_services/secure-panel/request-demo.service';
@@ -27,7 +28,7 @@ export class ViewRequestDemoComponent {
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private _masterService: MasterService, private _requestDemoService: RequestDemoService, private _toastrService: ToastrService, private _tenantService: TenantService) {
+    private _masterService: MasterService, private _requestDemoService: RequestDemoService, private _snackBar: MatSnackBar, private _tenantService: TenantService) {
     this.bindNoOFEmplyeeDDL();
     this.bindIndustriesDDL();
     this.bindHereAboutUsDDL();
@@ -106,7 +107,7 @@ export class ViewRequestDemoComponent {
           this.loading = false;
           let el: HTMLElement = this.customerCancelEle.nativeElement;
           el.click();
-          this._toastrService.success(res.message, 'Success');
+          this._snackBar.open(res.message);
           this._requestDemoService.subDomainAdded.next(true);
         },
         error: error => {

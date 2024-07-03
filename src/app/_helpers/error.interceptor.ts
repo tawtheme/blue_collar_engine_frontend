@@ -5,10 +5,11 @@ import { catchError } from 'rxjs/operators';
 
 import { AuthenticationService } from '@app/_services';
 import { ToastrService } from 'ngx-toastr';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    constructor(private authenticationService: AuthenticationService, private _toastrService: ToastrService) { }
+    constructor(private authenticationService: AuthenticationService, private _snackBar: MatSnackBar) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let error: any;
@@ -16,10 +17,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             if ([401, 403].includes(err.status) && this.authenticationService.userValue) {
                 this.authenticationService.logout();
                 if (err.status == 401) {
-                    this._toastrService.error("Unauthorized access", "Error");
+                    this._snackBar.open("Unauthorized access");
                 }
                 else {
-                    this._toastrService.error("Session has been expired", "Error");
+                    this._snackBar.open("Session has been expired");
                 }
                 return throwError(() => error);
             }
@@ -29,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             else {
                 error = err.error.data || err.error.message || err.statusText;
             }
-            this._toastrService.error(error, "Error");
+            this._snackBar.open(error);
             return throwError(() => error);
         }))
     }

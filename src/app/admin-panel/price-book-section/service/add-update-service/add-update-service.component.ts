@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
@@ -31,7 +32,7 @@ export class AddUpdateServiceComponent {
   selectedFiles: FileList | any = null;
   progressInfos: any[] = [];
   apiBaseUrl: string = environment.apiUrl + '/';
-  constructor(private formBuilder: FormBuilder, private _categoryService: CategoryService, private _router: Router, private _toastrService: ToastrService, private _dialog: MatDialog, private _uploadService: UploadService) {
+  constructor(private formBuilder: FormBuilder, private _categoryService: CategoryService, private _router: Router, private _snackBar: MatSnackBar, private _dialog: MatDialog, private _uploadService: UploadService) {
     var _param = {
       "id": 0,
       "pageNumber": 0,
@@ -127,7 +128,7 @@ export class AddUpdateServiceComponent {
         //console.log(res)
         let el: HTMLElement = this.customerCancelEle.nativeElement;
         el.click();
-        this._toastrService.success(res.message, 'Success');
+        this._snackBar.open(res.message);
         this._categoryService.categoryServiceAdded.next(true);
       });
   }
@@ -175,7 +176,7 @@ export class AddUpdateServiceComponent {
       this.selectedFiles = null;
       this.submitted = false;
       this.categoryServiceForm.controls['files'].setValue("");
-      this._toastrService.error("Only png, jpeg, jpg extension files are allowed", "Error");
+      this._snackBar.open("Only png, jpeg, jpg extension files are allowed");
     }
   }
 
@@ -197,7 +198,7 @@ export class AddUpdateServiceComponent {
             'status': 'D'
           }
           this._uploadService.changeStatus(_param).subscribe(res => {
-            this._toastrService.success("Service Image has been deleted successfully.", 'Success');
+            this._snackBar.open("Service Image has been deleted successfully.");
             this._categoryService.categoryServiceAdded.next(true);
           })
         }

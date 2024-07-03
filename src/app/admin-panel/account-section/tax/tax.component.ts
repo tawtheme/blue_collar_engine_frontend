@@ -10,6 +10,7 @@ import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account
 export class TaxComponent {
   taxes: any[] = [];
   taxInfo: any;
+  loading: boolean = false;
   @ViewChild('addTaxCancelEle') addTaxCancelEle!: ElementRef<HTMLElement>;
   constructor(private _accountSettingService: AccountSettingService, private _router: Router) {
 
@@ -17,17 +18,19 @@ export class TaxComponent {
 
   ngOnInit() {
     this.getAllTaxes();
-    this._accountSettingService.tenantAddressAdded.subscribe(res=>{
-      if(res){
+    this._accountSettingService.tenantAddressAdded.subscribe(res => {
+      if (res) {
         this.getAllTaxes();
       }
     });
   }
 
   getAllTaxes() {
+    this.loading = true;
     this._accountSettingService.getAllTax()
       .subscribe({
         next: (res) => {
+          this.loading = false;
           this.taxes = res.data;
           ////console.log(this.taxes)
         }
@@ -36,7 +39,7 @@ export class TaxComponent {
 
   editTax(taxInfo: any) {
     this.taxInfo = taxInfo;
-   // //console.log(this.taxInfo)
+    // //console.log(this.taxInfo)
     let el: HTMLElement = this.addTaxCancelEle.nativeElement;
     el.click();
   }

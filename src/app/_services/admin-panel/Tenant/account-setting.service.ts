@@ -118,8 +118,8 @@ export class AccountSettingService {
       }));
   }
 
-  getAllUsers() {
-    return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetAllUsers`)
+  getAllUsers(PaginationModel: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/GetAllUsers`, PaginationModel)
       .pipe(map(res => {
         return res;
       }));
@@ -132,6 +132,6 @@ export class AccountSettingService {
     return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/AddUpdateUser`, userInfo, httpOptions)
       .pipe(map(res => {
         return res;
-      }));   
+      }));
   }
 }

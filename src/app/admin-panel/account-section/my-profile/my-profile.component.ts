@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
@@ -29,7 +30,7 @@ export class MyProfileComponent {
   selectedFiles: FileList | any = null;
   progressInfos: any[] = [];
   apiBaseUrl: string = environment.apiUrl + '/';
-  constructor(private _accountSettingService: AccountSettingService, private _router: Router, private formBuilder: FormBuilder, private _customerService: CustomerService, private _toastrService: ToastrService, private _masterService: MasterService, private _dialog: MatDialog) {
+  constructor(private _accountSettingService: AccountSettingService, private _router: Router, private formBuilder: FormBuilder, private _customerService: CustomerService, private _snackBar: MatSnackBar, private _masterService: MasterService, private _dialog: MatDialog) {
 
   }
 
@@ -127,7 +128,7 @@ export class MyProfileComponent {
       this.selectedFiles = null;
       this.submitted = false;
       this.profileForm.controls['companyImagePath'].setValue("");
-      this._toastrService.error("Only png, jpeg, jpg extension files are allowed", "Error");
+      this._snackBar.open("Only png, jpeg, jpg extension files are allowed", "Error");
     }
   }
 
@@ -174,7 +175,8 @@ export class MyProfileComponent {
     this._accountSettingService.updateProfile(formData)
       .subscribe(res => {
         this.submitted = false;
-        this._toastrService.success(res.message, 'Success');
+        this._snackBar.open(res.message);
+        
       });
   }
 }

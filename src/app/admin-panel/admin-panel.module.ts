@@ -45,6 +45,7 @@ import { ContractorAddressBookComponent } from './account-section/contractor-add
 import { SystemConfigurationComponent } from './account-section/system-configuration/system-configuration.component';
 import { TeamManagementComponent } from './account-section/team-management/team-management.component';
 import { AddTeamMemberComponent } from './account-section/team-management/add-team-member/add-team-member.component';
+import { StarRatingComponent } from './shared/star-rating/star-rating.component';
 
 @NgModule({
   imports: [
@@ -96,7 +97,8 @@ import { AddTeamMemberComponent } from './account-section/team-management/add-te
     ContractorAddressBookComponent,
     SystemConfigurationComponent,
     TeamManagementComponent,
-    AddTeamMemberComponent
+    AddTeamMemberComponent,
+    StarRatingComponent
   ],
 
 })

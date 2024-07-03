@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { environment } from '@environments/environment';
@@ -25,7 +26,7 @@ export class AddTeamMemberComponent {
   message: string[] = [];
   progressInfos: any[] = [];
   apiBaseUrl: string = environment.apiUrl + '/';
-  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _toastrService: ToastrService, private _dialog: MatDialog) {
+  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _dialog: MatDialog) {
 
   }
   ngOnInit() {
@@ -73,6 +74,7 @@ export class AddTeamMemberComponent {
         this.submitted = false;
         this.userForm.reset();
         this.userForm.controls['teamId'].setValue(0);
+        this.userForm.controls['userId'].setValue('');
         this.userForm.controls['state'].setValue('');
         this.userForm.controls['designation'].setValue('');
         this.userForm.controls['status'].setValue('A');
@@ -90,7 +92,8 @@ export class AddTeamMemberComponent {
     }
     this.loading = true;
     param = { ...param, ...{ mobileNo: param.mobileNo.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, ''), alternateNo: param.alternateNo != null && param.alternateNo != '' ? param.alternateNo.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '') : '', file: this.selectedFiles } };
-
+   // console.log(param)
+    //return;
     const formData = new FormData();
     formData.append('teamId', param.teamId);
     formData.append('userId', param.userId);
@@ -113,7 +116,7 @@ export class AddTeamMemberComponent {
       next: res => {
         this.submitted = false;
         this.loading = false;
-        this._toastrService.success(res.message, 'Success');
+        this._snackBar.open(res.message);
         this._accountSettingService.userAdded.next(true);
         let el: HTMLElement = this.addTeamMemberEle.nativeElement;
         el.click();
@@ -152,7 +155,7 @@ export class AddTeamMemberComponent {
       this.selectedFiles = null;
       this.submitted = false;
       this.userForm.controls['companyImagePath'].setValue("");
-      this._toastrService.error("Only png, jpeg, jpg extension files are allowed", "Error");
+      this._snackBar.open("Only png, jpeg, jpg extension files are allowed", "Error");
     }
   }
 

@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
 import { ToastrService } from 'ngx-toastr';
@@ -16,7 +17,7 @@ export class CategoryAddUpdateComponent {
   loading = false;
   submitted = false;
   @ViewChild('customerCancelEle') customerCancelEle!: ElementRef<HTMLElement>;
-  constructor(private formBuilder: FormBuilder, private _categoryService: CategoryService, private _router: Router, private _toastrService: ToastrService) {
+  constructor(private formBuilder: FormBuilder, private _categoryService: CategoryService, private _router: Router, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -59,7 +60,7 @@ export class CategoryAddUpdateComponent {
           //console.log(res)
           let el: HTMLElement = this.customerCancelEle.nativeElement;
           el.click();
-          this._toastrService.success(res.message, 'Success');
+          this._snackBar.open(res.message);
           this._categoryService.categoryAdded.next(true);
         },
         error: error => {

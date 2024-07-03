@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@app/_services';
 import { ConfirmedValidator } from '@app/shared/confirmed.validator';
@@ -18,7 +19,7 @@ export class ResetPasswordComponent {
   token: string = '';
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router, private authenticationService: AuthenticationService, private _toastrService: ToastrService) { }
+    private router: Router, private authenticationService: AuthenticationService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.queryParams
@@ -60,7 +61,7 @@ export class ResetPasswordComponent {
           //console.log(res)
           this.submitted = false;
           this.resetPasswordForm.reset();
-          this._toastrService.success(res.message, 'Success');          
+          this._snackBar.open(res.message);          
         },
         error: error => {
           this.loading = false;

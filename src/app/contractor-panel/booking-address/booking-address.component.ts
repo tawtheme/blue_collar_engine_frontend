@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/_services';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
@@ -29,7 +30,8 @@ export class BookingAddressComponent {
   selectedServices: any[] = [];
   isEnableNextBtn: boolean = false;
   IsShowEditBtn: boolean = false;
-  constructor(private authenticationService: AuthenticationService, private _router: Router, private _dialog: MatDialog, private _toastrService: ToastrService, private _bookingSharedService: BookingSharedService, private _tenantService: TenantService, private formBuilder: FormBuilder, private _customerService: CustomerService, public dialogRef: MatDialogRef<BookingAddressComponent>,
+  loading: boolean = false;
+  constructor(private authenticationService: AuthenticationService, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar, private _bookingSharedService: BookingSharedService, private _tenantService: TenantService, private formBuilder: FormBuilder, private _customerService: CustomerService, public dialogRef: MatDialogRef<BookingAddressComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private _bookingService: BookingService) {
     this.tenantInfo = <any>this.authenticationService.tenantValue;
     this.user = <any>this.authenticationService.userValue;
@@ -48,7 +50,7 @@ export class BookingAddressComponent {
   ngOnInit() {
     this.mobileVerifyForm = this.formBuilder.group({
       mobileNo: ['', [Validators.required]],
-      countryCode: ['', Validators.required],
+      countryCode: ['', null],
       otp: ['', null]
     });
 
@@ -90,14 +92,14 @@ export class BookingAddressComponent {
     if (this.mobileVerifyForm.controls['otp'].value == '') {
       this.authenticationService.generateOTP(_param).subscribe(res => {
         this.IsShowEditBtn = true;
-        this._toastrService.success("One time password have been sent on mobile no.")
+        this._snackBar.open("One time password have been sent on mobile no.")
       })
     }
     else {
       _param.otp = this.mobileVerifyForm.controls['otp'].value;
       this.authenticationService.verifyOTP(_param).subscribe(res => {
         ////console.log(res)
-        this._toastrService.success(res.message);
+        this._snackBar.open(res.message);
         this.openVerifyOTP = false;
         this.isVerifyOtp = true;
         this._customerService.findCustomerByMobileNo(_param.sendTo).subscribe(res => {
@@ -155,13 +157,14 @@ export class BookingAddressComponent {
   }
 
   proceedBooking() {
+    
     this.submitted = true;
     // stop here if form is invalid
     if (this.calanderBookingForm.invalid) {
       return;
     }
     else if (this.selectedServices.length == 0) {
-      this._toastrService.error("Please add atleast one service", "Error");
+      this._snackBar.open("Please add atleast one service");
     }
     else {
       const message = `Are you sure you want to do proceed?`;
@@ -176,9 +179,11 @@ export class BookingAddressComponent {
           var _mobileNo = this.mobileVerifyForm.controls['mobileNo'].value.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '');
           _param = { ..._param, ...{ mobileNo: _mobileNo, bookingDate: this.bookingDate, timeSlot: this.bookingTime, bookingDetails: this.selectedServices, customerId: (_param.customerId == '' ? 0 : _param.customerId), addressId: (_param.customerAddressId == '' ? 0 : _param.customerAddressId), status: 'U' } };
           ////console.log(_param)
+          this.loading=true;
           this._bookingService.createBooking(_param).subscribe(res => {
             ////console.log(res)
-            this._toastrService.success(res.message, "Success");
+            this.loading=false;
+            this._snackBar.open(res.message);
             this._bookingSharedService.emptryCart();
             window.location.reload();
             this.dialogRef.close();

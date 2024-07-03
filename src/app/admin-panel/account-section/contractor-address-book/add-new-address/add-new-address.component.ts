@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
@@ -19,7 +20,7 @@ export class AddNewAddressComponent {
   loading = false;
   @Input() items?: any;
   @ViewChild('addNewAddressCancelEle') addNewAddressCancelEle!: ElementRef<HTMLElement>;
-  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _toastrService: ToastrService) {
+  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) {
 
   }
   ngOnInit() {
@@ -68,8 +69,8 @@ export class AddNewAddressComponent {
       this.loading = false;
       //console.log(res)
       let el: HTMLElement = this.addNewAddressCancelEle.nativeElement;
-      el.click();
-      this._toastrService.success(res.message, 'Success');
+      el.click();      
+      this._snackBar.open(res.message);
       this._accountSettingService.tenantAddressAdded.next(true);
     });
   }

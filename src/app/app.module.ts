@@ -33,16 +33,24 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { PhoneMaskDirective } from './_helpers/directive/phone-mask.directive';
 import { UsMobileNoPipe } from './_helpers/pipe/us-mobile-no.pipe';
-import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './_helpers/loading.interceptor';
 import {NgxStripeModule} from "ngx-stripe";
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.component';
 import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { SharedModule } from './shared/shared.module';
 
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
 }
+const matSnackbarDefaultConfig: MatSnackBarConfig = {
+    verticalPosition: 'bottom',
+    horizontalPosition: 'center',
+    duration: 2000,
+  };
+
+  
 @NgModule({
     imports: [
         BrowserModule,
@@ -58,6 +66,7 @@ Date.prototype.toISOString = function () {
         NgbModule,
         MaterialModule,
         JwtModule,
+        SharedModule,
         NgxStripeModule.forRoot()
     ],
     declarations: [
@@ -74,7 +83,6 @@ Date.prototype.toISOString = function () {
         HomePageComponent,
         FrontendLayoutComponent,
         PagenotfoundComponent,
-        SpinnerComponent,
         PaymentSuccessComponent,
         FeatureInvoiceComponent,
         FeatureEstimateComponent,
@@ -83,6 +91,8 @@ Date.prototype.toISOString = function () {
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+        {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: matSnackbarDefaultConfig},
+
         //{  provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
         { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
         JwtHelperService,
