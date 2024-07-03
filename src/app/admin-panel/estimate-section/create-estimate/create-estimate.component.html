@@ -41,8 +41,8 @@
                         <mat-form-field class="example-full-width muiDatePickerFromField">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
                                 placeholder="Choose a date"
-                                [ngClass]="{ 'is-invalid': submitted && estimateInvoiceForm.get('expiryDate')?.hasError('required') }">
-                            <mat-datepicker-toggle matSuffix [for]="picker"
+                                [ngClass]="{ 'is-invalid': submitted && estimateInvoiceForm.get('expiryDate')?.hasError('required') }" readonly>
+                            <mat-datepicker-toggle matSuffix [for]="picker" disabled="false"
                                 [disableRipple]="true"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -222,11 +222,9 @@
             <div class="d-flex justify-content-end gap-3 mt-5" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')">
                 <button class="light-outlined-button px-5" type="submit" 
                     (click)="getAction('D')">
-                    <!-- <span *ngIf="loadingDraft" class="spinner-border spinner-border-sm me-1"></span> -->
                     Save as draft</button>
                 <button class="primary-filled-button px-5" type="submit" 
                     (click)="getAction('S')">
-                    <!-- <span *ngIf="loadingSend" class="spinner-border spinner-border-sm me-1"></span> -->
                     Save & Send </button>
             </div>
         </form>

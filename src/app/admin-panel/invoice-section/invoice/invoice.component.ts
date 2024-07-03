@@ -115,6 +115,9 @@ export class InvoiceComponent implements OnInit {
   }
 
   rangeChangeEvent() {
+    if(this.invoiceRagePickerForm.value.end==null){
+      return;
+    }
     this.getAll(this.bindSearchcParam());
   }
 }

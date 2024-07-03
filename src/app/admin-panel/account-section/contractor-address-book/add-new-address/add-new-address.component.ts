@@ -42,19 +42,20 @@ export class AddNewAddressComponent {
   get f() { return this.addressForm.controls; }
 
   ngOnChanges() {
-    if(this.addressForm!=undefined){
+    if (this.addressForm != undefined) {
       if (this.items != null) {
         this.addressForm.patchValue(this.items);
+        //console.log(this.items)
       }
       else {
-        this.submitted=false;
+        this.submitted = false;
         this.addressForm.reset();
         this.addressForm.controls['tenantAddressId'].setValue(0);
         this.addressForm.controls['tenantId'].setValue(0);
         this.addressForm.controls['state'].setValue('');
         this.addressForm.controls['isDefault'].setValue(false);
       }
-    }  
+    }
   }
 
   onSubmit() {
@@ -69,8 +70,14 @@ export class AddNewAddressComponent {
       this.loading = false;
       //console.log(res)
       let el: HTMLElement = this.addNewAddressCancelEle.nativeElement;
-      el.click();      
+      el.click();
       this._snackBar.open(res.message);
+      this.addressForm.reset();
+      this.submitted = false;
+      this.addressForm.controls['tenantAddressId'].setValue(0);
+      this.addressForm.controls['tenantId'].setValue(0);
+      this.addressForm.controls['state'].setValue('');
+      this.addressForm.controls['isDefault'].setValue(false);
       this._accountSettingService.tenantAddressAdded.next(true);
     });
   }

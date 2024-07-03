@@ -10,7 +10,7 @@ export class DashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getTopTechnician(userId: any='') {
+  getTopTechnician(userId: any = '') {
     return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetTopTechnician?userId=` + userId)
       .pipe(map(res => {
         return res;
@@ -19,6 +19,13 @@ export class DashboardService {
 
   getTopServices() {
     return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetTopServices`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  getDashboardGraphStats(dashboardGraphStatInfo: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/GetDashboardGraphStats`, dashboardGraphStatInfo)
       .pipe(map(res => {
         return res;
       }));

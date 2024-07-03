@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
@@ -27,7 +27,7 @@ export class CreateCustomerComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
       companyName: ['', [Validators.maxLength(200)]],
       mobileNumber: ['', [Validators.required]],
-      landlineNo: ['', [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]{10}')]],
+      landlineNo: ['', [Validators.required]],
       emailAddress: ['', [Validators.required, Validators.maxLength(200)]],
       serviceAddress: ['', [Validators.required, Validators.maxLength(500)]],
       state: ['', [Validators.required, Validators.maxLength(50)]],
@@ -40,11 +40,11 @@ export class CreateCustomerComponent implements OnInit {
 
   }
   ngOnChanges() {
-    if(this.items!=undefined){
+    if (this.items != undefined) {
       this.items = { ...this.items, ...{ tags: this.items.tags != null && this.items.tags.length > 0 ? this.items.tags.split(',') : '' } };
       this.customerForm.patchValue(this.items);
     }
-    
+
   }
   // convenience getter for easy access to form fields
   get f() { return this.customerForm.controls; }
@@ -53,8 +53,7 @@ export class CreateCustomerComponent implements OnInit {
     this.submitted = true;
     let param = this.customerForm.value as any;
     Object.assign(param, { latitude: '30.849536', longitude: '75.796101' });
-    param = { ...param, ...{ tags: param.tags != null && param.tags.length > 0 ? param.tags.toString() : '', mobileNumber: param.mobileNumber.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '') } }
-    //console.log(param);
+    param = { ...param, ...{ tags: param.tags != null && param.tags.length > 0 ? param.tags.toString() : '', mobileNumber: param.mobileNumber.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, ''), landlineNo: param.landlineNo.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '') } }
     if (this.customerForm.invalid) {
       return;
     }
@@ -79,5 +78,5 @@ export class CreateCustomerComponent implements OnInit {
         }
       });
   }
-
 }
+

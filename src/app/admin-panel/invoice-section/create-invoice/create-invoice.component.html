@@ -41,7 +41,7 @@
                         <mat-form-field class="example-full-width muiDatePickerFromField">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
                                 placeholder="Choose a date"
-                                [ngClass]="{ 'is-invalid': submitted && invoiceForm.get('expiryDate')?.hasError('required') }">
+                                [ngClass]="{ 'is-invalid': submitted && invoiceForm.get('expiryDate')?.hasError('required') }" readonly>
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>

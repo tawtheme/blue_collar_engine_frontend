@@ -8,11 +8,12 @@
     <div class="  px-3 py-3">
         <h4 class="mb-0 font18 font500">Payment Gateway Setup</h4>
     </div>
-    <form class="p-4 pt-0" [formGroup]="configurationForm" (ngSubmit)="onSubmit()">
+    <form class="p-4 pt-0" [formGroup]="configurationForm" (ngSubmit)="onSubmit()" *ngIf="!isEditDisabled">
         <div class="form-group mb-3">
             <label for="PublicKey" class="form-label">Secret Key</label>
             <input type="text" id="secretKey" formControlName="secretKey" class="form-control"
-                placeholder="Enter Secret Key" maxlength="500" [ngClass]="{ 'is-invalid': submitted && f.secretKey.errors }"/>
+                placeholder="Enter Secret Key" maxlength="500"
+                [ngClass]="{ 'is-invalid': submitted && f.secretKey.errors }" />
             <div *ngIf="submitted && f.secretKey.errors" class="invalid-feedback">
                 <div *ngIf="f.secretKey.errors.required">Secret Key is required</div>
             </div>
@@ -20,15 +21,36 @@
         <div class="form-group mb-3">
             <label for="SecretKey" class="form-label">Publish Key</label>
             <input type="text" id="publishableKey" formControlName="publishableKey" class="form-control"
-                placeholder="Enter Publish Key" maxlength="500" [ngClass]="{ 'is-invalid': submitted && f.publishableKey.errors }"/>
+                placeholder="Enter Publish Key" maxlength="500"
+                [ngClass]="{ 'is-invalid': submitted && f.publishableKey.errors }" />
             <div *ngIf="submitted && f.publishableKey.errors" class="invalid-feedback">
                 <div *ngIf="f.publishableKey.errors.required">Publish Key is required</div>
             </div>
         </div>
-        <div class="d-flex justify-content-start gap-3 mt-4">         
-            <button  class="primary-filled-button px-5">
-                <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span> -->
+        <div class="d-flex justify-content-start gap-3 mt-4">
+            <button class="primary-filled-button px-5">
                 Save Changes
+            </button>
+            <button  class="primary-filled-button px-5" (click)="hideConfiguration()" type="button" *ngIf="isShowHideBtn">
+                Hide
+            </button>
+        </div>
+    </form>
+
+    <form class="p-4 pt-0" [formGroup]="configurationForm" *ngIf="isEditDisabled">
+        <div class="form-group mb-3">
+            <label for="PublicKey" class="form-label">Secret Key</label>
+            <input type="text" id="secretKey" formControlName="secretKeyMask" class="form-control"
+                placeholder="Enter Secret Key" maxlength="500" />
+        </div>
+        <div class="form-group mb-3">
+            <label for="SecretKey" class="form-label">Publish Key</label>
+            <input type="text" id="publishableKey" formControlName="publishableKeyMask" class="form-control"
+                placeholder="Enter Publish Key" maxlength="500" />
+        </div>
+        <div class="d-flex justify-content-start gap-3 mt-4">
+            <button class="primary-filled-button px-5" (click)="editConfiguration()" type="button">
+                Edit
             </button>
         </div>
     </form>

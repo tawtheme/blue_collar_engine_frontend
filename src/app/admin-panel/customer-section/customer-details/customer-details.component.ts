@@ -198,4 +198,8 @@ export class CustomerDetailsComponent implements OnInit {
   redirectToCreateEstimate(estimateId: number) {
     this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } })
   }
+
+  redirectToEstimate(customerId:number){
+    this._router.navigate(['/admin/create-estimate'], { queryParams: { customerId: customerId } })
+  }
 }

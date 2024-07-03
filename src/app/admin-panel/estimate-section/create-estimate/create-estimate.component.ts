@@ -33,7 +33,7 @@ export class CreateEstimateComponent implements OnInit {
   customerAddress: any = [];
   isDisabled: boolean = true;
   customerInfo: CustomerModel = { firstName: '--', lastName: '--', mobileNumber: '--', emailAddress: '--', serviceAddress: '--', customerAddressId: 0, customerId: 0 };
-  taxPer: any;
+  taxPer: any = 0;
   clickType: any;
   subTotal: number = 0.00;
   estimateTotal: number = 0.00;
@@ -97,8 +97,9 @@ export class CreateEstimateComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.loading = false;
-          this.customerList = res.data;
-          //console.log(this.customerList)
+          this.customerList = res.data.filter(function (el: { status: any; }) {
+            return el.status=='A';
+          });          
         },
         error: error => {
           this.loading = false;
@@ -127,10 +128,14 @@ export class CreateEstimateComponent implements OnInit {
   }
 
   bindTax(type: any) {
-    this._accountSettingService.getTax(type).subscribe(res => {
-      //console.log(res.data.tax)
-      this.estimateInvoiceForm.controls['tax'].setValue(res.data.tax);
-      this.taxPer = res.data.tax;
+    this._accountSettingService.getTax(type).subscribe(res => {      
+      if (res.data != null) {
+        this.estimateInvoiceForm.controls['tax'].setValue(res.data.tax);
+        this.taxPer = res.data.tax;
+      }
+      else {
+        this.estimateInvoiceForm.controls['tax'].setValue(0);
+      }
     })
   }
 
@@ -173,7 +178,6 @@ export class CreateEstimateComponent implements OnInit {
         }
       });
   }
-
 
   onSubmit() {
     this.submitted = true;

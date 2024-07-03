@@ -61,6 +61,9 @@ export class EstimateComponent implements OnInit {
   }
 
   rangeChangeEvent() {
+    if (this.estimateRagePickerForm.value.end == null) {
+      return;
+    }
     this.getAll(this.bindSearchcParam());
   }
 

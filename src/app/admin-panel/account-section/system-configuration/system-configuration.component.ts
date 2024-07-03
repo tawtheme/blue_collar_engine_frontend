@@ -14,6 +14,8 @@ export class SystemConfigurationComponent {
   configurationForm!: FormGroup;
   submitted = false;
   loading = false;
+  isEditDisabled: boolean = true;
+  isShowHideBtn: boolean = false;
   constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) {
 
   }
@@ -22,7 +24,9 @@ export class SystemConfigurationComponent {
       id: [0, null],
       secretKey: ['', [Validators.required, Validators.maxLength(500)]],
       publishableKey: ['', [Validators.required, Validators.maxLength(500)]],
-      isActive: [true, null]
+      isActive: [true, null],
+      secretKeyMask: [null, null],
+      publishableKeyMask: [null, null]
     });
     this.get();
   }
@@ -35,6 +39,7 @@ export class SystemConfigurationComponent {
     if (this.configurationForm.invalid) {
       return;
     }
+    console.log(param)
     this.loading = true;
     this._accountSettingService.addUpdateStripeConfiguration(param)
       .subscribe({
@@ -57,9 +62,27 @@ export class SystemConfigurationComponent {
       .subscribe({
         next: (res) => {
           this.configurationForm.patchValue(res.data);
+          if (res.data != null) {
+            this.isEditDisabled = true;
+            this.configurationForm.controls['secretKeyMask'].disable();
+            this.configurationForm.controls['publishableKeyMask'].disable();
+          }
+          else {
+            this.isEditDisabled = false;
+          }
+
         },
         error: error => {
         }
       });
+  }
+
+  editConfiguration() {
+    this.isEditDisabled = false;
+    this.isShowHideBtn=true;
+  }
+
+  hideConfiguration() {
+    this.isEditDisabled = true;
   }
 }

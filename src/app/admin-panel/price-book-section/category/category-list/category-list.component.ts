@@ -42,6 +42,12 @@ export class CategoryListComponent {
         this.getAll(_param);
       }
     });
+
+    this._categoryService.categoryServiceAdded.subscribe((data: boolean) => {
+      if (data) {
+        this.getAll(_param);
+      }
+    });
   }
 
   getAll(param: PaginationModel) {

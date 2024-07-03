@@ -35,7 +35,7 @@
         <div class="form-group mb-3">
             <label for="email" class="form-label">Landline No.</label>
             <input type="text" formControlName="landlineNo" class="form-control" placeholder="Landline number"
-                [ngClass]="{ 'is-invalid': submitted && f.landlineNo.errors }" maxlength="200" />
+                [ngClass]="{ 'is-invalid': submitted && f.landlineNo.errors }" maxlength="200" appPhoneMask/>
             <div *ngIf="submitted && f.landlineNo.errors" class="invalid-feedback">
                 <div *ngIf="f.landlineNo.errors.required">Landline no. is required</div>
                 <div *ngIf="f.landlineNo.errors.pattern">Enter valid Landline no.</div>

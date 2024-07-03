@@ -104,7 +104,7 @@ export class CreateInvoiceComponent implements OnInit {
           // this.isShowRegNo = true;          
           this.bookingId = params.bookingId;
           this.getBookingInfo(this.bookingId);
-        }
+        }       
       });
   }
 
@@ -118,8 +118,9 @@ export class CreateInvoiceComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.loading = false;
-          this.customerList = res.data;
-          ////console.log(this.customerList)
+          this.customerList = res.data.filter(function (el: { status: any; }) {
+            return el.status=='A';
+          });           
         },
         error: error => {
           this.loading = false;
