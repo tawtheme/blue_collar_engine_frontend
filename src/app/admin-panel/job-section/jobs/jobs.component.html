@@ -1,11 +1,11 @@
 <div class="page-title-box items-center">
     <div class="container-xxl">
         <div class="d-flex items-center">
-            <h3 class="page-title">Booking</h3>
-            <!-- <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
+            <h3 class="page-title">Bookings</h3>
+            <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
                 <button class="primary-filled-button  w-100" type="button" (click)="createJob()">
                     <span class=" icon-add"></span> Add New Booking</button>
-            </div> -->
+            </div>
         </div>
     </div>
 </div>
@@ -69,7 +69,7 @@
                     <!-- <span class="icon-down-arrow font18 leftRotate90"></span>
                     <h4 class="font16">Feb 26, 2024</h4>
                     <span class="icon-down-arrow font18 rightRotate90"></span> -->
-                    <mat-form-field class="example-full-width muiDatePickerFromField">
+                    <mat-form-field class="example-full-width muiDatePickerFromField" (click)="picker.open()">
                         <input matInput [matDatepicker]="picker" [formControl]="todayDate" placeholder="Choose a date"
                             (dateChange)="onUnassignedDateChange($event)" readonly>
                         <mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true"></mat-datepicker-toggle>
@@ -92,7 +92,7 @@
                                 class="icon-email"></span>{{booking.emailAddress}} </div>
                     </div>
                     <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadUnAssigned"></mat-progress-bar> -->
-                    <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned">
+                    <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned" class="text-center p-3">
                         <span>No data found</span>
                     </div>
                     <mat-paginator [length]="unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0"
