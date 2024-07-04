@@ -17,7 +17,7 @@
 
 /* Transparent Overlay */
 .loading:before {
-  content: '';
+  content: "";
   display: block;
   position: fixed;
   top: 0;
@@ -158,11 +158,19 @@ button.primary-filled-button.mdc-button {
   font-family: "Lexend", sans-serif !important;
 }
 
-.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled+.mdc-radio__background .mdc-radio__inner-circle {
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled
+  + .mdc-radio__background
+  .mdc-radio__inner-circle {
   border-color: var(--primary) !important;
 }
 
-.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:checked+.mdc-radio__background .mdc-radio__outer-circle {
+.mat-mdc-radio-button
+  .mdc-radio
+  .mdc-radio__native-control:enabled:checked
+  + .mdc-radio__background
+  .mdc-radio__outer-circle {
   border-color: var(--primary) !important;
 }
 

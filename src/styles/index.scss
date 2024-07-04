@@ -1449,6 +1449,7 @@ tag-input.form-control {
       padding: 0;
       width: 20px;
       height: 20px;
+      margin-top: -5px;
       margin-right: 10px;
     }
   }
@@ -1456,6 +1457,15 @@ tag-input.form-control {
     &::before {
       display: none;
     }
+  }
+  .mat-date-range-input-container {
+    justify-content: space-between;
+    .mat-date-range-input-start-wrapper {
+      position: inherit;
+    }
+  }
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
   }
 }
 
@@ -1502,4 +1512,18 @@ tag-input.form-control {
       border: 1px solid var(--border-success);
     }
   }
+}
+
+app-view-request-demo,
+app-create-customer-address {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+table .mat-mdc-checkbox .mdc-checkbox__background {
+  width: 15px;
+  height: 15px;
+  border-width: 1px;
+  border-color: #d1d5db !important;
 }

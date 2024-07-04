@@ -51,36 +51,40 @@
                 </div>
             </article> -->
         </div>
-        <div class="table-top-filter-row">
-            <div class="table-top-filter-left"  [formGroup]="estimateRagePickerForm">
-                <div class="top-search-group flexGrow2 startIconInputField">
-                    <input type="text" id="search" name="search" formControlName="searchStr"
-                        placeholder="Search with Name, Address, Phone number here..." class="form-control"
-                        (keyup.enter)="onEnter($event)">
-                    <span class="icon-search iconPosition"></span>
-                </div>
-                <div class="top-search-group flexGrow1">
-                    <mat-form-field>
-                        <mat-label>Enter a date range</mat-label>
-                        <mat-date-range-input [rangePicker]="picker">
-                            <input matStartDate formControlName="start" placeholder="Start date">
-                            <input matEndDate formControlName="end" placeholder="End date"
-                                (dateChange)="rangeChangeEvent()">
-                        </mat-date-range-input>
-                        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker></mat-date-range-picker>
-                    </mat-form-field>
-                    <!-- <input type="date" id="date" name="date" placeholder="Select date..." class="form-control"> -->
-                </div>
-                <div class="top-search-group flexGrow1">
-                    <select id="status" name="status" class="form-select" formControlName="status" (change)="filterGrid()">
-                        <option value="">Show All</option>                        
-                        <option value="D">Draft</option>
-                        <option value="S">Sent</option>
-                    </select>
+        <div class="table-top-filter-row row">
+            <div class="col-md-8">
+                <div class="table-top-filter-left" [formGroup]="estimateRagePickerForm">
+                    <div class="top-search-group flexGrow2 startIconInputField">
+                        <input type="text" id="search" name="search" formControlName="searchStr"
+                            placeholder="Search with Name, Address, Phone number here..." class="form-control"
+                            (keyup.enter)="onEnter($event)">
+                        <span class="icon-search iconPosition"></span>
+                    </div>
+                    <div class="top-search-group">
+                        <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
+                            <!-- <mat-label>Enter a date range</mat-label> -->
+                            <mat-date-range-input [rangePicker]="picker">
+                                <input matStartDate formControlName="start" placeholder="Start date">
+                                <input matEndDate formControlName="end" placeholder="End date"
+                                    (dateChange)="rangeChangeEvent()">
+                            </mat-date-range-input>
+                            <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-date-range-picker #picker></mat-date-range-picker>
+                        </mat-form-field>
+                        <!-- <input type="date" id="date" name="date" placeholder="Select date..." class="form-control"> -->
+                    </div>
+                    <div class="top-search-group flexGrow1">
+                        <select id="status" name="status" class="form-select" formControlName="status"
+                            (change)="filterGrid()">
+                            <option value="">Show All</option>
+                            <option value="D">Draft</option>
+                            <option value="S">Sent</option>
+                        </select>
+                    </div>
                 </div>
             </div>
+
             <!-- <div class="table-top-filter-right">
                 <button class="light-outlined-button"><span class="icon-send"></span> Send Estimate</button>
                 <button class="light-outlined-button"><span class="icon-time"></span> Send Reminder</button>
@@ -126,8 +130,10 @@
                             </div>
                         </td>
                     </tr>
-                    <tr *ngIf="items.length==0 && !loading">
-                        <span>No data found</span>
+                    <tr *ngIf="items.length == 0 && !loading" class="text-center">
+                        <td class="text-center" colspan="7">
+                            <span>No data found</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
