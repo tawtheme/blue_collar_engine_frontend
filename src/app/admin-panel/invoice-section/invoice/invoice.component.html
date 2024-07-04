@@ -29,8 +29,8 @@
                     <span class="icon-time"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>$18,000</h6>
-                    <p>Draft from 15 invoices</p>
+                    <h6>${{stats?.totalInvoiceDraftRevenue | number : '1.2-2'}}</h6>
+                    <p>Draft from {{stats?.totalInvoiceDraftCount}} invoices</p>
                 </div>
             </article>
             <article class="widget-card ">
@@ -38,8 +38,8 @@
                     <span class="icon-overdue"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>$25,000</h6>
-                    <p>Overdue from 35 invoices</p>
+                    <h6>${{stats?.totalInvoiceOverDueRevenue | number : '1.2-2'}}</h6>
+                    <p>Overdue from {{stats?.totalInvoiceOverDueCount}} invoices</p>
                 </div>
             </article>
             <article class="widget-card ">
@@ -47,8 +47,8 @@
                     <span class="icon-job"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>$35,000</h6>
-                    <p>Need invoices for 26 jobs</p>
+                    <h6>${{stats?.totalPendingInvoiceRevenue | number : '1.2-2'}}</h6>
+                    <p>Need invoices for {{stats?.totalPendingInvoiceCount}} jobs</p>
                 </div>
             </article>
         </div>

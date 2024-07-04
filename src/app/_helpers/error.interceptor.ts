@@ -25,10 +25,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                 return throwError(() => error);
             }
             else if (err.status == 400) {
-                error = err.error.data || err.error.message;
+                error = err.error.message || err.error.data;
             }
             else {
-                error = err.error.data || err.error.message || err.statusText;
+                error = err.error.message || err.error.data || err.statusText;
             }
             this._snackBar.open(error);
             return throwError(() => error);

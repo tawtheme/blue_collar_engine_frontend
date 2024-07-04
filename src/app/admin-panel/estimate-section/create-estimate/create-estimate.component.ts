@@ -287,7 +287,7 @@ export class CreateEstimateComponent implements OnInit {
           this.productList = res.data.filter(function (ele: any) {
             return ele.isOnlineBooking == true;
           });
-          console.log(this.productList)
+          //console.log(this.productList)
         },
         error: error => {
           this.loading = false;

@@ -14,10 +14,10 @@
                         <!-- <li><a href="javascript:void(0);">
                                 Create Booking</a>
                         </li> -->
-                        <li><a href="/admin/estimate">
+                        <li><a href="/admin/create-estimate">
                                 Create Estimate</a>
                         </li>
-                        <li><a href="/admin/invoice">
+                        <li><a href="/admin/create-invoice">
                                 Create Invoice</a>
                         </li>
                     </ul>
@@ -52,28 +52,28 @@
                     <div class="col-3">
                         <div class="py-4">
                             <p class="mb-0 font14 font-muted font500">Booking</p>
-                            <h4 class="my-2">{{stats.totalBookingCount}}</h4>
+                            <h4 class="my-2">{{stats?.totalBookingCount}}</h4>
                             <!-- <p class="mb-0 font14 font-muted font500">Conversion Rate</p> -->
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="py-4">
                             <p class="mb-0 font14 font-muted font500">Total Revenue</p>
-                            <h4 class="my-2">${{stats.totalRevenueAmt | number : '1.2-2'}}</h4>
+                            <h4 class="my-2">${{stats?.totalRevenueAmt | number : '1.2-2'}}</h4>
                             <!-- <p class="mb-0 font14 font-muted font500">Average booking</p> -->
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="py-4">
                             <p class="mb-0 font14 font-muted font500">Estimate</p>
-                            <h4 class="my-2">{{stats.totalEstimateCount}}</h4>
+                            <h4 class="my-2">{{stats?.totalEstimateCount}}</h4>
                             <!-- <p class="mb-0 font14 font-muted font500">Conversion Rate</p> -->
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="py-4">
                             <p class="mb-0 font14 font-muted font500">Invoice</p>
-                            <h4 class="my-2">{{stats.totalInvoiceCount}}</h4>
+                            <h4 class="my-2">{{stats?.totalInvoiceCount}}</h4>
                             <!-- <p class="mb-0 font14 font-muted font500">Payment Rate</p> -->
                         </div>
                     </div>
