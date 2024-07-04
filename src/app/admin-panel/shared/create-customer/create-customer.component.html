@@ -35,7 +35,7 @@
         <div class="form-group mb-3">
             <label for="email" class="form-label">Landline No.</label>
             <input type="text" formControlName="landlineNo" class="form-control" placeholder="Landline number"
-                [ngClass]="{ 'is-invalid': submitted && f.landlineNo.errors }" maxlength="200" appPhoneMask/>
+                [ngClass]="{ 'is-invalid': submitted && f.landlineNo.errors }" maxlength="200" appPhoneMask />
             <div *ngIf="submitted && f.landlineNo.errors" class="invalid-feedback">
                 <div *ngIf="f.landlineNo.errors.required">Landline no. is required</div>
                 <div *ngIf="f.landlineNo.errors.pattern">Enter valid Landline no.</div>
@@ -61,19 +61,11 @@
             </div>
             <div class="row g-3">
                 <div class="col-md-6 ">
-                    <select id="state" formControlName="state" name="state" class="form-select"
+                    <select id="state" formControlName="state" class="form-select"
                         [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
-                        <option value="" disabled>Select State</option>
-                        <option value="California">California</option>
-                        <option value="Texas">Texas</option>
-                        <option value="Florida">Florida</option>
-                        <option value="New York">New York</option>
-                        <option value="Pennsylvania">Pennsylvania</option>
-                        <option value="Illinois">Illinois</option>
-                        <option value="Ohio">Ohio</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="North Carolina">North Carolina</option>
-                        <option value="Michigan">Michigan</option>
+                        <option value="">Select</option>
+                        <option value="{{state.text}}" *ngFor="let state of states">{{state.value}}
+                        </option>
                     </select>
                     <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
                         <div *ngIf="f.state.errors.required">State is required</div>
@@ -121,16 +113,13 @@
         <div class="form-group mb-3">
             <label for="status" class="form-label">Status</label>
             <select id="status" name="status" class="form-select" formControlName="status">
-                <option value="A" selected>Active Customer</option>
-                <option value="I">In-active Customer</option>
+                <option value="A" selected>Active</option>
+                <option value="I">In-active</option>
             </select>
         </div>
     </div>
     <div class="sidebar-popup-bottom offcanvas-footer">
         <button class="light-outlined-button outlined w-100" data-bs-dismiss="offcanvas" type="button">Cancel</button>
-        <button class="btn btn-primary w-100">
-            <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span> -->
-            Save
-        </button>
+        <button class="btn btn-primary w-100">Save</button>
     </div>
 </form>

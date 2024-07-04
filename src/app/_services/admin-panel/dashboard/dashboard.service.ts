@@ -30,4 +30,11 @@ export class DashboardService {
         return res;
       }));
   }
+
+  getDashboardStats() {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetDashboardStats`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 }

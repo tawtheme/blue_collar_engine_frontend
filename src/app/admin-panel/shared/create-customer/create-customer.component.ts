@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
+import { MasterService } from '@app/_services/master.service';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 
@@ -16,8 +17,9 @@ export class CreateCustomerComponent implements OnInit {
   customerForm!: FormGroup;
   loading = false;
   submitted = false;
+  states:any[]=[];
   @ViewChild('customerCancelEle') customerCancelEle!: ElementRef<HTMLElement>;
-  constructor(private formBuilder: FormBuilder, private _customerService: CustomerService, private _router: Router, private _snackBar: MatSnackBar) {
+  constructor(private formBuilder: FormBuilder, private _customerService: CustomerService, private _router: Router, private _snackBar: MatSnackBar, private _masterService: MasterService) {
 
   }
   ngOnInit(): void {
@@ -37,6 +39,8 @@ export class CreateCustomerComponent implements OnInit {
       tags: ['', [Validators.required, Validators.maxLength(500)]],
       status: ['A', null],
     });
+
+    this.getAllStates();
 
   }
   ngOnChanges() {
@@ -78,5 +82,18 @@ export class CreateCustomerComponent implements OnInit {
         }
       });
   }
+
+  getAllStates() {
+    this._masterService.getStates()
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.states = res.data;
+        },
+        error: error => {
+        }
+      });
+  }
+
 }
 

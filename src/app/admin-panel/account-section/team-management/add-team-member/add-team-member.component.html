@@ -23,7 +23,7 @@
         <div class="form-group mb-3">
             <label for="mobileNumber" class="form-label">Mobile No.</label>
             <input type="text" class="form-control" placeholder="Mobile number" formControlName="mobileNo"
-                maxlength="20" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" appPhoneMask/>
+                maxlength="20" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" appPhoneMask />
             <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
                 <div *ngIf="f.mobileNo.errors.required">Mobile no. is required</div>
             </div>
@@ -32,7 +32,7 @@
             <label for="alternativemobileNumber" class="form-label">Alternative Number</label>
             <input type="text" class="form-control" placeholder="Alternative mobile number"
                 formControlName="alternateNo" maxlength="20"
-                [ngClass]="{ 'is-invalid': submitted && f.alternateNo.errors }" appPhoneMask/>
+                [ngClass]="{ 'is-invalid': submitted && f.alternateNo.errors }" appPhoneMask />
             <div *ngIf="submitted && f.alternateNo.errors" class="invalid-feedback">
                 <div *ngIf="f.alternateNo.errors.required">Alternative no. is required</div>
             </div>
@@ -56,20 +56,12 @@
             </div>
             <div class="row g-3">
                 <div class="col-md-6 ">
-                    <select id="state" name="" class="form-select" formControlName="state" maxlength="50"
+                    <select id="state" formControlName="state" class="form-select"
                         [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
                         <option value="">Select</option>
-                        <option value="California">California</option>
-                        <option value="Texas">Texas</option>
-                        <option value="Florida">Florida</option>
-                        <option value="New York">New York</option>
-                        <option value="Pennsylvania">Pennsylvania</option>
-                        <option value="Illinois">Illinois</option>
-                        <option value="Ohio">Ohio</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="North Carolina">North Carolina</option>
-                        <option value="Michigan">Michigan</option>
-                    </select>
+                        <option value="{{state.text}}" *ngFor="let state of states">{{state.value}}
+                        </option>
+                    </select>                    
                     <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
                         <div *ngIf="f.state.errors.required">State is required</div>
                     </div>
@@ -118,7 +110,7 @@
         <div class="form-group mb-3">
             <label for="uploadPhoto" class="form-label">Upload Photo</label>
             <div class="uploadPhotoFormWrapper" id="uploadPhoto">
-                <input type="file" accept="image/*" (change)="selectFiles($event)"/>
+                <input type="file" accept="image/*" (change)="selectFiles($event)" />
                 <div class="d-flex align-items-center">
                     <span class="icon-attachment fs-5"></span>
                     <div class="ms-2">
@@ -129,10 +121,11 @@
             </div>
             <div class="uploadedPhotoWrapper">
                 <div class="uploadedImagesItem" *ngFor='let preview of previews;index as i'>
-                    <button type="button" class="btn" (click)="removeServiceImage(preview.index, preview.uploadId)"> 
+                    <button type="button" class="btn" (click)="removeServiceImage(preview.index, preview.uploadId)">
                         <span class="icon-close-1"></span>
                     </button>
-                    <img [src]="preview.filePath" class="preview img-fluid" (error)="preview.filePath = './../../../../assets/images/services3.png'">
+                    <img [src]="preview.filePath" class="preview img-fluid"
+                        (error)="preview.filePath = './../../../../assets/images/services3.png'">
                 </div>
             </div>
         </div>

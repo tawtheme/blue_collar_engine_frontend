@@ -13,19 +13,6 @@
     <div class="py-4">
         <div class="widget-container">
             <article class="widget-card ">
-                <div class="widget-card-circle lightGrayBox">
-                    <span class="icon-job"></span>
-                </div>
-                <div class="widget-card-info">
-                    <h6>{{(unAssignedBooking.length > 0 ?
-                        unAssignedBooking[0].totalCount:0)+(assignedBooking.length > 0 ?
-                        assignedBooking[0].totalCount:0)+(compeletedBooking.length > 0 ?
-                        compeletedBooking[0].totalCount:0)}}</h6>
-                    <p>Total Booking</p>
-                    <!-- <mat-progress-bar mode="query" *ngIf="loadUnAssigned"></mat-progress-bar> -->
-                </div>
-            </article>
-            <article class="widget-card ">
                 <div class="widget-card-circle lightYellowBox">
                     <span class="icon-info"></span>
                 </div>
@@ -48,14 +35,30 @@
                 </div>
             </article>
             <article class="widget-card ">
-                <div class="widget-card-circle lightPrimaryBox">
-                    <span class="icon-invoice"></span>
+                <div class="widget-card-circle lightSuccessBox ">
+                    <span class="icon-tick"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>$35,000</h6>
-                    <p>Total Revenue</p>
+                    <h6>{{compeletedBooking.length > 0 ?
+                        compeletedBooking[0].totalCount:0}}</h6>
+                    <p>Completed Booking</p>
+                    <!-- <mat-progress-bar mode="query" *ngIf="loadAssigned"></mat-progress-bar> -->
                 </div>
             </article>
+            <article class="widget-card ">
+                <div class="widget-card-circle lightGrayBox">
+                    <span class="icon-job"></span>
+                </div>
+                <div class="widget-card-info">
+                    <h6>{{(unAssignedBooking.length > 0 ?
+                        unAssignedBooking[0].totalCount:0)+(assignedBooking.length > 0 ?
+                        assignedBooking[0].totalCount:0)+(compeletedBooking.length > 0 ?
+                        compeletedBooking[0].totalCount:0)}}</h6>
+                    <p>Total Booking</p>
+                    <!-- <mat-progress-bar mode="query" *ngIf="loadUnAssigned"></mat-progress-bar> -->
+                </div>
+            </article>
+            
         </div>
 
     </div>

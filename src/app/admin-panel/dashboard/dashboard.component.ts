@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
   technician: any[] = [];
   topServices: any[] = [];
   graphStats: any[] = [];
+  stats: any;
   todayBookingLoaded: boolean = false;
   estimateInvoiceLoaded: boolean = false;
   invoiceLoaded: boolean = false;
@@ -55,6 +56,7 @@ export class DashboardComponent implements OnInit {
     this.dashboardRagePickerForm.controls['end'].setValue(new Date(year, month, day));
 
     this.getDashboardGraphStats();
+    this.getDashboardStats();
     var _param = {
       "id": 0,
       "pageNumber": 1,
@@ -188,6 +190,18 @@ export class DashboardComponent implements OnInit {
         next: (res: { data: any[]; }) => {
           this.graphStats = res.data;
           this.bindHighChart(this.graphStats);
+        },
+        error: error => {
+        }
+      });
+  }
+
+  getDashboardStats() {
+    this._dashboardService.getDashboardStats()
+      .subscribe({
+        next: (res: { data: any[]; }) => {
+          this.stats = res.data;
+          console.log(this.stats)
         },
         error: error => {
         }

@@ -52,29 +52,29 @@
                     <div class="col-3">
                         <div class="py-4">
                             <p class="mb-0 font14 font-muted font500">Booking</p>
-                            <h4 class="my-2">90%</h4>
-                            <p class="mb-0 font14 font-muted font500">Conversion Rate</p>
+                            <h4 class="my-2">{{stats.totalBookingCount}}</h4>
+                            <!-- <p class="mb-0 font14 font-muted font500">Conversion Rate</p> -->
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="py-4">
                             <p class="mb-0 font14 font-muted font500">Total Revenue</p>
-                            <h4 class="my-2">$2,3458</h4>
-                            <p class="mb-0 font14 font-muted font500">Average booking</p>
+                            <h4 class="my-2">${{stats.totalRevenueAmt | number : '1.2-2'}}</h4>
+                            <!-- <p class="mb-0 font14 font-muted font500">Average booking</p> -->
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="py-4">
                             <p class="mb-0 font14 font-muted font500">Estimate</p>
-                            <h4 class="my-2">75%</h4>
-                            <p class="mb-0 font14 font-muted font500">Conversion Rate</p>
+                            <h4 class="my-2">{{stats.totalEstimateCount}}</h4>
+                            <!-- <p class="mb-0 font14 font-muted font500">Conversion Rate</p> -->
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="py-4">
                             <p class="mb-0 font14 font-muted font500">Invoice</p>
-                            <h4 class="my-2">90%</h4>
-                            <p class="mb-0 font14 font-muted font500">Payment Rate</p>
+                            <h4 class="my-2">{{stats.totalInvoiceCount}}</h4>
+                            <!-- <p class="mb-0 font14 font-muted font500">Payment Rate</p> -->
                         </div>
                     </div>
                 </div>

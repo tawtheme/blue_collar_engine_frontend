@@ -3,10 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
+import { MasterService } from '@app/_services/master.service';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { environment } from '@environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 
 @Component({
   selector: 'app-add-team-member',
@@ -26,7 +27,8 @@ export class AddTeamMemberComponent {
   message: string[] = [];
   progressInfos: any[] = [];
   apiBaseUrl: string = environment.apiUrl + '/';
-  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _dialog: MatDialog) {
+  states:any[]=[];
+  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _dialog: MatDialog, private _masterService: MasterService) {
 
   }
   ngOnInit() {
@@ -48,7 +50,7 @@ export class AddTeamMemberComponent {
       designation: ['', [Validators.required]],
       profileImagePath: ['', null],
     });
-
+     this.getAllStates();
   }
   // convenience getter for easy access to form fields
   get f() { return this.userForm.controls; }
@@ -177,5 +179,17 @@ export class AddTeamMemberComponent {
         return;
       }
     });
+  }
+
+  getAllStates() {
+    this._masterService.getStates()
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.states = res.data;
+        },
+        error: error => {
+        }
+      });
   }
 }

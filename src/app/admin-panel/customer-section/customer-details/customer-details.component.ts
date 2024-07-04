@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { BookingService } from '@app/_services/admin-panel/booking/booking.service';
@@ -31,7 +32,7 @@ export class CustomerDetailsComponent implements OnInit {
   pageSize: number = 5;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   pageEvent: PageEvent | undefined;
-  constructor(private route: ActivatedRoute, private _customerService: CustomerService, private _router: Router, private _bookingService: BookingService, private _invoiceService: InvoiceService, private _estimateService: EstimateService, private _dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private _customerService: CustomerService, private _router: Router, private _bookingService: BookingService, private _invoiceService: InvoiceService, private _estimateService: EstimateService, private _dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.route.queryParams
@@ -191,15 +192,34 @@ export class CustomerDetailsComponent implements OnInit {
     this._dialog.open(EditViewBookingComponent, { width: '1200px', height: '800px', data: { 'bookingInfo': booking, isEnableEdit: false }, disableClose: true })
   }
 
-  viewInvoice(invoiceId: number) {
-    this._router.navigate(['/admin/create-invoice'], { queryParams: { invoiceId: invoiceId } })
+  viewInvoice(invoiceId: number) {   
+    if (invoiceId > 0) {
+      this._router.navigate(['/admin/create-invoice'], { queryParams: { invoiceId: invoiceId } })
+    }
+    else {
+      if (this.customerInfo.status == 'A') {
+        this._router.navigate(['/admin/create-invoice'], { queryParams: { invoiceId: invoiceId } })
+      }
+      else {
+        this._snackBar.open("You cannot create an invoice until the customer status is In-Active. Kindly activate it first.");
+        return;
+      }
+    }
   }
 
   redirectToCreateEstimate(estimateId: number) {
-    this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } })
+    if (estimateId > 0) {
+      this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } });
+    }
+    else {
+      if (this.customerInfo.status == 'A') {
+        this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } });
+      }
+      else {
+        this._snackBar.open("You cannot create an estimate invoice until the customer status is In-Active. Kindly activate it first.");
+        return;
+      }
+    }
   }
 
-  redirectToEstimate(customerId:number){
-    this._router.navigate(['/admin/create-estimate'], { queryParams: { customerId: customerId } })
-  }
 }

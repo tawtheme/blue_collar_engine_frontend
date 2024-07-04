@@ -37,4 +37,11 @@ export class MasterService {
         return res;
       }));
   }
+
+  getStates() {   
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Master/GetStates`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 }

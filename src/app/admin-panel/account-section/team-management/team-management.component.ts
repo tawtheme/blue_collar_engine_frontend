@@ -1,7 +1,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
+import { MasterService } from '@app/_services/master.service';
 import { environment } from '@environments/environment';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-team-management',
@@ -17,6 +19,7 @@ export class TeamManagementComponent {
   pageSize: number = 5;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   pageEvent: PageEvent | undefined;
+  
   constructor(private _accountSettingService: AccountSettingService) {
 
   }
@@ -80,5 +83,5 @@ export class TeamManagementComponent {
       "searchStr": ""
     }
     this.getAllUsers(_param);
-  }
+  }  
 }

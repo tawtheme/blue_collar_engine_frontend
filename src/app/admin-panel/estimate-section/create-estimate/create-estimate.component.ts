@@ -98,8 +98,8 @@ export class CreateEstimateComponent implements OnInit {
         next: (res) => {
           this.loading = false;
           this.customerList = res.data.filter(function (el: { status: any; }) {
-            return el.status=='A';
-          });          
+            return el.status == 'A';
+          });
         },
         error: error => {
           this.loading = false;
@@ -128,7 +128,7 @@ export class CreateEstimateComponent implements OnInit {
   }
 
   bindTax(type: any) {
-    this._accountSettingService.getTax(type).subscribe(res => {      
+    this._accountSettingService.getTax(type).subscribe(res => {
       if (res.data != null) {
         this.estimateInvoiceForm.controls['tax'].setValue(res.data.tax);
         this.taxPer = res.data.tax;
@@ -280,25 +280,14 @@ export class CreateEstimateComponent implements OnInit {
   }
 
   getAllProduct(_param: any) {
-    // this._productService.getAll()
-    //   .pipe(first())
-    //   .subscribe({
-    //     next: (res) => {
-    //       this.loading = false;
-    //       this.productList = res.data;
-    //       //console.log(this.productList)
-    //     },
-    //     error: error => {
-    //       this.loading = false;
-    //     }
-    //   });
-
     this._categoryService.getAllServices(_param)
       .pipe(first())
       .subscribe({
         next: (res) => {
-          this.productList = res.data;
-          //console.log(this.productList)
+          this.productList = res.data.filter(function (ele: any) {
+            return ele.isOnlineBooking == true;
+          });
+          console.log(this.productList)
         },
         error: error => {
           this.loading = false;
