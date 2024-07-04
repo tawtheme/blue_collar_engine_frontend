@@ -23,6 +23,7 @@ export class InvoiceComponent implements OnInit {
   pageEvent: PageEvent | undefined;
 
   invoiceRagePickerForm!: FormGroup;
+  stats:any;
   constructor(private _router: Router, private _invoiceService: InvoiceService, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class InvoiceComponent implements OnInit {
       status: ['', null]
     });
     this.getAll(this.bindSearchcParam());
+    this.getStats();
   }
 
   getAll(param: any) {
@@ -119,5 +121,18 @@ export class InvoiceComponent implements OnInit {
       return;
     }
     this.getAll(this.bindSearchcParam());
+  }
+
+  getStats() {
+    this._invoiceService.getStats()
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.stats = res.data;
+          //console.log(this.stats)
+        },
+        error: error => {
+        }
+      });
   }
 }

@@ -29,4 +29,11 @@ export class InvoiceService {
         return res;
       }));
   }
+
+  getStats() {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Invoice/GetStats`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 }

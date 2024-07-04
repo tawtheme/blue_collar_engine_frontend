@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { PaginationModel } from '@app/_models/pagination';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
 import { EstimateService } from '@app/_services/admin-panel/estimate/estimate.service';
+import { InvoiceService } from '@app/_services/admin-panel/invoice/invoice.service';
 import { first } from 'rxjs';
 
 @Component({
@@ -25,7 +26,8 @@ export class EstimateComponent implements OnInit {
   pageEvent: PageEvent | undefined;
 
   estimateRagePickerForm!: FormGroup;
-  constructor(private _router: Router, private _estimateService: EstimateService, private _formBuilder: FormBuilder) { }
+  stats:any;
+  constructor(private _router: Router, private _estimateService: EstimateService, private _formBuilder: FormBuilder, private _invoiceService: InvoiceService) { }
 
   ngOnInit(): void {
     this.estimateRagePickerForm = this._formBuilder.group({
@@ -35,6 +37,7 @@ export class EstimateComponent implements OnInit {
       status: ['', null]
     });
     this.getAll(this.bindSearchcParam());
+    this.getStats();
   }
   createEstimate() {
     this._router.navigate(['/admin/create-estimate'])
@@ -122,5 +125,18 @@ export class EstimateComponent implements OnInit {
       return this.sortOrder === 1 ? '☝️' : '👇';
     }
     return '';
+  }
+
+  getStats() {
+    this._invoiceService.getStats()
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.stats = res.data;
+          //console.log(this.stats)
+        },
+        error: error => {
+        }
+      });
   }
 }
