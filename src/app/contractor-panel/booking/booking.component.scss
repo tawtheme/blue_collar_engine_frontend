@@ -109,4 +109,21 @@
 button:disabled {
   opacity: 0.3;
 }
-
+.ScheduleOnlineTopSection {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  z-index: 9;
+}
+.booking-services-lists {
+  max-height: 88vh;
+  overflow-y: auto;
+  display: block;
+  position: sticky;
+  top: 60px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+}

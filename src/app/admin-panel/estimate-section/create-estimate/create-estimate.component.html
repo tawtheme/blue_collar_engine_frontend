@@ -38,10 +38,11 @@
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="expiryDate" class="form-label">Due Date</label>
-                        <mat-form-field class="example-full-width muiDatePickerFromField">
+                        <mat-form-field class="example-full-width muiDatePickerFromField" (click)="picker.open()">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
                                 placeholder="Choose a date"
-                                [ngClass]="{ 'is-invalid': submitted && estimateInvoiceForm.get('expiryDate')?.hasError('required') }" readonly>
+                                [ngClass]="{ 'is-invalid': submitted && estimateInvoiceForm.get('expiryDate')?.hasError('required') }"
+                                readonly>
                             <mat-datepicker-toggle matSuffix [for]="picker" disabled="false"
                                 [disableRipple]="true"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
@@ -220,11 +221,9 @@
             </div>
 
             <div class="d-flex justify-content-end gap-3 mt-5" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')">
-                <button class="light-outlined-button px-5" type="submit" 
-                    (click)="getAction('D')">
+                <button class="light-outlined-button px-5" type="submit" (click)="getAction('D')">
                     Save as draft</button>
-                <button class="primary-filled-button px-5" type="submit" 
-                    (click)="getAction('S')">
+                <button class="primary-filled-button px-5" type="submit" (click)="getAction('S')">
                     Save & Send </button>
             </div>
         </form>

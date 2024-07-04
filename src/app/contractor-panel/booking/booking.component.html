@@ -5,9 +5,23 @@
 </div>
 <div class="py-5">
     <div class="container-xxl">
-        <h4 class="mb-15 font20">Select Service</h4>
+        <div class="ScheduleOnlineTopSection">
+            <div class="row gx-5">
+                <div class="col-lg-4">
+                    <h4 class="mb-15 font20">Select Service</h4>
+                </div>
+                <div class="col-lg-8">
+                    <div *ngFor="let category of items; let i = index">
+                        <div *ngIf="category.categoryId === activeCategory">
+                            <h4 class="mb-15 font20">{{category.name}} Services</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row gx-5">
             <div class="col-lg-4">
+
                 <div class="nav flex-column nav-pills me-3 booking-services-lists" id="v-pills-tab" role="tablist"
                     aria-orientation="vertical">
                     <div *ngFor="let catgeory of items;index as i">
@@ -33,7 +47,6 @@
                         class="tab-pane fade {{catgeory.categoryId==activeCategory ?'show active':''}}"
                         attr.id="leftPanel_{{catgeory.categoryId}}" role="tabpanel"
                         attr.aria-labelledby="leftPanel_{{catgeory.categoryId}}_tab" tabindex="0">
-                        <h4 class="mb-15 font20">{{catgeory.name}} Services </h4>
                         <div class="border rounded p-4">
                             <div class="booking-services-items"
                                 *ngFor='let service of catgeory.categoryServices;index as j'>
@@ -67,11 +80,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="d-flex justify-content-start mt-4">
+                    <button class="primary-filled-button px-5 lg-btn" type="button" (click)="openBookingSlot()"
+                        [disabled]="!isEnableNextBtn">Next</button>
+                </div>
             </div>
         </div>
-        <div class="d-flex justify-content-start mt-4">
-            <button class="primary-filled-button px-5 lg-btn" type="button" (click)="openBookingSlot()"
-                [disabled]="!isEnableNextBtn">Next</button>
-        </div>
+
     </div>
 </div>

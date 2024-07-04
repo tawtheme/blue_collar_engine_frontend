@@ -71,27 +71,27 @@
         </div>
         <h4 class="mb-12 font16">Quick Summary</h4>
         <div class="row customers-widget-container">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <article class="border rounded h-100 py-3 px-4 d-flex justify-content-between">
                     <div class="">
-                        <h3>{{customerStats?.totalBookingCount}}</h3>
+                        <h3>{{customerStats?.totalBookingCount ? customerStats?.totalBookingCount : 0}}</h3>
                         <p>Total Booking</p>
                         <!-- <mat-progress-bar mode="query" *ngIf="customerStatsLoading"></mat-progress-bar> -->
                     </div>
                     <div class="">
-                        <h3>{{customerStats?.totalEstimateCount}}</h3>
+                        <h3>{{customerStats?.totalEstimateCount ? customerStats?.totalEstimateCount : 0}}</h3>
                         <p>Total Estimates</p>
                         <!-- <mat-progress-bar mode="query" *ngIf="customerStatsLoading"></mat-progress-bar> -->
                     </div>
                     <div class="">
-                        <h3>{{customerStats?.totalInvoiceCount}}</h3>
+                        <h3>{{customerStats?.totalInvoiceCount ? customerStats?.totalInvoiceCount : 0}}</h3>
                         <p>Total Invoice</p>
                         <!-- <mat-progress-bar mode="query" *ngIf="customerStatsLoading"></mat-progress-bar> -->
                     </div>
 
                 </article>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="row">
                     <div class="col-md-6">
                         <article class="customers-widget-card lightSuccessCardBox">

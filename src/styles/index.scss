@@ -1527,3 +1527,19 @@ table .mat-mdc-checkbox .mdc-checkbox__background {
   border-width: 1px;
   border-color: #d1d5db !important;
 }
+
+.mat-mdc-checkbox
+  .mdc-checkbox
+  .mdc-checkbox__native-control:enabled:checked
+  ~ .mdc-checkbox__background {
+  background: transparent !important;
+}
+
+.mdc-checkbox__ripple {
+  display: none !important;
+}
+
+.mat-mdc-form-field-error {
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+}

@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="table-top-filter-right">
+            <div class="table-top-filter-right d-none">
                 <button class="light-outlined-button"><span class="icon-export"></span> Export</button>
             </div>
         </div>
@@ -96,7 +96,8 @@
                     <tbody>
                         <tr *ngFor="let cust of items">
                             <td>
-                                <mat-checkbox class="example-margin" [checked]="cust.ischeck ==true"></mat-checkbox>
+                                <mat-checkbox class="example-margin" [checked]="cust.ischeck ==true"
+                                    [disableRipple]="true"></mat-checkbox>
                             </td>
                             <td>{{cust.createdDate | date:'mediumDate' }}</td>
                             <td>{{cust.firstName}} {{cust.lastName}}</td>
