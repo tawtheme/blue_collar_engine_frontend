@@ -20,8 +20,6 @@
   border-top: 2px solid;
 }
 
-
-
 .bookingDateTimeWrapper {
   display: flex;
   align-items: center;
@@ -162,4 +160,8 @@ li.dropdown-team-item {
       padding: 5px;
     }
   }
+}
+
+.scheduler-left-lists-item {
+  cursor: pointer;
 }

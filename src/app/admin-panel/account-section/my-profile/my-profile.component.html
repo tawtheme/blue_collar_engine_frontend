@@ -41,7 +41,7 @@
                         <label for="Email" class="form-label">Email Address</label>
                         <input type="text" formControlName="emailAddress" class="form-control mb-3"
                             placeholder="Enter email address" maxlength="200"
-                            [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"/>
+                            [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" />
                         <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
                             <div *ngIf="f.emailAddress.errors.required">Email address is required</div>
                         </div>
@@ -67,7 +67,7 @@
                 <div class="CompanyLogoUploadWrapper">
                     <div class="uploadPhotoFormWrapper" id="uploadPhoto">
                         <input type="file" accept="image/*" (change)="selectFiles($event)" />
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center w-100 h-100 justify-content-center">
                             <span class="icon-attachment fs-5"></span>
                             <div class="ms-2">
                                 <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose
@@ -84,7 +84,8 @@
                                 (click)="removeServiceImage(preview.index, preview.uploadId)">
                                 <span class="icon-close-1"></span>
                             </button>
-                            <img [src]="preview.filePath" class="preview img-fluid" (error)="preview.filePath = './../../../../assets/images/services3.png'">
+                            <img [src]="preview.filePath" class="preview img-fluid"
+                                (error)="preview.filePath = './../../../../assets/images/services3.png'">
                         </div>
 
 

@@ -1191,7 +1191,7 @@ form.sidebar-popup-inner {
 
 .uploadPhotoFormWrapper {
   border: 1px dashed var(--border-color);
-  padding: 15px;
+  padding: 0;
   position: relative;
   border-radius: 6px;
   display: flex;
@@ -1199,6 +1199,7 @@ form.sidebar-popup-inner {
   justify-content: center;
   flex-direction: column;
   height: 95px;
+  cursor: pointer;
   input {
     position: absolute;
     width: 100%;
@@ -1206,6 +1207,7 @@ form.sidebar-popup-inner {
     opacity: 0;
     top: 0;
     left: 0;
+    cursor: pointer;
   }
 }
 
@@ -1522,10 +1524,14 @@ app-create-customer-address {
 }
 
 table .mat-mdc-checkbox .mdc-checkbox__background {
-  width: 15px;
-  height: 15px;
-  border-width: 1px;
-  border-color: #d1d5db !important;
+  width: 18px;
+  height: 18px;
+  border-width: 2px;
+  border-color: var(--black) !important;
+}
+.mat-mdc-checkbox.mat-accent {
+  --mdc-checkbox-selected-focus-icon-color: var(--primary80) !important;
+  --mdc-checkbox-selected-hover-icon-color: var(--primary80) !important;
 }
 
 .mat-mdc-checkbox
@@ -1535,11 +1541,15 @@ table .mat-mdc-checkbox .mdc-checkbox__background {
   background: transparent !important;
 }
 
-.mdc-checkbox__ripple {
+.mdc-checkbox__ripple,
+.mdc-line-ripple {
   display: none !important;
 }
 
 .mat-mdc-form-field-error {
-  margin-top: 0.25rem;
-  font-size: 0.875em;
+  margin-top: 0.15rem;
+  font-size: 12px !important;
+}
+.invalid-feedback {
+  font-size: 12px;
 }

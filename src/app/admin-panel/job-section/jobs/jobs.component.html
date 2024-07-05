@@ -58,7 +58,7 @@
                     <!-- <mat-progress-bar mode="query" *ngIf="loadUnAssigned"></mat-progress-bar> -->
                 </div>
             </article>
-            
+
         </div>
 
     </div>
@@ -80,11 +80,11 @@
                     </mat-form-field>
                 </div>
                 <div class="scheduler-left-lists">
-                    <div class="px-3 py-4 border-bottom" *ngFor="let booking of unAssignedBooking">
+                    <div class="px-3 py-4 border-bottom scheduler-left-lists-item"
+                        (click)="openEditViewBooking(booking)" *ngFor="let booking of unAssignedBooking">
                         <div class="d-flex gap-3 mb-2">
                             <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingTime}}</span>
-                            <button class="danger-badge" type="button"
-                                (click)="openEditViewBooking(booking)">{{booking.statusText}}</button>
+                            <button class="danger-badge" type="button">{{booking.statusText}}</button>
                         </div>
                         <h4 class="font16 mb-1">{{booking.customerName}}</h4>
                         <p class="font14 mb-2 font-muted">{{booking.address}} {{booking.city}} {{booking.state}}
