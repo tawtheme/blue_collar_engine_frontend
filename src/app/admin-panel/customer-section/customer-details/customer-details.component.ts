@@ -157,7 +157,7 @@ export class CustomerDetailsComponent implements OnInit {
         next: (res) => {
           this.customerStatsLoading = false;
           this.customerStats = res.data;
-          ////console.log(this.customerStats)
+          //console.log(this.customerStats)
         },
         error: error => {
           this.customerStatsLoading = false;

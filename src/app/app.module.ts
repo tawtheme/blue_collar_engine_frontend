@@ -45,9 +45,10 @@ Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
 }
 const matSnackbarDefaultConfig: MatSnackBarConfig = {
-    verticalPosition: 'bottom',
+    verticalPosition: 'top',
     horizontalPosition: 'center',
     duration: 2000,
+    panelClass:"custom-snakbar"
   };
 
   

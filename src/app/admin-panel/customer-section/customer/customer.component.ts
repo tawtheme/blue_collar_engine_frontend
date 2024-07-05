@@ -25,6 +25,7 @@ export class CustomerComponent implements OnInit {
   pageSize: number = 5;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   pageEvent: PageEvent | undefined;
+  customerStats: any;
   constructor(private _customerService: CustomerService, private _router: Router) {
 
   }
@@ -37,7 +38,7 @@ export class CustomerComponent implements OnInit {
       "searchStr": ""
     }
     this.getAll(_param);
-
+   this.getCustomerStats();
     this._customerService.customerAdded.subscribe((data: boolean) => {
       if (data) {
         this.getAll(_param);
@@ -129,5 +130,19 @@ export class CustomerComponent implements OnInit {
       ev.source.checked = true;
     }
   }
+
+  getCustomerStats() {
+    this._customerService.getCustomerStats(0)
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this.customerStats = res.data;
+          //console.log(this.customerStats)
+        },
+        error: error => {
+        }
+      });
+  }
+
 
 }

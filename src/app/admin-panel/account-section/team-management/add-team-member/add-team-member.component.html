@@ -85,8 +85,8 @@
         </div>
         <div class="form-group mb-3">
             <label for="designation" class="form-label">Designation</label>
-            <select id="designation" name="designation" class="form-select" formControlName="designation" maxlength="50"
-                [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }">
+            <select id="designation" name="designation" class="form-select" formControlName="designation" 
+                [ngClass]="{ 'is-invalid': submitted && f.designation.errors }">
                 <option value="">Select</option>
                 <option value="AC Maintenance">AC Maintenance</option>
                 <option value="Mechanical Aptitude">Mechanical Aptitude</option>

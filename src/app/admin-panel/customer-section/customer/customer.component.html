@@ -29,8 +29,8 @@
                     <span class="icon-invoice"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>$18,000</h6>
-                    <p>Due from 15 customers</p>
+                    <h6>${{customerStats?.totalDueRevenue | number : '1.2-2'}}</h6>
+                    <p>Due from {{customerStats?.totalCustomerDueCount}} customers</p>
                 </div>
             </article>
             <!-- <article class="widget-card ">
@@ -49,7 +49,7 @@
                     <span class="icon-user"></span>
                 </div>
                 <div class="widget-card-info">
-                    <h6>75%
+                    <h6>{{customerStats?.totalActiveCustomerPercentage}}%
                         <span>Customers have been active</span>
                     </h6>
                     <p>within the last 6 months</p>

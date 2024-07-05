@@ -42,27 +42,19 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.invalid) {
             return;
         }
-
         this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe({
                 next: () => {
                     this.user = <any>this.authenticationService.userValue;
-                    // //debugger
-                    // //console.log(this.user)
                     this.loading = false;
-                    // const returnUrl = this.route.snapshot.queryParams['returnUrl'] ||  '/';
                     if (this.user.data.role == Role.SuperAdmin) {
                         this.router.navigateByUrl(this.route.snapshot.queryParams['returnUrl'] || '/secure-panel');
                     }
                     if (this.user.data.role == Role.Admin) {
                         this.router.navigateByUrl(this.route.snapshot.queryParams['returnUrl'] || '/admin');
                     }
-
-                    // get return url from query parameters or default to home page
-                    // const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-                    // this.router.navigateByUrl(returnUrl);
                 },
                 error: error => {
                     this.error = error;
@@ -76,8 +68,7 @@ export class UsernameValidator {
     static cannotContainSpace(control: AbstractControl) : ValidationErrors | null {  
         if((control.value as string).indexOf(' ') >= 0){  
             return {cannotContainSpace: true}  
-        }  
-    
+        }      
         return null;  
     }  
 }  

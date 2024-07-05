@@ -74,19 +74,16 @@
             <div class="col-md-5">
                 <article class="border rounded h-100 py-3 px-4 d-flex justify-content-between">
                     <div class="">
-                        <h3>{{customerStats?.totalBookingCount ? customerStats?.totalBookingCount : 0}}</h3>
+                        <h3>{{customerStats?.totalBookingCount}}</h3>
                         <p>Total Booking</p>
-                        <!-- <mat-progress-bar mode="query" *ngIf="customerStatsLoading"></mat-progress-bar> -->
                     </div>
                     <div class="">
-                        <h3>{{customerStats?.totalEstimateCount ? customerStats?.totalEstimateCount : 0}}</h3>
+                        <h3>{{customerStats?.totalEstimateCount}}</h3>
                         <p>Total Estimates</p>
-                        <!-- <mat-progress-bar mode="query" *ngIf="customerStatsLoading"></mat-progress-bar> -->
                     </div>
                     <div class="">
-                        <h3>{{customerStats?.totalInvoiceCount ? customerStats?.totalInvoiceCount : 0}}</h3>
+                        <h3>{{customerStats?.totalInvoiceCount}}</h3>
                         <p>Total Invoice</p>
-                        <!-- <mat-progress-bar mode="query" *ngIf="customerStatsLoading"></mat-progress-bar> -->
                     </div>
 
                 </article>
@@ -95,13 +92,13 @@
                 <div class="row">
                     <div class="col-md-6">
                         <article class="customers-widget-card lightSuccessCardBox">
-                            <h3>0</h3>
+                            <h3>${{customerStats?.totalRevenueByCustomer | number : '1.2-2'}}</h3>
                             <p>Total Revenue</p>
                         </article>
                     </div>
                     <div class="col-md-6">
                         <article class="customers-widget-card lightDangerCardBox">
-                            <h3>$0.00</h3>
+                            <h3>${{customerStats?.totalDueRevenueByCustomer | number : '1.2-2'}}</h3>
                             <p>Current Due</p>
                         </article>
                     </div>
@@ -119,21 +116,18 @@
                     data-bs-target="#pills-booking" type="button" role="tab" aria-controls="pills-booking"
                     aria-selected="true">Bookings ({{bookings.length > 0 ?
                     bookings[0].totalCount:0}})</button>
-                <!-- <mat-progress-bar mode="query" *ngIf="loadBooking"></mat-progress-bar> -->
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-estimate-tab" data-bs-toggle="pill" data-bs-target="#pills-estimate"
                     type="button" role="tab" aria-controls="pills-estimate" aria-selected="false">Estimate
                     ({{estimateInvoice.length > 0 ?
                     estimateInvoice[0].totalCount:0}})</button>
-                <!-- <mat-progress-bar mode="query" *ngIf="loadEstimateInvoice"></mat-progress-bar> -->
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-invoices-tab" data-bs-toggle="pill" data-bs-target="#pills-invoices"
                     type="button" role="tab" aria-controls="pills-invoices" aria-selected="false">Invoices
                     ({{invoices.length > 0 ?
                     invoices[0].totalCount:0}})</button>
-                <!-- <mat-progress-bar mode="query" *ngIf="loadInvoice"></mat-progress-bar> -->
             </li>
             <!-- <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-notifications-tab" data-bs-toggle="pill"
