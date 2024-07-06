@@ -1591,3 +1591,10 @@ table .mat-mdc-checkbox .mdc-checkbox__background {
 .mat-primary .mat-pseudo-checkbox-indeterminate {
   background: var(--primary) !important;
 }
+
+.mat-calendar-body-cell:not(.mat-calendar-body-disabled):hover
+  > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
+    .mat-calendar-body-comparison-identical
+  ) {
+  background-color: rgb(43 100 223 / 30%);
+}

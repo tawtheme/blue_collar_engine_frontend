@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BookingComponent } from './booking/booking.component';
 import { PagenotfoundComponent } from '@app/pagenotfound/pagenotfound.component';
 import { ContractorAuthGuard } from '@app/_helpers/contractor-auth.guard';
-
+import { BookingSuccessComponent } from './booking-success/booking-success.component';
+import { BookingFailedComponent } from './booking-failed/booking-failed.component';
 
 const routes: Routes = [
   {
@@ -15,18 +16,25 @@ const routes: Routes = [
         path: 'online-form',
         component: BookingComponent,
         pathMatch: 'full',
-       // canActivate: [ContractorAuthGuard]
-      }]
+        // canActivate: [ContractorAuthGuard]
+      },
+    ],
   },
-  { path: '**', component: PagenotfoundComponent }
-
+  {
+    path: 'booking-success',
+    component: BookingSuccessComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'booking-failed',
+    component: BookingFailedComponent,
+    pathMatch: 'full',
+  },
+  { path: '**', component: PagenotfoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ContractorPanelRoutingModule { }
-
-
-
+export class ContractorPanelRoutingModule {}
