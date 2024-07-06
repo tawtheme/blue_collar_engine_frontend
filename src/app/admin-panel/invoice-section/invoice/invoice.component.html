@@ -57,10 +57,11 @@
                 <div class="table-top-filter-left" [formGroup]="invoiceRagePickerForm">
                     <div class="top-search-group flexGrow2 startIconInputField">
                         <input type="text" id="search" name="search" formControlName="searchStr"
-                            placeholder="Search invoice here..." class="form-control" (keyup.enter)="onEnter($event)">
+                            placeholder="Search with Name and Invoice number" class="form-control"
+                            (keyup.enter)="onEnter($event)">
                         <span class="icon-search iconPosition"></span>
                     </div>
-                    <div class="top-search-group flexGrow1">
+                    <div class="top-search-group">
                         <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
                             <!-- <mat-label>Enter a date range</mat-label> -->
                             <mat-date-range-input [rangePicker]="picker">

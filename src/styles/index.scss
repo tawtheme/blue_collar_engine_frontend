@@ -1553,3 +1553,41 @@ table .mat-mdc-checkbox .mdc-checkbox__background {
 .invalid-feedback {
   font-size: 12px;
 }
+
+.mat-mdc-form-field-focus-overlay {
+  background-color: #fff !important;
+}
+
+.loading .mat-mdc-progress-spinner {
+  --mdc-circular-progress-active-indicator-color: var(--primary) !important;
+  width: 45px !important;
+  height: 45px !important;
+}
+
+.custom-spinner .mat-progress-spinner svg {
+  stroke: var(--primary) !important;
+}
+
+.custom-mat-selectbox.mat-mdc-form-field {
+  width: 100%;
+}
+
+.custom-mat-selectbox .mat-mdc-text-field-wrapper {
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--dark);
+  background-color: var(--white) !important;
+  font-weight: 300;
+  height: 39px;
+}
+
+.custom-mat-selectbox .mat-mdc-form-field-infix {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked,
+.mat-primary .mat-pseudo-checkbox-indeterminate {
+  background: var(--primary) !important;
+}

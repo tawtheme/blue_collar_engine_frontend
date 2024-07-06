@@ -128,11 +128,9 @@
                                     class="icon-email"></span>{{booking.emailAddress}}</div>
                         </div>
                         <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                        <div class="d-flex gap5 items-center">
-                            <div *ngFor="let cat of booking.categories">
-                                <span class="white-badge bg-light"
-                                    *ngFor="let service of cat.products">{{service.serviceName}}</span>
-                            </div>
+                        <div class="d-flex gap-2 items-center" *ngFor="let cat of booking.categories">
+                            <span class="white-badge bg-light"
+                                *ngFor="let service of cat.products">{{service.serviceName}}</span>
                         </div>
                         <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
                     </div>
