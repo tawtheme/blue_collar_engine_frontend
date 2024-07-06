@@ -54,7 +54,7 @@ export class CustomerComponent implements OnInit {
         next: (res) => {
           this.loading = false;
           this.items = res.data;
-          //console.log(this.items)
+        //  console.log(this.items)
         },
         error: error => {
           this.loading = false;

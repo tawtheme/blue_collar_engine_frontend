@@ -48,9 +48,11 @@
                     </div>
                 </td>
             </tr>
-            <tr *ngIf="taxes.length==0 && !loading">
-                <span>No data found</span>
-            </tr>
+            <tr *ngIf="taxes.length == 0 && !loading" class="text-center">
+                <td class="text-center" colspan="4">
+                    <span>No data found</span>
+                </td>
+            </tr>           
         </tbody>
     </table>
     <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
