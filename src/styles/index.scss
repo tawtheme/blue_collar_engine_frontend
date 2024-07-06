@@ -1322,7 +1322,7 @@ form.sidebar-popup-inner {
   padding: 6px 15px;
   border-radius: 4px;
   height: 38px;
-  font-family: "Lexend", sans-serif;
+  font-family: "JUST Sans";
   cursor: pointer;
   font-size: 14px;
 }
@@ -1398,7 +1398,7 @@ tag-input.form-control {
     align-items: center;
     gap: 5px;
     tag {
-      font-family: "Lexend", sans-serif;
+      font-family: "JUST Sans";
       margin: 0;
       height: 24px;
       line-height: 24px;
@@ -1421,7 +1421,7 @@ tag-input.form-control {
     border: 0 !important;
     padding: 0 !important;
     input {
-      font-family: "Lexend", sans-serif;
+      font-family: "JUST Sans";
       padding: 0;
       font-weight: 300;
     }
@@ -1443,7 +1443,7 @@ tag-input.form-control {
       padding: 0 !important;
       min-height: auto;
       input {
-        font-family: "Lexend", sans-serif;
+        font-family: "JUST Sans";
         font-weight: 300;
       }
     }
@@ -1596,5 +1596,9 @@ table .mat-mdc-checkbox .mdc-checkbox__background {
   > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(
     .mat-calendar-body-comparison-identical
   ) {
-  background-color: rgb(43 100 223 / 30%);
+  background-color: rgba(43, 100, 223, 0.3) !important;
+}
+
+.customers-tables td .light-outlined-button {
+  white-space: nowrap;
 }
