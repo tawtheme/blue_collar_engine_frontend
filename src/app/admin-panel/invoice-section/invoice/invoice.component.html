@@ -128,9 +128,11 @@
                                     Details</button>
                             </div>
                         </td>
-                    </tr>
-                    <tr *ngIf="items.length==0 && !loading">
-                        <span>No data found</span>
+                    </tr>                  
+                    <tr *ngIf="items.length == 0 && !loading" class="text-center">
+                        <td class="text-center" colspan="8">
+                            <span>No data found</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>

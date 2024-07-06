@@ -44,7 +44,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'jobs',
+        path: 'bookings',
         component: JobsComponent,
         canActivate: [AuthGuard]
       },

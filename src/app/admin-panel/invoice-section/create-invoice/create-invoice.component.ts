@@ -255,7 +255,7 @@ export class CreateInvoiceComponent implements OnInit {
           this._snackBar.open(res.message);
           ////console.log(res)
           if (this.bookingId > 0) {
-            this._router.navigate(['/admin/jobs']);
+            this._router.navigate(['/admin/bookings']);
             //this._bookingService.openEditBookingPage.next(this.bookingId);
           }
           else {

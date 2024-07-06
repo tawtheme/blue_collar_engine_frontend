@@ -110,9 +110,9 @@
                             <td> <mat-slide-toggle [checked]="cust.status=='A'"
                                     (change)="onChange($event)"></mat-slide-toggle>
                             </td>
-                            <td>$00.0</td>
+                            <td>${{cust?.balanceDueAmount | number : '1.2-2'}}</td>
 
-                            <td>--</td>
+                            <td>{{cust?.lastBookingCreatedDate==null ? '---':(cust?.lastBookingCreatedDate | date:'medium') }}</td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <button class=" light-outlined-button"
@@ -120,9 +120,11 @@
                                         Details</button>
                                 </div>
                             </td>
-                        </tr>
-                        <tr *ngIf="items.length==0 && !loading">
-                            <span>No data found</span>
+                        </tr>                   
+                        <tr *ngIf="items.length == 0 && !loading" class="text-center">
+                            <td class="text-center" colspan="8">
+                                <span>No data found</span>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
