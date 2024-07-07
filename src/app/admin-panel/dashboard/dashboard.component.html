@@ -10,6 +10,7 @@
                         Add New
                         <span class="icon-down-arrow"></span>
                     </button>
+
                     <ul class="dropdown-menu dropdown-menu-end">
                         <!-- <li><a href="javascript:void(0);">
                                 Create Booking</a>
@@ -21,6 +22,90 @@
                                 Create Invoice</a>
                         </li>
                     </ul>
+                </div>
+                <button type="button" class="btn btn-primary  gap-2" data-bs-toggle="modal"
+                    data-bs-target="#onboardModel">
+                    Open On-Board
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade onBoardModelStyle" id="onboardModel" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="diablog-header">
+                <h3>Welcome to Blue Collar Engine!</h3>
+                <p class="font-muted mt-2">To get started, we need to set up a few things.</p>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="px-md-5 pb-md-5 px-4 pb-4">
+                <div class="my-4 border rounded p-4">
+                    <div class="onBoardModelListItem">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="lightGrayBox ">
+                                <span class="icon-time fs-5"></span>
+                            </div>
+                            <div class="">
+                                <h4 class="font16 font500 text-black">Business Hours</h4>
+                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
+                            </div>
+                        </div>
+                        <div class="ms-auto">
+                            <span class="icon-tick text-success fs-3"></span>
+                        </div>
+                    </div>
+                    <div class="onBoardModelListItem">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="lightGrayBox ">
+                                <span class="icon-list fs-5"></span>
+                            </div>
+                            <div class="">
+                                <h4 class="font16 font500 text-black">Services</h4>
+                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
+                            </div>
+                        </div>
+                        <button class="ms-auto btn btn-primary">Update Now</button>
+                    </div>
+                    <div class="onBoardModelListItem">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="lightGrayBox ">
+                                <span class="icon-team fs-5"></span>
+                            </div>
+                            <div class="">
+                                <h4 class="font16 font500 text-black">Team Setup</h4>
+                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
+                            </div>
+                        </div>
+                        <button class="ms-auto btn btn-primary">Update Now</button>
+                    </div>
+                    <div class="onBoardModelListItem">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="lightGrayBox ">
+                                <span class="icon-invoice fs-5"></span>
+                            </div>
+                            <div class="">
+                                <h4 class="font16 font500 text-black">Invoice Settings</h4>
+                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
+                            </div>
+                        </div>
+                        <button class="ms-auto btn btn-primary">Update Now</button>
+                    </div>
+                    <div class="onBoardModelListItem">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="lightGrayBox ">
+                                <span class="icon-operations fs-5"></span>
+                            </div>
+                            <div class="">
+                                <h4 class="font16 font500 text-black">Payment Gateway</h4>
+                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
+                            </div>
+                        </div>
+                        <button class="ms-auto btn btn-primary">Update Now</button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -46,7 +131,7 @@
                 </mat-form-field>
             </div>
         </div>
-        <div class="border rounded mt-2">
+        <div class="border rounded mt-2 overflow-hidden">
             <div class="border-bottom px-4">
                 <div class="row">
                     <div class="col-3">
@@ -106,7 +191,7 @@
                         <p class="font14 mb-0 font-muted">{{booking.address}}, {{booking.city}}, {{booking.state}},
                             {{booking.zipCode}}</p>
                     </div>
-                    <div *ngIf="todayBooking.length==0 && !todayBookingLoaded">
+                    <div *ngIf="todayBooking.length==0 && !todayBookingLoaded" class="p-3 text-center">
                         <span>No data found</span>
                     </div>
                 </div>
@@ -132,7 +217,7 @@
                         </div>
                         <p class="font14 mb-0 font-muted">{{estimate.serviceAddress}}</p>
                     </div>
-                    <div *ngIf="estimateInvoices.length==0 && !estimateInvoiceLoaded">
+                    <div *ngIf="estimateInvoices.length==0 && !estimateInvoiceLoaded" class="p-3 text-center">
                         <span>No data found</span>
                     </div>
                 </div>
@@ -158,7 +243,7 @@
                         </div>
                         <p class="font14 mb-0 font-muted">{{invoice.serviceAddress}}</p>
                     </div>
-                    <div *ngIf="invoices.length==0 && !invoiceLoaded">
+                    <div *ngIf="invoices.length==0 && !invoiceLoaded" class="p-3 text-center">
                         <span>No data found</span>
                     </div>
                 </div>
@@ -208,7 +293,9 @@
                                 </td>
                             </tr>
                             <tr *ngIf="technician.length==0 && !technicianLoaded">
-                                <span>No data found</span>
+                                <td class="text-center" colspan="4">
+                                    <span>No data found</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -245,7 +332,9 @@
 
                             </tr>
                             <tr *ngIf="topServices.length==0 && !topServicesLoaded">
-                                <span>No data found</span>
+                                <td class="text-center" colspan="4">
+                                    <span>No data found</span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

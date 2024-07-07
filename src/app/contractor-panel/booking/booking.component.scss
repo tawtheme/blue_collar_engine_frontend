@@ -1,12 +1,23 @@
 .booking-title-section {
   background-color: var(--light-blue);
-
   h2 {
     font-size: 35px;
+    @media screen and (max-width: 767px) {
+      font-size: 25px;
+    }
   }
 }
 
 .booking-services-lists {
+  max-height: 88vh;
+  overflow-y: auto;
+  display: block;
+  position: sticky;
+  top: 60px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+
   button {
     cursor: pointer;
     margin-bottom: 15px;
@@ -46,16 +57,45 @@
       }
     }
   }
+  @media screen and (max-width: 991px) {
+    border: 0;
+    padding: 0;
+    overflow-y: hidden;
+    overflow-x: auto;
+    position: relative;
+    top: 0;
+    max-height: initial;
+    border-radius: 0;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 20px;
+    flex-wrap: nowrap;
+    button {
+      padding: 15px 25px;
+      margin-bottom: 15px;
+      h4 {
+        margin-top: 0 !important;
+      }
+      img {
+        display: none !important;
+      }
+    }
+  }
+  @media screen and (max-width: 767px) {
+    margin-bottom: 15px;
+    button {
+      padding: 10px 25px;
+      white-space: nowrap;
+    }
+  }
 }
 
 .booking-services-items {
   border-bottom: 1px solid var(--border-color2);
   margin-bottom: 25px;
-  padding-bottom: 25px;
-
+  padding: 25px;
   &:last-child {
     margin-bottom: 0;
-    padding-bottom: 0;
     border: 0;
   }
 
@@ -79,6 +119,10 @@
         color: var(--white);
       }
     }
+  }
+  @media screen and (max-width: 767px) {
+    padding: 15px;
+    margin-bottom: 15px;
   }
 }
 
@@ -116,14 +160,4 @@ button:disabled {
   padding-bottom: 10px;
   padding-top: 10px;
   z-index: 9;
-}
-.booking-services-lists {
-  max-height: 88vh;
-  overflow-y: auto;
-  display: block;
-  position: sticky;
-  top: 60px;
-  border: 1px solid #ddd;
-  padding: 15px;
-  border-radius: 8px;
 }

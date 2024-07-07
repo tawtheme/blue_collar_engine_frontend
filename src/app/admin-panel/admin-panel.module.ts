@@ -46,6 +46,7 @@ import { SystemConfigurationComponent } from './account-section/system-configura
 import { TeamManagementComponent } from './account-section/team-management/team-management.component';
 import { AddTeamMemberComponent } from './account-section/team-management/add-team-member/add-team-member.component';
 import { StarRatingComponent } from './shared/star-rating/star-rating.component';
+import { OnboardPopupComponent } from './dashboard/onboard-popup/onboard-popup.component';
 
 @NgModule({
   imports: [
@@ -98,7 +99,8 @@ import { StarRatingComponent } from './shared/star-rating/star-rating.component'
     SystemConfigurationComponent,
     TeamManagementComponent,
     AddTeamMemberComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    OnboardPopupComponent
   ],
 
 })

@@ -19,10 +19,9 @@ const day = today.getDay();
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-
   rating: number = 5;
   starCount: number = 5;
   starColor: StarRatingColor = StarRatingColor.accent;
@@ -45,26 +44,37 @@ export class DashboardComponent implements OnInit {
 
   dashboardRagePickerForm!: FormGroup;
 
-  constructor(private _bookingService: BookingService, private _estimateService: EstimateService, private _invoiceService: InvoiceService, private _accountSettingService: AccountSettingService, private _dashboardService: DashboardService, private _formBuilder: FormBuilder) { }
+  constructor(
+    private _bookingService: BookingService,
+    private _estimateService: EstimateService,
+    private _invoiceService: InvoiceService,
+    private _accountSettingService: AccountSettingService,
+    private _dashboardService: DashboardService,
+    private _formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.dashboardRagePickerForm = this._formBuilder.group({
       start: [null, null],
-      end: [null, null]
+      end: [null, null],
     });
-    this.dashboardRagePickerForm.controls['start'].setValue(new Date(year, month, (day - 14)));
-    this.dashboardRagePickerForm.controls['end'].setValue(new Date(year, month, day));
+    this.dashboardRagePickerForm.controls['start'].setValue(
+      new Date(year, month, day - 14)
+    );
+    this.dashboardRagePickerForm.controls['end'].setValue(
+      new Date(year, month, day)
+    );
 
     this.getDashboardGraphStats();
     this.getDashboardStats();
     var _param = {
-      "id": 0,
-      "pageNumber": 1,
-      "pageSize": 3,
-      "searchStr": "",
-      "type": "",
-      "bookingDate": new Date()
-    }
+      id: 0,
+      pageNumber: 1,
+      pageSize: 3,
+      searchStr: '',
+      type: '',
+      bookingDate: new Date(),
+    };
     this.todayBookings(_param);
     this.getEstimates();
     this.getInvoices();
@@ -78,7 +88,8 @@ export class DashboardComponent implements OnInit {
 
   todayBookings(param: any) {
     this.todayBookingLoaded = true;
-    this._bookingService.getAll(param)
+    this._bookingService
+      .getAll(param)
       .pipe(first())
       .subscribe({
         next: (res) => {
@@ -86,24 +97,25 @@ export class DashboardComponent implements OnInit {
           this.todayBooking = res.data;
           ////console.log(this.todayBooking)
         },
-        error: error => {
+        error: (error) => {
           this.todayBookingLoaded = false;
-        }
+        },
       });
   }
 
   getEstimates() {
     var _param = {
-      "id": 0,
-      "pageNumber": 1,
-      "pageSize": 3,
-      "searchStr": '',
-      "status": '',
-      "startDate": null,
-      "endDate": null
-    }
+      id: 0,
+      pageNumber: 1,
+      pageSize: 3,
+      searchStr: '',
+      status: '',
+      startDate: null,
+      endDate: null,
+    };
     this.estimateInvoiceLoaded = true;
-    this._estimateService.getAll(_param)
+    this._estimateService
+      .getAll(_param)
       .pipe(first())
       .subscribe({
         next: (res) => {
@@ -111,66 +123,65 @@ export class DashboardComponent implements OnInit {
           this.estimateInvoices = res.data;
           ////console.log(this.estimateInvoices)
         },
-        error: error => {
+        error: (error) => {
           this.estimateInvoiceLoaded = false;
-        }
+        },
       });
   }
 
   getInvoices() {
     var _param = {
-      "id": 0,
-      "pageNumber": 1,
-      "pageSize": 3,
-      "searchStr": '',
-      "status": '',
-      "startDate": null,
-      "endDate": null
-    }
+      id: 0,
+      pageNumber: 1,
+      pageSize: 3,
+      searchStr: '',
+      status: '',
+      startDate: null,
+      endDate: null,
+    };
     this.invoiceLoaded = true;
-    this._invoiceService.getAll(_param)
+    this._invoiceService
+      .getAll(_param)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.invoiceLoaded = false;
           this.invoices = res.data;
         },
-        error: error => {
+        error: (error) => {
           this.invoiceLoaded = false;
-        }
+        },
       });
   }
 
   getTopTechnician() {
     this.technicianLoaded = true;
-    this._dashboardService.getTopTechnician()
-      .subscribe({
-        next: (res: { data: any[]; }) => {
-          this.technician = res.data;
-          this.technician.forEach(res => {
-            res.profileImagePath = this.apiBaseUrl + res.profileImagePath
-          })
-          this.technicianLoaded = false;
-        },
-        error: error => {
-          this.technicianLoaded = false;
-        }
-      });
+    this._dashboardService.getTopTechnician().subscribe({
+      next: (res: { data: any[] }) => {
+        this.technician = res.data;
+        this.technician.forEach((res) => {
+          res.profileImagePath = this.apiBaseUrl + res.profileImagePath;
+        });
+        this.technicianLoaded = false;
+      },
+      error: (error) => {
+        this.technicianLoaded = false;
+      },
+    });
   }
 
   getTopServices() {
     this.topServicesLoaded = true;
-    this._dashboardService.getTopServices()
-      .subscribe({
-        next: (res: { data: any[]; }) => {
-          this.topServices = res.data;
-          ////console.log(this.topServices)
-          this.topServicesLoaded = false;
-        },
-        error: error => {
-          this.topServicesLoaded = false;
-        }
-      });
+    this._dashboardService.getTopServices().subscribe({
+      next: (res: { data: any[] }) => {
+        this.topServices = res.data;
+        ////console.log(this.topServices)
+        this.topServicesLoaded = false;
+      },
+      error: (error) => {
+        this.topServicesLoaded = false;
+      },
+    });
   }
 
   rangeChangeEvent() {
@@ -179,33 +190,31 @@ export class DashboardComponent implements OnInit {
 
   getDashboardGraphStats() {
     var objDahsboardGraphInput = {
-      'startDate': this.dashboardRagePickerForm.value.start,
-      'endDate': this.dashboardRagePickerForm.value.end
-    }
+      startDate: this.dashboardRagePickerForm.value.start,
+      endDate: this.dashboardRagePickerForm.value.end,
+    };
     if (objDahsboardGraphInput.endDate == null) {
       return;
     }
-    this._dashboardService.getDashboardGraphStats(objDahsboardGraphInput)
+    this._dashboardService
+      .getDashboardGraphStats(objDahsboardGraphInput)
       .subscribe({
-        next: (res: { data: any[]; }) => {
+        next: (res: { data: any[] }) => {
           this.graphStats = res.data;
           this.bindHighChart(this.graphStats);
         },
-        error: error => {
-        }
+        error: (error) => {},
       });
   }
 
   getDashboardStats() {
-    this._dashboardService.getDashboardStats()
-      .subscribe({
-        next: (res: { data: any[]; }) => {
-          this.stats = res.data;
-         // console.log(this.stats)
-        },
-        error: error => {
-        }
-      });
+    this._dashboardService.getDashboardStats().subscribe({
+      next: (res: { data: any[] }) => {
+        this.stats = res.data;
+        // console.log(this.stats)
+      },
+      error: (error) => {},
+    });
   }
 
   bindHighChart(graphStats: any = []) {
@@ -213,62 +222,65 @@ export class DashboardComponent implements OnInit {
       return el.day;
     });
     var graphData = [];
-    graphData.push({
-      'name': 'Total Booking',
-      'data': this.graphStats.map(function (el) {
-        return el.totalBookingCount;
-      })
-    },
+    graphData.push(
       {
-        'name': 'Total Estimate',
-        'data': this.graphStats.map(function (el) {
-          return el.totalEstimateCount;
-        })
+        name: 'Total Booking',
+        data: this.graphStats.map(function (el) {
+          return el.totalBookingCount;
+        }),
       },
       {
-        'name': 'Total Invoice',
-        'data': this.graphStats.map(function (el) {
+        name: 'Total Estimate',
+        data: this.graphStats.map(function (el) {
+          return el.totalEstimateCount;
+        }),
+      },
+      {
+        name: 'Total Invoice',
+        data: this.graphStats.map(function (el) {
           return el.totalInvoiceCount;
-        })
-      })
+        }),
+      }
+    );
 
     //console.log(graphData)
     // @ts-ignore
     var chart = Highcharts.chart('container', {
       chart: {
-        type: 'column'
+        type: 'column',
       },
       title: {
-        text: 'Counter'
+        text: 'Counter',
       },
       subtitle: {
-        text: 'Total Booking, Total Estimate & Total Invoice'
+        text: 'Total Booking, Total Estimate & Total Invoice',
       },
       xAxis: {
         categories: days,
-        crosshair: true
+        crosshair: true,
       },
       yAxis: {
         min: 0,
         title: {
-          text: 'Total Count'
-        }
+          text: 'Total Count',
+        },
       },
       tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+        pointFormat:
+          '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
           '<td style="padding:0"><b>{point.y}</b></td></tr>',
         footerFormat: '</table>',
         shared: true,
-        useHTML: true
+        useHTML: true,
       },
       plotOptions: {
         column: {
           pointPadding: 0.2,
-          borderWidth: 0
-        }
+          borderWidth: 0,
+        },
       },
-      series: graphData
+      series: graphData,
     });
   }
 }

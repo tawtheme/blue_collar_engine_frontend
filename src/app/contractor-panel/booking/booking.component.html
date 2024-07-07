@@ -1,14 +1,14 @@
-<div class="booking-title-section py-5">
+<div class="booking-title-section py-md-5 py-4">
     <div class="container-xxl">
         <h2 class="text-center">Schedule Online</h2>
     </div>
 </div>
-<div class="py-5">
+<div class="py-md-5 py-4">
     <div class="container-xxl">
-        <div class="ScheduleOnlineTopSection">
+        <div class="ScheduleOnlineTopSection d-none d-lg-block">
             <div class="row gx-5">
                 <div class="col-lg-4">
-                    <h4 class="mb-15 font20">Select Service</h4>
+                    <h4 class="mb-15 font20">Category</h4>
                 </div>
                 <div class="col-lg-8">
                     <div *ngFor="let category of items; let i = index">
@@ -21,7 +21,7 @@
         </div>
         <div class="row gx-5">
             <div class="col-lg-4">
-
+                <h4 class="mb-15 font20 d-block d-lg-none">Category</h4>
                 <div class="nav flex-column nav-pills me-3 booking-services-lists" id="v-pills-tab" role="tablist"
                     aria-orientation="vertical">
                     <div *ngFor="let catgeory of items;index as i">
@@ -42,33 +42,40 @@
 
             </div>
             <div class="col-lg-8">
+                <div *ngFor="let category of items; let i = index" class="d-block d-lg-none">
+                    <div *ngIf="category.categoryId === activeCategory">
+                        <h4 class="mb-15 font20">{{category.name}} Services</h4>
+                    </div>
+                </div>
                 <div class="tab-content" id="v-pills-tabContent">
                     <div *ngFor="let catgeory of items;index as i"
                         class="tab-pane fade {{catgeory.categoryId==activeCategory ?'show active':''}}"
                         attr.id="leftPanel_{{catgeory.categoryId}}" role="tabpanel"
                         attr.aria-labelledby="leftPanel_{{catgeory.categoryId}}_tab" tabindex="0">
-                        <div class="border rounded p-4">
+                        <div class="border rounded p-0">
                             <div class="booking-services-items"
                                 *ngFor='let service of catgeory.categoryServices;index as j'>
                                 <div class="row">
-                                    <div class="col-lg-8">
+                                    <div class="col-md-8">
                                         <span class="grey-badge border-0 rounded-pill mb-2">Starts at ${{service.price |
                                             number : '1.2-2'}}</span>
-                                        <h4 class="mb-3 font16">{{service.serviceName}}</h4>
-                                        <p>{{service.description}}</p>
+                                        <h4 class="mb-md-3 mb-2 font16">{{service.serviceName}}</h4>
+                                        <p class="mb-2 font14">{{service.description}}</p>
                                         <a class="text-decoration-underline font13">View Details</a>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="booking-services-item-img text-end"
+                                    <div class="col-md-4">
+                                        <div class="booking-services-item-img text-end mt-md-0 mt-2"
                                             *ngIf="service.uploadedFiles.length == 0">
-                                            <img src="./../../../../assets/images/services3.png" class="img-fluid" />
+                                            <img src="./../../../../assets/images/services3.png"
+                                                class="img-fluid rounded" />
                                             <button class="btn btn-primary"
                                                 (click)="addToCart($event, service.categoryServiceId)"
                                                 [ngClass]="this.isAdded[service.categoryServiceId] ? 'btn-success added' : ''">{{isAdded[service.categoryServiceId]?'Added':'Add'}}</button>
                                         </div>
-                                        <div class="booking-services-item-img text-end"
+                                        <div class="booking-services-item-img text-end mt-md-0 mt-2"
                                             *ngIf="service.uploadedFiles.length > 0">
-                                            <img src="{{service.uploadedFiles[0].filePath}}" class="img-fluid sss"
+                                            <img src="{{service.uploadedFiles[0].filePath}}"
+                                                class="img-fluid sss rounded"
                                                 (error)="service.uploadedFiles[0].filePath = './../../../../assets/images/services3.png'" />
                                             <button class="btn btn-primary"
                                                 (click)="addToCart($event, service.categoryServiceId)"

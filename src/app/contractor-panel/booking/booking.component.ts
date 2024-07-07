@@ -176,6 +176,7 @@ export class BookingComponent implements OnInit {
       data: this.selectedServices,
       disableClose: true,
       width: '800px',
+      panelClass: 'custom-modal-style',
     });
   }
 }

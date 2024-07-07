@@ -79,7 +79,8 @@ export class BookingSlotComponent {
 
     this._dialog.open(BookingAddressComponent, {
       width: '800px',
-      // height: '600px',
+      height: '550px',
+      panelClass: 'custom-modal-style',
       data: {
         bookingDate: this.bookingDate,
         bookingTime: this.bookingTime,

@@ -1,11 +1,44 @@
-<div class="modal-content">
-    <div class="modal-header">
-        <h4 class="modal-title">Book Service</h4>
-        <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
-    </div>
+<div class="modal-header" mat-dialog-title class="text-center pt-5">
+    <h4 class="modal-title">Add contact information</h4>
+    <p class="font-muted font400">Please enter contact details below</p>
+    <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
+</div>
+<mat-dialog-content>
     <div class="service-modal-wrapper">
         <form [formGroup]="mobileVerifyForm" (ngSubmit)="onVerifyMobileNo()">
             <div class="row mx-0">
+
+                <div class="col-lg-7 mx-auto">
+                    <h5 class="mb-2 font14 font500">Mobile number</h5>
+
+                    <div class="form-group mb-3">
+                        <div class="form-input-group">
+                            <input type="text" placeholder="Enter mobile no." formControlName="mobileNo"
+                                class="form-control" appPhoneMask
+                                [ngClass]="{ 'is-invalid': submitted && e.mobileNo.errors }" maxlength="200"
+                                [disabled]="isVerifyOtp">
+                            <button class="primary-filled-button sm-btn" type="button" (click)="enableEditMobileNo()"
+                                *ngIf="IsShowEditBtn">Edit</button>
+                        </div>
+                        <div *ngIf="submitted && e.mobileNo.errors" class="invalid-feedback">
+                            <div *ngIf="e.mobileNo.errors.required">Mobile number is required</div>
+                            <div *ngIf="e.mobileNo.errors.pattern">Enter valid mobile number</div>
+                        </div>
+                        <button class="primary-filled-button px-5 sm-btn mt-3 text-center w-100" type="submit"
+                            *ngIf="!openVerifyOTP && !isVerifyOtp">Generate OTP</button>
+                    </div>
+                    <h5 class="mb-2 font14 font500" *ngIf="openVerifyOTP">Enter OTP</h5>
+                    <div class="form-group mb-3" *ngIf="openVerifyOTP">
+                        <input type="text" placeholder="Enter OTP" formControlName="otp" class="form-control"
+                            [ngClass]="{ 'is-invalid': submitted && e.otp.errors }" maxlength="6">
+                        <div *ngIf="submitted && e.otp.errors" class="invalid-feedback">
+                            <div *ngIf="e.otp.errors.required">OTP is required</div>
+                            <div *ngIf="e.otp.errors.pattern">Enter valid OTP</div>
+                        </div>
+                        <button class="primary-filled-button px-5 sm-btn text-center w-100 mt-3"
+                            type="submit">Verify</button>
+                    </div>
+                </div>
                 <div class="col-lg-7">
                     <div class="px-3 pt-3">
                         <!-- <h5 class="mb-2 font14 font500 mt-4">Country Code</h5>
@@ -21,32 +54,8 @@
                             </div>
                         </div> -->
 
-                        <h5 class="mb-2 font14 font500">Mobile number</h5>
-                        <div class="form-group mb-3">
-                            <input type="text" placeholder="Enter mobile no." formControlName="mobileNo"
-                                class="form-control" appPhoneMask
-                                [ngClass]="{ 'is-invalid': submitted && e.mobileNo.errors }" maxlength="200"
-                                [disabled]="isVerifyOtp">
-                            <button class="primary-filled-button px-5 sm-btn" type="button"
-                                (click)="enableEditMobileNo()" *ngIf="IsShowEditBtn">Edit</button>
-                            <div *ngIf="submitted && e.mobileNo.errors" class="invalid-feedback">
-                                <div *ngIf="e.mobileNo.errors.required">Mobile number is required</div>
-                                <div *ngIf="e.mobileNo.errors.pattern">Enter valid mobile number</div>
-                            </div>
-                            <button class="primary-filled-button px-5 sm-btn mt-3" type="submit"
-                                *ngIf="!openVerifyOTP && !isVerifyOtp">Generate OTP</button>
-                        </div>
 
-                        <h5 class="mb-2 font14 font500" *ngIf="openVerifyOTP">Enter OTP</h5>
-                        <div class="form-group mb-3" *ngIf="openVerifyOTP">
-                            <input type="text" placeholder="Enter OTP" formControlName="otp" class="form-control"
-                                [ngClass]="{ 'is-invalid': submitted && e.otp.errors }" maxlength="6">
-                            <div *ngIf="submitted && e.otp.errors" class="invalid-feedback">
-                                <div *ngIf="e.otp.errors.required">OTP is required</div>
-                                <div *ngIf="e.otp.errors.pattern">Enter valid OTP</div>
-                            </div>
-                            <button class="primary-filled-button px-5 sm-btn" type="submit">Verify</button>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -54,8 +63,35 @@
 
         <form [formGroup]="calanderBookingForm" *ngIf="isVerifyOtp" (ngSubmit)="proceedBooking()">
             <div class="row">
-                <div class="col-lg-7">
-                    <div class="p-4 px-3">
+                <div class="col-lg-12">
+                    <div class="border rounded bg-light p-3">
+                        <h5 class="mb-3 font-muted font500">Services</h5>
+                        <div class="booking-popup-services-item" *ngFor="let service of selectedServices">
+                            <div class="booking-services-item-img text-end">
+                                <img class="img-fluid rounded"
+                                    src="https://api.tawfresh.com/Upload\bimlaadmin@gmail.com\ServiceImages\15\footertableware-1-768x614.jpg">
+                            </div>
+                            <div class="booking-popup-services-item-info">
+                                <span class="grey-badge bg-secondary bg-opacity-25 border-0 rounded-pill mb-2">Starts at
+                                    ${{service.price}}</span>
+                                <h4 class="mb-1 font16">{{service.serviceName}}</h4>
+                                <p class="mb-2 font14">{{service.description}}</p>
+                                <a class="text-decoration-underline font13">read more</a>
+                            </div>
+
+                        </div>
+
+                        <div class="bg-white p-3 border mt-3 rounded">
+                            <p class="font14 mb-0 font-muted">Date & Time</p>
+                            <h4 class="font16 font600 my-1 ">{{bookingDate | date:'mediumDate' }}
+                                {{businessHours[0].openTime}} -
+                                {{businessHours[0].closeTime}}</h4>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-lg-12">
+                    <div class="py-4">
                         <h5 class="mb-2 font14 font500 mt-4">Customer Name</h5>
                         <div class="row g-3">
                             <div class="col-md-6 ">
@@ -82,7 +118,7 @@
                             </div>
                         </div>
                         <h5 class="mb-2 font14 font500 mt-4">Email Address</h5>
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <input type="text" placeholder="Enter email address" class="form-control"
                                 formControlName="emailAddress" maxlength="200"
                                 [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"
@@ -147,37 +183,12 @@
                     </div>
 
                 </div>
-                <div class="col-lg-5 service-modal-right">
-                    <div class="ps-0 p-4 d-flex flex-column h-100">
-                        <div class="">
-                            <div class="border-bottom mb-3 pb-3" *ngFor="let service of selectedServices">
-                                <span class="grey-badge border-0 rounded-pill mb-2">Starts at
-                                    ${{service.price}}</span>
-                                <h4 class="mb-3 font16">{{service.serviceName}}</h4>
-                                <button class="light-outlined-button bg-white xs-btn mt-2 px-2" type="button"
-                                    (click)="removeSelectedService(service.categoryServiceId)"> <span
-                                        class="icon-edit"></span> Remove</button>
-                            </div>
-                            <div class="d-flex align-items-start gap-3">
-                                <div class="fs-3">
-                                    <span class="icon-calendar"></span>
-                                </div>
-                                <div class="">
-                                    <p class="font14 mb-0 font-muted">Date & Time</p>
-                                    <h4 class="font16 font600 my-1 ">{{businessHours[0].openTime}} -
-                                        {{businessHours[0].closeTime}}</h4>
-                                    <p class="font14 mb-0 ">{{bookingDate | date:'mediumDate' }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-auto">
-                            <button class="primary-filled-button px-5 lg-btn w-100" type="submit">
-                                <!-- <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span> -->
-                                Book Now</button>
-                        </div>
-                    </div>
+
+                <div class="col-lg-12">
+                    <button class="primary-filled-button px-5 lg-btn w-100" type="submit">
+                        Book Now</button>
                 </div>
             </div>
         </form>
     </div>
-</div>
+</mat-dialog-content>

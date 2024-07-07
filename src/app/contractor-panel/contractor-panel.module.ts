@@ -6,6 +6,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import { BookingComponent } from './booking/booking.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PhoneMaskDirective } from '@app/_helpers/directive/phone-mask.directive';
 import { BookingSlotComponent } from './booking-slot/booking-slot.component';
@@ -24,6 +25,7 @@ import { BookingFailedComponent } from './booking-failed/booking-failed.componen
     MatDatepickerModule,
     MatCardModule,
     MatRadioModule,
+    MatDialogModule,
     SharedModule,
   ],
   declarations: [

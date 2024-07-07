@@ -16,6 +16,7 @@ $secondary-color: #173777;
 html {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -160,10 +161,6 @@ ul {
 
 .flex-wrap {
   flex-wrap: wrap;
-}
-
-.d-block {
-  display: block !important;
 }
 
 .items-start {
@@ -1517,7 +1514,10 @@ tag-input.form-control {
 }
 
 app-view-request-demo,
-app-create-customer-address {
+app-create-customer-address,
+app-booking-slot,
+app-booking-address,
+app-booking-success {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -1601,4 +1601,119 @@ table .mat-mdc-checkbox .mdc-checkbox__background {
 
 .customers-tables td .light-outlined-button {
   white-space: nowrap;
+}
+
+.highcharts-container > *,
+.mat-mdc-paginator {
+  font-family: "JUST Sans" !important;
+}
+
+.mat-calendar-body-in-range > .mat-calendar-body-comparison-identical,
+.mat-calendar-body-in-comparison-range.mat-calendar-body-in-range::after,
+.mat-calendar-body-comparison-identical,
+.mat-calendar-body-in-comparison-range::before,
+.mat-calendar-body-in-range::before {
+  background: var(--light-primary) !important;
+}
+
+app-booking-slot .mat-calendar-header .mat-calendar-controls {
+  margin: 0 !important;
+}
+
+.service-modal-available-slots {
+  mat-radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    @media screen and (max-width: 575px) {
+      grid-template-columns: 1fr;
+    }
+    mat-radio-button {
+      width: 100%;
+      .mdc-form-field {
+        width: 100%;
+        label {
+          color: #6b7280;
+          background-color: #ffffff;
+          border: 1px solid #d1d5db;
+          border-radius: 6px;
+          color: #6b7280;
+          padding: 8px 15px;
+          width: 100%;
+          font-size: 14px;
+          text-align: center;
+          cursor: pointer;
+        }
+      }
+      .mdc-radio {
+        display: none;
+      }
+      &.mat-mdc-radio-checked {
+        label {
+          color: var(--white);
+          background-color: var(--primary);
+          border: 1px solid var(--primary);
+        }
+      }
+    }
+  }
+}
+
+.mat-calendar-body-today.mat-calendar-body-selected {
+  box-shadow: none !important;
+}
+
+.mat-calendar-body-cell-content {
+  border-radius: 8px !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__content {
+  font-family: "JUST Sans" !important;
+}
+
+@media screen and (max-width: 767px) {
+  .custom-modal-style {
+    max-width: 100% !important;
+    height: 100% !important;
+  }
+  .custom-modal-style .mat-mdc-dialog-container .mdc-dialog__content {
+    max-height: inherit;
+    padding: 15px 10px !important;
+  }
+}
+
+.onBoardModelStyle {
+  .diablog-header {
+    border: 0;
+    padding: 30px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 0;
+    button.btn-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    h3 {
+      font-size: 25px;
+    }
+  }
+  .onBoardModelListItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    .lightGrayBox {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
