@@ -40,7 +40,7 @@ export class BookingSharedService {
   }
 
   // Remove all the items added to the cart
-  emptryCart() {
+  emptyCart() {
     this.cartItems.length = 0;
     this.products.next(this.cartItems);
   }

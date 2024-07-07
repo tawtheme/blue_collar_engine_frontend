@@ -9,6 +9,7 @@ import { TenantService } from '@app/_services/secure-panel/tenant.service';
 import { BookingSharedService } from '@app/_services/site-panel/booking/booking-shared.service';
 import { BookingService } from '@app/_services/site-panel/booking/booking.service';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import { environment } from '@environments/environment';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -31,6 +32,7 @@ export class BookingAddressComponent {
   isEnableNextBtn: boolean = false;
   IsShowEditBtn: boolean = false;
   loading: boolean = false;
+  baseUrl: any = environment.apiUrl;
   constructor(private authenticationService: AuthenticationService, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar, private _bookingSharedService: BookingSharedService, private _tenantService: TenantService, private formBuilder: FormBuilder, private _customerService: CustomerService, public dialogRef: MatDialogRef<BookingAddressComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private _bookingService: BookingService) {
     this.tenantInfo = <any>this.authenticationService.tenantValue;
@@ -42,6 +44,7 @@ export class BookingAddressComponent {
     this.bookingTime = this.data.bookingTime;
     this.bookingDate = this.data.bookingDate;
     this.selectedServices = this.data.selectedServices;
+    console.log(this.selectedServices)
     if (this.selectedServices.length > 0) {
       this.isEnableNextBtn = true;
     }
@@ -140,26 +143,26 @@ export class BookingAddressComponent {
       }
     });
   }
+
   bindSelectedService() {
     this._bookingSharedService.getProducts().subscribe(res => {
       if (res.length > 0) {
         this.selectedServices = res;
         this.isEnableNextBtn = true;
-        ////console.log(this.selectedServices)
+        console.log(this.selectedServices)
       }
       else {
         this.isEnableNextBtn = false;
       }
     });
   }
+
   closeDialog() {
     this.dialogRef.close();
   }
 
   proceedBooking() {
-    
     this.submitted = true;
-    // stop here if form is invalid
     if (this.calanderBookingForm.invalid) {
       return;
     }
@@ -167,32 +170,18 @@ export class BookingAddressComponent {
       this._snackBar.open("Please add atleast one service");
     }
     else {
-      const message = `Are you sure you want to do proceed?`;
-      const dialogData = new ConfirmDialogModel("Confirmation", message);
-      const dialogRef = this._dialog.open(ConfirmDialogComponent, {
-        maxWidth: "400px",
-        data: dialogData
-      });
-      dialogRef.afterClosed().subscribe(dialogResult => {
-        if (dialogResult) {
-          let _param = this.calanderBookingForm.value as any;
-          var _mobileNo = this.mobileVerifyForm.controls['mobileNo'].value.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '');
-          _param = { ..._param, ...{ mobileNo: _mobileNo, bookingDate: this.bookingDate, timeSlot: this.bookingTime, bookingDetails: this.selectedServices, customerId: (_param.customerId == '' ? 0 : _param.customerId), addressId: (_param.customerAddressId == '' ? 0 : _param.customerAddressId), status: 'U' } };
-          ////console.log(_param)
-          this.loading=true;
-          this._bookingService.createBooking(_param).subscribe(res => {
-            ////console.log(res)
-            this.loading=false;
-            this._snackBar.open(res.message);
-            this._bookingSharedService.emptryCart();
-            window.location.reload();
-            this.dialogRef.close();
-          })
-        }
-        else {
-          return;
-        }
-      });
+      let _param = this.calanderBookingForm.value as any;
+      var _mobileNo = this.mobileVerifyForm.controls['mobileNo'].value.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '');
+      _param = { ..._param, ...{ mobileNo: _mobileNo, bookingDate: this.bookingDate, timeSlot: this.bookingTime, bookingDetails: this.selectedServices, customerId: (_param.customerId == '' ? 0 : _param.customerId), addressId: (_param.customerAddressId == '' ? 0 : _param.customerAddressId), status: 'U' } };
+      this.loading = true;
+      this._bookingService.createBooking(_param).subscribe(res => {
+        this.loading = false;
+        this._snackBar.open(res.message);
+        this._bookingSharedService.emptyCart();
+        //window.location.reload();
+        this.dialogRef.close();
+        this._router.navigate(['/booking/booking-success']);
+      })
     }
   }
 }

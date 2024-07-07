@@ -7,10 +7,8 @@
     <div class="service-modal-wrapper">
         <form [formGroup]="mobileVerifyForm" (ngSubmit)="onVerifyMobileNo()">
             <div class="row mx-0">
-
                 <div class="col-lg-7 mx-auto">
                     <h5 class="mb-2 font14 font500">Mobile number</h5>
-
                     <div class="form-group mb-3">
                         <div class="form-input-group">
                             <input type="text" placeholder="Enter mobile no." formControlName="mobileNo"
@@ -53,9 +51,6 @@
                                 <div *ngIf="e.countryCode.errors.required">Country code is required</div>
                             </div>
                         </div> -->
-
-
-
                     </div>
                 </div>
             </div>
@@ -67,20 +62,23 @@
                     <div class="border rounded bg-light p-3">
                         <h5 class="mb-3 font-muted font500">Services</h5>
                         <div class="booking-popup-services-item" *ngFor="let service of selectedServices">
-                            <div class="booking-services-item-img text-end">
-                                <img class="img-fluid rounded"
-                                    src="https://api.tawfresh.com/Upload\bimlaadmin@gmail.com\ServiceImages\15\footertableware-1-768x614.jpg">
+                            <div class="booking-services-item-img text-end" *ngIf="service.uploadedFiles.length == 0">
+                                <img class="img-fluid rounded" src="./../../../../assets/images/services3.png"
+                                    class="img-fluid sss rounded" />
+                            </div>
+                            <div class="booking-services-item-img text-end" *ngIf="service.uploadedFiles.length > 0">
+                                <img class="img-fluid rounded" src="{{service.uploadedFiles[0].filePath}}"
+                                    (error)="service.uploadedFiles[0].filePath = './../../../../assets/images/services3.png'"
+                                    class="img-fluid sss rounded" />
                             </div>
                             <div class="booking-popup-services-item-info">
                                 <span class="grey-badge bg-secondary bg-opacity-25 border-0 rounded-pill mb-2">Starts at
                                     ${{service.price}}</span>
                                 <h4 class="mb-1 font16">{{service.serviceName}}</h4>
                                 <p class="mb-2 font14">{{service.description}}</p>
-                                <a class="text-decoration-underline font13">read more</a>
+                                <!-- <a class="text-decoration-underline font13">read more</a> -->
                             </div>
-
                         </div>
-
                         <div class="bg-white p-3 border mt-3 rounded">
                             <p class="font14 mb-0 font-muted">Date & Time</p>
                             <h4 class="font16 font600 my-1 ">{{bookingDate | date:'mediumDate' }}
@@ -88,7 +86,6 @@
                                 {{businessHours[0].closeTime}}</h4>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-lg-12">
                     <div class="py-4">

@@ -112,7 +112,7 @@
                         <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
                         <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
                         <th (click)="sortBy('totalAmount')">Amount Due{{sortIcon('totalAmount')}}</th>
-                        <th (click)="sortBy('jobId')">Job{{sortIcon('jobId')}}</th>
+                        <th (click)="sortBy('bookingId')">Booking Id{{sortIcon('bookingId')}}</th>
                         <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
                         <th>Action</th>
                     </tr>
@@ -126,7 +126,7 @@
                         <td>{{invoice.createdDate | date:'mediumDate' }}</td>
                         <td>{{invoice.firstName}} {{invoice.lastName}}</td>
                         <td>${{invoice.totalAmount | number : '1.2-2'}}</td>
-                        <td>{{invoice.jobId}}</td>
+                        <td>{{invoice.bookingId > 0 ? '#'+invoice.bookingId:'--'}}</td>
                         <td>
                             <div class="">
                                 <span class="warning-badge">{{invoice.status}}</span>
@@ -138,7 +138,7 @@
                                     Details</button>
                             </div>
                         </td>
-                    </tr>                  
+                    </tr>
                     <tr *ngIf="items.length == 0 && !loading" class="text-center">
                         <td class="text-center" colspan="8">
                             <span>No data found</span>
