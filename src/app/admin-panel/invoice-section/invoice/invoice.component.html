@@ -29,6 +29,15 @@
                     <span class="icon-time"></span>
                 </div>
                 <div class="widget-card-info">
+                    <h6>${{stats?.totalRevenueAmt | number : '1.2-2'}}</h6>
+                    <p>Total Revneue</p>
+                </div>
+            </article>
+            <article class="widget-card ">
+                <div class="widget-card-circle lightYellowBox">
+                    <span class="icon-time"></span>
+                </div>
+                <div class="widget-card-info">
                     <h6>${{stats?.totalInvoiceDraftRevenue | number : '1.2-2'}}</h6>
                     <p>Draft from {{stats?.totalInvoiceDraftCount}} invoices</p>
                 </div>
@@ -81,6 +90,7 @@
                             <option value="">Show All</option>
                             <option value="D">Draft</option>
                             <option value="S">Sent</option>
+                            <option value="P">Paid</option>
                         </select>
                     </div>
                 </div>

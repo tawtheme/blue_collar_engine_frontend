@@ -9,12 +9,10 @@ import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account
 import { environment } from '@environments/environment';
 import { DashboardService } from '@app/_services/admin-panel/dashboard/dashboard.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { end } from '@popperjs/core';
+import { DatePipe } from '@angular/common';
 
-const today = new Date();
-const month = today.getMonth();
-const year = today.getFullYear();
-const day = today.getDay();
+const startDate = new Date();
+const endDate= new Date(startDate.getTime() - (336*60*60*1000));
 
 @Component({
   selector: 'app-dashboard',
@@ -58,12 +56,17 @@ export class DashboardComponent implements OnInit {
       start: [null, null],
       end: [null, null],
     });
+<<<<<<< HEAD
     this.dashboardRagePickerForm.controls['start'].setValue(
       new Date(year, month, day - 14)
     );
     this.dashboardRagePickerForm.controls['end'].setValue(
       new Date(year, month, day)
     );
+=======
+    this.dashboardRagePickerForm.controls['start'].setValue(endDate);
+    this.dashboardRagePickerForm.controls['end'].setValue(startDate);
+>>>>>>> 0407233f05dfde6f1e012f5b6d65839d46ca54b1
 
     this.getDashboardGraphStats();
     this.getDashboardStats();
@@ -208,13 +211,15 @@ export class DashboardComponent implements OnInit {
   }
 
   getDashboardStats() {
-    this._dashboardService.getDashboardStats().subscribe({
-      next: (res: { data: any[] }) => {
-        this.stats = res.data;
-        // console.log(this.stats)
-      },
-      error: (error) => {},
-    });
+    this._dashboardService.getDashboardStats()
+      .subscribe({
+        next: (res: { data: any[]; }) => {
+          this.stats = res.data;
+          // console.log(this.stats)
+        },
+        error: error => {
+        }
+      });
   }
 
   bindHighChart(graphStats: any = []) {

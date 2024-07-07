@@ -728,7 +728,7 @@ ul {
 // Widget Styles
 
 .widget-container {
-  @include grid-layout(1fr 1fr 1fr 1fr, 1rem);
+  @include grid-layout(1fr 1fr 1fr 1fr 1fr, 1rem);
   .widget-card {
     @include flexbox(row, space-between, center);
     gap: 0.8rem;
