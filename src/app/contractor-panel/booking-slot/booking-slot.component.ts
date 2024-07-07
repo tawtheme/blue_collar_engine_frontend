@@ -1,8 +1,15 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { TenantService } from '@app/_services/secure-panel/tenant.service';
 import { BookingSharedService } from '@app/_services/site-panel/booking/booking-shared.service';
-import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogModel,
+} from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import moment from 'moment';
 import { BookingAddressComponent } from '../booking-address/booking-address.component';
 import { ToastrService } from 'ngx-toastr';
@@ -10,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-booking-slot',
   templateUrl: './booking-slot.component.html',
-  styleUrls: ['./booking-slot.component.scss']
+  styleUrls: ['./booking-slot.component.scss'],
 })
 export class BookingSlotComponent {
   bookingDate: Date | null | undefined;
@@ -20,12 +27,16 @@ export class BookingSlotComponent {
   selectedServices: any[] = [];
   submitted = false;
   isEnableNextBtn: boolean = false;
-  loading:boolean=true;
+  loading: boolean = true;
   constructor(
     public dialogRef: MatDialogRef<BookingSlotComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: any[] = [], private _tenantService: TenantService, private _dialog: MatDialog, private _bookingSharedService: BookingSharedService, private _toastrService: ToastrService
-  ) { }
+    public data: any[] = [],
+    private _tenantService: TenantService,
+    private _dialog: MatDialog,
+    private _bookingSharedService: BookingSharedService,
+    private _toastrService: ToastrService
+  ) {}
 
   ngOnInit() {
     ////console.log(this.data)
@@ -40,18 +51,19 @@ export class BookingSlotComponent {
   }
 
   bindBusinessHours(dayId: number) {
-    this._tenantService.getBusinesshours().subscribe(res => {
-      this.loading=false;
+    this._tenantService.getBusinesshours().subscribe((res) => {
+      this.loading = false;
       //console.log(res.data)
-      this.businessHours = res.data.filter((time: { dayId: any; isDayActive:boolean }) => {
-        return time.dayId === dayId && time.isDayActive==true;
-      })
+      this.businessHours = res.data.filter(
+        (time: { dayId: any; isDayActive: boolean }) => {
+          return time.dayId === dayId && time.isDayActive == true;
+        }
+      );
       //console.log(this.businessHours)
       if (this.businessHours.length > 0) {
         this.bookingTime = this.businessHours[0].businessHourId;
         this.isEnableNextBtn = true;
-      }
-      else {        
+      } else {
         this.bookingTime = 0;
         this.isEnableNextBtn = false;
       }
@@ -59,11 +71,23 @@ export class BookingSlotComponent {
   }
 
   openBookingAddress() {
-    this.businessHours = this.businessHours.filter((time: { businessHourId: any; }) => {
-      return time.businessHourId === this.bookingTime;
-    });
+    this.businessHours = this.businessHours.filter(
+      (time: { businessHourId: any }) => {
+        return time.businessHourId === this.bookingTime;
+      }
+    );
 
-    this._dialog.open(BookingAddressComponent, { width: '900px', height: '600px', data: { bookingDate: this.bookingDate, bookingTime: this.bookingTime, businessHours: this.businessHours, selectedServices: this.selectedServices }, disableClose: true });
+    this._dialog.open(BookingAddressComponent, {
+      width: '800px',
+      // height: '600px',
+      data: {
+        bookingDate: this.bookingDate,
+        bookingTime: this.bookingTime,
+        businessHours: this.businessHours,
+        selectedServices: this.selectedServices,
+      },
+      disableClose: true,
+    });
     this.dialogRef.close();
   }
 
@@ -75,30 +99,28 @@ export class BookingSlotComponent {
 
   removeSelectedService(serviceId: number) {
     const message = `Are you sure you want to do remove?`;
-    const dialogData = new ConfirmDialogModel("Confirmation", message);
+    const dialogData = new ConfirmDialogModel('Confirmation', message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
-      maxWidth: "400px",
-      data: dialogData
+      maxWidth: '400px',
+      data: dialogData,
     });
-    dialogRef.afterClosed().subscribe(dialogResult => {
+    dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this._bookingSharedService.removeProductFromCart(serviceId);
         this.bindSelectedService();
-      }
-      else {
+      } else {
         return;
       }
     });
   }
 
   bindSelectedService() {
-    this._bookingSharedService.getProducts().subscribe(res => {
+    this._bookingSharedService.getProducts().subscribe((res) => {
       if (res.length > 0) {
         this.selectedServices = res;
         this.isEnableNextBtn = true;
         ////console.log(this.selectedServices)
-      }
-      else {
+      } else {
         this.isEnableNextBtn = false;
       }
     });
@@ -107,6 +129,4 @@ export class BookingSlotComponent {
   closeDialog() {
     this.dialogRef.close();
   }
-
-
 }
