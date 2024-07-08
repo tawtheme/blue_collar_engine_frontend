@@ -3,34 +3,32 @@
     <p class="font-muted font400">Please choose date and available window slot</p>
     <button type="button" class="btn-close" (click)="closeDialog()" aria-label="Close"></button>
 </div>
-<mat-dialog-content>
-    <div class="service-modal-wrapper">
-        <div class="row mx-0">
-            <div class="col-lg-12">
-                <div class="">
-                    <div class="service-modal-calendar mb-4">
-                        <mat-card class="demo-inline-calendar-card">
-                            <mat-calendar [(selected)]="bookingDate" [minDate]="todayDate"
-                                (selectedChange)="onSelect($event)"></mat-calendar>
-                        </mat-card>
-                    </div>
-                    <h5 class="mb-2 font14 font500">Select Available Time</h5>
-                    <div class="service-modal-available-slots">
-                        <mat-radio-group aria-label="Select an option" [(ngModel)]="bookingTime"
-                            class="booking-available-time-slot">
-                            <mat-radio-button [value]="timeSlot.businessHourId"
-                                *ngFor="let timeSlot of businessHours;index as i">{{timeSlot.openTime}}-{{timeSlot.closeTime}}</mat-radio-button>
-                        </mat-radio-group>
-                        <div *ngIf="businessHours.length==0 && !loading">
-                            <span>No slot found</span>
-                        </div>
+<div class="service-modal-wrapper px-3 px-lg-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="">
+                <div class="service-modal-calendar mb-4">
+                    <mat-card class="demo-inline-calendar-card">
+                        <mat-calendar [(selected)]="bookingDate" [minDate]="todayDate"
+                            (selectedChange)="onSelect($event)"></mat-calendar>
+                    </mat-card>
+                </div>
+                <h5 class="mb-2 font14 font500">Select Available Time</h5>
+                <div class="service-modal-available-slots">
+                    <mat-radio-group aria-label="Select an option" [(ngModel)]="bookingTime"
+                        class="booking-available-time-slot">
+                        <mat-radio-button [value]="timeSlot.businessHourId"
+                            *ngFor="let timeSlot of businessHours;index as i">{{timeSlot.openTime}}-{{timeSlot.closeTime}}</mat-radio-button>
+                    </mat-radio-group>
+                    <div *ngIf="businessHours.length==0 && !loading">
+                        <span>No slot found</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
+</div>
+<div class="px-3 px-lg-5 py-4">
     <button class="primary-filled-button px-5 lg-btn w-100" type="submit" (click)="openBookingAddress()"
         [ngClass]="{ disabled: isEnableNextBtn === true }" [disabled]="!isEnableNextBtn">Next</button>
-</mat-dialog-actions>
+</div>

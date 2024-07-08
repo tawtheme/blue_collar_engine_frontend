@@ -57,10 +57,18 @@
                                 *ngFor='let service of catgeory.categoryServices;index as j'>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <span class="grey-badge border-0 rounded-pill mb-2">Starts at ${{service.price |
+                                        <span
+                                            class="primary-badge border-0 rounded-pill font14 mb-2 font500 px-3 py-2">${{service.price
+                                            |
                                             number : '1.2-2'}}</span>
                                         <h4 class="mb-md-3 mb-2 font16">{{service.serviceName}}</h4>
                                         <p class="mb-2 font14">{{service.description}}</p>
+                                        <button
+                                            class="btn btn-outline-primary d-flex align-items-center px-3 font16 gap-2"
+                                            (click)="addToCart($event, service.categoryServiceId)"
+                                            [ngClass]="this.isAdded[service.categoryServiceId] ? 'btn-primary added text-white' : ''"><span
+                                                class="icon-add-1">
+                                            </span>{{isAdded[service.categoryServiceId]?'Added':'Add'}}</button>
                                         <!-- <a class="text-decoration-underline font13">View Details</a> -->
                                     </div>
                                     <div class="col-md-4">
@@ -68,18 +76,14 @@
                                             *ngIf="service.uploadedFiles.length == 0">
                                             <img src="./../../../../assets/images/services3.png"
                                                 class="img-fluid rounded" />
-                                            <button class="btn btn-primary"
-                                                (click)="addToCart($event, service.categoryServiceId)"
-                                                [ngClass]="this.isAdded[service.categoryServiceId] ? 'btn-success added' : ''">{{isAdded[service.categoryServiceId]?'Added':'Add'}}</button>
+
                                         </div>
                                         <div class="booking-services-item-img text-end mt-md-0 mt-2"
                                             *ngIf="service.uploadedFiles.length > 0">
                                             <img src="{{service.uploadedFiles[0].filePath}}"
                                                 class="img-fluid sss rounded"
                                                 (error)="service.uploadedFiles[0].filePath = './../../../../assets/images/services3.png'" />
-                                            <button class="btn btn-primary"
-                                                (click)="addToCart($event, service.categoryServiceId)"
-                                                [ngClass]="this.isAdded[service.categoryServiceId] ? 'btn-success added' : ''">{{isAdded[service.categoryServiceId]?'Added':'Add'}}</button>
+
                                         </div>
                                     </div>
                                 </div>

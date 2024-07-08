@@ -1,0 +1,42 @@
+.payment-success-header {
+  box-shadow: 0px 1px 10px 0px #0000001a;
+  padding: 6px 0;
+}
+
+.payment-success-inner {
+  padding: 80px 0;
+
+  .payment-success-top {
+    .icon {
+      width: 80px;
+      margin: 0 auto;
+      margin-bottom: 15px;
+    }
+    h2 {
+      font-size: 30px;
+      color: #111827;
+      margin-bottom: 15px;
+    }
+    p {
+      color: #6b7280;
+      font-size: 16px;
+    }
+  }
+  .payment-success-feedback {
+    h2 {
+      font-size: 30px;
+      color: #111827;
+      margin-bottom: 15px;
+    }
+    span.icon-star {
+      color: #f7b128;
+    }
+    button {
+      background: #111827;
+      color: var(--white);
+      &:hover {
+        background: var(--primary);
+      }
+    }
+  }
+}

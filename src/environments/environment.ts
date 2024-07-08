@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:5100',
+  apiUrl: 'https://api.tawfresh.com',
   baseUrlHostName: 'localhost',
   tenantToken: 'kwVEV6',
 };
@@ -17,3 +17,5 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+
+// live api https://api.tawfresh.com
