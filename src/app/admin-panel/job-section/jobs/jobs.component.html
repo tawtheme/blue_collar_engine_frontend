@@ -164,7 +164,7 @@
                                     class="icon-email"></span>{{booking.emailAddress}}</div>
                         </div>
                         <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                        <div *ngFor="let cat of booking.categories">
+                        <div *ngFor="let cat of booking.categories" class="d-flex gap-2 items-center">
                             <span class="white-badge bg-light"
                                 *ngFor="let service of cat.products">{{service.serviceName}}</span>
                         </div>

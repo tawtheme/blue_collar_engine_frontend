@@ -1623,7 +1623,7 @@ app-booking-slot .mat-calendar-header .mat-calendar-controls {
 .service-modal-available-slots {
   mat-radio-group {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 15px;
     @media screen and (max-width: 575px) {
       grid-template-columns: 1fr;
@@ -1719,11 +1719,12 @@ app-booking-slot .mat-calendar-header .mat-calendar-controls {
 }
 
 .custom-modal-style {
-  height: 90vh;
+  max-height: 90vh !important;
   overflow-y: auto;
   border-radius: 8px;
   @media screen and (max-width: 767px) {
     height: 100vh;
+    max-height: 100vh !important;
     border-radius: 0;
   }
 }
