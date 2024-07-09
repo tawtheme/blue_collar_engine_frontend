@@ -10,16 +10,15 @@
                         Add New
                         <span class="icon-down-arrow"></span>
                     </button>
-
                     <ul class="dropdown-menu dropdown-menu-end">
                         <!-- <li><a href="javascript:void(0);">
-                                Create Booking</a>
+                            Create Booking</a>
                         </li> -->
                         <li><a href="/admin/create-estimate">
-                                Create Estimate</a>
+                            Create Estimate</a>
                         </li>
                         <li><a href="/admin/create-invoice">
-                                Create Invoice</a>
+                            Create Invoice</a>
                         </li>
                     </ul>
                 </div>
@@ -31,6 +30,8 @@
         </div>
     </div>
 </div>
+
+<!--onboarding popup start-->
 <div class="modal fade onBoardModelStyle" id="onboardModel" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -38,7 +39,6 @@
             <div class="diablog-header">
                 <h3>Welcome to Blue Collar Engine!</h3>
                 <p class="font-muted mt-2">To get started, we need to set up a few things.</p>
-
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="px-md-5 pb-md-5 px-4 pb-4">
@@ -105,16 +105,17 @@
                         </div>
                         <button class="ms-auto btn btn-primary">Update Now</button>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!--onboarding popup end-->
+
 <div class="container-xxl">
-    <div class="py-4">
+    <div class="py-3">
         <div class="d-flex align-items-center">
-            <h3 class="mb-0 font20">Quick Overview</h3>
+            <h3 class="mb-0 font15">Quick Overview</h3>
             <div class="ms-auto">
                 <mat-form-field class="muiDatePickerFromField " (click)="picker.open()">
                     <!-- <mat-label>Select Date range</mat-label> -->
@@ -135,38 +136,31 @@
             <div class="border-bottom px-4">
                 <div class="row">
                     <div class="col-3">
-                        <div class="py-4">
+                        <div class="py-2">
+                            <h4 class="my-1">{{stats?.totalBookingCount}}</h4>
                             <p class="mb-0 font14 font-muted font500">Booking</p>
-                            <h4 class="my-2">{{stats?.totalBookingCount}}</h4>
-                            <!-- <p class="mb-0 font14 font-muted font500">Conversion Rate</p> -->
                         </div>
                     </div>
                     <div class="col-3">
-                        <div class="py-4">
+                        <div class="py-2">
+                            <h4 class="my-1">${{stats?.totalRevenueAmt | number : '1.2-2'}}</h4>
                             <p class="mb-0 font14 font-muted font500">Total Revenue</p>
-                            <h4 class="my-2">${{stats?.totalRevenueAmt | number : '1.2-2'}}</h4>
-                            <!-- <p class="mb-0 font14 font-muted font500">Average booking</p> -->
                         </div>
                     </div>
                     <div class="col-3">
-                        <div class="py-4">
+                        <div class="py-2">
+                            <h4 class="my-1">{{stats?.totalEstimateCount}}</h4>
                             <p class="mb-0 font14 font-muted font500">Estimate</p>
-                            <h4 class="my-2">{{stats?.totalEstimateCount}}</h4>
-                            <!-- <p class="mb-0 font14 font-muted font500">Conversion Rate</p> -->
                         </div>
                     </div>
                     <div class="col-3">
-                        <div class="py-4">
+                        <div class="py-2">
+                            <h4 class="my-1">{{stats?.totalInvoiceCount}}</h4>
                             <p class="mb-0 font14 font-muted font500">Invoice</p>
-                            <h4 class="my-2">{{stats?.totalInvoiceCount}}</h4>
-                            <!-- <p class="mb-0 font14 font-muted font500">Payment Rate</p> -->
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- <div class="">
-                <img src="../../../assets/images/dashboard-graph.png" class="img-fluid" />
-            </div> -->
             <div id="container"></div>
         </div>
     </div>
@@ -178,7 +172,7 @@
                         class="ShapeCircle32 bg-primary bg-opacity-10 d-flex align-items-center justify-content-center">
                         <span class="icon-job text-primary"></span>
                     </div>
-                    <h4 class="font18 ms-2 font600">Today’s Booking</h4>
+                    <h4 class="font15 ms-2 font600">Today’s Booking</h4>
                     <a href="/admin/bookings" class="ms-auto font14">View All</a>
                 </div>
                 <div class="border rounded">
@@ -201,7 +195,7 @@
                     <div class="ShapeCircle32 lightYellowBox2 d-flex align-items-center justify-content-center">
                         <span class="icon-estimate"></span>
                     </div>
-                    <h4 class="font18 ms-2 font600">Latest Estimate Invoices</h4>
+                    <h4 class="font15 ms-2 font600">Latest Estimate Invoices</h4>
                     <a href="/admin/estimate" class="ms-auto font14">View All</a>
                 </div>
                 <div class="border rounded">
@@ -227,7 +221,7 @@
                     <div class="ShapeCircle32 lightGreenBox d-flex align-items-center justify-content-center">
                         <span class="icon-invoice"></span>
                     </div>
-                    <h4 class="font18 ms-2 font600">Latest Invoices</h4>
+                    <h4 class="font15 ms-2 font600">Latest Invoices</h4>
                     <a href="/admin/invoice" class="ms-auto font14">View All</a>
                 </div>
                 <div class="border rounded">
@@ -250,11 +244,10 @@
             </div>
         </div>
     </div>
-
     <div class="py-4">
         <div class="row gx-lg-5">
             <div class="col-lg-7">
-                <h4 class="font18 font600 mb-3">Top Technician </h4>
+                <h4 class="font15 font600 mb-3">Top Technician </h4>
                 <div class="mt-20 ">
                     <table class="row-border ">
                         <thead>
@@ -302,7 +295,7 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <h4 class="font18 font600">Popular Service</h4>
+                <h4 class="font15 font600">Popular Service</h4>
                 <div class="mt-20 ">
                     <table class="row-border ">
                         <thead>
@@ -329,7 +322,6 @@
                                         <span class="icon-notification"></span> -->
                                     </div>
                                 </td>
-
                             </tr>
                             <tr *ngIf="topServices.length==0 && !topServicesLoaded">
                                 <td class="text-center" colspan="4">
@@ -342,5 +334,4 @@
             </div>
         </div>
     </div>
-
 </div>
