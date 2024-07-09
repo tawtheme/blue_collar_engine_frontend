@@ -2,21 +2,114 @@
     <div class="top-header-wrap">
         <div class="container-xxl">
             <div class="d-flex align-items-center">
-                <a class="navbar-brand" *ngIf="!isAdmin" [routerLink]="['/secure-panel/dashboard']">
-                    <img src="../../../../assets/images/logo-white.svg" alt="logo" />
-                </a>
-                <a class="navbar-brand" *ngIf="isAdmin" [routerLink]="['/admin']">
-                    <img src="../../../../assets/images/logo-white.svg" alt="logo" />
-                </a>
+                <nav class="navbar navbar-expand-lg navbar-dark header-navigation">
+                    <a class="navbar-brand" *ngIf="!isAdmin" [routerLink]="['/secure-panel/dashboard']">
+                        <img src="../../../../assets/images/logo-white.svg" alt="logo" class="admin-logo"/>
+                    </a>
+                    <a class="navbar-brand" *ngIf="isAdmin" [routerLink]="['/admin']">
+                        <img src="../../../../assets/images/logo-white.svg" alt="logo" class="admin-logo"/>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!isAdmin">
+                            <li class="nav-item mx-1" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                <a class="nav-link" [routerLink]="['/secure-panel/dashboard']">
+                                    <span class="icon-holder">
+                                        <span class="icon-house"></span>
+                                    </span>
+                                    <span class="menu-title">Overview</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-1" routerLinkActive="active">
+                                <a class="nav-link" [routerLink]="['/secure-panel/request-demo']">
+                                    <span class="icon-holder">
+                                        <span class="icon-house"></span>
+                                    </span>
+                                    <span class="menu-title">Request Demo</span>
+                                </a>
+                            </li>
+                        </ul>
+        
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isAdmin">
+                            <li class="nav-item mx-1" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                                <a class="nav-link" [routerLink]="['/admin']">
+                                    <span class="icon-holder">
+                                        <span class="icon-house"></span>
+                                    </span>
+                                    <span class="menu-title">Overview</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-1" routerLinkActive="active" [ngClass]="{'active': createJobActive.isActive }"
+                                [routerLinkActiveOptions]="{exact: true}">
+                                <a class="nav-link" [routerLink]="['/admin/bookings']">
+                                    <span class="icon-holder">
+                                        <span class="icon-job"></span>
+                                    </span>
+                                    <span class="menu-title">Bookings</span>
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': createBookingActive.isActive }" [routerLinkActiveOptions]="{exact: true}">
+                                <a class="nav-link" [routerLink]="['/admin/scheduler']">
+                                    <span class="icon-holder">
+                                        <span class="icon-calendar"></span>
+                                    </span>
+                                    <span class="menu-title">Scheduler</span>
+                                </a>
+                            </li> -->
+                            <li class="nav-item mx-1" routerLinkActive="active"
+                                [ngClass]="{'active': createEstimateActive.isActive }"
+                                [routerLinkActiveOptions]="{exact: true}">
+                                <a class="nav-link" [routerLink]="['/admin/estimate']">
+                                    <span class="icon-holder">
+                                        <span class="icon-estimate"></span>
+                                    </span>
+                                    <span class="menu-title">Estimates</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-1" routerLinkActive="active"
+                                [ngClass]="{'active': customerInvoiceActive.isActive}"
+                                [routerLinkActiveOptions]="{exact: true}">
+                                <a class="nav-link" [routerLink]="['/admin/invoice']">
+                                    <span class="icon-holder">
+                                        <span class="icon-invoice"></span>
+                                    </span>
+                                    <span class="menu-title">Invoices</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-1" routerLinkActive="active"
+                                [ngClass]="{'active': customerDetailActive.isActive }"
+                                [routerLinkActiveOptions]="{exact: true}">
+                                <a class="nav-link" [routerLink]="['/admin/customer']">
+                                    <span class="icon-holder">
+                                        <span class="icon-user"></span>
+                                    </span>
+                                    <span class="menu-title">Customers</span>
+                                </a>
+                            </li>
+                            <li class="nav-item mx-1" routerLinkActive="active" [ngClass]="{'active': priceBookActive.isActive }"
+                                [routerLinkActiveOptions]="{exact: true}">
+                                <a class="nav-link" [routerLink]="['/admin/price-book']">
+                                    <span class="icon-holder">
+                                        <span class="icon-invoice"></span>
+                                    </span>
+                                    <span class="menu-title">Services</span>
+                                </a>
+                            </li>
+                            <a routerLink="/admin/customer" routerLinkActive #customerListActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin/customer-detail" routerLinkActive #customerDetailActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin/create-booking" routerLinkActive #createBookingActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin/create-job" routerLinkActive #createJobActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin/create-estimate" routerLinkActive #createEstimateActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin/create-invoice" routerLinkActive #customerInvoiceActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin//price-book" routerLinkActive #priceBookActive="routerLinkActive" style="display: none"></a>
+                        </ul>
+                    </div>
+                </nav>
                 <div class="top-header-right ms-auto">
-                    <!-- <div class="header-search-box">
-                        <form action="javascript:void(0);">
-                            <input type="text" name="search" placeholder="Search..." autocomplete="off" value="">
-                            <button>
-                                <span class="icon-search"></span>
-                            </button>
-                        </form>
-                    </div> -->
                     <div class="header-actions">
                         <a href="javascript:void(0);">
                             <span class="icon-help"></span>
@@ -34,11 +127,8 @@
                                 <span class="icon-down-arrow"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
-                                <li><a [routerLink]="['/admin/account-setting']"><span
-                                            class="icon-user"></span>Profile</a>
-                                </li>
-                                <li><a href="javascript:void(0);" (click)="logout()"><span
-                                            class="icon-returning"></span>Logout</a></li>
+                                <li><a [routerLink]="['/admin/account-setting']"><span class="icon-user"></span>Profile</a></li>
+                                <li><a href="javascript:void(0);" (click)="logout()"><span class="icon-returning"></span>Logout</a></li>
                             </ul>
                         </div>
                     </div>
@@ -46,120 +136,4 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark header-navigation">
-        <div class="container-xxl">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!isAdmin">
-                    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" [routerLink]="['/secure-panel/dashboard']">
-                            <span class="icon-holder">
-                                <span class="icon-house"></span>
-                            </span>
-                            <span class="menu-title">Overview</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item" routerLinkActive="active">
-                        <a class="nav-link" [routerLink]="['/secure-panel/request-demo']">
-                            <span class="icon-holder">
-                                <span class="icon-house"></span>
-                            </span>
-                            <span class="menu-title">Request Demo</span>
-                        </a>
-                    </li>
-                </ul>
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isAdmin">
-                    <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" [routerLink]="['/admin']">
-                            <span class="icon-holder">
-                                <span class="icon-house"></span>
-                            </span>
-                            <span class="menu-title">Overview</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': createJobActive.isActive }"
-                        [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" [routerLink]="['/admin/bookings']">
-                            <span class="icon-holder">
-                                <span class="icon-job"></span>
-                            </span>
-                            <span class="menu-title">Bookings</span>
-                        </a>
-                    </li>
-                    <!-- <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': createBookingActive.isActive }" [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" [routerLink]="['/admin/scheduler']">
-                            <span class="icon-holder">
-                                <span class="icon-calendar"></span>
-                            </span>
-                            <span class="menu-title">Scheduler</span>
-                        </a>
-                    </li> -->
-
-                    <li class="nav-item" routerLinkActive="active"
-                        [ngClass]="{'active': createEstimateActive.isActive }"
-                        [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" [routerLink]="['/admin/estimate']">
-                            <span class="icon-holder">
-                                <span class="icon-estimate"></span>
-                            </span>
-                            <span class="menu-title">Estimates</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" routerLinkActive="active"
-                        [ngClass]="{'active': customerInvoiceActive.isActive}"
-                        [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" [routerLink]="['/admin/invoice']">
-                            <span class="icon-holder">
-                                <span class="icon-invoice"></span>
-                            </span>
-                            <span class="menu-title">Invoices</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" routerLinkActive="active"
-                        [ngClass]="{'active': customerDetailActive.isActive }"
-                        [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" [routerLink]="['/admin/customer']">
-                            <span class="icon-holder">
-                                <span class="icon-user"></span>
-                            </span>
-                            <span class="menu-title">Customers</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" routerLinkActive="active" [ngClass]="{'active': priceBookActive.isActive }"
-                        [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" [routerLink]="['/admin/price-book']">
-                            <span class="icon-holder">
-                                <span class="icon-invoice"></span>
-                            </span>
-                            <span class="menu-title">Services</span>
-                        </a>
-                    </li>
-
-                    <a routerLink="/admin/customer" routerLinkActive #customerListActive="routerLinkActive"
-                        style="display: none"></a>
-                    <a routerLink="/admin/customer-detail" routerLinkActive #customerDetailActive="routerLinkActive"
-                        style="display: none"></a>
-                    <a routerLink="/admin/create-booking" routerLinkActive #createBookingActive="routerLinkActive"
-                        style="display: none"></a>
-                    <a routerLink="/admin/create-job" routerLinkActive #createJobActive="routerLinkActive"
-                        style="display: none"></a>
-                    <a routerLink="/admin/create-estimate" routerLinkActive #createEstimateActive="routerLinkActive"
-                        style="display: none"></a>
-                    <a routerLink="/admin/create-invoice" routerLinkActive #customerInvoiceActive="routerLinkActive"
-                        style="display: none"></a>
-                    <a routerLink="/admin//price-book" routerLinkActive #priceBookActive="routerLinkActive"
-                        style="display: none"></a>
-
-
-
-                </ul>
-            </div>
-        </div>
-    </nav>
 </header>
