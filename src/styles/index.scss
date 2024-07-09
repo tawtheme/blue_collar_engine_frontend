@@ -1717,3 +1717,31 @@ app-booking-slot .mat-calendar-header .mat-calendar-controls {
     }
   }
 }
+
+.custom-modal-style {
+  height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  @media screen and (max-width: 767px) {
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .mat-mdc-dialog-surface.mdc-dialog__surface {
+    border-radius: 0 !important;
+  }
+}
+
+.cdk-global-scrollblock {
+  overflow-y: hidden !important;
+  top: 0 !important;
+}
+
+.mat-mdc-snack-bar-container .mat-mdc-snackbar-surface {
+  background: var(--primary) !important;
+}
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+  font-family: "JUST Sans" !important;
+}
