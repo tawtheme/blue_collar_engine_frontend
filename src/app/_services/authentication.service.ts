@@ -53,7 +53,7 @@ export class AuthenticationService {
         let reqHeaders = new HttpHeaders().set('Content-Type', 'application/json');
         return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/Login`, JSON.stringify(_params), { headers: reqHeaders })
             .pipe(map(user => {
-                ////console.log(JSON.stringify(user))
+                //////console.log(JSON.stringify(user))
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));
                 this.userSubject.next(user);
@@ -116,7 +116,7 @@ export class AuthenticationService {
         let reqHeaders = new HttpHeaders().set('Content-Type', 'application/json');
         return this.http.post<any>(`${environment.apiUrl}/api/v1/Account/Login`, JSON.stringify(_params), { headers: reqHeaders })
             .pipe(map(tenant => {
-                ////console.log(JSON.stringify(user))
+                //////console.log(JSON.stringify(user))
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('tenantToken', JSON.stringify(tenant));
                 this.tenantTokenSubject.next(tenant);

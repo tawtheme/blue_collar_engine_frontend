@@ -84,7 +84,7 @@ export class ServiceListComponent {
           if (this.items.length > 0) {
             this.activeCategory = this.items[0].categoryId;
           }
-          //console.log(this.items)
+          ////console.log(this.items)
         },
         error: error => {
           this.loading = false;
@@ -100,7 +100,7 @@ export class ServiceListComponent {
           this.loading = false;
           this.serviceItems = res.data;
 
-          //console.log(this.serviceItems)
+          ////console.log(this.serviceItems)
         },
         error: error => {
           this.loading = false;

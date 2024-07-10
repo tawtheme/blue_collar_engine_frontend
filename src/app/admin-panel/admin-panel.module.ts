@@ -45,9 +45,8 @@ import { ContractorAddressBookComponent } from './account-section/contractor-add
 import { SystemConfigurationComponent } from './account-section/system-configuration/system-configuration.component';
 import { TeamManagementComponent } from './account-section/team-management/team-management.component';
 import { AddTeamMemberComponent } from './account-section/team-management/add-team-member/add-team-member.component';
-import { StarRatingComponent } from './shared/star-rating/star-rating.component';
 import { OnboardPopupComponent } from './dashboard/onboard-popup/onboard-popup.component';
-
+import { NgApexchartsModule } from "ng-apexcharts";
 @NgModule({
   imports: [
     CommonModule,
@@ -60,7 +59,8 @@ import { OnboardPopupComponent } from './dashboard/onboard-popup/onboard-popup.c
       useFactory: adapterFactory,
     }),
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    NgApexchartsModule
   ],
   declarations: [
     DashboardComponent,
@@ -99,8 +99,8 @@ import { OnboardPopupComponent } from './dashboard/onboard-popup/onboard-popup.c
     SystemConfigurationComponent,
     TeamManagementComponent,
     AddTeamMemberComponent,
-    StarRatingComponent,
-    OnboardPopupComponent
+    OnboardPopupComponent,
+
   ],
 
 })

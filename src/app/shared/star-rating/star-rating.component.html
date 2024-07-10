@@ -1,5 +1,5 @@
 <button mat-icon-button [color]="color" *ngFor="let ratingId of ratingArr;index as i" [id]="'star_'+i"
-    (click)="onClick(i+1)" matTooltipPosition="above">
+    (click)="onClick(i+1)" matTooltipPosition="above" [ngClass]="{'disable':customDisable === true}">
     <mat-icon>
         {{showIcon(i)}}
     </mat-icon>

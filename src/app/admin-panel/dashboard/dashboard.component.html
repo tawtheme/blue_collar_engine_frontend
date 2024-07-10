@@ -12,10 +12,10 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a href="/admin/create-estimate">
-                            Create Estimate</a>
+                                Create Estimate</a>
                         </li>
                         <li><a href="/admin/create-invoice">
-                            Create Invoice</a>
+                                Create Invoice</a>
                         </li>
                     </ul>
                 </div>
@@ -77,6 +77,14 @@
                 </div>
             </div>
             <div id="container"></div>
+            <div id="chart">
+                <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
+                    [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
+                    [yaxis]="chartOptions.yaxis" [legend]="chartOptions.legend" [fill]="chartOptions.fill"
+                    [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
+                    [xaxis]="chartOptions.xaxis"></apx-chart>
+            </div>
+
         </div>
     </div>
     <div class="py-4">
@@ -191,12 +199,8 @@
                                 <td>
                                     <div class="d-flex gap-2 align-items-center justify-content-center custom-star">
                                         <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
-                                            (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
-                                        <!-- <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span> -->
+                                            (ratingUpdated)="onRatingChanged($event)"
+                                            [customDisable]="starDisable"></app-star-rating>
                                     </div>
                                 </td>
                             </tr>
@@ -229,7 +233,8 @@
                                 <td>
                                     <div class="d-flex gap-2 align-items-center justify-content-center custom-star">
                                         <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
-                                            (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
+                                            (ratingUpdated)="onRatingChanged($event)"
+                                            [customDisable]="starDisable"></app-star-rating>
                                         <!-- <span class="icon-notification"></span>
                                         <span class="icon-notification"></span>
                                         <span class="icon-notification"></span>

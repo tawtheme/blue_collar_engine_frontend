@@ -38,15 +38,15 @@ export class BookingAddressComponent {
     @Inject(MAT_DIALOG_DATA) public data: any, private _bookingService: BookingService) {
     this.tenantInfo = <any>this.authenticationService.tenantValue;
     this.user = <any>this.authenticationService.userValue;
-    // ////console.log(this.tenantInfo)
-    // ////console.log(this.user)
-    //////console.log(this.data)
+    // //////console.log(this.tenantInfo)
+    // //////console.log(this.user)
+    ////////console.log(this.data)
     this.businessHours = this.data.businessHours;
     this.bookingTime = this.data.bookingTime;
     this.bookingTimeText = this.data.bookingTimeText;
     this.bookingDate = this.data.bookingDate;
     this.selectedServices = this.data.selectedServices;
-    console.log(this.selectedServices)
+    //console.log(this.selectedServices)
     if (this.selectedServices.length > 0) {
       this.isEnableNextBtn = true;
     }
@@ -103,12 +103,12 @@ export class BookingAddressComponent {
     else {
       _param.otp = this.mobileVerifyForm.controls['otp'].value;
       this.authenticationService.verifyOTP(_param).subscribe(res => {
-        ////console.log(res)
+        //////console.log(res)
         this._snackBar.open(res.message);
         this.openVerifyOTP = false;
         this.isVerifyOtp = true;
         this._customerService.findCustomerByMobileNo(_param.sendTo).subscribe(res => {
-          ////console.log(res)
+          //////console.log(res)
           if (res.data.response != -1 && res.data.response != -2) {
             this.calanderBookingForm.patchValue(res.data.result);
           }
@@ -151,7 +151,7 @@ export class BookingAddressComponent {
       if (res.length > 0) {
         this.selectedServices = res;
         this.isEnableNextBtn = true;
-        console.log(this.selectedServices)
+        //console.log(this.selectedServices)
       }
       else {
         this.isEnableNextBtn = false;

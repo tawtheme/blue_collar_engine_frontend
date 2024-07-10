@@ -35,6 +35,7 @@
     "highcharts-angular": "^3.1.2",
     "jquery": "^3.7.1",
     "moment": "^2.18.1",
+    "ng-apexcharts": "^1.7.2",
     "ngx-chips": "^3.0.0",
     "ngx-material-timepicker": "^13.1.1",
     "ngx-stripe": "^15.8.1",

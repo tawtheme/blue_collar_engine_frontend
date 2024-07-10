@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { StarRatingColor } from '../shared/star-rating/star-rating.component';
 import { BookingService } from '@app/_services/admin-panel/booking/booking.service';
-import { first } from 'rxjs';
+import { first, min } from 'rxjs';
 import { EstimateService } from '@app/_services/admin-panel/estimate/estimate.service';
 import { InvoiceService } from '@app/_services/admin-panel/invoice/invoice.service';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
@@ -12,7 +11,21 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { OnboardPopupComponent } from './onboard-popup/onboard-popup.component';
 import { Router } from '@angular/router';
-
+import { StarRatingColor } from '@app/shared/star-rating/star-rating.component';
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ChartComponent,
+  ApexDataLabels,
+  ApexPlotOptions,
+  ApexYAxis,
+  ApexLegend,
+  ApexStroke,
+  ApexXAxis,
+  ApexFill,
+  ApexTooltip,
+  ApexNonAxisChartSeries
+} from "ng-apexcharts";
 const startDate = new Date();
 const endDate = new Date(startDate.getTime() - (336 * 60 * 60 * 1000));
 
@@ -27,7 +40,7 @@ export class DashboardComponent implements OnInit {
   starColor: StarRatingColor = StarRatingColor.accent;
   starColorP: StarRatingColor = StarRatingColor.primary;
   starColorW: StarRatingColor = StarRatingColor.warn;
-
+  starDisable: boolean = true;
   todayBooking: any[] = [];
   estimateInvoices: any[] = [];
   invoices: any[] = [];
@@ -44,6 +57,10 @@ export class DashboardComponent implements OnInit {
 
   dashboardRagePickerForm!: FormGroup;
   onBoardStatus: any;
+
+  @ViewChild("chart", { static: false })
+  chart!: ChartComponent;
+  public chartOptions: Partial<ChartOptions> | any;
   constructor(
     private _bookingService: BookingService,
     private _estimateService: EstimateService,
@@ -51,7 +68,9 @@ export class DashboardComponent implements OnInit {
     private _accountSettingService: AccountSettingService,
     private _dashboardService: DashboardService,
     private _formBuilder: FormBuilder, private _dialog: MatDialog, private _router: Router
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.dashboardRagePickerForm = this._formBuilder.group({
@@ -92,7 +111,7 @@ export class DashboardComponent implements OnInit {
         next: (res) => {
           this.todayBookingLoaded = false;
           this.todayBooking = res.data;
-          ////console.log(this.todayBooking)
+          //////console.log(this.todayBooking)
         },
         error: (error) => {
           this.todayBookingLoaded = false;
@@ -118,7 +137,7 @@ export class DashboardComponent implements OnInit {
         next: (res) => {
           this.estimateInvoiceLoaded = false;
           this.estimateInvoices = res.data;
-          ////console.log(this.estimateInvoices)
+          //////console.log(this.estimateInvoices)
         },
         error: (error) => {
           this.estimateInvoiceLoaded = false;
@@ -172,7 +191,7 @@ export class DashboardComponent implements OnInit {
     this._dashboardService.getTopServices().subscribe({
       next: (res: { data: any[] }) => {
         this.topServices = res.data;
-        ////console.log(this.topServices)
+        //////console.log(this.topServices)
         this.topServicesLoaded = false;
       },
       error: (error) => {
@@ -209,7 +228,7 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         next: (res: { data: any[]; }) => {
           this.stats = res.data;
-          // console.log(this.stats)
+          // //console.log(this.stats)
         },
         error: error => {
         }
@@ -242,45 +261,88 @@ export class DashboardComponent implements OnInit {
       }
     );
 
-    //console.log(graphData)
+    ////console.log(graphData)
     // @ts-ignore
-    var chart = Highcharts.chart('container', {
+    // var chart = Highcharts.chart('container', {
+    //   chart: {
+    //     type: 'column',
+    //   },
+    //   title: {
+    //     text: '',
+    //   },
+    //   subtitle: {
+    //     text: 'Counter, total booking, total estimate, total estimate',
+    //   },
+    //   xAxis: {
+    //     categories: days,
+    //     crosshair: true,
+    //   },
+    //   yAxis: {
+    //     min: 0,
+    //     title: {
+    //       text: 'Total Count',
+    //     },
+    //   },
+    //   tooltip: {
+    //     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+    //     pointFormat:
+    //       '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+    //       '<td style="padding:0"><b>{point.y}</b></td></tr>',
+    //     footerFormat: '</table>',
+    //     shared: true,
+    //     useHTML: true,
+    //   },
+    //   plotOptions: {
+    //     column: {
+    //       pointPadding: 0.2,
+    //       borderWidth: 0,
+    //     },
+    //   },
+    //   series: graphData,
+    // });
+  console.log(graphData)
+    this.chartOptions = {
+      series: graphData,      
       chart: {
-        type: 'column',
-      },
-      title: {
-        text: 'Counter',
-      },
-      subtitle: {
-        text: 'Total Booking, Total Estimate & Total Invoice',
-      },
-      xAxis: {
-        categories: days,
-        crosshair: true,
-      },
-      yAxis: {
-        min: 0,
-        title: {
-          text: 'Total Count',
-        },
-      },
-      tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat:
-          '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-          '<td style="padding:0"><b>{point.y}</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true,
+        type: "bar",
+        height: 350
       },
       plotOptions: {
-        column: {
-          pointPadding: 0.2,
-          borderWidth: 0,
-        },
+        bar: {
+          horizontal: false,
+          columnWidth: "55%",
+          endingShape: "rounded"
+        }
       },
-      series: graphData,
-    });
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        show: true,
+        width: 2,
+        colors: ["transparent"]
+      },
+      xaxis: {
+        categories: days
+      },
+      yaxis: {
+        title: {
+          text: "Total Count"
+        },
+        min: 0
+      },
+      fill: {
+        opacity: 1
+      },
+      tooltip: {
+        y: {
+          formatter: function (val: string) {
+            return  val;
+          }
+        }
+      }
+    };
+
   }
 
 
@@ -293,10 +355,22 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         next: (res: { data: any[]; }) => {
           this.onBoardStatus = res.data;
-          console.log(this.onBoardStatus)
+          //console.log(this.onBoardStatus)
         },
         error: error => {
         }
       });
   }
 }
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  dataLabels: ApexDataLabels;
+  plotOptions: ApexPlotOptions;
+  yaxis: ApexYAxis;
+  xaxis: ApexXAxis;
+  fill: ApexFill;
+  tooltip: ApexTooltip;
+  stroke: ApexStroke;
+  legend: ApexLegend;
+};

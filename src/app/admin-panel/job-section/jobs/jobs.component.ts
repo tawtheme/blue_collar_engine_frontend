@@ -137,7 +137,7 @@ export class JobsComponent implements OnInit {
   getAllCompletedBooking(param: PaginationModel) {
     this.loadCompeleted = true;
     param = { ...param, ...{ type: 'C', bookingDate: null } };
-    ////console.log(param)
+    //////console.log(param)
     this._bookingService.getAll(param)
       .pipe(first())
       .subscribe({

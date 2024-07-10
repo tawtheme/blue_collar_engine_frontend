@@ -56,4 +56,11 @@ export class BookingService {
         return res;
       }));
   }
+
+  saveBookingRating(bookingRateInfo: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Booking/SaveRating`, bookingRateInfo)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 }

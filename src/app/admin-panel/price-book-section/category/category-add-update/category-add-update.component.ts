@@ -50,14 +50,14 @@ export class CategoryAddUpdateComponent {
       return;
     }
     let param = this.categoryForm.value as any;
-    //console.log(param);
+    ////console.log(param);
     this.loading = true;
     this._categoryService.addUpdate(param)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.loading = false;
-          //console.log(res)
+          ////console.log(res)
           let el: HTMLElement = this.customerCancelEle.nativeElement;
           el.click();
           this._snackBar.open(res.message);

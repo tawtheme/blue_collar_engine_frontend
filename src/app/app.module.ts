@@ -31,9 +31,6 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
-import { PhoneMaskDirective } from './_helpers/directive/phone-mask.directive';
-import { UsMobileNoPipe } from './_helpers/pipe/us-mobile-no.pipe';
-import { LoadingInterceptor } from './_helpers/loading.interceptor';
 import {NgxStripeModule} from "ngx-stripe";
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.component';
@@ -86,7 +83,7 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
         PagenotfoundComponent,
         PaymentSuccessComponent,
         FeatureInvoiceComponent,
-        FeatureEstimateComponent,
+        FeatureEstimateComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -95,7 +92,7 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
         {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: matSnackbarDefaultConfig},
         { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
         JwtHelperService,
-        LoaderService
+        LoaderService,
     ],
     bootstrap: [AppComponent]
 })

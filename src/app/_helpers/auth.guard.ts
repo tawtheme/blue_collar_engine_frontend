@@ -22,14 +22,14 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const user = this.authenticationService.userValue;
-        console.log(state.url)
+        //console.log(state.url)
         if (this._jwtHelperService.isTokenExpired(user?.data.token!)) {
             this._snackBar.open("Session has been expired");
             this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
             return false;
         }
         if (user) {
-            debugger
+            //debugger
             const { roles } = route.data;
             if (roles && !roles.includes(user.data.role)) {
                 this.router.navigate(['/unauthorized'], { queryParams: { returnUrl: state.url } });
@@ -49,7 +49,7 @@ export class AuthGuard implements CanActivate {
             .subscribe({
                 next: (res: { data: any[]; }) => {
                     this.onBoardStatus = res.data;
-                    console.log(this.onBoardStatus)
+                    //console.log(this.onBoardStatus)
                     if ((!this.onBoardStatus.isServiceAdded || !this.onBoardStatus.isServiceAdded || !this.onBoardStatus.isServiceAdded || !this.onBoardStatus.isServiceAdded) && (stateUrl != '/admin' && stateUrl != '/admin/price-book' && stateUrl != '/admin/account-setting')) {
                         this._dialog.open(OnboardPopupComponent, { width: '900px', height: '600px', data: { 'onBoardStatus': this.onBoardStatus, isEnableEdit: false }, disableClose: true })
                     }

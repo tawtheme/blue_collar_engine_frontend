@@ -7,34 +7,37 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./star-rating.component.scss']
 })
 export class StarRatingComponent {
-  @Input('rating')  rating: number = 3;
-  @Input('starCount')  starCount: number = 5;
-  @Input('color')  color: string = 'accent';
-  @Output()  ratingUpdated = new EventEmitter();
+  @Input('rating') rating: number = 3;
+  @Input('starCount') starCount: number = 5;
+  @Input('color') color: string = 'accent';
+  @Input('customDisable') customDisable: boolean = true;
+  @Output() ratingUpdated = new EventEmitter();
 
-   snackBarDuration: number = 2000;
-   ratingArr:number[] = [];
+  snackBarDuration: number = 2000;
+  ratingArr: number[] = [];
 
   constructor(private snackBar: MatSnackBar) {
+    
   }
 
 
   ngOnInit() {
-    //console.log("a "+this.starCount)
+    ////console.log("a "+this.starCount)
     for (let index = 0; index < this.starCount; index++) {
       this.ratingArr.push(index);
     }
+    console.log(this.customDisable)
   }
-  onClick(rating:number) {
-    //console.log(rating)
+  onClick(rating: number) {
+    ////console.log(rating)
     // this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', {
     //   duration: this.snackBarDuration
     // });
-    // this.ratingUpdated.emit(rating);
+    this.ratingUpdated.emit(rating);
     return false;
   }
 
-  showIcon(index:number) {
+  showIcon(index: number) {
     if (this.rating >= index + 1) {
       return 'star';
     } else {

@@ -89,6 +89,7 @@ export class AddUpdateServiceComponent {
           'index': i,
           'uploadId': this.items.uploadedFiles[i].uploadId
         }
+        debugger
         this.previews.push(_data);
         this.categoryServiceForm.controls['files'].clearValidators();
         this.categoryServiceForm.controls['files'].updateValueAndValidity();
@@ -125,7 +126,7 @@ export class AddUpdateServiceComponent {
     this._categoryService.addUpdateService(formData)
       .subscribe(res => {
         this.loading = false;
-        //console.log(res)
+        ////console.log(res)
         let el: HTMLElement = this.customerCancelEle.nativeElement;
         el.click();
         this._snackBar.open(res.message);
@@ -140,7 +141,7 @@ export class AddUpdateServiceComponent {
         next: (res) => {
           this.loading = false;
           this.categories = res.data;
-          //console.log(this.items)
+          ////console.log(this.items)
         },
         error: error => {
           this.loading = false;
@@ -181,7 +182,7 @@ export class AddUpdateServiceComponent {
   }
 
   removeServiceImage(index: number, uploadId: number) {
-    //console.log(this.categoryServiceForm.value.categoryServiceId)
+    ////console.log(this.categoryServiceForm.value.categoryServiceId)
     const message = `Are you sure you want to remove?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
@@ -192,7 +193,7 @@ export class AddUpdateServiceComponent {
       if (dialogResult) {
         if (this.categoryServiceForm.value.categoryServiceId > 0 && uploadId > 0) {
           //this.previews.splice(index, 1);          
-          //console.log('uploadId :' + uploadId)
+          ////console.log('uploadId :' + uploadId)
           var _param = {
             'uploadId': uploadId,
             'status': 'D'

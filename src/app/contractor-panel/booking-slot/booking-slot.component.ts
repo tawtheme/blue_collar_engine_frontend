@@ -40,7 +40,7 @@ export class BookingSlotComponent {
   ) {}
 
   ngOnInit() {
-    ////console.log(this.data)
+    //////console.log(this.data)
     this.selectedServices = this.data;
     if (this.selectedServices.length > 0) {
       this.isEnableNextBtn = true;
@@ -54,13 +54,13 @@ export class BookingSlotComponent {
   bindBusinessHours(dayId: number) {
     this._tenantService.getBusinesshours().subscribe((res) => {
       this.loading = false;
-      //console.log(res.data)
+      ////console.log(res.data)
       this.businessHours = res.data.filter(
         (time: { dayId: any; isDayActive: boolean }) => {
           return time.dayId === dayId && time.isDayActive == true;
         }
       );
-      //console.log(this.businessHours)
+      ////console.log(this.businessHours)
       if (this.businessHours.length > 0) {
         this.bookingTime = this.businessHours[0].businessHourId;
         this.bookingTimeText=this.businessHours[0].openTime+'-'+this.businessHours[0].closeTime;
@@ -123,7 +123,7 @@ export class BookingSlotComponent {
       if (res.length > 0) {
         this.selectedServices = res;
         this.isEnableNextBtn = true;
-        ////console.log(this.selectedServices)
+        //////console.log(this.selectedServices)
       } else {
         this.isEnableNextBtn = false;
       }

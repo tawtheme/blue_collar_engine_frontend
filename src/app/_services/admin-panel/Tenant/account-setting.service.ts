@@ -39,7 +39,7 @@ export class AccountSettingService {
       }));
   }
 
-  setAsDefaultAddress(addressInfo:any){
+  setAsDefaultAddress(addressInfo: any) {
     return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/SetAsDefaultAddress`, addressInfo)
       .pipe(map(res => {
         return res;
@@ -137,6 +137,13 @@ export class AccountSettingService {
       headers: new HttpHeaders().set('skip', 'true')
     };
     return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/AddUpdateUser`, userInfo, httpOptions)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  getTenant(userId: any) {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Account/GetTenant?subdomain=&userId=` + userId)
       .pipe(map(res => {
         return res;
       }));

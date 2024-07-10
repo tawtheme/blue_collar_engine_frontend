@@ -221,7 +221,7 @@ export class CreateEstimateComponent implements OnInit {
             this.loadingDraft = false;
           }
           this._snackBar.open(res.message);
-          //console.log(res)
+          ////console.log(res)
           this._router.navigate(['/admin/estimate']);
         },
         error: error => {
@@ -249,7 +249,7 @@ export class CreateEstimateComponent implements OnInit {
 
   addProduct() {
     this.products().push(this.newProduct());
-    //console.log(this.f)
+    ////console.log(this.f)
   }
 
   removeQuantity(i: number) {
@@ -272,11 +272,11 @@ export class CreateEstimateComponent implements OnInit {
     for (let i = 0; i < this.products().length; i++) {
       _totalAmt += this.products().at(i).get('totalPrice')?.value;
     }
-    //console.log(_totalAmt)
+    ////console.log(_totalAmt)
     this.subTotal = _totalAmt - this.estimateInvoiceForm.controls['discount'].value;
     this.taxAmount = (this.subTotal * this.taxPer / 100);
     this.estimateTotal = this.subTotal + this.taxAmount;
-    //console.log('estimateTotal :' + _totalAmt)
+    ////console.log('estimateTotal :' + _totalAmt)
   }
 
   getAllProduct(_param: any) {
@@ -287,7 +287,7 @@ export class CreateEstimateComponent implements OnInit {
           this.productList = res.data.filter(function (ele: any) {
             return ele.isOnlineBooking == true;
           });
-          //console.log(this.productList)
+          ////console.log(this.productList)
         },
         error: error => {
           this.loading = false;

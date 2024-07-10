@@ -154,7 +154,7 @@ export class CreateInvoiceComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.productList = res.data;
-          ////console.log(this.productList)
+          //////console.log(this.productList)
         },
         error: error => {
           this.loading = false;
@@ -164,7 +164,7 @@ export class CreateInvoiceComponent implements OnInit {
 
   bindTax(type: any) {
     this._accountSettingService.getTax(type).subscribe(res => {
-      ////console.log(res.data.tax)
+      //////console.log(res.data.tax)
       this.invoiceForm.controls['tax'].setValue(res.data.tax);
       this.taxPer = res.data.tax;
     })
@@ -217,7 +217,7 @@ export class CreateInvoiceComponent implements OnInit {
     }
     let param = this.invoiceForm.value as any;
     Object.assign(param, { status: this.clickType });
-    ////console.log(param)
+    //////console.log(param)
     if (this.clickType == 'S') {
       const message = `Are you sure you want to do send?`;
       const dialogData = new ConfirmDialogModel("Confirmation", message);
@@ -253,7 +253,7 @@ export class CreateInvoiceComponent implements OnInit {
             this.loadingDraft = false;
           }
           this._snackBar.open(res.message);
-          ////console.log(res)
+          //////console.log(res)
           if (this.bookingId > 0) {
             this._router.navigate(['/admin/bookings']);
             //this._bookingService.openEditBookingPage.next(this.bookingId);
@@ -288,7 +288,7 @@ export class CreateInvoiceComponent implements OnInit {
 
   addProduct() {
     this.products().push(this.newProduct());
-    ////console.log(this.f)
+    //////console.log(this.f)
   }
 
   removeQuantity(i: number) {
@@ -351,7 +351,7 @@ export class CreateInvoiceComponent implements OnInit {
       });
       res.data = { ...res.data, ...{ products: productArr } }
       this.invoiceForm.patchValue(res.data);
-      //console.log(res.data)
+      ////console.log(res.data)
       this.customerInfo = <CustomerModel>res.data;
       this.customerInfo = { ...this.customerInfo, ...{ serviceAddress: res.data.address } };
       this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);

@@ -39,7 +39,7 @@ export class SystemConfigurationComponent {
     if (this.configurationForm.invalid) {
       return;
     }
-    //console.log(param)
+    ////console.log(param)
     this.loading = true;
     this._accountSettingService.addUpdateStripeConfiguration(param)
       .subscribe({
