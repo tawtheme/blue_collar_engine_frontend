@@ -1,0 +1,27 @@
+.recent-wrapper{
+    height: 300px;
+    overflow: scroll;
+
+    .recentListing{
+        border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important;
+    
+        &:last-child{
+            border-bottom: none !important;
+        }
+    }
+}
+.popularSection{
+    overflow: hidden;
+
+    table{
+        border: none;
+
+        tbody td {
+            padding: 0px 10px !important
+        }
+
+        tr:last-child{
+            border-bottom: none;
+        }
+    }
+}
