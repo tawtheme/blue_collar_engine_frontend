@@ -692,11 +692,11 @@ ul {
 
 .page-title-box {
   // @include flexbox(row, space-between, flex-start);
-  padding: 20px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--border-color);
   .page-title {
     @include flexbox(row, space-between, flex-start);
-    font-size: 28px;
+    font-size: 24px;
   }
 }
 
@@ -1128,7 +1128,7 @@ table tr {
 table tbody td {
   border: none;
   text-align: left !important;
-  padding: 6px 15px !important;
+  padding: 15px 15px !important;
   font-size: 0.875rem;
   font-weight: 400;
 }
@@ -1745,4 +1745,7 @@ app-booking-slot .mat-calendar-header .mat-calendar-controls {
 }
 .mat-mdc-snack-bar-container .mdc-snackbar__label {
   font-family: "JUST Sans" !important;
+}
+.mat-datepicker-content .mat-calendar{
+  height: auto !important;
 }

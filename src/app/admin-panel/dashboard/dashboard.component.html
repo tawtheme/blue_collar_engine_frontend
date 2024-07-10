@@ -19,9 +19,11 @@
                         </li>
                     </ul>
                 </div>
+                <!--
                 <button type="button" class="btn btn-primary  gap-2" (click)="openOnBoardModel()">
                     Open On-Board
                 </button>
+                -->
             </div>
         </div>
     </div>
@@ -33,7 +35,6 @@
             <h3 class="mb-0 font15">Quick Overview</h3>
             <div class="ms-auto">
                 <mat-form-field class="muiDatePickerFromField " (click)="picker.open()">
-                    <!-- <mat-label>Select Date range</mat-label> -->
                     <mat-date-range-input [rangePicker]="picker" [formGroup]="dashboardRagePickerForm"
                         [comparisonStart]="dashboardRagePickerForm.value.start"
                         [comparisonEnd]="dashboardRagePickerForm.value.end">
@@ -41,7 +42,6 @@
                         <input matEndDate formControlName="end" placeholder="End date"
                             (dateChange)="rangeChangeEvent()">
                     </mat-date-range-input>
-                    <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
                     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-date-range-picker #picker></mat-date-range-picker>
                 </mat-form-field>
@@ -186,13 +186,7 @@
                                 <td>{{tech.successRate}}%</td>
                                 <td>
                                     <div class="d-flex gap-2 align-items-center justify-content-center custom-star">
-                                        <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
-                                            (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
-                                        <!-- <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span>
-                                        <span class="icon-notification"></span> -->
+                                        <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor" (ratingUpdated)="onRatingChanged($event)"></app-star-rating>
                                     </div>
                                 </td>
                             </tr>
