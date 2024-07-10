@@ -9,9 +9,12 @@ import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account
 import { environment } from '@environments/environment';
 import { DashboardService } from '@app/_services/admin-panel/dashboard/dashboard.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { OnboardPopupComponent } from './onboard-popup/onboard-popup.component';
+import { Router } from '@angular/router';
 
 const startDate = new Date();
-const endDate= new Date(startDate.getTime() - (336*60*60*1000));
+const endDate = new Date(startDate.getTime() - (336 * 60 * 60 * 1000));
 
 @Component({
   selector: 'app-dashboard',
@@ -40,15 +43,15 @@ export class DashboardComponent implements OnInit {
   apiBaseUrl: string = environment.apiUrl + '/';
 
   dashboardRagePickerForm!: FormGroup;
-
+  onBoardStatus: any;
   constructor(
     private _bookingService: BookingService,
     private _estimateService: EstimateService,
     private _invoiceService: InvoiceService,
     private _accountSettingService: AccountSettingService,
     private _dashboardService: DashboardService,
-    private _formBuilder: FormBuilder
-  ) {}
+    private _formBuilder: FormBuilder, private _dialog: MatDialog, private _router: Router
+  ) { }
 
   ngOnInit(): void {
     this.dashboardRagePickerForm = this._formBuilder.group({
@@ -73,6 +76,7 @@ export class DashboardComponent implements OnInit {
     this.getInvoices();
     this.getTopTechnician();
     this.getTopServices();
+    this.getOnBoardStats();
   }
 
   onRatingChanged(rating: number) {
@@ -196,7 +200,7 @@ export class DashboardComponent implements OnInit {
           this.graphStats = res.data;
           this.bindHighChart(this.graphStats);
         },
-        error: (error) => {},
+        error: (error) => { },
       });
   }
 
@@ -277,5 +281,22 @@ export class DashboardComponent implements OnInit {
       },
       series: graphData,
     });
+  }
+
+
+  openOnBoardModel() {
+    this._dialog.open(OnboardPopupComponent, { width: '900px', height: '600px', data: { 'onBoardStatus': this.onBoardStatus, isEnableEdit: false }, disableClose: true })
+  }
+
+  getOnBoardStats() {
+    this._dashboardService.GetOnBoardStatus()
+      .subscribe({
+        next: (res: { data: any[]; }) => {
+          this.onBoardStatus = res.data;
+          console.log(this.onBoardStatus)
+        },
+        error: error => {
+        }
+      });
   }
 }

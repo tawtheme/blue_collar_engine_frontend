@@ -37,4 +37,11 @@ export class DashboardService {
         return res;
       }));
   }
+
+  GetOnBoardStatus() {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetOnBoardStatus`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 }

@@ -1,5 +1,6 @@
 <div class="offcanvas-header sidebar-popup-header">
-    <h6 class="offcanvas-title" id="offcanvasRightLabel">Add Customer</h6>
+    <h6 class="offcanvas-title" id="offcanvasRightLabel">
+        {{customerForm.value.customerId ==0 ?'Add Customer':'Edit Customer'}}</h6>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" #customerCancelEle>
     </button>
 </div>

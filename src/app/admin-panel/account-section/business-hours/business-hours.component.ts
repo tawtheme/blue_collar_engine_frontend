@@ -138,7 +138,7 @@ export class BusinessHoursComponent {
       return;
     }
     this.loading = true;
-    //console.log(JSON.stringify(param))
+    console.log(JSON.stringify(param))
     this._accountSettingService.addUpdateBusinessHours(param).subscribe(res => {
       this.loading = false;
       this._snackBar.open(res.message);

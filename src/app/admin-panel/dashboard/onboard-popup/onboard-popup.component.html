@@ -1,15 +1,74 @@
-<div class="modal-dialog modal-dialog-centered">
+<div class="modal-dialog modal-dialog-centered modal-lg onBoardModelStyle ">
     <div class="modal-content">
-        <div class="modal-header">
-            <div class="">
-                <h4>Welcome to Blue Collar Engine!</h4>
-                <p>To get started, we need to set up a few things.</p>
-            </div>
-
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="diablog-header">
+            <h3>Welcome to Blue Collar Engine!</h3>
+            <p class="font-muted mt-2">To get started, we need to set up a few things.</p>        
+            <button type="button" class="btn-close" (click)="cancel()" *ngIf="isShowCancelBtn"></button>
         </div>
-        <div class="modal-body">
-
+        <div class="px-md-5 pb-md-5 px-4 pb-4">
+            <div class="my-4 border rounded p-4">              
+                <div class="onBoardModelListItem">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="lightGrayBox ">
+                            <span class="icon-list fs-5"></span>
+                        </div>
+                        <div class="">
+                            <h4 class="font16 font500 text-black">Services</h4>
+                            <p class="font14 mb-0 font-muted">Please update the business hours </p>
+                        </div>
+                    </div>
+                    <div class="ms-auto" *ngIf="onBoardData?.isServiceAdded">
+                        <span class="icon-tick text-success fs-3"></span>
+                    </div>
+                    <button class="ms-auto btn btn-primary" (click)="redirectToService()" *ngIf="!onBoardData?.isServiceAdded">Update Now</button>
+                </div>
+                <div class="onBoardModelListItem">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="lightGrayBox ">
+                            <span class="icon-team fs-5"></span>
+                        </div>
+                        <div class="">
+                            <h4 class="font16 font500 text-black">Team Setup</h4>
+                            <p class="font14 mb-0 font-muted">Please update the business hours </p>
+                        </div>
+                    </div>
+                    <div class="ms-auto" *ngIf="onBoardData?.isTeamMemberAdded">
+                        <span class="icon-tick text-success fs-3"></span>
+                    </div>
+                    <button class="ms-auto btn btn-primary" (click)="redirectToUser()" *ngIf="!onBoardData?.isTeamMemberAdded">Update Now</button>
+                </div>
+                <div class="onBoardModelListItem">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="lightGrayBox ">
+                            <span class="icon-invoice fs-5"></span>
+                        </div>
+                        <div class="">
+                            <h4 class="font16 font500 text-black">Invoice Settings</h4>
+                            <p class="font14 mb-0 font-muted">Please update the business hours </p>
+                        </div>
+                    </div>
+                    <div class="ms-auto" *ngIf="onBoardData?.isTaxAdded">
+                        <span class="icon-tick text-success fs-3"></span>
+                    </div>
+                    <button class="ms-auto btn btn-primary" (click)="redirectToTax()" *ngIf="!onBoardData?.isTaxAdded">Update Now</button>
+                </div>
+                <div class="onBoardModelListItem">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="lightGrayBox ">
+                            <span class="icon-operations fs-5"></span>
+                        </div>
+                        <div class="">
+                            <h4 class="font16 font500 text-black">Payment Gateway</h4>
+                            <p class="font14 mb-0 font-muted">Please update the business hours </p>
+                        </div>
+                    </div>
+                    <div class="ms-auto" *ngIf="onBoardData?.isStripeKeysAdded">
+                        <span class="icon-tick text-success fs-3"></span>
+                    </div>
+                    <button class="ms-auto btn btn-primary" (click)="redirectToStripeConfiguration()" *ngIf="!onBoardData?.isStripeKeysAdded">Update Now</button>
+                </div>
+        
+            </div>
         </div>
     </div>
 </div>

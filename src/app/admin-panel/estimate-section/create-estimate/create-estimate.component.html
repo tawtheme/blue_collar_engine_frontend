@@ -3,14 +3,14 @@
         <div class="d-flex items-center">
             <div class="">
                 <div class="d-flex items-center mb-10">
-                    <h4 class="page-title">Add New Estimate</h4>
+                    <h4 class="page-title">{{estimateInvoiceForm.value.estimateId ==0 ?'Add New Estimate':'View Estimate'}} </h4>
                 </div>
                 <div class="breadcrumb">
                     <a [routerLink]="['/admin']">Dashboard</a>
                     <span class="separator">/</span>
                     <a [routerLink]="['/admin/estimate']">Estimate</a>
                     <span class="separator">/</span>
-                    <span>Create Estimate</span>
+                    <span>{{estimateInvoiceForm.value.estimateId ==0 ?'Create Estimate':'View Estimate'}}</span>
                 </div>
             </div>
         </div>

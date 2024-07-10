@@ -24,6 +24,7 @@ export class BookingSlotComponent {
   todayDate: Date = new Date();
   businessHours: any[] = [];
   bookingTime: any;
+  bookingTimeText: any;
   selectedServices: any[] = [];
   submitted = false;
   isEnableNextBtn: boolean = false;
@@ -62,6 +63,7 @@ export class BookingSlotComponent {
       //console.log(this.businessHours)
       if (this.businessHours.length > 0) {
         this.bookingTime = this.businessHours[0].businessHourId;
+        this.bookingTimeText=this.businessHours[0].openTime+'-'+this.businessHours[0].closeTime;
         this.isEnableNextBtn = true;
       } else {
         this.bookingTime = 0;
@@ -84,6 +86,7 @@ export class BookingSlotComponent {
       data: {
         bookingDate: this.bookingDate,
         bookingTime: this.bookingTime,
+        bookingTimeText:this.bookingTimeText,
         businessHours: this.businessHours,
         selectedServices: this.selectedServices,
       },

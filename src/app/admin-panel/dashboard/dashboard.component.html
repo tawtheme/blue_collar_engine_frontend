@@ -12,9 +12,6 @@
                     </button>
 
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <!-- <li><a href="javascript:void(0);">
-                                Create Booking</a>
-                        </li> -->
                         <li><a href="/admin/create-estimate">
                                 Create Estimate</a>
                         </li>
@@ -23,94 +20,14 @@
                         </li>
                     </ul>
                 </div>
-                <button type="button" class="btn btn-primary  gap-2" data-bs-toggle="modal"
-                    data-bs-target="#onboardModel">
+                <button type="button" class="btn btn-primary  gap-2" (click)="openOnBoardModel()">
                     Open On-Board
                 </button>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade onBoardModelStyle" id="onboardModel" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="diablog-header">
-                <h3>Welcome to Blue Collar Engine!</h3>
-                <p class="font-muted mt-2">To get started, we need to set up a few things.</p>
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="px-md-5 pb-md-5 px-4 pb-4">
-                <div class="my-4 border rounded p-4">
-                    <div class="onBoardModelListItem">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="lightGrayBox ">
-                                <span class="icon-time fs-5"></span>
-                            </div>
-                            <div class="">
-                                <h4 class="font16 font500 text-black">Business Hours</h4>
-                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
-                            </div>
-                        </div>
-                        <div class="ms-auto">
-                            <span class="icon-tick text-success fs-3"></span>
-                        </div>
-                    </div>
-                    <div class="onBoardModelListItem">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="lightGrayBox ">
-                                <span class="icon-list fs-5"></span>
-                            </div>
-                            <div class="">
-                                <h4 class="font16 font500 text-black">Services</h4>
-                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
-                            </div>
-                        </div>
-                        <button class="ms-auto btn btn-primary">Update Now</button>
-                    </div>
-                    <div class="onBoardModelListItem">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="lightGrayBox ">
-                                <span class="icon-team fs-5"></span>
-                            </div>
-                            <div class="">
-                                <h4 class="font16 font500 text-black">Team Setup</h4>
-                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
-                            </div>
-                        </div>
-                        <button class="ms-auto btn btn-primary">Update Now</button>
-                    </div>
-                    <div class="onBoardModelListItem">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="lightGrayBox ">
-                                <span class="icon-invoice fs-5"></span>
-                            </div>
-                            <div class="">
-                                <h4 class="font16 font500 text-black">Invoice Settings</h4>
-                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
-                            </div>
-                        </div>
-                        <button class="ms-auto btn btn-primary">Update Now</button>
-                    </div>
-                    <div class="onBoardModelListItem">
-                        <div class="d-flex align-items-center gap-3">
-                            <div class="lightGrayBox ">
-                                <span class="icon-operations fs-5"></span>
-                            </div>
-                            <div class="">
-                                <h4 class="font16 font500 text-black">Payment Gateway</h4>
-                                <p class="font14 mb-0 font-muted">Please update the business hours </p>
-                            </div>
-                        </div>
-                        <button class="ms-auto btn btn-primary">Update Now</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="container-xxl">
     <div class="py-4">
         <div class="d-flex align-items-center">

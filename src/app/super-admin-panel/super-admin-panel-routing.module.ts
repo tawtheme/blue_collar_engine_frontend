@@ -22,7 +22,8 @@ const routes: Routes = [
       {
         path: 'request-demo',
         component: RequestDemoComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.SuperAdmin] }
       }
     ],
     data: { roles: [Role.SuperAdmin] }

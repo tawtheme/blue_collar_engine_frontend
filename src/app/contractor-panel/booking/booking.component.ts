@@ -57,6 +57,7 @@ export class BookingComponent implements OnInit {
     this.baseUrl = environment.apiUrl;
     // ////console.log(this.tenantInfo)
     // ////console.log(this.user)
+    this._bookingSharedService.emptyCart();
   }
 
   ngOnInit(): void {

@@ -93,12 +93,9 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
         {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: matSnackbarDefaultConfig},
-
-        //{  provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true},
         { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
         JwtHelperService,
-        LoaderService,
-        fakeBackendProvider
+        LoaderService
     ],
     bootstrap: [AppComponent]
 })

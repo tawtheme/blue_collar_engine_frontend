@@ -28,6 +28,7 @@ export class BookingAddressComponent {
   bookingDate: Date | null | undefined;
   businessHours: any[] = [];
   bookingTime: any;
+  bookingTimeText: any;
   selectedServices: any[] = [];
   isEnableNextBtn: boolean = false;
   IsShowEditBtn: boolean = false;
@@ -42,6 +43,7 @@ export class BookingAddressComponent {
     //////console.log(this.data)
     this.businessHours = this.data.businessHours;
     this.bookingTime = this.data.bookingTime;
+    this.bookingTimeText = this.data.bookingTimeText;
     this.bookingDate = this.data.bookingDate;
     this.selectedServices = this.data.selectedServices;
     console.log(this.selectedServices)
@@ -171,16 +173,13 @@ export class BookingAddressComponent {
     }
     else {
       let _param = this.calanderBookingForm.value as any;
+      
       var _mobileNo = this.mobileVerifyForm.controls['mobileNo'].value.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '');
-      _param = { ..._param, ...{ mobileNo: _mobileNo, bookingDate: this.bookingDate, timeSlot: this.bookingTime, bookingDetails: this.selectedServices, customerId: (_param.customerId == '' ? 0 : _param.customerId), addressId: (_param.customerAddressId == '' ? 0 : _param.customerAddressId), status: 'U' } };
-      this.loading = true;
+      _param = { ..._param, ...{ mobileNo: _mobileNo, bookingDate: this.bookingDate, timeSlot: this.bookingTime, timeSlotText: this.bookingTimeText, bookingDetails: this.selectedServices, customerId: (_param.customerId == '' ? 0 : _param.customerId), addressId: (_param.customerAddressId == '' ? 0 : _param.customerAddressId), status: 'U' } };
+      this.dialogRef.close();
       this._bookingService.createBooking(_param).subscribe(res => {
-        this.loading = false;
-        this._snackBar.open(res.message);
-        this._bookingSharedService.emptyCart();
-        //window.location.reload();
-        this.dialogRef.close();
-        this._router.navigate(['/booking/booking-success']);
+        this._snackBar.open(res.message);             
+        this._router.navigateByUrl('/booking/booking-success', { state: _param });
       })
     }
   }

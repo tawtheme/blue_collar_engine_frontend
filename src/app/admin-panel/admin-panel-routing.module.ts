@@ -26,62 +26,74 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
         pathMatch: 'full',
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'customer',
         component: CustomerComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'customer-detail',
         component: CustomerDetailsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'scheduler',
         component: SchedulerComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'bookings',
         component: JobsComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'create-job',
         component: CreateJobComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'estimate',
         component: EstimateComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'create-estimate',
         component: CreateEstimateComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'invoice',
         component: InvoiceComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'create-invoice',
         component: CreateInvoiceComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'price-book',
         component: ServiceListComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'account-setting',
         component: AccountSettingComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
     ],
     data: { roles: [Role.Admin] },
