@@ -3,9 +3,11 @@
 .main-header-wrapper {
   .top-header-wrap {
     background-color: var(--secondary);
-    padding: 15px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     @include flexbox(row, space-between, center);
+    .admin-logo{
+      width: auto; height: 30px;
+    }
     .top-header-right {
       @include flexbox(row, center, center);
       height: 100%;
@@ -79,19 +81,18 @@
     .navbar-nav {
       .nav-item {
         position: relative;
-        margin-right: 10px;
         .nav-link {
           width: 100%;
-          padding: 16px 20px;
+          padding: 16px 12px;
           @include flexbox(row, flex-start, center);
           color: var(--white);
-          gap: 12px;
+          gap: 8px;
           position: relative;
           .menu-title {
             font-size: 14px;
-            font-weight: 300;
+            font-weight: 400;
           }
-          &::before {
+          /*&::before {
             content: "";
             width: 0%;
             height: 2px;
@@ -103,7 +104,7 @@
           }
           &:hover::before {
             width: 100%;
-          }
+          }*/
           &:hover {
             color: #f9d867;
           }

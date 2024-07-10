@@ -56,7 +56,8 @@
                         </mat-form-field>
                     </div>
                     <div class="custom-assigned-members" *ngIf="bookingInfo.status!='U'">
-                        <span *ngFor="let _members of bookingInfo.assignedTeamMembers">{{_members.fullName}}</span>
+                        <p *ngFor="let _members of bookingInfo.assignedTeamMembers " class="font14 mb-2 font400">
+                            {{_members.fullName}}</p>
                     </div>
                 </div>
             </div>
