@@ -118,7 +118,7 @@
                             <div class="booking-top-head assigned-booking">
                                 Assigned ({{assignedBooking.length > 0 ? assignedBooking[0].totalCount:0}})
                             </div>
-                            <select class="status-select" formControlName="currentStatus">
+                            <select class="status-select" formControlName="currentStatus" (change)="onChangeCurrentStatus($event)">
                                 <option value="" selected>Show All</option>
                                 <option value="JS">Job Started</option>
                                 <option value="JF">Job Finished</option>

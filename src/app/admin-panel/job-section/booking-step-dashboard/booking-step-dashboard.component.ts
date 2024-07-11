@@ -35,7 +35,7 @@ export class BookingStepDashboardComponent {
       .subscribe({
         next: (res) => {
           this.bookingStepInfo = res.data;
-          console.log(this.bookingStepInfo)
+          //console.log(this.bookingStepInfo)
           this.loading = false;
         }
       });
