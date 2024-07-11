@@ -1,21 +1,16 @@
-<div class="page-title-box items-center">
+<div class="page-title-box items-center sticky-top">
     <div class="container-xxl">
         <div class="d-flex items-center">
             <h4 class="page-title">Dashboard</h4>
             <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
                 <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle gap-2" data-bs-toggle="dropdown"
-                        data-bs-display="static" aria-expanded="false">
-                        <span class="icon-add font12"></span>
-                        Add New
-                        <span class="icon-down-arrow"></span>
+                    <button type="button" class="btn btn-primary dropdown-toggle gap-2" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        <span class="icon-add font12"></span>Add New<span class="icon-down-arrow"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a href="/admin/create-estimate">
-                                Create Estimate</a>
+                        <li><a href="/admin/create-estimate">Create Estimate</a>
                         </li>
-                        <li><a href="/admin/create-invoice">
-                                Create Invoice</a>
+                        <li><a href="/admin/create-invoice">Create Invoice</a>
                         </li>
                     </ul>
                 </div>
@@ -29,8 +24,37 @@
     </div>
 </div>
 
-<div class="container-xxl">
-    <div class="py-3">
+<div class="container-xxl pb-5">
+    <div class="mt-5">
+        <div class="row">
+            <div class="col-3">
+                <div class="py-2 px-3 border rounded">
+                    <h4 class="my-1">{{stats?.totalBookingCount}}</h4>
+                    <p class="mb-0 font13 font-muted">Total Booking</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="py-2 px-3 border rounded">
+                    <h4 class="my-1">{{stats?.totalEstimateCount}}</h4>
+                    <p class="mb-0 font13 font-muted">Total Estimate</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="py-2 px-3 border rounded">
+                    <h4 class="my-1">{{stats?.totalInvoiceCount}}</h4>
+                    <p class="mb-0 font13 font-muted">Total Invoice</p>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="py-2 px-3 border rounded">
+                    <h4 class="my-1">${{stats?.totalRevenueAmt | number : '1.2-2'}}</h4>
+                    <p class="mb-0 font13 font-muted">Total Revenue</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5">
         <div class="d-flex align-items-center">
             <h3 class="mb-0 font15">Quick Overview</h3>
             <div class="ms-auto">
@@ -95,7 +119,8 @@
               
         </div>
     </div>
-    <div class="py-4">
+
+    <div class="mt-5">
         <div class="row gx-md-5">
             <div class="col-lg-4">
                 <div class="d-flex align-items-center mb-2">
@@ -171,9 +196,10 @@
             </div>
         </div>
     </div>
-    <div class="py-4">
-        <div class="row gx-lg-4">
-            <div class="col-lg-6">
+
+    <div class="mt-5">
+        <div class="row gx-lg-5">
+            <div class="col-lg-7">
                 <h4 class="font15 font600 mb-2">Top Technician </h4>
                 <div class="border rounded popularSection">
                     <table class="row-border">
@@ -201,11 +227,12 @@
                                 <td>{{tech.totalSalesCount}}</td>
                                 <td>{{tech.successRate}}%</td>
                                 <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center custom-star">
+                                    <!--<div class="d-flex gap-2 align-items-center justify-content-center custom-star">
                                         <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
                                             (ratingUpdated)="onRatingChanged($event)"
                                             [customDisable]="starDisable"></app-star-rating>
-                                    </div>
+                                    </div>-->
+                                    <span class="success-badge">4/5</span>
                                 </td>
                             </tr>
                             <tr *ngIf="technician.length==0 && !technicianLoaded">
@@ -217,7 +244,7 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <h4 class="font15 font600 mb-2">Popular Service</h4>
                 <div class="border rounded popularSection">
                     <table>

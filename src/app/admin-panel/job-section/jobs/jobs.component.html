@@ -2,17 +2,18 @@
     <div class="container-xxl">
         <div class="d-flex items-center">
             <h3 class="page-title">Bookings</h3>
-            <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
-                <button class="primary-filled-button  w-100" type="button" (click)="createJob()">
-                    <span class=" icon-add"></span> Add New Booking</button>
-            </div>
+            <!--
+                <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
+                    <button class="primary-filled-button  w-100" type="button" (click)="createJob()"><span class=" icon-add"></span> Add New Booking</button>
+                </div>
+            -->
         </div>
     </div>
 </div>
 <div class="container-xxl">
     <div class="py-4">
         <div class="widget-container">
-            <article class="widget-card ">
+            <article class="widget-card">
                 <div class="widget-card-circle lightYellowBox">
                     <span class="icon-info"></span>
                 </div>
@@ -20,7 +21,6 @@
                     <h6>{{unAssignedBooking.length > 0 ?
                         unAssignedBooking[0].totalCount:0}}</h6>
                     <p>Unassigned Booking</p>
-                    <!-- <mat-progress-bar mode="query" *ngIf="loadUnAssigned"></mat-progress-bar> -->
                 </div>
             </article>
             <article class="widget-card ">
@@ -31,7 +31,6 @@
                     <h6>{{assignedBooking.length > 0 ?
                         assignedBooking[0].totalCount:0}}</h6>
                     <p>Assigned Booking</p>
-                    <!-- <mat-progress-bar mode="query" *ngIf="loadAssigned"></mat-progress-bar> -->
                 </div>
             </article>
             <article class="widget-card ">
@@ -42,7 +41,6 @@
                     <h6>{{compeletedBooking.length > 0 ?
                         compeletedBooking[0].totalCount:0}}</h6>
                     <p>Completed Booking</p>
-                    <!-- <mat-progress-bar mode="query" *ngIf="loadAssigned"></mat-progress-bar> -->
                 </div>
             </article>
             <article class="widget-card ">
@@ -55,132 +53,160 @@
                         assignedBooking[0].totalCount:0)+(compeletedBooking.length > 0 ?
                         compeletedBooking[0].totalCount:0)}}</h6>
                     <p>Total Booking</p>
-                    <!-- <mat-progress-bar mode="query" *ngIf="loadUnAssigned"></mat-progress-bar> -->
                 </div>
             </article>
-
         </div>
-
     </div>
 
     <div class="row gy-3 gy-lg-0 gx-5">
+        <!--search-filter-->
+        <div class="booking-filter mb-4">
+            <div class="position-relative startIconInputField">
+                <input type="text" id="search" name="search" formControlName="searchStr"
+                    placeholder=" Search with Name, Mobile number" class="form-control">
+                <span class="icon-search iconPosition"></span>
+            </div>
+            <div>
+                <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
+                    <input matInput [matDatepicker]="picker" [formControl]="todayDate" placeholder="Choose a date"
+                        (dateChange)="onUnassignedDateChange($event)" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div>
+                <select id="" name="" class="form-select pe-4" formControlName="status">
+                    <option value="">Show All</option>
+                    <option value="">Unassigned</option>
+                    <option value="">Assigned</option>
+                    <option value="">Job Started</option>
+                    <option value="">Job Finished</option>
+                    <option value="">Invoice</option>
+                    <option value="">Compaleted</option>
+                </select>
+            </div>
+        </div>
+
         <div class="col-lg-3">
-            <div class="booking-top-head border-danger">Unassigned ({{unAssignedBooking.length > 0 ?
-                unAssignedBooking[0].totalCount:0}})</div>
-            <div class="border rounded overflow-hidden">
-                <div class="bg-light p-3 d-flex justify-content-between align-items-center">
-                    <!-- <span class="icon-down-arrow font18 leftRotate90"></span>
-                    <h4 class="font16">Feb 26, 2024</h4>
-                    <span class="icon-down-arrow font18 rightRotate90"></span> -->
-                    <mat-form-field class="example-full-width muiDatePickerFromField" (click)="picker.open()">
-                        <input matInput [matDatepicker]="picker" [formControl]="todayDate" placeholder="Choose a date"
-                            (dateChange)="onUnassignedDateChange($event)" readonly>
-                        <mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
+            <div class="bookingColumn">
+                <div class="booking-top-head unassigned-booking">
+                    Unassigned ({{unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0}})
                 </div>
-                <div class="scheduler-left-lists">
-                    <div class="px-3 py-4 border-bottom scheduler-left-lists-item"
-                        (click)="openEditViewBooking(booking)" *ngFor="let booking of unAssignedBooking">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="primary-badge"> #{{booking.bookingId}}</span>
-                            <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingTime}}</span>
-                            <button class="danger-badge" type="button">{{booking.statusText}}</button>
-                        </div>
-                        <h4 class="font16 mb-1">{{booking.customerName}}</h4>
-                        <p class="font14 mb-2 font-muted">{{booking.address}} {{booking.city}} {{booking.state}}
-                            {{booking.zipCode}}</p>
-                        <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 font-muted"> <span
-                                class="icon-call"></span>{{booking.mobileNumber | usMobileNo}} </div>
-                        <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                class="icon-email"></span>{{booking.emailAddress}} </div>
+                <div class="assigned-booking-item" (click)="openEditViewBooking(booking)" *ngFor="let booking of unAssignedBooking">
+                    <div class="d-flex gap-3 mb-2">
+                        <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingTime}}</span>
+                        <button class="danger-badge" type="button">{{booking.statusText}}</button>
                     </div>
-                    <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadUnAssigned"></mat-progress-bar> -->
-                    <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned" class="text-center p-3">
-                        <span>No data found</span>
-                    </div>
+                    <h4 class="font16 mb-1">{{booking.customerName}}</h4>
+                    <p class="font14 mb-2 font-muted">{{booking.address}} {{booking.city}} {{booking.state}}
+                        {{booking.zipCode}}</p>
+                    <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 font-muted"> <span
+                        class="icon-call"></span>{{booking.mobileNumber | usMobileNo}} </div>
+                    <div class="font14 d-flex align-items-center gap-2 font-muted"><span
+                        class="icon-email"></span>{{booking.emailAddress}} </div>
+                </div>
+                <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned" class="text-center p-3">
+                    <span>No data found</span>
+                </div>
+                <!--
                     <mat-paginator [length]="unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0"
-                        *ngIf="unAssignedBooking.length > 0" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                        (page)="onPageChanged($event, 'U')"></mat-paginator>
-                </div>
+                        *ngIf="unAssignedBooking.length > 0" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event, 'U')">
+                    </mat-paginator>
+                -->
             </div>
         </div>
         <div class="col-lg-9">
-            <div class="row gx-4 gy-3 gy-lg-0 gx-lg-5">
+            <div class="row gx-4 gy-3 gx-5">
+                <!--Assigned-section-start-->
                 <div class="col-lg-6">
-                    <div class="booking-top-head border-warning">Assigned ({{assignedBooking.length > 0 ?
-                        assignedBooking[0].totalCount:0}})</div>
-                    <div class="p-4 border rounded mb-3 assigned-booking-item" (click)="openEditViewBooking(booking)"
-                        *ngFor="let booking of assignedBooking">
-                        <div class="d-flex gap-3 mb-2 align-items-center ">
-                            <span class="primary-badge"> #{{booking.bookingId}}</span>
-                            <span class="primary-badge"> {{booking.bookingTime}}</span>
-                            <div class="userAvtarGroup-rounded-wrapper d-flex align-items-center  ms-auto"
-                                *ngFor="let teamMember of booking.assignedTeamMembers">
-                                <img src="{{teamMember.profileImagePath}}"
-                                    (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
-                                    alt="" class="rounded-circle">
+                    <div class="bookingColumn">
+                        <div class="booking-top-head assigned-booking">
+                            Assigned ({{assignedBooking.length > 0 ? assignedBooking[0].totalCount:0}})
+                        </div>
+                        <div class="assigned-booking-item" (click)="openEditViewBooking(booking)" *ngFor="let booking of assignedBooking">
+                            <div class="d-flex gap-3 mb-2 align-items-center justify-content-between">
+                                <span class="primary-badge"> {{booking.bookingTime}}</span>
+                                <div class="d-flex align-items-center">
+                                    <div *ngFor="let teamMember of booking.assignedTeamMembers" class="userAvtarGroup-rounded-wrapper">
+                                        <img src="{{teamMember.profileImagePath}}"
+                                            (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'" alt="image" class="rounded-circle">
+                                    </div>
+                                </div>
                             </div>
+                            <h4 class="font15 mb-2">{{booking.customerName}}</h4>
+                            <div class="d-flex align-items-center gap-4 ">
+                                <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                    <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
+                                </div>
+                                <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                    <span class="icon-email"></span>{{booking.emailAddress}}
+                                </div>
+                            </div>
+                            <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
+                            <div class="d-flex flex-wrap gap-2 items-center" *ngFor="let cat of booking.categories">
+                                <span class="white-badge bg-light"
+                                    *ngFor="let service of cat.products">{{service.serviceName}}
+                                </span>
+                            </div>
+                            <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
                         </div>
-                        <h4 class="font18 mb-2 mt-1">{{booking.customerName}}</h4>
-                        <div class="d-flex align-items-center gap-4 ">
-                            <div class="font14 d-flex align-items-center gap-2  font-muted"> <span
-                                    class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}</div>
-                            <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                    class="icon-email"></span>{{booking.emailAddress}}</div>
-                        </div>
-                        <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                        <div class="d-flex gap-2 items-center" *ngFor="let cat of booking.categories">
-                            <span class="white-badge bg-light"
-                                *ngFor="let service of cat.products">{{service.serviceName}}</span>
-                        </div>
-                        <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
                     </div>
-                    <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadAssigned"></mat-progress-bar> -->
                     <div *ngIf="assignedBooking.length==0 && !loadAssigned">
                         <span>No data found</span>
                     </div>
-                    <mat-paginator [length]="assignedBooking.length > 0 ? assignedBooking[0].totalCount:0"
-                        *ngIf="assignedBooking.length > 0" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                        (page)="onPageChanged($event, 'A')"></mat-paginator>
+                    <!--
+                        <mat-paginator [length]="assignedBooking.length > 0 ? assignedBooking[0].totalCount:0"
+                            *ngIf="assignedBooking.length > 0" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event, 'A')">
+                        </mat-paginator>
+                    -->
                 </div>
+
+                <!--Compeleted-section-start-->
                 <div class="col-lg-6">
-                    <div class="booking-top-head border-success-subtle">Completed ({{compeletedBooking.length > 0 ?
-                        compeletedBooking[0].totalCount:0}})</div>
-                    <div class="p-4 border rounded mb-3 assigned-booking-item" *ngFor="let booking of compeletedBooking"
-                        (click)="openEditViewBooking(booking)">
-                        <div class="d-flex gap-3 mb-2 align-items-center ">
-                            <span class="primary-badge"> #{{booking.bookingId}}</span>
-                            <span class="white-badge"> {{booking.bookingTime}}</span>
-                            <div class="userAvtarGroup-rounded-wrapper d-flex align-items-center  ms-auto"
-                                *ngFor="let teamMember of booking.assignedTeamMembers">
-                                <img src="{{teamMember.profileImagePath}}"
-                                    (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
-                                    alt="" class="rounded-circle">
+                    <div class="bookingColumn">
+                        <div class="booking-top-head compelete-booking">
+                            Completed ({{compeletedBooking.length > 0 ? compeletedBooking[0].totalCount:0}})
+                        </div>
+                        <div class="assigned-booking-item" *ngFor="let booking of compeletedBooking" (click)="openEditViewBooking(booking)">
+                            <div class="d-flex gap-3 mb-2 align-items-center justify-content-between">
+                                <span class="primary-badge">{{booking.bookingTime}}</span>
+                                <div class="d-flex align-items-center">
+                                    <div *ngFor="let teamMember of booking.assignedTeamMembers" class="userAvtarGroup-rounded-wrapper">
+                                        <img src="{{teamMember.profileImagePath}}"
+                                            (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'" alt="image" class="rounded-circle">
+                                    </div>
+                                </div>
                             </div>
+                            <h4 class="font15 mb-2">{{booking.customerName}}</h4>
+                            <div class="d-flex align-items-center gap-4 ">
+                                <div class="font14 d-flex align-items-center gap-2 font-muted"> 
+                                    <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
+                                </div>
+                                <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                    <span class="icon-email"></span>{{booking.emailAddress}}
+                                </div>
+                            </div>
+                            <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
+                            <div *ngFor="let cat of booking.categories" class="d-flex flex-wrap gap-2 items-center">
+                                <span class="white-badge bg-light"
+                                    *ngFor="let service of cat.products">{{service.serviceName}}
+                                </span>
+                            </div>
+                            <!--
+                            <app-booking-step-dashboard [bookingId]="booking.bookingId"
+                                [bookingStatus]="booking.status">
+                            </app-booking-step-dashboard>
+                            -->
                         </div>
-                        <h4 class="font18 mb-2 mt-1">{{booking.customerName}}</h4>
-                        <div class="d-flex align-items-center gap-4 ">
-                            <div class="font14 d-flex align-items-center gap-2  font-muted"> <span
-                                    class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}</div>
-                            <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                                    class="icon-email"></span>{{booking.emailAddress}}</div>
-                        </div>
-                        <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                        <div *ngFor="let cat of booking.categories" class="d-flex gap-2 items-center">
-                            <span class="white-badge bg-light"
-                                *ngFor="let service of cat.products">{{service.serviceName}}</span>
-                        </div>
-                        <app-booking-step-dashboard [bookingId]="booking.bookingId"
-                            [bookingStatus]="booking.status"></app-booking-step-dashboard>
                     </div>
-                    <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadCompeleted"></mat-progress-bar> -->
                     <div *ngIf="compeletedBooking.length==0 && !loadCompeleted">
                         <span>No data found</span>
                     </div>
-                    <mat-paginator [length]="compeletedBooking.length > 0 ? compeletedBooking[0].totalCount:0"
-                        *ngIf="compeletedBooking.length > 0" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                        (page)="onPageChanged($event, 'C')"></mat-paginator>
+                    <!--
+                        <mat-paginator [length]="compeletedBooking.length > 0 ? compeletedBooking[0].totalCount:0"
+                            *ngIf="compeletedBooking.length > 0" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event, 'C')">
+                        </mat-paginator>
+                    -->
                 </div>
             </div>
         </div>
@@ -249,8 +275,7 @@
                 </div>
             </div>
             <div class="form-group mb-3">
-                <textarea placeholder="Description (Optional)" class="form-control" rows="7">I've scheduled an appointment for HVAC servicing. 
-Our air conditioning unit has been making a strange rattling noise intermittently, especially during hot days. Also, our dog will be in the backyard, so please let us know when you're arriving. Looking forward to your visit. Thanks!
+                <textarea placeholder="Description (Optional)" class="form-control" rows="7">I've scheduled an appointment for HVAC servicing. Our air conditioning unit has been making a strange rattling noise intermittently, especially during hot days. Also, our dog will be in the backyard, so please let us know when you're arriving. Looking forward to your visit. Thanks!
                 </textarea>
             </div>
             <div class="form-group mb-3">
@@ -331,7 +356,7 @@ Our air conditioning unit has been making a strange rattling noise intermittentl
 
 
 <div class="modal fade" id="bookingDetailsModal" tabindex="-1" aria-labelledby="bookingDetailsModal" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog">
         <div class="modal-content border overflow-hidden">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="bookingDetailsModalLabel">Booking Details</h1>
