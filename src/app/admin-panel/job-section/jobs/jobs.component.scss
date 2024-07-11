@@ -1,16 +1,72 @@
+/*..search-filter..*/
+.booking-filter{
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  column-gap: 30px;
+
+  .iconPosition{
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: var(--muted);
+  }
+}
+
+/*..booking column..*/
+.bookingColumn{
+  background-color: #F3F4F6;
+  padding: 10px; border-radius: 8px;
+  height: 100vh; overflow: hidden;
+
+  .booking-top-head{
+    color: var(--white);
+    font-weight: 400; font-size: 14px;
+    padding: 5px 8px; border-radius: 8px;
+    margin-bottom: 10px; display: inline-flex;
+  }
+  .unassigned-booking{
+    background-color: var(--danger);
+  }
+  .assigned-booking{
+    background-color: var(--wraning-label);
+  }
+
+  .compelete-booking{
+    background-color: var(--dark-green);
+  }
+
+  .booking-listing{
+    overflow: scroll;
+    height: 100%;
+
+    .assigned-booking-item {
+      cursor: pointer;
+      background-color: var(--white);
+      border-radius: 10px;
+      padding: 20px; margin: 0px 0px 20px 0px;
+      border: 1px solid var(--border-color2);
+
+      &:last-child{
+        margin: 0px 0px 0px 0px;
+      }
+    }
+  }
+  
+}
+
 .overlap-rounded-wrapper {
   img {
     width: 32px;
     height: 32px;
     margin: 0 0 0 -7px;
-    border: 2px solid #4ade80;
+    border: 2px solid var(--dark-green);
   }
 }
 
 .bookingDateTimeWrapper {
-  display: flex;
-  align-items: center;
+  display: flex; align-items: center;
   position: relative;
+
   span.icon-calendar {
     position: absolute;
     left: 12px;
@@ -33,6 +89,7 @@
 li.dropdown-team-item {
   padding: 15px;
   border-bottom: 1px solid var(--border-color2);
+
   .dropdown-badge {
     height: 22px;
     padding-top: 0;
@@ -124,9 +181,8 @@ li.dropdown-team-item {
     position: relative;
     img {
       width: 150px;
-      height: 156px;
+      height: 150px;
       border-radius: 12px;
-      min-width: 150px;
     }
   }
   .booking-services-unit-actions {
@@ -144,53 +200,4 @@ li.dropdown-team-item {
       padding: 5px;
     }
   }
-}
-
-/*..search-filter..*/
-.booking-filter{
-  display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
-  column-gap: 30px;
-
-  .iconPosition{
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    color: var(--muted);
-  }
-}
-
-.bookingColumn{
-  background-color: #F3F4F6;
-  padding: 10px; border-radius: 8px;
-
-  .booking-top-head{
-    color: var(--white);
-    font-weight: 400; font-size: 14px;
-    padding: 5px 8px; border-radius: 8px;
-    margin-bottom: 10px; display: inline-flex;
-  }
-  .unassigned-booking{
-    background-color: var(--danger);
-  }
-  .assigned-booking{
-    background-color: var(--wraning-label);
-  }
-
-  .compelete-booking{
-    background-color: var(--dark-green);
-  }
-
-  .assigned-booking-item {
-    cursor: pointer;
-    background-color: var(--white);
-    border-radius: 10px;
-    padding: 20px; margin: 0px 0px 20px 0px;
-    border: 1px solid var(--border-color2);
-
-    &:last-child{
-      margin: 0px 0px 0px 0px;
-    }
-  }
-  
 }
