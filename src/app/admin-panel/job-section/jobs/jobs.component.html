@@ -57,7 +57,7 @@
         <div class="booking-filter mb-4">
             <div class="position-relative startIconInputField">
                 <input type="text" id="search" name="search" formControlName="searchStr"
-                    placeholder=" Search with Name, Mobile number" class="form-control">
+                    placeholder=" Search with Name, Mobile number" class="form-control" (keyup.enter)="onEnter($event)">
                 <span class="icon-search iconPosition"></span>
             </div>
             <div>
