@@ -688,6 +688,12 @@ ul {
   @include toggle-switch;
 }
 
+
+//container height
+.wrapperHeight{
+  height: calc(100% - 150px);
+}
+
 // @include checkbox;
 .page-title-box {
   // @include flexbox(row, space-between, flex-start);
@@ -1103,7 +1109,7 @@ table tr {
 table tbody td {
   border: none;
   text-align: left !important;
-  padding: 10px 12px !important;
+  padding: 20px 12px !important;
   font-size: 0.80rem;
   font-weight: 400;
 }
@@ -1720,4 +1726,15 @@ app-booking-slot .mat-calendar-header .mat-calendar-controls {
 }
 .mat-datepicker-content .mat-calendar{
   height: auto !important;
+}
+
+/*..material-pagination..*/
+.mat-mdc-paginator-container{
+  padding: 0px !important;
+  min-height: inherit !important;
+  justify-content: space-between !important;
+
+  .mat-calendar-controls{
+    margin: 0% calc(4.7142857143% - 16px) 3% calc(4.7142857143% - 16px);
+  }
 }

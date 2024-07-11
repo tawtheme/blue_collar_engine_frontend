@@ -3,56 +3,47 @@
         <div class="d-flex items-center">
             <h3 class="page-title">Estimates</h3>
             <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
-                <button class="primary-filled-button  w-100" type="button" (click)="createEstimate()"><span
-                        class="icon-add"></span>
-                    Add New Estimate</button>
+                <button class="primary-filled-button  w-100" type="button" (click)="createEstimate()">
+                    <span class="icon-add"></span>Add New Estimate
+                </button>
             </div>
         </div>
     </div>
 </div>
 <div class="container-xxl">
     <div class="py-4">
-        <div class="widget-container">
-            <article class="widget-card ">
-                <div class="widget-card-circle lightGrayBox">
+        <div class="estimate-widget-container">
+            <div class="estimate-widget-card">
+                <div class="estimate-widget-card-circle lightGrayBox">
                     <span class="icon-invoice"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="estimate-widget-card-info">
                     <h6>{{items.length > 0 ?
                         items[0].totalCount:0}}</h6>
                     <p>Total Estimates</p>
                 </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightYellowBox">
+            </div>
+            <div class="estimate-widget-card ">
+                <div class="estimate-widget-card-circle lightYellowBox">
                     <span class="icon-time"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="estimate-widget-card-info">
                     <h6>${{stats?.totalEstimateDraftRevenue | number : '1.2-2'}}</h6>
                     <p>Draft from {{stats?.totalEstimateDraftCount}} estimates</p>
                 </div>
-            </article>
-            <!-- <article class="widget-card ">
-                <div class="widget-card-circle lightDangerBox">
-                    <span class="icon-overdue"></span>
+            </div>
+            <div class="estimate-widget-card ">
+                <div class="estimate-widget-card-circle lightYellowBox">
+                    <span class="icon-time"></span>
                 </div>
-                <div class="widget-card-info">
-                    <h6>$25,000</h6>
-                    <p>Overdue from 35 Invoices</p>
+                <div class="estimate-widget-card-info">
+                    <h6>${{stats?.totalEstimateDraftRevenue | number : '1.2-2'}}</h6>
+                    <p>Send from {{stats?.totalEstimateDraftCount}} estimates</p>
                 </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightSuccessBox">
-                    <span class="icon-job"></span>
-                </div>
-                <div class="widget-card-info">
-                    <h6>75% </h6>
-                    <p>Need invoices for 26 jobs</p>
-                </div>
-            </article> -->
+            </div>
         </div>
         <div class="table-top-filter-row row">
-            <div class="col-md-8">
+            <div class="col-12">
                 <div class="table-top-filter-left" [formGroup]="estimateRagePickerForm">
                     <div class="top-search-group flexGrow2 startIconInputField">
                         <input type="text" id="search" name="search" formControlName="searchStr"
@@ -62,17 +53,13 @@
                     </div>
                     <div class="top-search-group">
                         <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
-                            <!-- <mat-label>Enter a date range</mat-label> -->
                             <mat-date-range-input [rangePicker]="picker">
                                 <input matStartDate formControlName="start" placeholder="Start date">
-                                <input matEndDate formControlName="end" placeholder="End date"
-                                    (dateChange)="rangeChangeEvent()">
+                                <input matEndDate formControlName="end" placeholder="End date" (dateChange)="rangeChangeEvent()">
                             </mat-date-range-input>
-                            <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
                             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-date-range-picker #picker></mat-date-range-picker>
                         </mat-form-field>
-                        <!-- <input type="date" id="date" name="date" placeholder="Select date..." class="form-control"> -->
                     </div>
                     <div class="top-search-group flexGrow1">
                         <select id="status" name="status" class="form-select" formControlName="status"
@@ -84,7 +71,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- <div class="table-top-filter-right">
                 <button class="light-outlined-button"><span class="icon-send"></span> Send Estimate</button>
                 <button class="light-outlined-button"><span class="icon-time"></span> Send Reminder</button>
@@ -95,38 +81,30 @@
             <table class="row-border">
                 <thead>
                     <tr>
-                        <th>
+                        <th class="td-1">
                             <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
                         </th>
                         <th (click)="sortBy('refNo')">Estimate No.{{sortIcon('refNo')}}</th>
                         <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
                         <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
                         <th (click)="sortBy('totalAmount')">Amount Due{{sortIcon('totalAmount')}}</th>
-                        <!-- <th (click)="sortBy('jobId')">Job{{sortIcon('jobId')}}</th> -->
                         <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let estimate of items">
-                        <td>
+                        <td class="td-1">
                             <mat-checkbox class="example-margin" [checked]="estimate.ischeck ==true"></mat-checkbox>
                         </td>
                         <td>{{estimate.refNo}}</td>
                         <td>{{estimate.createdDate | date:'mediumDate' }}</td>
                         <td>{{estimate.firstName}} {{estimate.lastName}}</td>
                         <td>${{estimate.totalAmount | number : '1.2-2'}}</td>
-                        <!-- <td>{{estimate.jobId}}</td> -->
-                        <td>
-                            <div class="">
-                                <span class="warning-badge">{{estimate.status}}</span>
-                            </div>
-                        </td>
+                        <td><span class="warning-badge">{{estimate.status}}</span></td>
                         <td>
                             <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button"
-                                    (click)="redirectToCreateEstimate(estimate.estimateId)">View
-                                    Details</button>
+                                <button class=" light-outlined-button" (click)="redirectToCreateEstimate(estimate.estimateId)">View Details</button>
                             </div>
                         </td>
                     </tr>
@@ -137,7 +115,6 @@
                     </tr>
                 </tbody>
             </table>
-            <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
         </div>
         <div class="card-footer pb-0 pt-3">
             <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"
