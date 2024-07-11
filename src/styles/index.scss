@@ -586,39 +586,31 @@ ul {
 // Auth Styles End //
 
 // Badges Styles
-
 .primary-badge {
   @include badge(var(--light-primary), $primary, $primary);
 }
-
 .success-badge {
   @include badge(#bbf7d0, #15803d, #4ade80);
 }
-
 .danger-badge {
   @include badge(#fee2e2, #b91c1c, #f87171);
 }
-
 .warning-badge {
   @include badge(#fef3c7, #b45309, #fbbf24);
 }
-
 .grey-badge {
   @include badge(#f3f4f6, #4b5563, #d1d5db);
 }
-
 .white-badge {
   @include badge(#ffffff, #4b5563, #d1d5db);
 }
 
 // Form
-
 .formGroup {
   margin-bottom: 15px;
 }
 
 // Buttons
-
 .primary-filled-button {
   @include button(var(--primary), var(--white), var(--primary), 38px, 14px);
   white-space: nowrap;
@@ -627,7 +619,6 @@ ul {
     border-color: var(--primary80);
   }
 }
-
 .primary-outlined-button {
   @include button(transparent, var(--muted), var(--primary), 38px, 14px);
 }
@@ -639,7 +630,6 @@ ul {
     border-color: var(--border-color);
   }
 }
-
 .light-outlined-button {
   @include button(transparent, var(--muted), var(--border-color), 38px, 14px);
   &:hover {

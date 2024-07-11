@@ -127,35 +127,43 @@
                         </div>
                         <div class="booking-listing">
                             <div class="assigned-booking-item" (click)="openEditViewBooking(booking)"
-                                *ngFor="let booking of assignedBooking">
-                                <div class="d-flex gap-3 mb-2 align-items-center justify-content-between">
-                                    <span class="primary-badge"> {{booking.bookingId}}</span>
-                                    <span class="primary-badge"> {{booking.bookingTime}}</span>
-                                    <div class="d-flex align-items-center">
-                                        <div *ngFor="let teamMember of booking.assignedTeamMembers"
-                                            class="userAvtarGroup-rounded-wrapper">
-                                            <img src="{{teamMember.profileImagePath}}"
-                                                (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
-                                                alt="image" class="rounded-circle">
+                                *ngFor="let booking of assignedBooking"> 
+
+                                <div class="d-flex flex-column">
+                                    <div class="d-flex gap-3 mb-0 align-items-center justify-content-between">
+                                        <span class="white-badge bg-light px-1 py-0">#{{booking.bookingId}}</span>
+                                        <div class="d-flex align-items-center">
+                                            <div *ngFor="let teamMember of booking.assignedTeamMembers" class="userAvtarGroup-rounded-wrapper">
+                                                <img src="{{teamMember.profileImagePath}}" (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'" alt="image" class="rounded-circle">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between flex-column">
+                                        <div class="font15 font500">{{booking.customerName}}</div>
+                                        <div class="d-flex align-items-center gap-4">
+                                            <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                                <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
+                                            </div>
+                                            <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                                <span class="icon-email"></span>{{booking.emailAddress}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <h4 class="font15 mb-2">{{booking.customerName}}</h4>
-                                <div class="d-flex align-items-center gap-4 ">
-                                    <div class="font14 d-flex align-items-center gap-2 font-muted">
-                                        <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
-                                    </div>
-                                    <div class="font14 d-flex align-items-center gap-2 font-muted">
-                                        <span class="icon-email"></span>{{booking.emailAddress}}
-                                    </div>
+                                <div class="d-flex align-items-start flex-column">
+                                    <h5 class="font14 mb-1 mt-3 font400 font-muted">Date and Time</h5>
+                                    <span class="primary-badge"> {{booking.bookingTime}}</span>
                                 </div>
-                                <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                                <div class="d-flex flex-wrap gap-2 items-center" *ngFor="let cat of booking.categories">
-                                    <span class="white-badge bg-light"
-                                        *ngFor="let service of cat.products">{{service.serviceName}}
-                                    </span>
+                                <div class="d-flex align-items-start flex-column">
+                                    <h5 class="font14 mb-1 mt-3 font400 font-muted">Services</h5>
+                                    <div class="d-flex flex-wrap gap-2 items-center" *ngFor="let cat of booking.categories">
+                                        <span class="white-badge bg-light"
+                                            *ngFor="let service of cat.products">{{service.serviceName}}
+                                        </span>
+                                    </div>
                                 </div>
                                 <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
+
                             </div>
                         </div>
                     </div>
@@ -176,33 +184,41 @@
                             Completed ({{compeletedBooking.length > 0 ? compeletedBooking[0].totalCount:0}})
                         </div>
                         <div class="booking-listing">
-                            <div class="assigned-booking-item" *ngFor="let booking of compeletedBooking"
-                                (click)="openEditViewBooking(booking)">
-                                <div class="d-flex gap-3 mb-2 align-items-center justify-content-between">
-                                    <span class="primary-badge">{{booking.bookingTime}}</span>
-                                    <div class="d-flex align-items-center">
-                                        <div *ngFor="let teamMember of booking.assignedTeamMembers"
-                                            class="userAvtarGroup-rounded-wrapper">
-                                            <img src="{{teamMember.profileImagePath}}"
-                                                (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
-                                                alt="image" class="rounded-circle">
+                            <div class="assigned-booking-item" (click)="openEditViewBooking(booking)"
+                                *ngFor="let booking of compeletedBooking">
+
+                                <div class="d-flex flex-column">
+                                    <div class="d-flex gap-3 mb-0 align-items-center justify-content-between">
+                                        <span class="white-badge bg-light px-1 py-0">#{{booking.bookingId}}</span>
+                                        <div class="d-flex align-items-center">
+                                            <div *ngFor="let teamMember of booking.assignedTeamMembers" class="userAvtarGroup-rounded-wrapper">
+                                                <img src="{{teamMember.profileImagePath}}" (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'" alt="image" class="rounded-circle">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between flex-column">
+                                        <div class="font15 font500">{{booking.customerName}}</div>
+                                        <div class="d-flex align-items-center gap-4">
+                                            <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                                <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
+                                            </div>
+                                            <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                                <span class="icon-email"></span>{{booking.emailAddress}}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <h4 class="font15 mb-2">{{booking.customerName}}</h4>
-                                <div class="d-flex align-items-center gap-4 ">
-                                    <div class="font14 d-flex align-items-center gap-2 font-muted">
-                                        <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
-                                    </div>
-                                    <div class="font14 d-flex align-items-center gap-2 font-muted">
-                                        <span class="icon-email"></span>{{booking.emailAddress}}
-                                    </div>
+                                <div class="d-flex align-items-start flex-column">
+                                    <h5 class="font14 mb-1 mt-3 font400 font-muted">Date and Time</h5>
+                                    <span class="primary-badge"> {{booking.bookingTime}}</span>
                                 </div>
-                                <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                                <div *ngFor="let cat of booking.categories" class="d-flex flex-wrap gap-2 items-center">
-                                    <span class="white-badge bg-light"
-                                        *ngFor="let service of cat.products">{{service.serviceName}}
-                                    </span>
+                                <div class="d-flex align-items-start flex-column">
+                                    <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
+                                    <div *ngFor="let cat of booking.categories" class="d-flex flex-wrap gap-2 items-center">
+                                        <span class="white-badge bg-light"
+                                            *ngFor="let service of cat.products">{{service.serviceName}}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
