@@ -6,8 +6,6 @@
                     <h4 class="page-title">{{estimateInvoiceForm.value.estimateId ==0 ?'Add New Estimate':'View Estimate'}} </h4>
                 </div>
                 <div class="breadcrumb">
-                    <a [routerLink]="['/admin']">Dashboard</a>
-                    <span class="separator">/</span>
                     <a [routerLink]="['/admin/estimate']">Estimate</a>
                     <span class="separator">/</span>
                     <span>{{estimateInvoiceForm.value.estimateId ==0 ?'Create Estimate':'View Estimate'}}</span>
@@ -212,7 +210,7 @@
                     </div>
                 </div>
             </div>
-            <div class="d-flex justify-content-end gap-3 mt-5" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')">
+            <div class="d-flex justify-content-end gap-3 mt-4" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')">
                 <button class="light-outlined-button px-5" type="submit" (click)="getAction('D')"> Save as draft</button>
                 <button class="primary-filled-button px-5" type="submit" (click)="getAction('S')"> Send </button>
             </div>

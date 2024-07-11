@@ -13,145 +13,142 @@
 
 <div class="container-xxl">
     <div class="py-4">
-        <div class="widget-container">
-            <article class="widget-card ">
-                <div class="widget-card-circle lightGrayBox">
+        <div class="invoice-widget-container">
+            <div class="invoice-widget-card">
+                <div class="invoice-widget-card-circle lightGrayBox">
                     <span class="icon-invoice"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="invoice-widget-card-info">
                     <h6>{{items.length > 0 ?
                         items[0].totalCount:0}}</h6>
                     <p>Total Invoice</p>
                 </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightYellowBox">
+            </div>
+            <div class="invoice-widget-card">
+                <div class="invoice-widget-card-circle lightYellowBox">
                     <span class="icon-time"></span>
                 </div>
-                <div class="widget-card-info">
-                    <h6>${{stats?.totalRevenueAmt | number : '1.2-2'}}</h6>
-                    <p>Total Revneue</p>
-                </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightYellowBox">
-                    <span class="icon-time"></span>
-                </div>
-                <div class="widget-card-info">
+                <div class="invoice-widget-card-info">
                     <h6>${{stats?.totalInvoiceDraftRevenue | number : '1.2-2'}}</h6>
                     <p>Draft from {{stats?.totalInvoiceDraftCount}} invoices</p>
                 </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightDangerBox">
+            </div>
+            <div class="invoice-widget-card">
+                <div class="invoice-widget-card-circle lightDangerBox">
                     <span class="icon-overdue"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="invoice-widget-card-info">
                     <h6>${{stats?.totalInvoiceOverDueRevenue | number : '1.2-2'}}</h6>
                     <p>Overdue from {{stats?.totalInvoiceOverDueCount}} invoices</p>
                 </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightGreenBox">
+            </div>
+            <div class="invoice-widget-card">
+                <div class="invoice-widget-card-circle lightGreenBox">
                     <span class="icon-job"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="invoice-widget-card-info">
                     <h6>${{stats?.totalPendingInvoiceRevenue | number : '1.2-2'}}</h6>
                     <p>Need invoices for {{stats?.totalPendingInvoiceCount}} jobs</p>
                 </div>
-            </article>
-        </div>
-        <div class="table-top-filter-row row">
-            <div class="col-md-8">
-                <div class="table-top-filter-left" [formGroup]="invoiceRagePickerForm">
-                    <div class="top-search-group flexGrow2 startIconInputField">
-                        <input type="text" id="search" name="search" formControlName="searchStr"
-                            placeholder=" Search with Name, Invoice number" class="form-control"
-                            (keyup.enter)="onEnter($event)">
-                        <span class="icon-search iconPosition"></span>
-                    </div>
-                    <div class="top-search-group">
-                        <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
-                            <!-- <mat-label>Enter a date range</mat-label> -->
-                            <mat-date-range-input [rangePicker]="picker">
-                                <input matStartDate formControlName="start" placeholder="Start date">
-                                <input matEndDate formControlName="end" placeholder="End date"
-                                    (dateChange)="rangeChangeEvent()">
-                            </mat-date-range-input>
-                            <!-- <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint> -->
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-date-range-picker #picker></mat-date-range-picker>
-                        </mat-form-field>
-                        <!-- <input type="date" id="date" name="date" placeholder="Select date..." class="form-control"> -->
-                    </div>
-                    <div class="top-search-group flexGrow1">
-                        <select id="status" name="status" class="form-select pe-4" formControlName="status"
-                            (change)="filterGrid()">
-                            <option value="">Show All</option>
-                            <option value="D">Draft</option>
-                            <option value="S">Sent</option>
-                            <option value="P">Paid</option>
-                        </select>
-                    </div>
+            </div>
+            <div class="invoice-widget-card">
+                <div class="invoice-widget-card-circle lightYellowBox">
+                    <span class="icon-time"></span>
+                </div>
+                <div class="invoice-widget-card-info">
+                    <h6>${{stats?.totalRevenueAmt | number : '1.2-2'}}</h6>
+                    <p>Total Revneue</p>
                 </div>
             </div>
-            <!-- <div class="table-top-filter-right">
-                <button class="light-outlined-button"><span class="icon-send"></span> Send invoices</button>
-                <button class="light-outlined-button"><span class="icon-time"></span> Send Reminder</button>
-                <button class="light-outlined-button"><span class="icon-export"></span> Export</button>
-            </div> -->
         </div>
-        <div class="mt-20">
-            <table class="row-border">
-                <thead>
-                    <tr>
-                        <th>
-                            <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
-                        </th>
-                        <th (click)="sortBy('refNo')">Invoice No.{{sortIcon('refNo')}}</th>
-                        <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
-                        <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
-                        <th (click)="sortBy('totalAmount')">Amount Due{{sortIcon('totalAmount')}}</th>
-                        <th (click)="sortBy('bookingId')">Booking Id{{sortIcon('bookingId')}}</th>
-                        <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let invoice of items">
-                        <td>
-                            <mat-checkbox class="example-margin" [checked]="invoice.ischeck ==true"></mat-checkbox>
-                        </td>
-                        <td>{{invoice.refNo}}</td>
-                        <td>{{invoice.createdDate | date:'mediumDate' }}</td>
-                        <td>{{invoice.firstName}} {{invoice.lastName}}</td>
-                        <td>${{invoice.totalAmount | number : '1.2-2'}}</td>
-                        <td>{{invoice.bookingId > 0 ? '#'+invoice.bookingId:'--'}}</td>
-                        <td>
-                            <div class="">
-                                <span class="warning-badge">{{invoice.status}}</span>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center justify-content-end">
-                                <button class=" light-outlined-button" (click)="viewInvoice(invoice.invoiceId)">View
-                                    Details</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr *ngIf="items.length == 0 && !loading" class="text-center">
-                        <td class="text-center" colspan="8">
-                            <span>No data found</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
+    </div>
+    <div class="table-top-filter-row row">
+        <div class="col-md-8">
+            <div class="table-top-filter-left" [formGroup]="invoiceRagePickerForm">
+                <div class="top-search-group flexGrow2 startIconInputField">
+                    <input type="text" id="search" name="search" formControlName="searchStr"
+                        placeholder=" Search with Name, Invoice number" class="form-control"
+                        (keyup.enter)="onEnter($event)">
+                    <span class="icon-search iconPosition"></span>
+                </div>
+                <div class="top-search-group">
+                    <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate formControlName="start" placeholder="Start date">
+                            <input matEndDate formControlName="end" placeholder="End date"
+                                (dateChange)="rangeChangeEvent()">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+                <div class="top-search-group flexGrow1">
+                    <select id="status" name="status" class="form-select pe-4" formControlName="status"
+                        (change)="filterGrid()">
+                        <option value="">Show All</option>
+                        <option value="D">Draft</option>
+                        <option value="S">Sent</option>
+                        <option value="P">Paid</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="card-footer pb-0 pt-3">
-            <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"
-                [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                (page)="onPageChanged($event)"></mat-paginator>
-        </div>
+        <!-- <div class="table-top-filter-right">
+            <button class="light-outlined-button"><span class="icon-send"></span> Send invoices</button>
+            <button class="light-outlined-button"><span class="icon-time"></span> Send Reminder</button>
+            <button class="light-outlined-button"><span class="icon-export"></span> Export</button>
+        </div> -->
+    </div>
+    <div class="mt-20">
+        <table class="row-border">
+            <thead>
+                <tr>
+                    <th>
+                        <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
+                    </th>
+                    <th (click)="sortBy('refNo')">Invoice No.{{sortIcon('refNo')}}</th>
+                    <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
+                    <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
+                    <th (click)="sortBy('totalAmount')">Amount Due{{sortIcon('totalAmount')}}</th>
+                    <th (click)="sortBy('bookingId')">Booking Id{{sortIcon('bookingId')}}</th>
+                    <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let invoice of items">
+                    <td>
+                        <mat-checkbox class="example-margin" [checked]="invoice.ischeck ==true"></mat-checkbox>
+                    </td>
+                    <td>{{invoice.refNo}}</td>
+                    <td>{{invoice.createdDate | date:'mediumDate' }}</td>
+                    <td>{{invoice.firstName}} {{invoice.lastName}}</td>
+                    <td>${{invoice.totalAmount | number : '1.2-2'}}</td>
+                    <td>{{invoice.bookingId > 0 ? '#'+invoice.bookingId:'--'}}</td>
+                    <td>
+                        <div class="">
+                            <span class="warning-badge">{{invoice.status}}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <button class=" light-outlined-button" (click)="viewInvoice(invoice.invoiceId)">View
+                                Details</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="items.length == 0 && !loading" class="text-center">
+                    <td class="text-center" colspan="8">
+                        <span>No data found</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer pb-0 pt-3">
+        <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"
+            [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            (page)="onPageChanged($event)">
+        </mat-paginator>
     </div>
 </div>

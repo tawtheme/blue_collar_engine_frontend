@@ -823,7 +823,6 @@ ul {
 }
 
 .table-top-filter-row {
-  margin-top: 12px;
   @include flexbox(row, space-between, center);
   .table-top-filter-left {
     @include flexbox(row, flex-start, center);
@@ -977,7 +976,7 @@ ul {
   font-size: 14px;
   color: var(--dark);
   background-color: var(--white);
-  font-weight: 300;
+  font-weight: 300; resize: none;
   &::placeholder {
     color: #6b7280;
     font-weight: 300;
@@ -1095,9 +1094,11 @@ table th .form-check-input[type="checkbox"] {
   width: 14px;
   height: 14px;
 }
+/*..
 table th:last-child {
   text-align: right !important;
 }
+..*/
 table td:last-child {
   text-align: right !important;
 }
@@ -1576,6 +1577,9 @@ table .mat-mdc-checkbox .mdc-checkbox__background {
   ) {
   background-color: rgba(43, 100, 223, 0.3) !important;
 }
+.mat-calendar-controls{
+  margin: 0% calc(4.7142857143% - 16px) 3% calc(4.7142857143% - 16px) !important;
+}
 
 .customers-tables td .light-outlined-button {
   white-space: nowrap;
@@ -1733,8 +1737,4 @@ app-booking-slot .mat-calendar-header .mat-calendar-controls {
   padding: 0px !important;
   min-height: inherit !important;
   justify-content: space-between !important;
-
-  .mat-calendar-controls{
-    margin: 0% calc(4.7142857143% - 16px) 3% calc(4.7142857143% - 16px);
-  }
 }

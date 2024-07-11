@@ -1,8 +1,55 @@
+// Widget Styles
+.dashboard-widget-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  column-gap: 20px;
+
+  .dashboard-widget-card {
+      display: flex; column-gap: 20px;
+      background-color: white;
+      border: 1px solid var(--border-color2);
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 15px;      
+    
+      &-circle {
+          width: 48px;
+          height: 48px;
+          min-width: 48px;
+          border-radius: 50%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+      }
+      &-info {
+          flex-grow: 1;
+          h6 {
+          font-size: 20px;
+          margin-bottom: 5px;
+          color: var(--dark);
+          span {
+              font-size: 11px;
+              color: var(--dark);
+              margin-left: 2px;
+              font-weight: 400;
+          }
+          }
+          p {
+          font-size: 13px;
+          color: var(--muted);
+          margin: 0;
+          }
+      }
+  }
+}
+
 /*..search-filter..*/
 .booking-filter{
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
-  column-gap: 30px;
+  grid-template-columns: 4fr 1fr 1fr 1fr;
+  column-gap: 20px;
 
   .iconPosition{
     position: absolute;
@@ -16,7 +63,7 @@
 .bookingColumn{
   background-color: #F3F4F6;
   padding: 10px; border-radius: 8px;
-  height: 100vh; overflow: hidden;
+  min-height: 800px; max-height: 100%; overflow: hidden;
 
   .booking-top-head{
     color: var(--white);
@@ -30,11 +77,21 @@
   .assigned-booking{
     background-color: var(--wraning-label);
   }
-
   .compelete-booking{
     background-color: var(--dark-green);
   }
 
+  .status-select{
+    width: 120px; height: 30px;
+    color: var(--muted); font-size: 13px;
+    border: 1px solid var(--border-color2);
+    border-radius: 8px; padding: 0px 5px;
+    margin-bottom: 10px;
+
+    &:focus{
+      outline: none;
+    }
+  }
   .booking-listing{
     overflow: scroll;
     height: 100%;

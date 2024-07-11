@@ -12,43 +12,43 @@
 </div>
 <div class="container-xxl">
     <div class="py-4">
-        <div class="widget-container">
-            <article class="widget-card">
-                <div class="widget-card-circle lightYellowBox">
+        <div class="dashboard-widget-container">
+            <div class="dashboard-widget-card">
+                <div class="dashboard-widget-card-circle lightYellowBox">
                     <span class="icon-info"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="dashboard-widget-card-info">
                     <h6>{{bookingStats?.totalUnAssignedCount}}</h6>
                     <p>Unassigned Booking</p>
                 </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightSuccessBox ">
+            </div>
+            <div class="dashboard-widget-card ">
+                <div class="dashboard-widget-card-circle lightSuccessBox ">
                     <span class="icon-tick"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="dashboard-widget-card-info">
                     <h6>{{bookingStats?.totalAssignedCount}}</h6>
                     <p>Assigned Booking</p>
                 </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightSuccessBox ">
+            </div>
+            <div class="dashboard-widget-card ">
+                <div class="dashboard-widget-card-circle lightSuccessBox ">
                     <span class="icon-tick"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="dashboard-widget-card-info">
                     <h6>{{bookingStats?.totalCompletedCount}}</h6>
                     <p>Completed Booking</p>
                 </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightGrayBox">
+            </div>
+            <div class="dashboard-widget-card ">
+                <div class="dashboard-widget-card-circle lightGrayBox">
                     <span class="icon-job"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="dashboard-widget-card-info">
                     <h6>{{bookingStats?.totalBookingCount}}</h6>
                     <p>Total Booking</p>
                 </div>
-            </article>
+            </div>
         </div>
     </div>
 
@@ -61,15 +61,8 @@
                 <span class="icon-search iconPosition"></span>
             </div>
             <div>
-                <!-- <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
-                    <input matInput [matDatepicker]="picker" formControlName="bookingDate" placeholder="Choose a date"
-                        (dateChange)="onUnassignedDateChange($event)" readonly>
-                    <mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field> -->
                 <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
-                    <input matInput [matDatepicker]="picker" formControlName="bookingDate" placeholder="Choose a date"
-                        readonly>
+                    <input matInput [matDatepicker]="picker" formControlName="bookingDate" placeholder="Choose a date" readonly>
                     <mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -80,19 +73,11 @@
                     <option value="U">Unassigned</option>
                     <option value="A">Assigned</option>
                     <option value="C">Completed</option>
-                    <!-- <option value="">Job Started</option>
-                    <option value="">Job Finished</option>
-                    <option value="">Invoice</option> -->
-
                 </select>
             </div>
-            <div>
-                <button class="primary-filled-button px-5" type="button" (click)="filterBooking()">
-                    Filter</button>
-            </div>
-            <div>
-                <button class="primary-filled-button px-5" type="button" (click)="resetFilter()">
-                    Reset</button>
+            <div class="d-flex gap-3">
+                <button class="primary-filled-button px-4" type="button" (click)="filterBooking()">Filter</button>
+                <button class="light-primary-outlined-button px-4" type="button" (click)="resetFilter()">Reset</button>
             </div>
         </div>
         <div class="col-lg-3">
@@ -129,48 +114,49 @@
                 <!--Assigned-section-start-->
                 <div class="col-lg-6">
                     <div class="bookingColumn">
-                        <div class="booking-top-head assigned-booking">
-                            Assigned ({{assignedBooking.length > 0 ? assignedBooking[0].totalCount:0}})
-                        </div>
-                        <div>
-                            <select class="form-select pe-4" formControlName="currentStatus">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="booking-top-head assigned-booking">
+                                Assigned ({{assignedBooking.length > 0 ? assignedBooking[0].totalCount:0}})
+                            </div>
+                            <select class="status-select" formControlName="currentStatus">
                                 <option value="" selected>Show All</option>
                                 <option value="JS">Job Started</option>
                                 <option value="JF">Job Finished</option>
                                 <option value="I">Invoice</option>
                             </select>
                         </div>
-
-                        <div class="assigned-booking-item" (click)="openEditViewBooking(booking)"
-                            *ngFor="let booking of assignedBooking">
-                            <div class="d-flex gap-3 mb-2 align-items-center justify-content-between">
-                                <span class="primary-badge"> {{booking.bookingId}}</span>
-                                <span class="primary-badge"> {{booking.bookingTime}}</span>
-                                <div class="d-flex align-items-center">
-                                    <div *ngFor="let teamMember of booking.assignedTeamMembers"
-                                        class="userAvtarGroup-rounded-wrapper">
-                                        <img src="{{teamMember.profileImagePath}}"
-                                            (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
-                                            alt="image" class="rounded-circle">
+                        <div class="booking-listing">
+                            <div class="assigned-booking-item" (click)="openEditViewBooking(booking)"
+                                *ngFor="let booking of assignedBooking">
+                                <div class="d-flex gap-3 mb-2 align-items-center justify-content-between">
+                                    <span class="primary-badge"> {{booking.bookingId}}</span>
+                                    <span class="primary-badge"> {{booking.bookingTime}}</span>
+                                    <div class="d-flex align-items-center">
+                                        <div *ngFor="let teamMember of booking.assignedTeamMembers"
+                                            class="userAvtarGroup-rounded-wrapper">
+                                            <img src="{{teamMember.profileImagePath}}"
+                                                (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
+                                                alt="image" class="rounded-circle">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <h4 class="font15 mb-2">{{booking.customerName}}</h4>
-                            <div class="d-flex align-items-center gap-4 ">
-                                <div class="font14 d-flex align-items-center gap-2 font-muted">
-                                    <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
+                                <h4 class="font15 mb-2">{{booking.customerName}}</h4>
+                                <div class="d-flex align-items-center gap-4 ">
+                                    <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                        <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
+                                    </div>
+                                    <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                        <span class="icon-email"></span>{{booking.emailAddress}}
+                                    </div>
                                 </div>
-                                <div class="font14 d-flex align-items-center gap-2 font-muted">
-                                    <span class="icon-email"></span>{{booking.emailAddress}}
+                                <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
+                                <div class="d-flex flex-wrap gap-2 items-center" *ngFor="let cat of booking.categories">
+                                    <span class="white-badge bg-light"
+                                        *ngFor="let service of cat.products">{{service.serviceName}}
+                                    </span>
                                 </div>
+                                <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
                             </div>
-                            <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                            <div class="d-flex flex-wrap gap-2 items-center" *ngFor="let cat of booking.categories">
-                                <span class="white-badge bg-light"
-                                    *ngFor="let service of cat.products">{{service.serviceName}}
-                                </span>
-                            </div>
-                            <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
                         </div>
                     </div>
                     <div *ngIf="assignedBooking.length==0 && !loadAssigned" class="text-center p-3">
@@ -189,33 +175,35 @@
                         <div class="booking-top-head compelete-booking">
                             Completed ({{compeletedBooking.length > 0 ? compeletedBooking[0].totalCount:0}})
                         </div>
-                        <div class="assigned-booking-item" *ngFor="let booking of compeletedBooking"
-                            (click)="openEditViewBooking(booking)">
-                            <div class="d-flex gap-3 mb-2 align-items-center justify-content-between">
-                                <span class="primary-badge">{{booking.bookingTime}}</span>
-                                <div class="d-flex align-items-center">
-                                    <div *ngFor="let teamMember of booking.assignedTeamMembers"
-                                        class="userAvtarGroup-rounded-wrapper">
-                                        <img src="{{teamMember.profileImagePath}}"
-                                            (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
-                                            alt="image" class="rounded-circle">
+                        <div class="booking-listing">
+                            <div class="assigned-booking-item" *ngFor="let booking of compeletedBooking"
+                                (click)="openEditViewBooking(booking)">
+                                <div class="d-flex gap-3 mb-2 align-items-center justify-content-between">
+                                    <span class="primary-badge">{{booking.bookingTime}}</span>
+                                    <div class="d-flex align-items-center">
+                                        <div *ngFor="let teamMember of booking.assignedTeamMembers"
+                                            class="userAvtarGroup-rounded-wrapper">
+                                            <img src="{{teamMember.profileImagePath}}"
+                                                (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
+                                                alt="image" class="rounded-circle">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <h4 class="font15 mb-2">{{booking.customerName}}</h4>
-                            <div class="d-flex align-items-center gap-4 ">
-                                <div class="font14 d-flex align-items-center gap-2 font-muted">
-                                    <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
+                                <h4 class="font15 mb-2">{{booking.customerName}}</h4>
+                                <div class="d-flex align-items-center gap-4 ">
+                                    <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                        <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
+                                    </div>
+                                    <div class="font14 d-flex align-items-center gap-2 font-muted">
+                                        <span class="icon-email"></span>{{booking.emailAddress}}
+                                    </div>
                                 </div>
-                                <div class="font14 d-flex align-items-center gap-2 font-muted">
-                                    <span class="icon-email"></span>{{booking.emailAddress}}
+                                <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
+                                <div *ngFor="let cat of booking.categories" class="d-flex flex-wrap gap-2 items-center">
+                                    <span class="white-badge bg-light"
+                                        *ngFor="let service of cat.products">{{service.serviceName}}
+                                    </span>
                                 </div>
-                            </div>
-                            <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                            <div *ngFor="let cat of booking.categories" class="d-flex flex-wrap gap-2 items-center">
-                                <span class="white-badge bg-light"
-                                    *ngFor="let service of cat.products">{{service.serviceName}}
-                                </span>
                             </div>
                         </div>
                     </div>
