@@ -63,4 +63,11 @@ export class BookingService {
         return res;
       }));
   }
+  
+  getBookingStats() {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Booking/GetBookingStats`)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 }
