@@ -689,11 +689,11 @@ ul {
 }
 
 // @include checkbox;
-
 .page-title-box {
   // @include flexbox(row, space-between, flex-start);
   padding: 10px 0;
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--white); top: 54px; position: sticky;
   .page-title {
     @include flexbox(row, space-between, flex-start);
     font-size: 24px;
@@ -701,7 +701,6 @@ ul {
 }
 
 // Breadcrumb
-
 .breadcrumb {
   display: flex;
   align-items: center;
@@ -719,14 +718,12 @@ ul {
       margin-right: 5px; // Adjust as needed
     }
   }
-
   .separator {
     margin: 0 10px; // Adjust as needed
   }
 }
 
 // Widget Styles
-
 .widget-container {
   @include grid-layout(1fr 1fr 1fr 1fr 1fr, 1rem);
   .widget-card {
@@ -768,32 +765,26 @@ ul {
   background-color: var(--light-primary);
   color: var(--light-muted);
 }
-
 .lightYellowBox {
   background-color: var(--light-warning);
   color: var(--warning);
 }
-
 .lightYellowBox2 {
   background-color: var(--light-yellow);
   color: var(--mustard-brown);
 }
-
 .lightGreenBox {
   background-color: var(--light-green);
   color: var(--dark-green);
 }
-
 .lightDangerBox {
   background-color: var(--light-danger);
   color: var(--danger);
 }
-
 .lightSuccessBox {
   background-color: var(--light-success);
   color: var(--success);
 }
-
 .lightPrimaryBox {
   background-color: var(--light-primary);
   color: var(--primary);
@@ -844,7 +835,6 @@ ul {
     }
   }
 }
-
 .table-middle-items-center {
   th,
   td {
@@ -879,7 +869,6 @@ ul {
 }
 
 // Tabs
-
 .borderStyleTabs {
   display: flex;
   .nav-item {
@@ -1080,14 +1069,12 @@ button.btn.dropdown-toggle {
 }
 
 // custom table and datatable styles
-
 table {
   border-collapse: collapse;
   width: 100%;
   border: 1px solid var(--border-grey);
   border-radius: 5px;
 }
-
 table th {
   background-color: var(--light-primary);
   padding: 8px 12px !important;
@@ -1098,27 +1085,15 @@ table th {
   font-size: 0.75rem;
   font-weight: 500 !important;
 }
-
 table th .form-check-input[type="checkbox"] {
   width: 14px;
   height: 14px;
 }
-
 table th:last-child {
   text-align: right !important;
-  padding-right: 30px !important;
 }
-
-table tr tr:last-child {
-  text-align: right;
-}
-
-table td {
-  border: none;
-  text-align: left;
-  padding: 20px 12px;
-  font-size: 0.875rem;
-  font-weight: 400;
+table td:last-child {
+  text-align: right !important;
 }
 
 table tr {
@@ -1128,8 +1103,8 @@ table tr {
 table tbody td {
   border: none;
   text-align: left !important;
-  padding: 15px 15px !important;
-  font-size: 0.875rem;
+  padding: 10px 12px !important;
+  font-size: 0.80rem;
   font-weight: 400;
 }
 
@@ -1158,13 +1133,11 @@ table tbody td {
 .offcanvas-w480 {
   width: 480px !important;
 }
-
 form.sidebar-popup-inner {
   display: flex;
   flex-direction: column;
   height: calc(100% - 68px);
 }
-
 .offcanvas-header {
   .btn-close {
     border: 1px solid #d1d5db;
@@ -1175,7 +1148,6 @@ form.sidebar-popup-inner {
     border-radius: 8px;
   }
 }
-
 .sidebar-popup-bottom {
   display: flex;
   align-items: center;
