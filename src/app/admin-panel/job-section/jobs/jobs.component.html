@@ -83,6 +83,7 @@
                     <div class="px-3 py-4 border-bottom scheduler-left-lists-item"
                         (click)="openEditViewBooking(booking)" *ngFor="let booking of unAssignedBooking">
                         <div class="d-flex gap-3 mb-2">
+                            <span class="primary-badge"> #{{booking.bookingId}}</span>
                             <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingTime}}</span>
                             <button class="danger-badge" type="button">{{booking.statusText}}</button>
                         </div>
@@ -112,6 +113,7 @@
                     <div class="p-4 border rounded mb-3 assigned-booking-item" (click)="openEditViewBooking(booking)"
                         *ngFor="let booking of assignedBooking">
                         <div class="d-flex gap-3 mb-2 align-items-center ">
+                            <span class="primary-badge"> #{{booking.bookingId}}</span>
                             <span class="primary-badge"> {{booking.bookingTime}}</span>
                             <div class="userAvtarGroup-rounded-wrapper d-flex align-items-center  ms-auto"
                                 *ngFor="let teamMember of booking.assignedTeamMembers">
@@ -148,6 +150,7 @@
                     <div class="p-4 border rounded mb-3 assigned-booking-item" *ngFor="let booking of compeletedBooking"
                         (click)="openEditViewBooking(booking)">
                         <div class="d-flex gap-3 mb-2 align-items-center ">
+                            <span class="primary-badge"> #{{booking.bookingId}}</span>
                             <span class="white-badge"> {{booking.bookingTime}}</span>
                             <div class="userAvtarGroup-rounded-wrapper d-flex align-items-center  ms-auto"
                                 *ngFor="let teamMember of booking.assignedTeamMembers">

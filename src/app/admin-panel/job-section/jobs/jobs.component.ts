@@ -9,6 +9,7 @@ import { EditViewBookingComponent } from '../edit-view-booking/edit-view-booking
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { environment } from '@environments/environment';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-jobs',
@@ -28,8 +29,7 @@ export class JobsComponent implements OnInit {
   pageEvent: PageEvent | undefined;
   activePageDataChunkAssigned: any = []
   apiBaseUrl: string = environment.apiUrl + '/';
-  constructor(private _router: Router, private _bookingService: BookingService, private _dialog: MatDialog,) {
-
+  constructor(private _router: Router, private _bookingService: BookingService, private _dialog: MatDialog,private _datepipe:DatePipe) {
   }
 
   ngOnInit(): void {

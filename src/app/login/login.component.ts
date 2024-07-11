@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { AuthenticationService } from '@app/_services';
 import { Role, User } from '@app/_models';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DatePipe } from '@angular/common';
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     loginForm!: FormGroup;
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService, private snackBar: MatSnackBar
+        
     ) {
         ////debugger
         // redirect to home if already logged in
@@ -24,6 +26,8 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/login']);
         }
         this.user = <User>this.authenticationService.userValue;
+       
+
     }
 
     ngOnInit() {

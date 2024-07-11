@@ -76,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <div id="container"></div>
+            <!-- <div id="container"></div> -->
             <div id="chart">
                 <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
                     [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
@@ -84,7 +84,15 @@
                     [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
                     [xaxis]="chartOptions.xaxis"></apx-chart>
             </div>
-
+            <div id="pie-chart">
+                <apx-chart
+                  [series]="pieChartOptions.series"
+                  [chart]="pieChartOptions.chart"
+                  [labels]="pieChartOptions.labels"
+                  [responsive]="pieChartOptions.responsive"
+                ></apx-chart>
+              </div>
+              
         </div>
     </div>
     <div class="py-4">
@@ -218,7 +226,7 @@
                                 <th>Service Name</th>
                                 <th>Sales</th>
                                 <th>Revenue</th>
-                                <th>Rating</th>
+                                <!-- <th>Rating</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -226,13 +234,13 @@
                                 <td> {{service.serviceName}} </td>
                                 <td>{{service.totalSalesCount}}</td>
                                 <td>${{service.totalRevenue | number : '1.2-2'}}</td>
-                                <td>
+                                <!-- <td>
                                     <div class="d-flex gap-2 align-items-center justify-content-center custom-star">
                                         <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
                                             (ratingUpdated)="onRatingChanged($event)"
                                             [customDisable]="starDisable"></app-star-rating>                                    
                                     </div>
-                                </td>
+                                </td> -->
                             </tr>
                             <tr *ngIf="topServices.length==0 && !topServicesLoaded">
                                 <td class="text-center" colspan="4">

@@ -37,6 +37,7 @@ import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.compo
 import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { SharedModule } from './shared/shared.module';
+import { DatePipe } from '@angular/common';
 
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
@@ -93,6 +94,7 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
         { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
         JwtHelperService,
         LoaderService,
+        DatePipe
     ],
     bootstrap: [AppComponent]
 })

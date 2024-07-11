@@ -24,7 +24,8 @@ import {
   ApexXAxis,
   ApexFill,
   ApexTooltip,
-  ApexNonAxisChartSeries
+  ApexResponsive,
+  ApexNonAxisChartSeries,
 } from "ng-apexcharts";
 const startDate = new Date();
 const endDate = new Date(startDate.getTime() - (336 * 60 * 60 * 1000));
@@ -47,6 +48,7 @@ export class DashboardComponent implements OnInit {
   technician: any[] = [];
   topServices: any[] = [];
   graphStats: any[] = [];
+  pieChartStats: any[] = [];
   stats: any;
   todayBookingLoaded: boolean = false;
   estimateInvoiceLoaded: boolean = false;
@@ -58,9 +60,12 @@ export class DashboardComponent implements OnInit {
   dashboardRagePickerForm!: FormGroup;
   onBoardStatus: any;
 
-  @ViewChild("chart", { static: false })
-  chart!: ChartComponent;
+  @ViewChild("chart", { static: false }) chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
+
+  @ViewChild("pie-chart", { static: false }) pieChart!: ChartComponent;
+  public pieChartOptions: Partial<PieChartOptions> | any;
+
   constructor(
     private _bookingService: BookingService,
     private _estimateService: EstimateService,
@@ -221,6 +226,8 @@ export class DashboardComponent implements OnInit {
         },
         error: (error) => { },
       });
+
+    this.bindPieChart(objDahsboardGraphInput);
   }
 
   getDashboardStats() {
@@ -299,13 +306,12 @@ export class DashboardComponent implements OnInit {
     //     },
     //   },
     //   series: graphData,
-    // });
-  console.log(graphData)
+    // });    
     this.chartOptions = {
-      series: graphData,      
+      series: graphData,
       chart: {
         type: "bar",
-        height: 350
+        height: 300
       },
       plotOptions: {
         bar: {
@@ -337,7 +343,7 @@ export class DashboardComponent implements OnInit {
       tooltip: {
         y: {
           formatter: function (val: string) {
-            return  val;
+            return val;
           }
         }
       }
@@ -361,6 +367,47 @@ export class DashboardComponent implements OnInit {
         }
       });
   }
+
+  bindPieChart(objDahsboardGraphInput: any) {
+    this._dashboardService
+      .getDashboardPieChartStats(objDahsboardGraphInput)
+      .subscribe({
+        next: (res: { data: any[] }) => {
+          this.pieChartStats = res.data;
+
+          var serviceCountArr = this.pieChartStats.map(function (el) {
+            return el.totalCount;
+          });
+
+          var labelArr = this.pieChartStats.map(function (el) {
+            return el.serviceName;
+          });
+          this.pieChartOptions = {
+            series: serviceCountArr,
+            chart: {
+              width: 450,
+              type: "pie"
+            },
+            labels: labelArr,
+            responsive: [
+              {
+                breakpoint: 480,
+                options: {
+                  chart: {
+                    width: 200
+                  },
+                  legend: {
+                    position: "bottom"
+                  }
+                }
+              }
+            ]
+          };
+        },
+        error: (error) => { },
+      });
+
+  }
 }
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -373,4 +420,13 @@ export type ChartOptions = {
   tooltip: ApexTooltip;
   stroke: ApexStroke;
   legend: ApexLegend;
+  responsive: ApexResponsive[];
+  labels: any;
+};
+
+export type PieChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
 };
