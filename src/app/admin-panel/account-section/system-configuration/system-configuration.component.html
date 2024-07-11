@@ -4,7 +4,7 @@
 </div>
 
 <div class="border rounded overflow-hidden mb-4 mb-lg-5">
-    <div class="  px-3 py-3">
+    <div class="  px-4 py-3">
         <h4 class="mb-0 font18 font500">Payment Gateway Setup</h4>
     </div>
     <form class="p-4 pt-0" [formGroup]="configurationForm" (ngSubmit)="onSubmit()" *ngIf="!isEditDisabled">
@@ -30,7 +30,8 @@
             <button class="primary-filled-button px-5">
                 Save Changes
             </button>
-            <button  class="primary-filled-button px-5" (click)="hideConfiguration()" type="button" *ngIf="isShowHideBtn">
+            <button class="primary-filled-button px-5" (click)="hideConfiguration()" type="button"
+                *ngIf="isShowHideBtn">
                 Hide
             </button>
         </div>
@@ -55,6 +56,62 @@
     </form>
 </div>
 
+<div class="border rounded overflow-hidden mb-4 mb-lg-5">
+    <div class="px-4 py-3">
+        <h4 class="mb-0 font18 font500">Invoice Terms and conditions</h4>
+    </div>
+    <form class="p-4 pt-0">
+        <div class="d-flex flex-column gap-3">
+            <div class="d-flex gap-3 align-items-start">
+                <div class="border p-3 rounded w-100">
+                    <p class="mb-0 font14">Payment is due within [insert number] days from the date of the invoice. Late
+                        payments will incur
+                        a
+                        late fee of [insert percentage]% per month.</p>
+                </div>
+                <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"><span
+                        class="icon-delete"></span>
+                </button>
+            </div>
+            <div class="d-flex gap-3 align-items-start">
+                <div class="border p-3 rounded w-100">
+                    <p class="mb-0 font14">The invoice is for the work described in the attached scope of work or
+                        contract. Any additional work will require a separate agreement and may incur additional
+                        charges.</p>
+                </div>
+                <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"><span
+                        class="icon-delete"></span>
+                </button>
+            </div>
+            <div class="d-flex gap-3 align-items-start">
+                <div class="border p-3 rounded w-100">
+                    <p class="mb-0 font14">Any disputes or requests for adjustments to the invoice must be made in
+                        writing within [insert number] days of the invoice date.</p>
+                </div>
+                <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"><span
+                        class="icon-delete"></span>
+                </button>
+            </div>
+            <div class="d-flex gap-3 align-items-start">
+                <div class="border p-3 rounded w-100">
+                    <p class="mb-0 font14">By paying this invoice, the customer agrees to the terms and conditions
+                        outlined above.</p>
+                </div>
+                <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"><span
+                        class="icon-delete"></span>
+                </button>
+            </div>
+
+            <div class="d-flex gap-3 align-items-start">
+                <textarea type="text" id="invoiceTerm" formControlName="invoiceTerm" class="form-control"
+                    placeholder="Enter here" maxlength="20" rows="1"></textarea>
+                <button type="button" class="light-outlined-button rounded p-0 ShapeBox38"><span
+                        class="icon-add"></span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
 <!-- <div class="border rounded overflow-hidden mb-4 mb-lg-5" style="display:none;">
     <div class="  px-3 py-3">
         <h4 class="mb-0 font18 font500">Service Area Setup</h4>
