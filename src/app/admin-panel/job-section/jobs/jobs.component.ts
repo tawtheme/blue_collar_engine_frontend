@@ -243,16 +243,8 @@ export class JobsComponent implements OnInit {
   }
 
   onEnter(str: any): void {
-    var _param = {
-      "id": 0,
-      "pageNumber": 0,
-      "pageSize": this.pageSize,
-      "searchStr": str.target.value,
-      "bookingDate": this.todayDate.value
-    }
-    this.getAllUnAssignedBooking(_param);
-    this.getAllAssignedBooking(_param);
-    this.getAllCompletedBooking(_param);
+    debugger
+    this.filterBooking();
   }
 
   onUnassignedDateChange(event: MatDatepickerInputEvent<Date>): void {
