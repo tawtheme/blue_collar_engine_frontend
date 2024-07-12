@@ -84,7 +84,7 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
         PagenotfoundComponent,
         PaymentSuccessComponent,
         FeatureInvoiceComponent,
-        FeatureEstimateComponent
+        FeatureEstimateComponent                        
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

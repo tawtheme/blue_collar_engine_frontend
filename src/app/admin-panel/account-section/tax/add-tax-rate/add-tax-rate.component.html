@@ -1,5 +1,6 @@
 <div class="offcanvas-header sidebar-popup-header">
-    <h6 class="offcanvas-title" id="offcanvasRightLabel">{{addTaxForm.value.taxId ==0 ?'Add Tax Rate':'Edit Tax Rate'}} </h6>
+    <h6 class="offcanvas-title" id="offcanvasRightLabel">{{addTaxForm.value.taxId ==0 ?'Add Tax Rate':'Edit Tax Rate'}}
+    </h6>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" #addTaxCancelEle>
     </button>
 </div>
@@ -11,22 +12,16 @@
             <select id="name" formControlName="name" name="name" class="form-select"
                 [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                 <option value="">Select</option>
-                <option value="Tax">Tax</option>                
+                <option value="Tax">Tax</option>
             </select>
             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                 <div *ngIf="f.name.errors.required">Select Tax</div>
-            </div>
-
-            <!-- <input type="text" id="name" name="name" formControlName="name" placeholder="Enter name"
-                class="form-control " [ngClass]="{ 'is-invalid': submitted && f.name.errors }" maxlength="50">
-            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                <div *ngIf="f.name.errors.required">Name is required</div>
-            </div> -->
+            </div>          
         </div>
         <div class="form-group mb-3">
             <label for="rate" class="form-label">Rate</label>
-            <input type="number" id="rate" name="rate" formControlName="tax" placeholder="Enter rate "
-                class="form-control " [ngClass]="{ 'is-invalid': submitted && f.tax.errors }">
+            <input numeric decimals='2' type="text" id="rate" name="rate" formControlName="tax"
+                placeholder="Enter rate " class="form-control " [ngClass]="{ 'is-invalid': submitted && f.tax.errors }" appNumeric>
             <div *ngIf="submitted && f.tax.errors" class="invalid-feedback">
                 <div *ngIf="f.tax.errors.required">Tax is required</div>
             </div>
@@ -36,7 +31,8 @@
             <mat-form-field class="example-full-width muiDatePickerFromField">
                 <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="effectiveDate"
                     placeholder="Choose a date"
-                    [ngClass]="{ 'is-invalid': submitted && addTaxForm.get('effectiveDate')?.hasError('required') }" readonly>
+                    [ngClass]="{ 'is-invalid': submitted && addTaxForm.get('effectiveDate')?.hasError('required') }"
+                    readonly>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>

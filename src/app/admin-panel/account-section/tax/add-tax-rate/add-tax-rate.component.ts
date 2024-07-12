@@ -1,8 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-tax-rate',
