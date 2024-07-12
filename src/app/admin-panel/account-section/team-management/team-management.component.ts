@@ -19,7 +19,7 @@ export class TeamManagementComponent {
   pageSize: number = 5;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   pageEvent: PageEvent | undefined;
-  
+
   constructor(private _accountSettingService: AccountSettingService) {
 
   }
@@ -45,7 +45,9 @@ export class TeamManagementComponent {
         next: (res: { data: any[]; }) => {
           this.users = res.data;
           this.users.forEach(res => {
-            res.profileImagePath = this.apiBaseUrl + res.profileImagePath
+            if (res.profileImagePath != null && res.profileImagePath != "") {
+              res.profileImagePath = this.apiBaseUrl + res.profileImagePath
+            }
           })
           this.loading = false;
         }
@@ -83,5 +85,5 @@ export class TeamManagementComponent {
       "searchStr": ""
     }
     this.getAllUsers(_param);
-  }  
+  }
 }

@@ -232,7 +232,7 @@
                                             (ratingUpdated)="onRatingChanged($event)"
                                             [customDisable]="starDisable"></app-star-rating>
                                     </div>-->
-                                    <span class="success-badge">4/5</span>
+                                    <span class="success-badge">{{tech.averageRating}}/5</span>
                                 </td>
                             </tr>
                             <tr *ngIf="technician.length==0 && !technicianLoaded">

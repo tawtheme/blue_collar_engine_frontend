@@ -161,7 +161,7 @@ export class AddTeamMemberComponent {
     }
   }
 
-  removeServiceImage(index: number, uploadId: number) {
+  removeTeamImg(index: number, uploadId: number) {
     //////console.log(this.categoryServiceForm.value.categoryServiceId)
     const message = `Are you sure you want to remove?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
@@ -171,7 +171,7 @@ export class AddTeamMemberComponent {
     });
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
-        this.userForm.controls['companyImagePath'].setValue('');
+        this.userForm.controls['profileImagePath'].setValue('');
         this.previews.splice(index, 1);
         this.selectedFiles = null;
       }

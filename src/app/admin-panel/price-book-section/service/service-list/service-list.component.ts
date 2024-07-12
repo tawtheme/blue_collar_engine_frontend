@@ -6,7 +6,6 @@ import { PaginationModel } from '@app/_models/pagination';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { environment } from '@environments/environment';
-import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 
 @Component({
@@ -29,7 +28,7 @@ export class ServiceListComponent {
   @ViewChild('catgeoryServiceSideBarEle') catgeoryServiceSideBarEle!: ElementRef<HTMLElement>;
   apiBaseUrl: string = environment.apiUrl + '/';
   constructor(private _categoryService: CategoryService, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar) {
-
+    
   }
   ngOnInit(): void {
     var _param = {

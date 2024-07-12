@@ -148,4 +148,18 @@ export class AccountSettingService {
         return res;
       }));
   }
+
+  addUpdateTermsConditions(termConditionInfo: any) {
+    return this.http.post<any>(`${environment.apiUrl}/api/v1/Tenant/AddUpdateTermsConditions`, termConditionInfo)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
+
+  getTermsConditions(type: any) {
+    return this.http.get<any>(`${environment.apiUrl}/api/v1/Tenant/GetTermsConditions?type=` + type)
+      .pipe(map(res => {
+        return res;
+      }));
+  }
 }

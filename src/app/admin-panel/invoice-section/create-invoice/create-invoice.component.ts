@@ -32,7 +32,7 @@ export class CreateInvoiceComponent implements OnInit {
   productList: any = [];
   customerAddress: any = [];
   isDisabled: boolean = true;
-  customerInfo: CustomerModel = { firstName: '--', lastName: '--', mobileNumber: '--', emailAddress: '--', serviceAddress: '--', customerAddressId: 0, customerId: 0 };
+  customerInfo: CustomerModel = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
   taxPer: any;
   clickType: any;
   subTotal: number = 0.00;
@@ -47,6 +47,7 @@ export class CreateInvoiceComponent implements OnInit {
   filteredProducts: Observable<any[]>;
   productCtrl = new FormControl();
   bookingId: number = 0;
+  termAndConditionDetail:any[]=[];
   constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _snackBar: MatSnackBar, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService, private _bookingService: BookingService) {
     this.filteredProducts = this.productCtrl.valueChanges
       .pipe(
@@ -93,7 +94,7 @@ export class CreateInvoiceComponent implements OnInit {
     this.getAll(_param);
     this.getAllProduct(_param);
     this.bindTax(ConstantManager.TaxType);
-
+    this.bindTermConditions();
     this._activeRoute.queryParams
       .subscribe(params => {
         if (params.invoiceId != undefined && params.invoiceId > 0) {
@@ -104,7 +105,7 @@ export class CreateInvoiceComponent implements OnInit {
           // this.isShowRegNo = true;          
           this.bookingId = params.bookingId;
           this.getBookingInfo(this.bookingId);
-        }       
+        }
       });
   }
 
@@ -119,8 +120,8 @@ export class CreateInvoiceComponent implements OnInit {
         next: (res) => {
           this.loading = false;
           this.customerList = res.data.filter(function (el: { status: any; }) {
-            return el.status=='A';
-          });           
+            return el.status == 'A';
+          });
         },
         error: error => {
           this.loading = false;
@@ -175,11 +176,19 @@ export class CreateInvoiceComponent implements OnInit {
       return event.customerId == ev.target.value;
     });
     this.customerInfo = <CustomerModel>customerData[0];
-    if (this.customerInfo.customerId > 0) {
-      this.isDisabled = false;
+    if (this.customerInfo == undefined) {
+      this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
+      this.isDisabled = true;
     }
-    this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
-    this.getAddress(this.customerInfo.customerId);
+    else {
+      this.customerInfo.serviceAddress = customerData[0].serviceAddress + ', ' + customerData[0].city + ', ' + customerData[0].state + ', ' + customerData[0].zipCode;
+      if (this.customerInfo.customerId > 0) {
+        this.isDisabled = false;
+      }
+      this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
+      this.getAddress(this.customerInfo.customerId);
+    }
+
   }
 
   bindProductInfo(ev: any, index: number) {
@@ -276,6 +285,7 @@ export class CreateInvoiceComponent implements OnInit {
   products(): FormArray {
     return this.invoiceForm.get("products") as FormArray
   }
+
   newProduct(): FormGroup {
     return this._formBuilder.group({
       productId: ['', [Validators.required]],
@@ -307,7 +317,7 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   calculateTotal() {
-    let _totalAmt = 0;  
+    let _totalAmt = 0;
     for (let i = 0; i < this.products().length; i++) {
       _totalAmt += this.products().at(i).get('totalPrice')?.value;
     }
@@ -361,6 +371,19 @@ export class CreateInvoiceComponent implements OnInit {
       this.expiryDateStr = res.data.expiryDate;
       this.status = res.data.status;
     })
+  }
+
+  bindTermConditions() {
+    this._accountSettingService.getTermsConditions('IT')
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          console.log(res.data)
+          this.termAndConditionDetail=res.data.termAndConditionDetail;
+        },
+        error: () => {
+        }
+      });
   }
 
 }

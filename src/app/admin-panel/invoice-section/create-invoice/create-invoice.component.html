@@ -54,7 +54,8 @@
                 <div class="col-md-3" *ngIf="isShowRegNo">
                     <div class="form-group ">
                         <label for="EstimateId" class="form-label">Estimate ID</label>
-                        <input type="text" id="EstimateId" formControlName="refNo" placeholder="EstimateId" class="form-control" readonly>
+                        <input type="text" id="EstimateId" formControlName="refNo" placeholder="EstimateId"
+                            class="form-control" readonly>
                     </div>
                 </div>
             </div>
@@ -74,7 +75,7 @@
                             <div class="col-4">
                                 <div class="font-muted font14">Phone Number</div>
                             </div>
-                            <div class="col-8">
+                            <div class="col-8" *ngIf="customerInfo.mobileNumber!=''">
                                 <div class="font14 d-flex align-items-center gap-2">
                                     <span class="icon-call"></span>{{customerInfo.mobileNumber | usMobileNo}}
                                 </div>
@@ -84,7 +85,7 @@
                             <div class="col-4">
                                 <div class="font-muted font14">Email address</div>
                             </div>
-                            <div class="col-8">
+                            <div class="col-8" *ngIf="customerInfo.emailAddress!=''">
                                 <div class="font14 d-flex align-items-center gap-2">
                                     <span class="icon-email"></span>{{customerInfo.emailAddress}}
                                 </div>
@@ -96,7 +97,7 @@
                     <div class="border p-3 rounded h-100 ">
                         <div class="font-muted font14 d-flex align-items-center gap-2 mb-2">Service Address
                         </div>
-                        <div class="font14 d-flex align-items-center gap-2">
+                        <div class="font14 d-flex align-items-center gap-2" *ngIf="customerInfo.serviceAddress!=''">
                             <span class="icon-address"></span>{{customerInfo.serviceAddress}}
                         </div>
                         <input type="hidden" formControlName="customerAddressId">
@@ -132,12 +133,15 @@
                                                 *ngFor="let product of productList">
                                                 {{product.serviceName}}</option>
                                         </select>
-                                        <div *ngIf="submitted && product.get('productId')!.errors" class="invalid-feedback">
-                                            <div *ngIf="product.get('productId')!.errors?.required">Select a product</div>
+                                        <div *ngIf="submitted && product.get('productId')!.errors"
+                                            class="invalid-feedback">
+                                            <div *ngIf="product.get('productId')!.errors?.required">Select a product
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <textarea placeholder="Description (Optional)" formControlName="description" class="form-control" rows="3"></textarea>
+                                        <textarea placeholder="Description (Optional)" formControlName="description"
+                                            class="form-control" rows="3"></textarea>
                                     </div>
                                 </td>
                                 <td>
@@ -153,15 +157,18 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="text" id="UnitPrice" placeholder="$0.00" formControlName="price" class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && product.get('price')!.errors?.required }" readonly>
+                                        <input type="text" id="UnitPrice" placeholder="$0.00" formControlName="price"
+                                            class="form-control"
+                                            [ngClass]="{ 'is-invalid': submitted && product.get('price')!.errors?.required }"
+                                            readonly>
                                         <div *ngIf="submitted && product.get('price')!.errors" class="invalid-feedback">
                                             <div *ngIf="product.get('price')!.errors?.required">Price is required</div>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="text" id="UnitPrice" placeholder="$0.00" formControlName="totalPrice" class="form-control" readonly>
+                                    <input type="text" id="UnitPrice" placeholder="$0.00" formControlName="totalPrice"
+                                        class="form-control" readonly>
                                 </td>
                                 <td>
                                     <button class="btn" (click)="removeQuantity(i)"
@@ -182,33 +189,16 @@
                 <div class="col-lg-7">
                     <h4 class="mb-2 font16">Terms and conditions</h4>
                     <ol class="ps-3 mb-0">
-                        <li class="font-muted font14 mb-2">
-                            Payment is due within [number of days] from the invoice date. Late payments may incur
-                            penalties
-                            or interest charges at [rate]% per [period]. </li>
-                        <li class="font-muted font14 mb-2">Goods or services remain the property of [Your Company Name]
-                            until
-                            payment is received in full.
-                        </li>
-                        <li class="font-muted font14 mb-2">
-                            Any disputes or discrepancies regarding the invoice must be raised within [number of days]
-                            of
-                            receipt. Disputes will be resolved through [mediation/arbitration/court proceedings] in
-                            [jurisdiction].
-                        </li>
-                        <li class="font-muted font14 mb-2">
-                            This agreement is governed by the laws of [jurisdiction], and any disputes shall be resolved
-                            in
-                            [courts or arbitration in jurisdiction].
-                        </li>
+                        <li class="font-muted font14 mb-2" *ngFor="let term of termAndConditionDetail;let i=index">
+                            {{term.description}} </li>
                     </ol>
                 </div>
                 <div class="col-lg-5">
                     <div class="card p-3 bg-light">
                         <div class="d-flex mb-2 align-items-center justify-content-between">
                             <div class="font-muted font14 d-flex align-items-center gap-2 me-3">Discount</div>
-                            <input type="number" formControlName="discount" placeholder="Discount" class="form-control discount-input" 
-                            (change)="calculateTotal()">
+                            <input type="number" formControlName="discount" placeholder="Discount"
+                                class="form-control discount-input" (change)="calculateTotal()">
                         </div>
                         <div class="d-flex mb-3 align-items-center">
                             <div class="font-muted font14">Sub Total</div>
@@ -216,7 +206,7 @@
                         </div>
                         <div class="d-flex mb-3 align-items-center">
                             <div class="font-muted font14">Tax Rate: {{taxPer | number : '1.2-2'}}%</div>
-                            <div class="font14 ms-auto text-primary">+ ${{taxPer| number : '1.2-2'}} </div>
+                            <div class="font14 ms-auto text-primary">+ ${{taxAmount | number : '1.2-2'}} </div>
                         </div>
                         <div class="d-flex mt-3 mb-2 align-items-center">
                             <h4 class="font18">Total Amount</h4>
@@ -226,7 +216,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end gap-3 mt-4" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')">
-                <button class="light-outlined-button px-5" type="submit" (click)="getAction('D')" *ngIf="(bookingId == 0)">Save as draft</button>
+                <button class="light-outlined-button px-5" type="submit" (click)="getAction('D')"
+                    *ngIf="(bookingId == 0)">Save as draft</button>
                 <button class="primary-filled-button px-5" type="submit" (click)="getAction('S')">Send</button>
             </div>
         </form>

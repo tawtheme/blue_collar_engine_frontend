@@ -94,11 +94,11 @@
                                                         <div class="service-info-img"
                                                             *ngIf="service.uploadedFiles.length > 0">
                                                             <img src="{{apiBaseUrl}}{{service.uploadedFiles[0].filePath}}"
-                                                                onerror="this.src='../assets/images/services1.png'">
+                                                                onerror="this.src='../../../../assets/images/blank-img.png'">
                                                         </div>
                                                         <div class="service-info-img"
                                                             *ngIf="service.uploadedFiles.length == 0">
-                                                            <img src="../assets/images/services1.png">
+                                                            <img src="../../../../assets/images/blank-img.png">
                                                         </div>
                                                         <div class="">
                                                             <h4 class="font14 mb-1 font500">{{service.serviceName}}</h4>

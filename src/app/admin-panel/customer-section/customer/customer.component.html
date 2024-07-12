@@ -104,7 +104,7 @@
                             <td>{{cust.mobileNumber | usMobileNo}}</td>
                             <td>
                                 <div class="tableAddressTd text-wrap">
-                                    {{cust.serviceAddress}}
+                                    {{cust.serviceAddress}},  {{cust.city}},  {{cust.state}},  {{cust.zipCode}}
                                 </div>
                             </td>
                             <td> <mat-slide-toggle [checked]="cust.status=='A'"

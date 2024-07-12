@@ -74,7 +74,8 @@ export class MyProfileComponent {
           //////console.log(this.profileInfo)
           this._accountSettingService.tenentProfileInfo.next(this.profileInfo);
           this.profileForm.patchValue(this.profileInfo);
-          if (this.profileForm.controls['companyImagePath'].value != '') {
+          console.log(this.profileInfo)
+          if (this.profileForm.controls['companyImagePath'].value != '' && this.profileForm.controls['companyImagePath'].value != null) {
             var _data = {
               'filePath': this.apiBaseUrl + this.profileForm.controls['companyImagePath'].value,
               'index': 0

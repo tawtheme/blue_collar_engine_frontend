@@ -32,7 +32,7 @@ export class CreateEstimateComponent implements OnInit {
   productList: any = [];
   customerAddress: any = [];
   isDisabled: boolean = true;
-  customerInfo: CustomerModel = { firstName: '--', lastName: '--', mobileNumber: '--', emailAddress: '--', serviceAddress: '--', customerAddressId: 0, customerId: 0 };
+  customerInfo: CustomerModel = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
   taxPer: any = 0;
   clickType: any;
   subTotal: number = 0.00;
@@ -76,8 +76,7 @@ export class CreateEstimateComponent implements OnInit {
     }
     this.getAll(_param);
     this.getAllProduct(_param);
-    this.bindTax(ConstantManager.TaxType);
-
+    this.bindTax(ConstantManager.TaxType);   
     this._activeRoute.queryParams
       .subscribe(params => {
         if (params.estimateId != undefined && params.estimateId > 0) {
@@ -89,7 +88,6 @@ export class CreateEstimateComponent implements OnInit {
 
   // convenience getter for easy access to form fields
   get f() { return this.estimateInvoiceForm.controls; }
-
 
   getAll(param: PaginationModel) {
     this._customerService.getAll(param)
@@ -143,12 +141,21 @@ export class CreateEstimateComponent implements OnInit {
     var customerData = this.customerList.filter(function (event: { customerId: number; }) {
       return event.customerId == ev.target.value;
     });
+    console.log(customerData)
     this.customerInfo = <CustomerModel>customerData[0];
-    if (this.customerInfo.customerId > 0) {
-      this.isDisabled = false;
+    if (this.customerInfo == undefined) {
+      this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
+      this.isDisabled = true;
     }
-    this.estimateInvoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
-    this.getAddress(this.customerInfo.customerId);
+    else {
+      this.customerInfo.serviceAddress = customerData[0].serviceAddress + ', ' + customerData[0].city + ', ' + customerData[0].state + ', ' + customerData[0].zipCode;
+      if (this.customerInfo.customerId > 0) {
+        this.isDisabled = false;
+      }
+      this.estimateInvoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
+      this.getAddress(this.customerInfo.customerId);
+    }
+
   }
 
   bindProductInfo(ev: any, index: number) {
@@ -173,6 +180,7 @@ export class CreateEstimateComponent implements OnInit {
           this.customerAddress = res.data.filter(function (el: { customerId: number; }) {
             return el.customerId == customerId;
           });
+          console.log(this.customerAddress)
         },
         error: error => {
         }
@@ -294,4 +302,7 @@ export class CreateEstimateComponent implements OnInit {
         }
       });
   }
+
+
+
 }

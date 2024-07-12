@@ -39,8 +39,10 @@
                 <td>
                     <div class="d-flex teamProfileWrap align-items-center gap-3">
                         <div class="">
+                            <img src="../../../../assets/images/blank-img.png" class="img-fluid rounded-2"
+                                *ngIf="user.profileImagePath==null || user.profileImagePath==''">
                             <img [src]="user.profileImagePath" class="img-fluid rounded-2"
-                                (error)="user.profileImagePath = '../../../../assets/images/blank-img.png'">
+                                *ngIf="user.profileImagePath!=null || user.profileImagePath!=''">
                         </div>
                         <div class="">
                             <h4 class="font15 mb-1">{{user.firstName}} {{user.lastName}}</h4>
@@ -62,7 +64,7 @@
                     </div>
 
                 </td>
-            </tr>         
+            </tr>
             <tr *ngIf="users.length == 0 && !loading" class="text-center">
                 <td class="text-center" colspan="6">
                     <span>No data found</span>

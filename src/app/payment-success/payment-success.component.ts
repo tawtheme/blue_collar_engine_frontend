@@ -16,7 +16,7 @@ import { first } from 'rxjs';
   styleUrls: ['./payment-success.component.scss']
 })
 export class PaymentSuccessComponent {
-  rating: number = 5;
+  rating: number = 0;
   starCount: number = 5;
   starColor: StarRatingColor = StarRatingColor.accent;
   starColorP: StarRatingColor = StarRatingColor.primary;

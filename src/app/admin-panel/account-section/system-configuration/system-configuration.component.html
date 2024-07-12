@@ -60,53 +60,31 @@
     <div class="px-4 py-3">
         <h4 class="mb-0 font18 font500">Invoice Terms and conditions</h4>
     </div>
-    <form class="p-4 pt-0">
-        <div class="d-flex flex-column gap-3">
-            <div class="d-flex gap-3 align-items-start">
+    <form class="p-4 pt-0" [formGroup]="invoiceTermConditionForm" (ngSubmit)="onSubmitTermCondition()">
+        <div class="d-flex flex-column gap-3" formArrayName="termAndConditionDetail">
+            <button type="button" class="light-outlined-button rounded p-0 ShapeBox38" #tooltip="matTooltip"
+                matTooltip="Add new" (click)="addNewTermCondition()"><span class="icon-add"></span>
+            </button>
+            <div class="d-flex gap-3 align-items-start" *ngFor="let item of termAndConditionDetail().controls; let i=index"
+                [formGroupName]="i">
                 <div class="border p-3 rounded w-100">
-                    <p class="mb-0 font14">Payment is due within [insert number] days from the date of the invoice. Late
-                        payments will incur
-                        a
-                        late fee of [insert percentage]% per month.</p>
+                    <textarea type="text" id="invoiceTerm" formControlName="description" class="form-control"
+                        placeholder="Enter here" maxlength="4000" rows="3"
+                        [ngClass]="{ 'is-invalid': submitted && item.get('description')!.errors?.required }"></textarea>
+                    <div *ngIf="submitted && item.get('description')!.errors" class="invalid-feedback">
+                        <div *ngIf="item.get('description')!.errors?.required">This field is required </div>
+                    </div>
+                    <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"
+                        (click)="removeTermCondition(i)">
+                        <span class="icon-delete"></span>
+                    </button>
                 </div>
-                <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"><span
-                        class="icon-delete"></span>
-                </button>
-            </div>
-            <div class="d-flex gap-3 align-items-start">
-                <div class="border p-3 rounded w-100">
-                    <p class="mb-0 font14">The invoice is for the work described in the attached scope of work or
-                        contract. Any additional work will require a separate agreement and may incur additional
-                        charges.</p>
-                </div>
-                <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"><span
-                        class="icon-delete"></span>
-                </button>
-            </div>
-            <div class="d-flex gap-3 align-items-start">
-                <div class="border p-3 rounded w-100">
-                    <p class="mb-0 font14">Any disputes or requests for adjustments to the invoice must be made in
-                        writing within [insert number] days of the invoice date.</p>
-                </div>
-                <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"><span
-                        class="icon-delete"></span>
-                </button>
-            </div>
-            <div class="d-flex gap-3 align-items-start">
-                <div class="border p-3 rounded w-100">
-                    <p class="mb-0 font14">By paying this invoice, the customer agrees to the terms and conditions
-                        outlined above.</p>
-                </div>
-                <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"><span
-                        class="icon-delete"></span>
-                </button>
             </div>
 
-            <div class="d-flex gap-3 align-items-start">
-                <textarea type="text" id="invoiceTerm" formControlName="invoiceTerm" class="form-control"
-                    placeholder="Enter here" maxlength="20" rows="1"></textarea>
-                <button type="button" class="light-outlined-button rounded p-0 ShapeBox38"><span
-                        class="icon-add"></span>
+            <div class="d-flex justify-content-start gap-3 mt-4"
+                *ngIf="invoiceTermConditionForm.value.termAndConditionDetail.length > 0">
+                <button class="primary-filled-button px-5">
+                    Save
                 </button>
             </div>
         </div>

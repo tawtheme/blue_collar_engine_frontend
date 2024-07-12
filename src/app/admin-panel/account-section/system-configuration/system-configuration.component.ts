@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
+import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import { ToastrService } from 'ngx-toastr';
 import { first } from 'rxjs';
 
@@ -16,7 +18,8 @@ export class SystemConfigurationComponent {
   loading = false;
   isEditDisabled: boolean = true;
   isShowHideBtn: boolean = false;
-  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) {
+  invoiceTermConditionForm!: FormGroup;
+  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, public dialog: MatDialog) {
 
   }
   ngOnInit() {
@@ -28,8 +31,90 @@ export class SystemConfigurationComponent {
       secretKeyMask: [null, null],
       publishableKeyMask: [null, null]
     });
+
+    this.invoiceTermConditionForm = this.formBuilder.group({
+      termsConditionId: 0,
+      type: ['IT', null],
+      termAndConditionDetail: this.formBuilder.array([])
+    });
     this.get();
+    this.bindTermConditions();
   }
+
+  termAndConditionDetail(): FormArray {
+    return this.invoiceTermConditionForm.get("termAndConditionDetail") as FormArray
+  }
+
+  newTermCondition(): FormGroup {
+    return this.formBuilder.group({
+      termsConditionId: 0,
+      description: ['', [Validators.required]],
+      termsConditionDetailId: 0
+    })
+  }
+
+  addNewTermCondition() {
+    this.termAndConditionDetail().push(this.newTermCondition());
+  }
+
+  removeTermCondition(i: number) {
+    const message = `Are you sure you want to do delete?`;
+    const dialogData = new ConfirmDialogModel("Confirmation", message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: "400px",
+      data: dialogData
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.termAndConditionDetail().removeAt(i);
+      }
+      else {
+        return;
+      }
+    });
+  }
+
+  onSubmitTermCondition() {
+    this.submitted = true;
+    if (this.invoiceTermConditionForm.invalid) {
+      return;
+    }
+    let param = this.invoiceTermConditionForm.value as any;
+    param = { ...param, ...{ type: 'IT' } };
+    console.log(param)
+    this._accountSettingService.addUpdateTermsConditions(param)
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          this._snackBar.open(res.message);
+        },
+        error: () => {
+
+        }
+      });
+  }
+
+  bindTermConditions() {
+    this._accountSettingService.getTermsConditions('IT')
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          console.log(res.data)
+          this.termAndConditionDetail().clear();
+          if (res.data != null) {
+            res.data.termAndConditionDetail.forEach((t: { batches: any[]; }) => {
+              var _termCondition: FormGroup = this.newTermCondition();
+              this.termAndConditionDetail().push(_termCondition);
+            });
+            this.invoiceTermConditionForm.patchValue(res.data);
+            console.log(this.invoiceTermConditionForm.value)
+          }
+        },
+        error: () => {
+        }
+      });
+  }
+
   // convenience getter for easy access to form fields
   get f() { return this.configurationForm.controls; }
 
@@ -79,7 +164,7 @@ export class SystemConfigurationComponent {
 
   editConfiguration() {
     this.isEditDisabled = false;
-    this.isShowHideBtn=true;
+    this.isShowHideBtn = true;
   }
 
   hideConfiguration() {

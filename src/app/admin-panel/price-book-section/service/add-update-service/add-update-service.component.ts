@@ -89,7 +89,6 @@ export class AddUpdateServiceComponent {
           'index': i,
           'uploadId': this.items.uploadedFiles[i].uploadId
         }
-        debugger
         this.previews.push(_data);
         this.categoryServiceForm.controls['files'].clearValidators();
         this.categoryServiceForm.controls['files'].updateValueAndValidity();
@@ -200,6 +199,8 @@ export class AddUpdateServiceComponent {
           }
           this._uploadService.changeStatus(_param).subscribe(res => {
             this._snackBar.open("Service Image has been deleted successfully.");
+            let el: HTMLElement = this.customerCancelEle.nativeElement;
+            el.click();
             this._categoryService.categoryServiceAdded.next(true);
           })
         }
@@ -216,4 +217,5 @@ export class AddUpdateServiceComponent {
       }
     });
   }
+
 }

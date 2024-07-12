@@ -61,7 +61,7 @@
                         <option value="">Select</option>
                         <option value="{{state.text}}" *ngFor="let state of states">{{state.value}}
                         </option>
-                    </select>                    
+                    </select>
                     <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
                         <div *ngIf="f.state.errors.required">State is required</div>
                     </div>
@@ -85,7 +85,7 @@
         </div>
         <div class="form-group mb-3">
             <label for="designation" class="form-label">Designation</label>
-            <select id="designation" name="designation" class="form-select" formControlName="designation" 
+            <select id="designation" name="designation" class="form-select" formControlName="designation"
                 [ngClass]="{ 'is-invalid': submitted && f.designation.errors }">
                 <option value="">Select</option>
                 <option value="AC Maintenance">AC Maintenance</option>
@@ -115,17 +115,17 @@
                     <span class="icon-attachment fs-5"></span>
                     <div class="ms-2">
                         <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose file to upload</h5>
-                        <p class="font13 font-muted font300 mb-0">Supported format: CVS, XLS, PDF, PNG, JPG</p>
+                        <p class="font13 font-muted font300 mb-0">Supported format: PNG, JPG</p>
                     </div>
                 </div>
             </div>
             <div class="uploadedPhotoWrapper">
                 <div class="uploadedImagesItem" *ngFor='let preview of previews;index as i'>
-                    <button type="button" class="btn" (click)="removeServiceImage(preview.index, preview.uploadId)">
+                    <button type="button" class="btn" (click)="removeTeamImg(preview.index, preview.uploadId)">
                         <span class="icon-close-1"></span>
                     </button>
                     <img [src]="preview.filePath" class="preview img-fluid"
-                        (error)="preview.filePath = './../../../../assets/images/services3.png'">
+                        (error)="'../../../../assets/images/blank-img.png'">
                 </div>
             </div>
         </div>

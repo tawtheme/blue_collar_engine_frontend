@@ -1,5 +1,6 @@
 <div class="offcanvas-header sidebar-popup-header">
-    <h6 class="offcanvas-title" id="offcanvasRightLabel">{{categoryServiceForm.value.categoryServiceId ==0 ?'Add Service':'Edit Service'}}</h6>
+    <h6 class="offcanvas-title" id="offcanvasRightLabel">{{categoryServiceForm.value.categoryServiceId ==0 ?'Add
+        Service':'Edit Service'}}</h6>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" #customerCancelEle>
     </button>
 </div>
@@ -42,7 +43,7 @@
                     <span class="icon-attachment fs-5"></span>
                     <div class="ms-2">
                         <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose file to upload</h5>
-                        <p class="font13 font-muted font300 mb-0">Supported format: CVS, XLS, PDF, PNG, JPG</p>
+                        <p class="font13 font-muted font300 mb-0">Supported format: PNG, JPG, JPEG</p>
                     </div>
                 </div>
             </div>
@@ -51,10 +52,9 @@
                     <button type="button" class="btn" (click)="removeServiceImage(preview.index, preview.uploadId)">
                         <span class="icon-close-1"></span>
                     </button>
-                    <img [src]="preview.filePath" class="preview img-fluid">
+                    <img [src]="preview.filePath" class="preview img-fluid"
+                        (error)="preview.filePath ='../../../../assets/images/blank-img.png'">
                 </div>
-
-
             </div>
         </div>
         <div class="row">
