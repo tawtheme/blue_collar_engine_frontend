@@ -16,7 +16,7 @@
         <div class="invoice-widget-container">
             <div class="invoice-widget-card">
                 <div class="invoice-widget-card-circle lightGrayBox">
-                    <span class="icon-invoice"></span>
+                    <span class="icon-report-1"></span>
                 </div>
                 <div class="invoice-widget-card-info">
                     <h6>{{items.length > 0 ?
@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="invoice-widget-card">
-                <div class="invoice-widget-card-circle lightGreenBox">
+                <div class="invoice-widget-card-circle lightPrimaryBox">
                     <span class="icon-job"></span>
                 </div>
                 <div class="invoice-widget-card-info">
@@ -52,8 +52,8 @@
                 </div>
             </div>
             <div class="invoice-widget-card">
-                <div class="invoice-widget-card-circle lightYellowBox">
-                    <span class="icon-time"></span>
+                <div class="invoice-widget-card-circle lightGreenBox">
+                    <span class="icon-invoice"></span>
                 </div>
                 <div class="invoice-widget-card-info">
                     <h6>${{stats?.totalRevenueAmt | number : '1.2-2'}}</h6>
@@ -112,7 +112,7 @@
                     <th (click)="sortBy('totalAmount')">Amount Due{{sortIcon('totalAmount')}}</th>
                     <th (click)="sortBy('bookingId')">Booking Id{{sortIcon('bookingId')}}</th>
                     <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
-                    <th>Action</th>
+                    <th class="text-end">Action</th>
                 </tr>
             </thead>
             <tbody>

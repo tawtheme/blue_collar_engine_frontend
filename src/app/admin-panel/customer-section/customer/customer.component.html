@@ -11,132 +11,118 @@
         </div>
     </div>
 </div>
+
 <div class="container-xxl">
     <div class="py-4">
-        <div class="widget-container">
-            <article class="widget-card ">
-                <div class="widget-card-circle lightGrayBox">
+        <div class="customer-widget-container">
+            <div class="customer-widget-card ">
+                <div class="customer-widget-card-circle lightGrayBox">
                     <span class="icon-team"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="customer-widget-card-info">
                     <h6>{{items.length > 0 ?
                         items[0].totalCount:0}}</h6>
                     <p>Total Customers</p>
                 </div>
-            </article>
-            <article class="widget-card ">
-                <div class="widget-card-circle lightYellowBox">
+            </div>
+            <div class="customer-widget-card ">
+                <div class="customer-widget-card-circle lightYellowBox">
                     <span class="icon-invoice"></span>
                 </div>
-                <div class="widget-card-info">
+                <div class="customer-widget-card-info">
                     <h6>${{customerStats?.totalDueRevenue | number : '1.2-2'}}</h6>
                     <p>Due from {{customerStats?.totalCustomerDueCount}} customers</p>
                 </div>
-            </article>
-            <!-- <article class="widget-card ">
-                <div class="widget-card-circle lightDangerBox">
+            </div>
+            <div class="customer-widget-card ">
+                <div class="customer-widget-card-circle lightSuccessBox">
+                    <span class="icon-team"></span>
+                </div>
+                <div class="customer-widget-card-info">
+                    <h6>{{customerStats?.totalActiveCustomerPercentage}}%</h6>
+                    <p>Customers active in the last 6 months</p>
+                </div>
+            </div>
+            <!-- <div class="customer-widget-card ">
+                <div class="customer-widget-card-circle lightDangerBox">
                     <span class="icon-estimate"></span>
                 </div>
-                <div class="widget-card-info">
-                    <h6>35
-                        <span>Estimates haven’t Approved</span>
-                    </h6>
+                <div class="customer-widget-card-info">
+                    <h6>35<span>Estimates haven’t Approved</span></h6>
                     <p>worth $25,749.98</p>
                 </div>
-            </article> -->
-            <article class="widget-card ">
-                <div class="widget-card-circle lightSuccessBox">
-                    <span class="icon-user"></span>
-                </div>
-                <div class="widget-card-info">
-                    <h6>{{customerStats?.totalActiveCustomerPercentage}}%
-                        <span>Customers have been active</span>
-                    </h6>
-                    <p>within the last 6 months</p>
-                </div>
-            </article>
+            </div> -->
         </div>
-        <div class="table-top-filter-row row">
-            <div class="col-md-7">
-                <div class="table-top-filter-left">
-                    <div class="top-search-group flexGrow2 startIconInputField">
-                        <input type="text" id="search" name="search"
-                            placeholder="Search with Name, Address, Phone number here..." class="form-control"
-                            (keyup.enter)="onEnter($event)">
-                        <span class="icon-search iconPosition"></span>
-                    </div>
-                    <!-- <div class="top-search-group flexGrow1">
-                        <input type="date" id="date" name="date" placeholder="Select date..." class="form-control">
-                    </div> -->
-                </div>
-            </div>
+    </div>
 
-            <div class="table-top-filter-right d-none">
-                <button class="light-outlined-button"><span class="icon-export"></span> Export</button>
+    <div class="table-top-filter-row row">
+        <div class="col-md-7">
+            <div class="table-top-filter-left">
+                <div class="top-search-group flexGrow2 startIconInputField">
+                    <input type="text" id="search" name="search"
+                        placeholder="Search with Name, Address, Phone number here..." class="form-control"
+                        (keyup.enter)="onEnter($event)">
+                    <span class="icon-search iconPosition"></span>
+                </div>
             </div>
         </div>
-        <div class="row mt-3 mb-3">
-            <div class="mt-20 customers-tables">
-                <table class="row-border">
-                    <thead>
-                        <tr>
-                            <th>
-                                <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
-                            </th>
-                            <th (click)="sortBy('createdDate')">Create date{{sortIcon('createdDate')}}</th>
-                            <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
-                            <th (click)="sortBy('mobileNumber')">Contact number{{sortIcon('mobileNumber')}}</th>
-                            <th (click)="sortBy('serviceAddress')">Address{{sortIcon('serviceAddress')}}</th>
-                            <th>Customer Status</th>
-                            <th>Balance Due</th>
-                            <th>Last Booking</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let cust of items">
-                            <td>
-                                <mat-checkbox class="example-margin" [checked]="cust.ischeck ==true"
-                                    [disableRipple]="true"></mat-checkbox>
-                            </td>
-                            <td>{{cust.createdDate | date:'mediumDate' }}</td>
-                            <td>{{cust.firstName}} {{cust.lastName}}</td>
-                            <td>{{cust.mobileNumber | usMobileNo}}</td>
-                            <td>
-                                <div class="tableAddressTd text-wrap">
-                                    {{cust.serviceAddress}},  {{cust.city}},  {{cust.state}},  {{cust.zipCode}}
-                                </div>
-                            </td>
-                            <td> <mat-slide-toggle [checked]="cust.status=='A'"
-                                    (change)="onChange($event)"></mat-slide-toggle>
-                            </td>
-                            <td>${{cust?.balanceDueAmount | number : '1.2-2'}}</td>
+        <div class="table-top-filter-right d-none">
+            <button class="light-outlined-button"><span class="icon-export"></span> Export</button>
+        </div>
+    </div>
 
-                            <td>{{cust?.lastBookingCreatedDate==null ? '---':(cust?.lastBookingCreatedDate | date:'medium') }}</td>
-                            <td>
-                                <div class="d-flex align-items-center justify-content-center">
-                                    <button class=" light-outlined-button"
-                                        (click)="redirectToCustomerDetail(cust.customerId)">View
-                                        Details</button>
-                                </div>
-                            </td>
-                        </tr>                   
-                        <tr *ngIf="items.length == 0 && !loading" class="text-center">
-                            <td class="text-center" colspan="8">
-                                <span>No data found</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <!-- <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar> -->
-            </div>
-            <div class="card-footer pb-0 pt-3">
-                <!-- <app-pagination [items]="items" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination> -->
-                <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"
-                    [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                    (page)="onPageChanged($event)"></mat-paginator>
-            </div>
-        </div>
+    <div class="mt-20">
+        <table class="row-border">
+            <thead>
+                <tr>
+                    <th>
+                        <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
+                    </th>
+                    <th (click)="sortBy('createdDate')">Create date{{sortIcon('createdDate')}}</th>
+                    <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
+                    <th (click)="sortBy('mobileNumber')">Contact number{{sortIcon('mobileNumber')}}</th>
+                    <th (click)="sortBy('serviceAddress')">Address{{sortIcon('serviceAddress')}}</th>
+                    <th>Balance Due</th>
+                    <th>Last Booking</th>
+                    <th>Status</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cust of items">
+                    <td>
+                        <mat-checkbox class="example-margin" [checked]="cust.ischeck ==true" [disableRipple]="true"></mat-checkbox>
+                    </td>
+                    <td>{{cust.createdDate | date:'mediumDate' }}</td>
+                    <td>{{cust.firstName}} {{cust.lastName}}</td>
+                    <td>{{cust.mobileNumber | usMobileNo}}</td>
+                    <td>
+                        <div class="tableAddressTd text-wrap">
+                            {{cust.serviceAddress}},  {{cust.city}},  {{cust.state}},  {{cust.zipCode}}
+                        </div>
+                    </td>
+                    <td>${{cust?.balanceDueAmount | number : '1.2-2'}}</td>
+                    <td>{{cust?.lastBookingCreatedDate==null ? '---':(cust?.lastBookingCreatedDate | date:'medium') }}</td>
+                    <td> <mat-slide-toggle [checked]="cust.status=='A'" (change)="onChange($event)"></mat-slide-toggle></td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button class=" light-outlined-button" (click)="redirectToCustomerDetail(cust.customerId)">View Details</button>
+                        </div>
+                    </td>
+                </tr>                   
+                <tr *ngIf="items.length == 0 && !loading" class="text-center">
+                    <td class="text-center" colspan="8">
+                        <span>No data found</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer pb-0 pt-3">
+        <!-- <app-pagination [items]="items" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination> -->
+        <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"
+            [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            (page)="onPageChanged($event)"></mat-paginator>
     </div>
 </div>
 

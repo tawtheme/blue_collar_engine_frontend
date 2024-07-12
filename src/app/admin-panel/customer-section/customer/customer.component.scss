@@ -1,7 +1,53 @@
+// Widget Styles
+.customer-widget-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 20px;
+
+  .customer-widget-card {
+      display: flex; column-gap: 10px;
+      background-color: white;
+      border: 1px solid var(--border-color2);
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 15px;      
+    
+      &-circle {
+          width: 48px;
+          height: 48px;
+          min-width: 48px;
+          border-radius: 50%;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.5rem;
+      }
+      &-info {
+          flex-grow: 1;
+          h6 {
+          font-size: 20px;
+          margin-bottom: 5px;
+          color: var(--dark);
+          span {
+              font-size: 11px;
+              color: var(--dark);
+              margin-left: 2px;
+              font-weight: 400;
+          }
+          }
+          p {
+          font-size: 13px;
+          color: var(--muted);
+          margin: 0;
+          }
+      }
+  }
+}
+
 .tableAddressTd {
   max-width: 200px;
 }
-
 app-create-customer {
   display: flex;
   flex-direction: column;

@@ -61,55 +61,51 @@
                     {{customerInfo?.zipCode}}</h6>
             </div>
             <div class="customers-card-item">
-                <p>Phone Number</p>
-                <h6><span class="icon-call"></span>{{customerInfo?.mobileNumber | usMobileNo}}</h6>
-            </div>
-            <div class="customers-card-item">
                 <p>Email Address</p>
                 <h6><span class="icon-email"></span>{{customerInfo?.emailAddress}}</h6>
+            </div>
+            <div class="customers-card-item">
+                <p>Phone Number</p>
+                <h6><span class="icon-call"></span>{{customerInfo?.mobileNumber | usMobileNo}}</h6>
             </div>
         </div>
         <h4 class="mb-12 font16">Quick Summary</h4>
         <div class="row customers-widget-container">
-            <div class="col-md-5">
-                <article class="border rounded h-100 py-3 px-4 d-flex justify-content-between">
-                    <div class="">
+            <div class="col-md-6">
+                <div class="border rounded h-100 py-3 px-4 d-flex justify-content-between">
+                    <div>
                         <h3>{{customerStats?.totalBookingCount}}</h3>
                         <p>Total Booking</p>
                     </div>
-                    <div class="">
+                    <div>
                         <h3>{{customerStats?.totalEstimateCount}}</h3>
                         <p>Total Estimates</p>
                     </div>
-                    <div class="">
+                    <div>
                         <h3>{{customerStats?.totalInvoiceCount}}</h3>
                         <p>Total Invoice</p>
                     </div>
-
-                </article>
+                </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-6">
-                        <article class="customers-widget-card lightSuccessCardBox">
+                        <div class="customers-widget-card lightSuccessCardBox">
                             <h3>${{customerStats?.totalRevenueByCustomer | number : '1.2-2'}}</h3>
                             <p>Total Revenue</p>
-                        </article>
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <article class="customers-widget-card lightDangerCardBox">
+                        <div class="customers-widget-card lightDangerCardBox">
                             <h3>${{customerStats?.totalDueRevenueByCustomer | number : '1.2-2'}}</h3>
                             <p>Current Due</p>
-                        </article>
+                        </div>
                     </div>
                 </div>
-
-
             </div>
-
         </div>
 
-        <h4 class="mb-15 font16">Overview</h4>
+        <h4 class="mb-15 font16">Overview Details</h4>
         <ul class="nav nav-pills mb-3 outlinedButtonStyleTabs" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="pills-booking-tab" data-bs-toggle="pill"
@@ -134,55 +130,39 @@
                     data-bs-target="#pills-notifications" type="button" role="tab" aria-controls="pills-notifications"
                     aria-selected="false">Notifications</button>
             </li> -->
-
         </ul>
+
+        <!--booking-table-->
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-booking" role="tabpanel"
-                aria-labelledby="pills-booking-tab" tabindex="0">
-                <table class="row-border">
+            <div class="tab-pane fade show active" id="pills-booking" role="tabpanel" aria-labelledby="pills-booking-tab" tabindex="0">
+                <table class="row-border mb-3">
                     <thead>
                         <tr>
-                            <th>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                </div>
-                            </th>
                             <th>ID</th>
                             <th>Booking Date and Time</th>
                             <th>Location</th>
                             <th>Service Type</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th class="text-end">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let booking of bookings">
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                </div>
-                            </td>
                             <td>{{booking.bookingId}}</td>
                             <td>{{booking.bookingDate | date:'mediumDate'}} at {{booking.bookingTime}}</td>
                             <td>{{booking.address}}</td>
                             <td>
                                 <div class="d-flex gap5 items-center">
                                     <div *ngFor="let service of booking.categories">
-                                        <span class="grey-badge"
-                                            *ngFor="let product of service.products">{{product.serviceName}}</span>
+                                        <span class="grey-badge" *ngFor="let product of service.products">{{product.serviceName}}</span>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <div class="">
-                                    <span class="success-badge">{{booking.statusText}}</span>
-                                </div>
+                                <span class="success-badge">{{booking.statusText}}</span>
                             </td>
                             <td>
-                                <div class="d-flex items-center justify-center">
-                                    <button class="light-outlined-button sm-btn" type="button"
-                                        (click)="openEditViewBooking(booking)">View Details</button>
-                                </div>
+                                <button class="light-outlined-button sm-btn float-end" type="button" (click)="openEditViewBooking(booking)">View Details</button>
                             </td>
                         </tr>
                         <tr *ngIf="bookings.length==0 && !loadBooking">
@@ -192,44 +172,32 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadBooking"></mat-progress-bar> -->
                 <mat-paginator [length]="bookings.length > 0 ? bookings[0].totalCount:0" *ngIf="bookings.length > 0"
                     [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                    (page)="onPageChanged($event, 'B')"></mat-paginator>
+                    (page)="onPageChanged($event, 'B')">
+                </mat-paginator>
             </div>
-            <div class="tab-pane fade" id="pills-estimate" role="tabpanel" aria-labelledby="pills-estimate-tab"
-                tabindex="0">
-                <table class="row-border">
+            
+            <!--estimate-table-->
+            <div class="tab-pane fade" id="pills-estimate" role="tabpanel" aria-labelledby="pills-estimate-tab" tabindex="0">
+                <table class="row-border mb-3">
                     <thead>
                         <tr>
-                            <th>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                </div>
-                            </th>
                             <th>Estimate No.</th>
                             <th>Create Date</th>
                             <th>Service Address</th>
                             <th>Amount</th>
-                            <th>Action</th>
+                            <th class="text-end">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let invoice of estimateInvoice">
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                </div>
-                            </td>
                             <td>{{invoice.refNo}}</td>
                             <td>{{invoice.createdDate | date:'mediumDate'}}</td>
                             <td>{{invoice.serviceAddress}}</td>
                             <td> ${{invoice.totalAmount | number : '1.2-2'}}</td>
                             <td>
-                                <div class="d-flex items-center justify-center">
-                                    <button class="light-outlined-button sm-btn" type="button"
-                                        (click)="redirectToCreateEstimate(invoice.estimateId)">View Details</button>
-                                </div>
+                                <button class="light-outlined-button sm-btn float-end" type="button" (click)="redirectToCreateEstimate(invoice.estimateId)">View Details</button>
                             </td>
                         </tr>
                         <tr *ngIf="estimateInvoice.length==0 && !loadEstimateInvoice">
@@ -239,57 +207,38 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadEstimateInvoice"></mat-progress-bar> -->
                 <mat-paginator [length]="estimateInvoice.length > 0 ? estimateInvoice[0].totalCount:0"
                     *ngIf="estimateInvoice.length > 0" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                    (page)="onPageChanged($event, 'E')"></mat-paginator>
+                    (page)="onPageChanged($event, 'E')">
+                </mat-paginator>
             </div>
 
-            <div class="tab-pane fade" id="pills-invoices" role="tabpanel" aria-labelledby="pills-invoices-tab"
-                tabindex="0">
-                <table class="row-border">
+            <!--invoice-table-->
+            <div class="tab-pane fade" id="pills-invoices" role="tabpanel" aria-labelledby="pills-invoices-tab" tabindex="0">
+                <table class="row-border mb-3">
                     <thead>
                         <tr>
-                            <th>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                </div>
-                            </th>
                             <th>Invoice No.</th>
                             <th>Create Date</th>
                             <th>Due Date</th>
                             <th>Amount Due</th>
-                            <!-- <th>Job</th> -->
                             <th>Status</th>
-                            <th>Action</th>
+                            <th class="text-end">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let invoice of invoices">
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                </div>
-                            </td>
                             <td>{{invoice.refNo}}</td>
                             <td>{{invoice.createdDate | date:'mediumDate'}}</td>
                             <td>{{invoice.expiryDate | date:'mediumDate'}}</td>
                             <td>
                                 ${{invoice.totalAmount | number : '1.2-2'}}
                             </td>
-                            <!-- <td>
-                                {{invoice.status}}
-                            </td> -->
                             <td>
-                                <div class="">
-                                    <span class="warning-badge">{{invoice.status}}</span>
-                                </div>
+                                <span class="warning-badge">{{invoice.status}}</span>
                             </td>
                             <td>
-                                <div class="d-flex items-center justify-content-end">
-                                    <button class="light-outlined-button sm-btn" type="button"
-                                        (click)="viewInvoice(invoice.invoiceId)">View Details</button>
-                                </div>
+                                <button class="light-outlined-button sm-btn float-end" type="button" (click)="viewInvoice(invoice.invoiceId)">View Details</button>
                             </td>
                         </tr>
                         <tr *ngIf="invoices.length==0 && !loadInvoice">
@@ -299,59 +248,11 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- <mat-progress-bar mode="indeterminate" *ngIf="loadInvoice"></mat-progress-bar> -->
                 <mat-paginator [length]="invoices.length > 0 ? invoices[0].totalCount:0" *ngIf="invoices.length > 0"
                     [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                    (page)="onPageChanged($event, 'I')"></mat-paginator>
+                    (page)="onPageChanged($event, 'I')">
+                </mat-paginator>
             </div>
-            <!-- <div class="tab-pane fade" id="pills-notifications" role="tabpanel"
-                aria-labelledby="pills-notifications-tab" tabindex="0">
-                <table class="row-border">
-                    <thead>
-                        <tr>
-                            <th>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                </div>
-                            </th>
-                            <th>ID</th>
-                            <th>Booking Date and Time</th>
-                            <th>Location</th>
-                            <th>Service Type</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                                </div>
-                            </td>
-                            <td>345467</td>
-                            <td>Feb 26, 2024 at 10:00AM</td>
-                            <td>Palmetto Bay, Miami</td>
-                            <td>
-                                <div class="d-flex gap5 items-center">
-                                    <span class="grey-badge">Duct repair</span>
-                                    <span class="grey-badge">Furnace repair</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="">
-                                    <span class="success-badge">New</span>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="d-flex items-center justify-center">
-                                    <button class="light-outlined-button sm-btn">View Details</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> -->
         </div>
     </div>
 </div>
@@ -359,7 +260,6 @@
     aria-labelledby="offcanvasRightLabel">
     <app-create-customer [items]="customerInfo"></app-create-customer>
 </div>
-
 
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddressBookSidebar"
     aria-labelledby="offcanvasRightLabel">

@@ -15,7 +15,7 @@
         <div class="estimate-widget-container">
             <div class="estimate-widget-card">
                 <div class="estimate-widget-card-circle lightGrayBox">
-                    <span class="icon-invoice"></span>
+                    <span class="icon-report-1"></span>
                 </div>
                 <div class="estimate-widget-card-info">
                     <h6>{{items.length > 0 ?
@@ -33,8 +33,8 @@
                 </div>
             </div>
             <div class="estimate-widget-card ">
-                <div class="estimate-widget-card-circle lightYellowBox">
-                    <span class="icon-time"></span>
+                <div class="estimate-widget-card-circle lightSuccessBox">
+                    <span class="icon-send"></span>
                 </div>
                 <div class="estimate-widget-card-info">
                     <h6>${{stats?.totalEstimateSentRevenue | number : '1.2-2'}}</h6>
@@ -90,7 +90,7 @@
                     <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
                     <th (click)="sortBy('totalAmount')">Amount Due{{sortIcon('totalAmount')}}</th>
                     <th (click)="sortBy('status')">Status{{sortIcon('status')}}</th>
-                    <th>Action</th>
+                    <th class="text-end">Action</th>
                 </tr>
             </thead>
             <tbody>

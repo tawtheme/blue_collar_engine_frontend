@@ -75,8 +75,8 @@
                     <option value="C">Completed</option>
                 </select>
             </div> -->
-            <div class="d-flex gap-3">
-                <button class="primary-filled-button px-4" type="button" (click)="filterBooking()">Filter</button>
+            <div class="d-flex gap-3 justify-content-between">
+                <button class="primary-filled-button px-5" type="button" (click)="filterBooking()">Filter</button>
                 <button class="light-primary-outlined-button px-4" type="button" (click)="resetFilter()">Reset</button>
             </div>
         </div>
@@ -158,9 +158,7 @@
                                 <div class="d-flex align-items-start flex-column">
                                     <h5 class="font14 mb-1 mt-3 font400 font-muted">Services</h5>
                                     <div class="d-flex flex-wrap gap-2 items-center" *ngFor="let cat of booking.categories">
-                                        <span class="white-badge bg-light"
-                                            *ngFor="let service of cat.products">{{service.serviceName}}
-                                        </span>
+                                        <span class="white-badge bg-light" *ngFor="let service of cat.products">{{service.serviceName}}</span>
                                     </div>
                                 </div>
                                 <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
