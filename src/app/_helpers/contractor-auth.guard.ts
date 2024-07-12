@@ -45,7 +45,7 @@ export class ContractorAuthGuard implements CanActivate {
               localStorage.setItem('tenant', JSON.stringify(result.data));
               this.tenantSubject.next(result.data);
               var _tenantInfo = <any>this.authenticationService.tenantValue;
-             // //console.log(_tenantInfo)
+             // ////console.log(_tenantInfo)
               const user = this.authenticationService.userValue;
               if (user?.data.tenantInfo.subDomainName == subdomain) {
                 if (this._jwtHelperService.isTokenExpired(user?.data.token!)) {

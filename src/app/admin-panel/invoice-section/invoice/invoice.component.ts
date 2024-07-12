@@ -129,7 +129,7 @@ export class InvoiceComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.stats = res.data;
-          ////console.log(this.stats)
+          //////console.log(this.stats)
         },
         error: error => {
         }

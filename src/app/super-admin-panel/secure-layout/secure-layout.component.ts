@@ -12,10 +12,10 @@ export class SecureLayoutComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private _route: Router) {
     let getLink = window.location.href;
-    ////console.log('window.location.href :' + getLink)
+    //////console.log('window.location.href :' + getLink)
     const { hostname } = new URL(getLink);
     var subdomain = hostname.split(".")[0];
-    ////console.log(subdomain)
+    //////console.log(subdomain)
     if (subdomain != environment.baseUrlHostName) {
       this._route.navigate(['/booking']);
     }

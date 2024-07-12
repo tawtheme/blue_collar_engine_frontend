@@ -32,14 +32,14 @@ export class TaxComponent {
         next: (res) => {
           this.loading = false;
           this.taxes = res.data;
-          //////console.log(this.taxes)
+          ////////console.log(this.taxes)
         }
       });
   }
 
   editTax(taxInfo: any) {
     this.taxInfo = taxInfo;
-    // ////console.log(this.taxInfo)
+    // //////console.log(this.taxInfo)
     let el: HTMLElement = this.addTaxCancelEle.nativeElement;
     el.click();
   }

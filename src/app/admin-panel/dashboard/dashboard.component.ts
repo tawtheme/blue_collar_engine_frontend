@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
     var _param = {
       id: 0,
       pageNumber: 1,
-      pageSize: 3,
+      pageSize: 5,
       searchStr: '',
       type: '',
       bookingDate: new Date(),
@@ -116,7 +116,7 @@ export class DashboardComponent implements OnInit {
         next: (res) => {
           this.todayBookingLoaded = false;
           this.todayBooking = res.data;
-          //////console.log(this.todayBooking)
+          ////////console.log(this.todayBooking)
         },
         error: (error) => {
           this.todayBookingLoaded = false;
@@ -128,7 +128,7 @@ export class DashboardComponent implements OnInit {
     var _param = {
       id: 0,
       pageNumber: 1,
-      pageSize: 3,
+      pageSize: 5,
       searchStr: '',
       status: '',
       startDate: null,
@@ -142,7 +142,7 @@ export class DashboardComponent implements OnInit {
         next: (res) => {
           this.estimateInvoiceLoaded = false;
           this.estimateInvoices = res.data;
-          //////console.log(this.estimateInvoices)
+          ////////console.log(this.estimateInvoices)
         },
         error: (error) => {
           this.estimateInvoiceLoaded = false;
@@ -154,7 +154,7 @@ export class DashboardComponent implements OnInit {
     var _param = {
       id: 0,
       pageNumber: 1,
-      pageSize: 3,
+      pageSize: 5,
       searchStr: '',
       status: '',
       startDate: null,
@@ -196,7 +196,7 @@ export class DashboardComponent implements OnInit {
     this._dashboardService.getTopServices().subscribe({
       next: (res: { data: any[] }) => {
         this.topServices = res.data;
-        //////console.log(this.topServices)
+        ////////console.log(this.topServices)
         this.topServicesLoaded = false;
       },
       error: (error) => {
@@ -235,7 +235,7 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         next: (res: { data: any[]; }) => {
           this.stats = res.data;
-          // //console.log(this.stats)
+          // ////console.log(this.stats)
         },
         error: error => {
         }
@@ -268,7 +268,7 @@ export class DashboardComponent implements OnInit {
       }
     );
 
-    ////console.log(graphData)
+    //////console.log(graphData)
     // @ts-ignore
     // var chart = Highcharts.chart('container', {
     //   chart: {
@@ -361,7 +361,7 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         next: (res: { data: any[]; }) => {
           this.onBoardStatus = res.data;
-          //console.log(this.onBoardStatus)
+          ////console.log(this.onBoardStatus)
         },
         error: error => {
         }

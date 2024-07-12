@@ -67,7 +67,7 @@ export class CreateCustomerComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.loading = false;
-          ////console.log(res)
+          //////console.log(res)
           let el: HTMLElement = this.customerCancelEle.nativeElement;
           el.click();
           this._snackBar.open(res.message);

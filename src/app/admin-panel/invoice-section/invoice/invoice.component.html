@@ -127,7 +127,8 @@
                     <td>{{invoice.bookingId > 0 ? '#'+invoice.bookingId:'--'}}</td>
                     <td>
                         <div class="">
-                            <span class="warning-badge">{{invoice.status}}</span>
+                            <span
+                                [ngClass]="{'grey-badge': invoice.status === 'Draft', 'warning-badge' : invoice.status === 'Sent',  'success-badge' : invoice.status === 'Paid'}">{{invoice.status}}</span>
                         </div>
                     </td>
                     <td>
@@ -147,8 +148,7 @@
     </div>
     <div class="card-footer pb-0 pt-3">
         <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"
-            [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-            (page)="onPageChanged($event)">
+            [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)">
         </mat-paginator>
     </div>
 </div>

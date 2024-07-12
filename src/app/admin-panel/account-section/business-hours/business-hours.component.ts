@@ -29,12 +29,12 @@ export class BusinessHoursComponent {
 
   constructor(private authenticationService: AuthenticationService, private _accountSettingService: AccountSettingService, private _masterService: MasterService, private _formBuilder: FormBuilder, private _snackBar: MatSnackBar, public dialog: MatDialog) {
     this.user = <any>this.authenticationService.userValue;
-    //////console.log(this.user);
+    ////////console.log(this.user);
   }
 
   ngOnInit() {
     this._accountSettingService.tenentProfileInfo.subscribe(res => {
-      //////console.log(res);
+      ////////console.log(res);
       this.timeZone = res.timezone;
     });
     this.bindTimeZonesDDL();
@@ -75,7 +75,7 @@ export class BusinessHoursComponent {
 
   add(empIndex: number, dayId: number) {
     this.businessHours(empIndex).push(this.newbusinessHours(dayId));
-   // //console.log(this.businessHours(empIndex).value[0])
+   // ////console.log(this.businessHours(empIndex).value[0])
   }
 
   remove(empIndex: number, skillIndex: number) {
@@ -138,17 +138,17 @@ export class BusinessHoursComponent {
       return;
     }
     this.loading = true;
-    //console.log(JSON.stringify(param))
+    ////console.log(JSON.stringify(param))
     this._accountSettingService.addUpdateBusinessHours(param).subscribe(res => {
       this.loading = false;
       this._snackBar.open(res.message);
     });
   }
   onOpenTimeset(event: any) {
-    ////console.log(event);
+    //////console.log(event);
   }
 
   onCloseTimeset(event: any) {
-    ////console.log(event);
+    //////console.log(event);
   }
 }

@@ -43,8 +43,8 @@ export class PaymentSuccessComponent {
       .subscribe(params => {
         this.tenantId = params.tenant;
         this.bookingId = params.bookingId;
-        // //console.log('tenantId: ' + this.tenantId)
-        // //console.log('bookingId: ' + this.bookingId)
+        // ////console.log('tenantId: ' + this.tenantId)
+        // ////console.log('bookingId: ' + this.bookingId)
         if (this.tenantId != null && this.tenantId != null) {
           this.getTenant(this.tenantId);
         }
@@ -60,7 +60,7 @@ export class PaymentSuccessComponent {
       .pipe(first())
       .subscribe({
         next: (res) => {
-          //console.log(res.data)
+          ////console.log(res.data)
           if (res.data == null) {
             this.hideSubmitBtn = true;
             this._snackBar.open("This link is no longer valid.")
@@ -78,7 +78,7 @@ export class PaymentSuccessComponent {
       .pipe(first())
       .subscribe({
         next: (res) => {
-          ////console.log(res.data)
+          //////console.log(res.data)
           if (res.data.invoiceId > 0) {
             //this.getInvoice(res.data.invoiceId);
           }
@@ -93,7 +93,7 @@ export class PaymentSuccessComponent {
       .pipe(first())
       .subscribe({
         next: (res) => {
-          //console.log(res.data)
+          ////console.log(res.data)
         },
         error: error => {
         }

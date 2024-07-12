@@ -45,7 +45,7 @@ export class RequestDemoComponent implements OnInit {
   bindGrid(param: any) {
     this._requestDemoService.getDemoRequested(param).subscribe(res => {
       this.requestDemo = res.data;
-      ////console.log(this.requestDemo)
+      //////console.log(this.requestDemo)
       this.loading = false;
     });
   }
