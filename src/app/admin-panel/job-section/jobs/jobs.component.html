@@ -57,7 +57,7 @@
         <div class="booking-filter mb-4">
             <div class="position-relative startIconInputField">
                 <input type="text" id="search" name="search" formControlName="searchStr"
-                    placeholder=" Search with Name, Mobile number" class="form-control" (keyup.enter)="onEnter($event)">
+                    placeholder="Search with Name, Mobile Number" class="form-control" (keyup.enter)="onEnter($event)">
                 <span class="icon-search iconPosition"></span>
             </div>
             <div>
@@ -76,7 +76,7 @@
                 </select>
             </div> -->
             <div class="d-flex gap-3 justify-content-between">
-                <button class="primary-filled-button px-5" type="button" (click)="filterBooking()">Filter</button>
+                <button class="primary-filled-button px-5" type="button" (click)="filterBooking()"><span class="icon-filter"></span>Filter</button>
                 <button class="light-primary-outlined-button px-4" type="button" (click)="resetFilter()">Reset</button>
             </div>
         </div>
@@ -93,14 +93,18 @@
                     </div>
                     <h4 class="font16 mb-1">{{booking.customerName}}</h4>
                     <p class="font14 mb-2 font-muted">{{booking.address}} {{booking.city}} {{booking.state}}
-                        {{booking.zipCode}}</p>
-                    <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 font-muted"> <span
-                            class="icon-call"></span>{{booking.mobileNumber | usMobileNo}} </div>
-                    <div class="font14 d-flex align-items-center gap-2 font-muted"><span
-                            class="icon-email"></span>{{booking.emailAddress}} </div>
+                        {{booking.zipCode}}
+                    </p>
+                    <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 font-muted">
+                        <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}} 
+                    </div>
+                    <div class="font14 d-flex align-items-center gap-2 font-muted">
+                        <span class="icon-email"></span>{{booking.emailAddress}} 
+                    </div>
                 </div>
-                <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned" class="text-center p-3">
-                    <span>No data found</span>
+                <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned" class="d-flex flex-column align-items-center p-5">
+                    <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                    <span class="font-muted font14 text-center">No unassigned bookings available</span>
                 </div>
                 <!--
                     <mat-paginator [length]="unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0"
@@ -119,7 +123,7 @@
                                 Assigned ({{assignedBooking.length > 0 ? assignedBooking[0].totalCount:0}})
                             </div>
                             <select class="status-select" formControlName="currentStatus" (change)="onChangeCurrentStatus($event)">
-                                <option value="" selected>Show All</option>
+                                <option value="" selected>Status All</option>
                                 <option value="A">Assigned</option>
                                 <option value="JS">Job Started</option>
                                 <option value="JF">Job Finished</option>
@@ -127,9 +131,7 @@
                             </select>
                         </div>
                         <div class="booking-listing">
-                            <div class="assigned-booking-item" (click)="openEditViewBooking(booking)"
-                                *ngFor="let booking of assignedBooking"> 
-
+                            <div class="assigned-booking-item" (click)="openEditViewBooking(booking)" *ngFor="let booking of assignedBooking"> 
                                 <div class="d-flex flex-column">
                                     <div class="d-flex gap-3 mb-0 align-items-center justify-content-between">
                                         <span class="white-badge bg-light px-1 py-0">#{{booking.bookingId}}</span>
@@ -162,12 +164,12 @@
                                     </div>
                                 </div>
                                 <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
-
                             </div>
-                        </div>
-                    </div>
-                    <div *ngIf="assignedBooking.length==0 && !loadAssigned" class="text-center p-3">
-                        <span>No data found</span>
+                            <div *ngIf="assignedBooking.length==0 && !loadAssigned" class="d-flex flex-column align-items-center p-5">
+                                <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                                <span class="font-muted font14 text-center">No assigned booking available</span>
+                            </div>
+                        </div>                        
                     </div>
                     <!--
                         <mat-paginator [length]="assignedBooking.length > 0 ? assignedBooking[0].totalCount:0"
@@ -220,10 +222,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div *ngIf="compeletedBooking.length==0 && !loadCompeleted" class="d-flex flex-column align-items-center p-5">
+                                <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                                <span class="font-muted font14 text-center">No compeleted booking available</span>
+                            </div>
                         </div>
-                    </div>
-                    <div *ngIf="compeletedBooking.length==0 && !loadCompeleted" class="text-center p-3">
-                        <span>No data found</span>
                     </div>
                 </div>
             </div>
