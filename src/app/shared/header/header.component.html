@@ -1,22 +1,30 @@
 <header class="main-header-wrapper sticky-top">
     <div class="top-header-wrap">
         <div class="container-xxl">
-            <div class="d-flex align-items-center">
-                <nav class="navbar navbar-expand-lg navbar-dark header-navigation">
+            <div class="d-flex align-items-center justify-content-between">
+                <!-- <div class="site-logo">
                     <a class="navbar-brand" *ngIf="!isAdmin" [routerLink]="['/secure-panel/dashboard']">
-                        <img src="../../../../assets/images/logo-white.svg" alt="logo" class="admin-logo"/>
+                        <img src="../../../../assets/images/logo-white.svg" alt="logo" class="admin-logo" />
                     </a>
                     <a class="navbar-brand" *ngIf="isAdmin" [routerLink]="['/admin']">
-                        <img src="../../../../assets/images/logo-white.svg" alt="logo" class="admin-logo"/>
+                        <img src="../../../../assets/images/logo-white.svg" alt="logo" class="admin-logo" />
                     </a>
+                </div> -->
+                <div class="site-logo">
+                    <a class="navbar-brand" [routerLink]="isAdmin ? ['/admin'] : ['/secure-panel/dashboard']">
+                        <img src="../../../../assets/images/logo-white.svg" alt="logo" class="admin-logo" />
+                    </a>
+                </div>
+                <nav class="navbar navbar-expand-lg navbar-dark header-navigation">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                        aria-label="Toggle navigation">
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!isAdmin">
-                            <li class="nav-item mx-1" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <li class="nav-item mx-1" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{exact: true}">
                                 <a class="nav-link" [routerLink]="['/secure-panel']">
                                     <span class="icon-holder">
                                         <span class="icon-house"></span>
@@ -33,9 +41,10 @@
                                 </a>
                             </li>
                         </ul>
-        
+
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="isAdmin">
-                            <li class="nav-item mx-1" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                            <li class="nav-item mx-1" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{exact: true}">
                                 <a class="nav-link" [routerLink]="['/admin']">
                                     <span class="icon-holder">
                                         <span class="icon-house"></span>
@@ -43,7 +52,8 @@
                                     <span class="menu-title">Overview</span>
                                 </a>
                             </li>
-                            <li class="nav-item mx-1" routerLinkActive="active" [ngClass]="{'active': createJobActive.isActive }"
+                            <li class="nav-item mx-1" routerLinkActive="active"
+                                [ngClass]="{'active': createJobActive.isActive }"
                                 [routerLinkActiveOptions]="{exact: true}">
                                 <a class="nav-link" [routerLink]="['/admin/bookings']">
                                     <span class="icon-holder">
@@ -90,7 +100,8 @@
                                     <span class="menu-title">Customers</span>
                                 </a>
                             </li>
-                            <li class="nav-item mx-1" routerLinkActive="active" [ngClass]="{'active': priceBookActive.isActive }"
+                            <li class="nav-item mx-1" routerLinkActive="active"
+                                [ngClass]="{'active': priceBookActive.isActive }"
                                 [routerLinkActiveOptions]="{exact: true}">
                                 <a class="nav-link" [routerLink]="['/admin/price-book']">
                                     <span class="icon-holder">
@@ -99,17 +110,24 @@
                                     <span class="menu-title">Services</span>
                                 </a>
                             </li>
-                            <a routerLink="/admin/customer" routerLinkActive #customerListActive="routerLinkActive" style="display: none"></a>
-                            <a routerLink="/admin/customer-detail" routerLinkActive #customerDetailActive="routerLinkActive" style="display: none"></a>
-                            <a routerLink="/admin/create-booking" routerLinkActive #createBookingActive="routerLinkActive" style="display: none"></a>
-                            <a routerLink="/admin/create-job" routerLinkActive #createJobActive="routerLinkActive" style="display: none"></a>
-                            <a routerLink="/admin/create-estimate" routerLinkActive #createEstimateActive="routerLinkActive" style="display: none"></a>
-                            <a routerLink="/admin/create-invoice" routerLinkActive #customerInvoiceActive="routerLinkActive" style="display: none"></a>
-                            <a routerLink="/admin//price-book" routerLinkActive #priceBookActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin/customer" routerLinkActive #customerListActive="routerLinkActive"
+                                style="display: none"></a>
+                            <a routerLink="/admin/customer-detail" routerLinkActive
+                                #customerDetailActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin/create-booking" routerLinkActive
+                                #createBookingActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin/create-job" routerLinkActive #createJobActive="routerLinkActive"
+                                style="display: none"></a>
+                            <a routerLink="/admin/create-estimate" routerLinkActive
+                                #createEstimateActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin/create-invoice" routerLinkActive
+                                #customerInvoiceActive="routerLinkActive" style="display: none"></a>
+                            <a routerLink="/admin//price-book" routerLinkActive #priceBookActive="routerLinkActive"
+                                style="display: none"></a>
                         </ul>
                     </div>
                 </nav>
-                <div class="top-header-right ms-auto">
+                <div class="top-header-right">
                     <!--
                         <div class="header-actions">
                             <a href="javascript:void(0);">
@@ -130,8 +148,10 @@
                                 <span class="icon-down-arrow"></span>
                             </button>
                             <ul class="dropdown-menu dropdown-menu-lg-end">
-                                <li><a [routerLink]="['/admin/account-setting']"><span class="icon-user"></span>Profile</a></li>
-                                <li><a href="javascript:void(0);" (click)="logout()"><span class="icon-returning"></span>Logout</a></li>
+                                <li><a [routerLink]="['/admin/account-setting']"><span
+                                            class="icon-user"></span>Profile</a></li>
+                                <li><a href="javascript:void(0);" (click)="logout()"><span
+                                            class="icon-returning"></span>Logout</a></li>
                             </ul>
                         </div>
                     </div>

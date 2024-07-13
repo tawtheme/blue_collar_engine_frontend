@@ -5,8 +5,10 @@
     background-color: var(--secondary);
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     @include flexbox(row, space-between, center);
-    .admin-logo{
-      width: auto; height: 30px;
+    min-height: 54px;
+    .admin-logo {
+      width: auto;
+      height: 30px;
     }
     .top-header-right {
       @include flexbox(row, center, center);
@@ -92,7 +94,7 @@
             font-size: 14px;
             font-weight: 400;
           }
-          /*&::before {
+          &::before {
             content: "";
             width: 0%;
             height: 2px;
@@ -104,7 +106,7 @@
           }
           &:hover::before {
             width: 100%;
-          }*/
+          }
           &:hover {
             color: #f9d867;
           }
