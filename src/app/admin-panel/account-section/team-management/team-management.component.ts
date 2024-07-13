@@ -16,8 +16,8 @@ export class TeamManagementComponent {
   loading: boolean = false;
   @ViewChild('addUserCancelEle') addUserCancelEle!: ElementRef<HTMLElement>;
   apiBaseUrl: string = environment.apiUrl + '/';
-  pageSize: number = 5;
-  pageSizeOptions: number[] = [5, 10, 20, 50];
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [10, 20, 50];
   pageEvent: PageEvent | undefined;
 
   constructor(private _accountSettingService: AccountSettingService) {

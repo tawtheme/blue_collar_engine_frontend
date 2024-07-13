@@ -235,7 +235,7 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         next: (res: { data: any[]; }) => {
           this.stats = res.data;
-          // ////console.log(this.stats)
+          console.log(this.stats)
         },
         error: error => {
         }
