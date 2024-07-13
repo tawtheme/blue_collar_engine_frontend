@@ -62,23 +62,27 @@
     </div>
     <form class="p-4 pt-0" [formGroup]="invoiceTermConditionForm" (ngSubmit)="onSubmitTermCondition()">
         <div class="d-flex flex-column gap-3" formArrayName="termAndConditionDetail">
-            <button type="button" class="light-outlined-button rounded p-0 ShapeBox38" #tooltip="matTooltip"
-                matTooltip="Add new" (click)="addNewTermCondition()"><span class="icon-add"></span>
-            </button>
-            <div class="d-flex gap-3 align-items-start" *ngFor="let item of termAndConditionDetail().controls; let i=index"
-                [formGroupName]="i">
-                <div class="border p-3 rounded w-100">
-                    <textarea type="text" id="invoiceTerm" formControlName="description" class="form-control"
-                        placeholder="Enter here" maxlength="4000" rows="3"
-                        [ngClass]="{ 'is-invalid': submitted && item.get('description')!.errors?.required }"></textarea>
-                    <div *ngIf="submitted && item.get('description')!.errors" class="invalid-feedback">
-                        <div *ngIf="item.get('description')!.errors?.required">This field is required </div>
-                    </div>
+
+            <div class="d-flex gap-3 align-items-start"
+                *ngFor="let item of termAndConditionDetail().controls; let i = index" [formGroupName]="i">
+                <textarea type="text" id="invoiceTerm" formControlName="description" class="form-control"
+                    placeholder="Enter here" maxlength="4000" rows="3"
+                    [ngClass]="{'is-invalid': submitted && item.get('description')!.errors?.required}"></textarea>
+                <div *ngIf="submitted && item.get('description')!.errors" class="invalid-feedback">
+                    <div *ngIf="item.get('description')!.errors?.required">This field is required</div>
+                </div>
+                <div class="d-flex flex-column gap-2">
                     <button type="button" class="danger-outlined-button rounded p-0 ShapeBox38"
                         (click)="removeTermCondition(i)">
                         <span class="icon-delete"></span>
                     </button>
+                    <button *ngIf="i === termAndConditionDetail().controls.length - 1" type="button"
+                        class="light-outlined-button rounded p-0 ShapeBox38" #tooltip="matTooltip" matTooltip="Add new"
+                        (click)="addNewTermCondition()">
+                        <span class="icon-add"></span>
+                    </button>
                 </div>
+
             </div>
 
             <div class="d-flex justify-content-start gap-3 mt-4"
