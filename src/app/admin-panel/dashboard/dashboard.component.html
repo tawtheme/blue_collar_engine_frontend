@@ -16,9 +16,9 @@
                     </ul>
                 </div>
                 <!--
-                <button type="button" class="btn btn-primary  gap-2" (click)="openOnBoardModel()">
-                    Open On-Board
-                </button>
+                    <button type="button" class="btn btn-primary  gap-2" (click)="openOnBoardModel()">
+                        Open On-Board
+                    </button>
                 -->
             </div>
         </div>
@@ -72,124 +72,93 @@
                 </mat-form-field>
             </div>
         </div>
-        <div class="border rounded mt-2 overflow-hidden">
-            <!-- <div class="border-bottom px-4">
-                <div class="row">
-                    <div class="col-3">
-                        <div class="py-2">
-                            <h4 class="my-1">{{stats?.totalBookingCount}}</h4>
-                            <p class="mb-0 font13 font-muted">Total Booking</p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="py-2">
-                            <h4 class="my-1">{{stats?.totalEstimateCount}}</h4>
-                            <p class="mb-0 font13 font-muted">Total Estimate</p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="py-2">
-                            <h4 class="my-1">{{stats?.totalInvoiceCount}}</h4>
-                            <p class="mb-0 font13 font-muted">Total Invoice</p>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="py-2">
-                            <h4 class="my-1">${{stats?.totalRevenueAmt | number : '1.2-2'}}</h4>
-                            <p class="mb-0 font13 font-muted">Total Revenue</p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!-- <div id="container"></div> -->
+        <div class="border rounded mt-2">
             <div id="chart">
                 <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart"
                     [dataLabels]="chartOptions.dataLabels" [plotOptions]="chartOptions.plotOptions"
                     [yaxis]="chartOptions.yaxis" [legend]="chartOptions.legend" [fill]="chartOptions.fill"
                     [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip"
-                    [xaxis]="chartOptions.xaxis"></apx-chart>
+                    [xaxis]="chartOptions.xaxis">
+                </apx-chart>
             </div>
-            <div id="pie-chart">
-                <apx-chart [series]="pieChartOptions.series" [chart]="pieChartOptions.chart"
-                    [labels]="pieChartOptions.labels" [responsive]="pieChartOptions.responsive"></apx-chart>
-            </div>
-
         </div>
     </div>
 
     <div class="mt-5">
         <div class="row gx-md-5">
             <div class="col-lg-4">
-                <div class="d-flex align-items-center mb-2">
-                    <h4 class="font15 font600">Recent Booking</h4>
+                <div class="d-flex align-items-center mb-1">
+                    <div class="font15 font600">Recent Booking</div>
                     <a href="/admin/bookings" class="ms-auto font13">View All</a>
                 </div>
                 <div class="border rounded recent-wrapper">
                     <div class="p-3 recentListing" *ngFor="let booking of todayBooking">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingTime}}</span>
+                        <div class="d-flex gap-3 mb-1">
+                            <span class="grey-badge gap-2 d-flex align-items-center"><span class="icon-time"></span> {{booking.bookingTime}}</span>
                             <button [ngClass]="{'warning-badge': booking.status === 'U', 'primary-badge' : booking.status === 'A','success-badge' : booking.status === 'C' }" type="button">{{booking.statusText}}</button>
                         </div>
-                        <h4 class="font14 mb-1 font500">{{booking.customerName}}</h4>
-                        <p class="font13 mb-0 font-muted">{{booking.address}}, {{booking.city}}, {{booking.state}},
-                            {{booking.zipCode}}</p>
+                        <div class="font14 mb-0 font500">{{booking.customerName}}</div>
+                        <div class="font13 mb-0 font-muted">{{booking.address}}, {{booking.city}}, {{booking.state}}, {{booking.zipCode}}</div>
                     </div>
-                    <div *ngIf="todayBooking.length==0 && !todayBookingLoaded" class="p-3 text-center">
+                    <div *ngIf="todayBooking.length==0 && !todayBookingLoaded" class="d-flex flex-column h-100">
+                        <img src="../../../assets/images/no-data-found.svg" alt="image"/>
                         <span>No data found</span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="d-flex align-items-center mb-2">
-                    <h4 class="font15 font600">Recent Estimate</h4>
+                <div class="d-flex align-items-center mb-1">
+                    <div class="font15 font600">Recent Estimate</div>
                     <a href="/admin/estimate" class="ms-auto font13">View All</a>
                 </div>
                 <div class="border rounded recent-wrapper">
                     <div class="p-3 recentListing" *ngFor="let estimate of estimateInvoices">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-calendar"></span> {{estimate.createdDate |
+                        <div class="d-flex gap-3 mb-1">
+                            <span class="grey-badge gap-2 d-flex align-items-center"><span class="icon-calendar"></span> {{estimate.createdDate |
                                 date:'mediumDate'}}</span>
                             <button [ngClass]="{'grey-badge': estimate.status === 'Draft', 'warning-badge' : estimate.status === 'Sent'}" type="button">{{estimate.status}}</button>
                         </div>
                         <div class="d-flex align-items-top justify-content-between gap-3">
                             <div class="d-flex flex-column align-items-start justify-content-center">
-                                <h4 class="font14 mb-1 font500">{{estimate.firstName}} {{estimate.lastName}}</h4>
-                                <p class="font13 mb-0 font-muted">{{estimate.serviceAddress}}</p>
+                                <div class="font14 mb-0 font500">{{estimate.firstName}} {{estimate.lastName}}</div>
+                                <div class="font13 mb-0 font-muted">{{estimate.serviceAddress}}</div>
                             </div>
                             <div>
-                                <h4 class="font14 mb-1 ms-auto font500">${{estimate.totalAmount | number : '1.2-2'}}
-                                </h4>
+                                <div class="font14 mb-1 ms-auto font500">${{estimate.totalAmount | number : '1.2-2'}}</div>
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="estimateInvoices.length==0 && !estimateInvoiceLoaded" class="p-3 text-center">
+                    <div *ngIf="estimateInvoices.length==0 && !estimateInvoiceLoaded" class="d-flex flex-column h-100">
+                        <img src="../../../assets/images/no-data-found.svg" alt="image"/>
                         <span>No data found</span>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="d-flex align-items-center mb-2">
-                    <h4 class="font15 font600">Recent Invoice</h4>
+                <div class="d-flex align-items-center mb-1">
+                    <div class="font15 font600">Recent Invoice</div>
                     <a href="/admin/invoice" class="ms-auto font13">View All</a>
                 </div>
                 <div class="border rounded recent-wrapper">
                     <div class="p-3 recentListing" *ngFor="let invoice of invoices">
-                        <div class="d-flex gap-3 mb-2">
-                            <span class="grey-badge"><span class="icon-calendar"></span> {{invoice.createdDate |
-                                date:'mediumDate'}}</span>
+                        <div class="d-flex gap-3 mb-1">
+                            <span class="grey-badge gap-2 d-flex align-items-center">
+                                <span class="icon-calendar"></span> {{invoice.createdDate | date:'mediumDate'}}
+                            </span>
                             <button [ngClass]="{'grey-badge': invoice.status === 'Draft', 'warning-badge' : invoice.status === 'Sent', 'success-badge' : invoice.status === 'Paid'}">{{invoice.status}}</button>
                         </div>
                         <div class="d-flex align-items-top justify-content-between gap-3">
                             <div class="d-flex flex-column align-items-start justify-content-center">
-                                <h4 class="font14 mb-1 font500">{{invoice.firstName}} {{invoice.lastName}}</h4>
-                                <p class="font13 mb-0 font-muted">{{invoice.serviceAddress}}</p>
+                                <div class="font14 mb-0 font500">{{invoice.firstName}} {{invoice.lastName}}</div>
+                                <div class="font13 mb-0 font-muted">{{invoice.serviceAddress}}</div>
                             </div>
                             <div>
-                                <h4 class="font14 mb-1 ms-auto font500">${{invoice.totalAmount | number : '1.2-2'}}</h4>
+                                <div class="font14 mb-1 ms-auto font500">${{invoice.totalAmount | number : '1.2-2'}}</div>
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="invoices.length==0 && !invoiceLoaded" class="p-3 text-center">
+                    <div *ngIf="invoices.length==0 && !invoiceLoaded" class="d-flex flex-column h-100">
+                        <img src="../../../assets/images/no-data-found.svg" alt="image"/>
                         <span>No data found</span>
                     </div>
                 </div>
@@ -209,16 +178,15 @@
                                 <th>Revenue</th>
                                 <th>Sales</th>
                                 <th>Sucess Rate</th>
-                                <th>Customer Rating</th>
+                                <th class="text-end">Customer Rating</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let tech of technician">
                                 <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="ShapeCircle20">
-                                            <img [src]="tech.profileImagePath" class="img-fluid rounded-2"
-                                                (error)="tech.profileImagePath = '../../../../assets/images/blank-img.png'">
+                                    <div class="d-flex align-items-top gap-2">
+                                        <div class="techImage">
+                                            <img [src]="tech.profileImagePath" (error)="tech.profileImagePath = '../../../../assets/images/blank-img.png'">
                                         </div>
                                         {{tech.fullName}}
                                     </div>
@@ -227,16 +195,12 @@
                                 <td>{{tech.totalSalesCount}}</td>
                                 <td>{{tech.successRate}}%</td>
                                 <td>
-                                    <!--<div class="d-flex gap-2 align-items-center justify-content-center custom-star">
-                                        <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
-                                            (ratingUpdated)="onRatingChanged($event)"
-                                            [customDisable]="starDisable"></app-star-rating>
-                                    </div>-->
                                     <span class="success-badge">{{tech.averageRating}}/5</span>
                                 </td>
                             </tr>
                             <tr *ngIf="technician.length==0 && !technicianLoaded">
                                 <td class="text-center" colspan="4">
+                                    <img src="../../../assets/images/no-data-found.svg" alt="image"/>
                                     <span>No data found</span>
                                 </td>
                             </tr>
@@ -252,8 +216,7 @@
                             <tr>
                                 <th>Service Name</th>
                                 <th>Sales</th>
-                                <th>Revenue</th>
-                                <!-- <th>Rating</th> -->
+                                <th class="text-end">Revenue</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -261,13 +224,6 @@
                                 <td> {{service.serviceName}} </td>
                                 <td>{{service.totalSalesCount}}</td>
                                 <td>${{service.totalRevenue | number : '1.2-2'}}</td>
-                                <!-- <td>
-                                    <div class="d-flex gap-2 align-items-center justify-content-center custom-star">
-                                        <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
-                                            (ratingUpdated)="onRatingChanged($event)"
-                                            [customDisable]="starDisable"></app-star-rating>                                    
-                                    </div>
-                                </td> -->
                             </tr>
                             <tr *ngIf="topServices.length==0 && !topServicesLoaded">
                                 <td class="text-center" colspan="4">

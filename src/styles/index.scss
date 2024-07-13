@@ -104,12 +104,12 @@ ul {
 
 .font12 {
   font-size: 0.75rem !important;
-  line-height: 0.6875rem !important;
+  //line-height: 0.6875rem !important;
 }
 
 .font13 {
   font-size: 0.8125rem !important;
-  line-height: 0.8125rem !important;
+  //line-height: 0.8125rem !important;
 }
 
 .font14 {
@@ -1112,7 +1112,7 @@ table tr {
 table tbody td {
   border: none;
   text-align: left !important;
-  padding: 20px 12px !important;
+  padding: 15px 12px !important;
   font-size: 0.8rem;
   font-weight: 400;
 }
@@ -1744,4 +1744,8 @@ app-booking-slot .mat-calendar-header .mat-calendar-controls {
 app-header {
   position: relative;
   z-index: 3;
+}
+
+.no-data-found-img{
+  width: 100px; 
 }

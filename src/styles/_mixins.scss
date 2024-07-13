@@ -20,7 +20,8 @@ $font-family: "JUST Sans";
   min-width: $size;
   @if $borderRadius {
     border-radius: $borderRadius;
-  } @else {
+  }
+  @else {
     border-radius: if($shape == circle, 50%, 0%);
   }
 }
@@ -33,7 +34,8 @@ $font-family: "JUST Sans";
   $border: none,
   $borderRadius: 0,
   $color: var(--light-muted)
-) {
+)
+{
   padding: $p;
   border: $border;
   background-color: $bgColor;
@@ -87,7 +89,8 @@ $font-family: "JUST Sans";
   $border-color,
   $height,
   $font-size
-) {
+)
+{
   background-color: $background-color;
   color: $text-color;
   border: 1px solid;
@@ -98,11 +101,13 @@ $font-family: "JUST Sans";
   font-family: $font-family;
   cursor: pointer;
   font-size: $font-size;
+
   @include flexbox(row, center, center);
-  gap: 0.5rem;
-  &:focus {
-    outline: none;
-  }
+    gap: 0.5rem;
+
+    &:focus {
+      outline: none;
+    }
 }
 
 // @mixin checkbox {
@@ -218,11 +223,11 @@ $font-family: "JUST Sans";
 
 @mixin badge($background-color, $text-color, $border-color: transparent) {
   display: inline-block;
-  padding: 0.25rem 0.5rem;
+  padding: 0.15rem 0.35rem;
   border-radius: 0.25rem;
   background-color: $background-color;
   color: $text-color;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
   border: 1px solid $border-color;
 }
