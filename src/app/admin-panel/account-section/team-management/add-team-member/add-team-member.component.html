@@ -1,5 +1,5 @@
 <div class="offcanvas-header sidebar-popup-header">
-    <h6 class="offcanvas-title" id="offcanvasRightLabel">{{userForm.value.teamId ==0 ?'Add New':'Edit'}} </h6>
+    <h6 class="offcanvas-title" id="offcanvasRightLabel">{{userForm.value.teamId ==0 ?'Add New':'Edit Details'}} </h6>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" #addTeamMemberEle>
     </button>
 </div>
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="form-group mb-3">
-            <label for="designation" class="form-label">Designation</label>
+            <label for="designation" class="form-label">Roles</label>
             <select id="designation" name="designation" class="form-select" formControlName="designation"
                 [ngClass]="{ 'is-invalid': submitted && f.designation.errors }">
                 <option value="">Select</option>
@@ -111,12 +111,10 @@
             <label for="uploadPhoto" class="form-label">Upload Photo</label>
             <div class="uploadPhotoFormWrapper" id="uploadPhoto">
                 <input type="file" accept="image/*" (change)="selectFiles($event)" />
-                <div class="d-flex align-items-center">
-                    <span class="icon-attachment fs-5"></span>
-                    <div class="ms-2">
-                        <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose file to upload</h5>
-                        <p class="font13 font-muted font300 mb-0">Supported format: PNG, JPG</p>
-                    </div>
+                <div class="d-flex align-items-center w-100 h-100 justify-content-center flex-column text-center">
+                    <span class="icon-attachment fs-5 mb-1"></span>
+                    <div class="font14 font400">Choose file to upload</div>
+                    <div class="font10 font-muted font300">Supported format: PNG, JPG, JPEG</div>
                 </div>
             </div>
             <div class="uploadedPhotoWrapper">
@@ -124,7 +122,7 @@
                     <button type="button" class="btn" (click)="removeTeamImg(preview.index, preview.uploadId)">
                         <span class="icon-close-1"></span>
                     </button>
-                    <img [src]="preview.filePath" class="preview img-fluid"
+                    <img [src]="preview.filePath" class="preview img-fluid p-2"
                         (error)="'../../../../assets/images/blank-img.png'">
                 </div>
             </div>

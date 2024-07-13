@@ -1,30 +1,24 @@
 <div class="mb-4">
     <h4 class="mb-1 font20">Business Hours</h4>
-    <p class="font14 mb-0 font-muted">Choose the hours and days of the week you would like the
-        service to be active in.</p>
+    <p class="font14 mb-0 font-muted">Choose the hours and days of the week you would like the service to be active in.</p>
 </div>
 <div class="row">
-    <div class="col-md-10 col-lg-9">
-        <div class="border-bottom mb-4">
+    <div class="col-md-10 col-lg-12">
+        <div class="border-bottom mb-4 pb-4">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="">
-                        <h5 class="font15 mb-2">Timezone</h5>
-                    </div>
+                <div class="col-12">
+                    <div class="font15 mb-1">Timezone</div>
                 </div>
-                <div class="col-lg-9">
-                    <div class="form-group">
-                        <select id="timeZone" class="form-select" [(ngModel)]='timeZone'
-                            [ngModelOptions]="{standalone: true}" [disabled]="true">
-                            <option value="">Select</option>
-                            <option value="{{timezone.utc}}" *ngFor="let timezone of timezones">{{timezone.label}}
-                            </option>
-                        </select>
-                    </div>
+                <div class="col-12">
+                    <select id="timeZone" class="form-select" [(ngModel)]='timeZone'
+                        [ngModelOptions]="{standalone: true}" [disabled]="true">
+                        <option value="">Select</option>
+                        <option value="{{timezone.utc}}" *ngFor="let timezone of timezones">{{timezone.label}}
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>
-        <!-- <mat-progress-bar mode="indeterminate" *ngIf="preLoading"></mat-progress-bar> -->
         <form [formGroup]="businessHourForm" (ngSubmit)="onSubmit()">
             <div formArrayName="days">
                 <div class="business-hours-row row mb-3" *ngFor="let day of days().controls;let empIndex=index"
