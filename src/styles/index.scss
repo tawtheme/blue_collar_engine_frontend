@@ -587,7 +587,7 @@ ul {
 
 // Badges Styles
 .primary-badge {
-  @include badge(var(--light-primary), $primary, $primary);
+  @include badge(var(--light-blue), $primary, $primary);
 }
 .success-badge {
   @include badge(#bbf7d0, #15803d, #4ade80);
@@ -662,27 +662,22 @@ ul {
 }
 
 // Size Classes
-
 .xs-btn {
   height: 28px;
   font-size: 12px;
 }
-
 .sm-btn {
   height: 34px;
   font-size: 14px;
 }
-
 .md-btn {
   height: 38px;
   font-size: 14px;
 }
-
 .lg-btn {
   height: 42px;
   font-size: 14px;
 }
-
 .toggle-switch {
   @include toggle-switch;
 }
@@ -858,17 +853,14 @@ ul {
   background-color: var(--light-primary) !important;
   border-color: var(--border-primary) !important;
 }
-
 .lightSuccessCardBox {
   background-color: var(--light-success) !important;
   border-color: var(--border-success) !important;
 }
-
 .lightGreyCardBox {
   background-color: var(--light) !important;
   border-color: var(--border-grey) !important;
 }
-
 .lightDangerCardBox {
   background-color: var(--light-danger) !important;
   border-color: var(--border-danger) !important;

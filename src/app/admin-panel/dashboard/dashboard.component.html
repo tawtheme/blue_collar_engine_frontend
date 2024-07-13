@@ -9,53 +9,44 @@
                         <span class="icon-add font12"></span>Add New<span class="icon-down-arrow"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a href="/admin/create-estimate">Create Estimate</a>
-                        </li>
-                        <li><a href="/admin/create-invoice">Create Invoice</a>
-                        </li>
+                        <li><a href="/admin/create-estimate">Create Estimate</a></li>
+                        <li><a href="/admin/create-invoice">Create Invoice</a></li>
                     </ul>
                 </div>
-                <!--
-                    <button type="button" class="btn btn-primary  gap-2" (click)="openOnBoardModel()">
-                        Open On-Board
-                    </button>
-                -->
             </div>
         </div>
     </div>
 </div>
 
-<div class="container-xxl pb-5">
-    <div class="mt-5">
-        <div class="row">
-            <div class="col-3">
-                <div class="py-2 px-3 border rounded">
-                    <h4 class="my-1">{{stats?.totalBookingCount}}</h4>
-                    <p class="mb-0 font13 font-muted">Total Booking</p>
-                </div>
+<div class="container-xxl">
+    <div class="row pt-4 pb-5">
+        <div class="col-3">
+            <div class="py-2 px-3 border rounded">
+                <h4 class="my-1">{{stats?.totalBookingCount}}</h4>
+                <p class="mb-0 font13 font-muted">Total Booking</p>
             </div>
-            <div class="col-3">
-                <div class="py-2 px-3 border rounded">
-                    <h4 class="my-1">{{stats?.totalEstimateCount}}</h4>
-                    <p class="mb-0 font13 font-muted">Total Estimate</p>
-                </div>
+        </div>
+        <div class="col-3">
+            <div class="py-2 px-3 border rounded">
+                <h4 class="my-1">{{stats?.totalEstimateCount}}</h4>
+                <p class="mb-0 font13 font-muted">Total Estimate</p>
             </div>
-            <div class="col-3">
-                <div class="py-2 px-3 border rounded">
-                    <h4 class="my-1">{{stats?.totalInvoiceCount}}</h4>
-                    <p class="mb-0 font13 font-muted">Total Invoice</p>
-                </div>
+        </div>
+        <div class="col-3">
+            <div class="py-2 px-3 border rounded">
+                <h4 class="my-1">{{stats?.totalInvoiceCount}}</h4>
+                <p class="mb-0 font13 font-muted">Total Invoice</p>
             </div>
-            <div class="col-3">
-                <div class="py-2 px-3 border rounded">
-                    <h4 class="my-1">${{stats?.totalRevenueAmt | number : '1.2-2'}}</h4>
-                    <p class="mb-0 font13 font-muted">Total Revenue</p>
-                </div>
+        </div>
+        <div class="col-3">
+            <div class="py-2 px-3 border rounded">
+                <h4 class="my-1">${{stats?.totalRevenueAmt | number : '1.2-2'}}</h4>
+                <p class="mb-0 font13 font-muted">Total Revenue</p>
             </div>
         </div>
     </div>
 
-    <div class="mt-5">
+    <div class="mb-5">
         <div class="d-flex align-items-center">
             <h3 class="mb-0 font15">Quick Overview</h3>
             <div class="ms-auto">
@@ -84,8 +75,8 @@
         </div>
     </div>
 
-    <div class="mt-5">
-        <div class="row gx-md-5">
+    <div class="mb-5">
+        <div class="row gx-4">
             <div class="col-lg-4">
                 <div class="d-flex align-items-center mb-1">
                     <div class="font15 font600">Recent Booking</div>
@@ -114,8 +105,9 @@
                 <div class="border rounded recent-wrapper">
                     <div class="p-3 recentListing" *ngFor="let estimate of estimateInvoices">
                         <div class="d-flex gap-3 mb-1">
-                            <span class="grey-badge gap-2 d-flex align-items-center"><span class="icon-calendar"></span> {{estimate.createdDate |
-                                date:'mediumDate'}}</span>
+                            <span class="grey-badge gap-2 d-flex align-items-center">
+                                <span class="icon-calendar"></span> {{estimate.createdDate | date:'mediumDate'}}
+                            </span>
                             <button [ngClass]="{'grey-badge': estimate.status === 'Draft', 'warning-badge' : estimate.status === 'Sent'}" type="button">{{estimate.status}}</button>
                         </div>
                         <div class="d-flex align-items-top justify-content-between gap-3">
@@ -166,10 +158,10 @@
         </div>
     </div>
 
-    <div class="mt-5">
-        <div class="row gx-lg-5">
+    <div class="mb-5">
+        <div class="row gx-4">
             <div class="col-lg-7">
-                <h4 class="font15 font600 mb-2">Top Technician </h4>
+                <div class="font15 font600 mb-1">Top Technicias</div>
                 <div class="border rounded popularSection">
                     <table class="row-border">
                         <thead>
@@ -185,10 +177,13 @@
                             <tr *ngFor="let tech of technician">
                                 <td>
                                     <div class="d-flex align-items-top gap-2">
-                                        <div class="techImage">
+                                        <div class="tech-image">
                                             <img [src]="tech.profileImagePath" (error)="tech.profileImagePath = '../../../../assets/images/blank-img.png'">
                                         </div>
-                                        {{tech.fullName}}
+                                        <div class="d-flex flex-column">
+                                            {{tech.fullName}}
+                                            <span class="tech-role">AC Repair</span>
+                                        </div>
                                     </div>
                                 </td>
                                 <td>${{tech.totalRevenue | number : '1.2-2'}}</td>
@@ -209,7 +204,7 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <h4 class="font15 font600 mb-2">Popular Service</h4>
+                <div class="font15 font600 mb-1">Top Services</div>
                 <div class="border rounded popularSection">
                     <table>
                         <thead>
@@ -221,12 +216,13 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let service of topServices">
-                                <td> {{service.serviceName}} </td>
+                                <td>{{service.serviceName}}</td>
                                 <td>{{service.totalSalesCount}}</td>
                                 <td>${{service.totalRevenue | number : '1.2-2'}}</td>
                             </tr>
                             <tr *ngIf="topServices.length==0 && !topServicesLoaded">
                                 <td class="text-center" colspan="4">
+                                    <img src="../../../assets/images/no-data-found.svg" alt="image"/>
                                     <span>No data found</span>
                                 </td>
                             </tr>
