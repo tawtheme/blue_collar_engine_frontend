@@ -78,11 +78,11 @@
 
 @font-face {
   font-family: "icon";
-  src: url("icon.eot?wv2a7i");
-  src: url("icon.eot?wv2a7i#iefix") format("embedded-opentype"),
-    url("icon.ttf?wv2a7i") format("truetype"),
-    url("icon.woff?wv2a7i") format("woff"),
-    url("icon.svg?wv2a7i#icon") format("svg");
+  src: url("icon.eot?nqwbd1");
+  src: url("icon.eot?nqwbd1#iefix") format("embedded-opentype"),
+    url("icon.ttf?nqwbd1") format("truetype"),
+    url("icon.woff?nqwbd1") format("woff"),
+    url("icon.svg?nqwbd1#icon") format("svg");
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -104,6 +104,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-pending:before {
+  content: "\e940";
+}
+.icon-tick-fill:before {
+  content: "\e941";
+}
+.icon-Vector:before {
+  content: "\e942";
+}
 .icon-sms:before {
   content: "\e900";
 }
