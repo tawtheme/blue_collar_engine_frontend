@@ -52,7 +52,10 @@
             </tr>
             <tr *ngIf="users.length == 0 && !loading" class="text-center">
                 <td class="text-center" colspan="6">
-                    <span>No data found</span>
+                    <div class="d-flex flex-column align-items-center p-5">
+                        <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                        <span class="font-muted font14 text-center">No Team Member created. Click on "Add new" to create a member.</span>
+                    </div>
                 </td>
             </tr>
         </tbody>

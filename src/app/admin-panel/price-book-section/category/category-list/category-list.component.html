@@ -8,12 +8,8 @@
                 <th (click)="sortBy('totalServiceCount')">
                     Services{{sortIcon('totalServiceCount')}}
                 </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    Action
-                </th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +17,7 @@
                 <td class="col-8 px-4">
                     <div class="table-service-info d-flex align-items-center gap-3">
                         <div>
-                            <h4 class="font14 mb-1 font500">{{catgeory.name}}
-                            </h4>
+                            <h4 class="font14 mb-1 font500">{{catgeory.name}}</h4>
                             <p class="font14 mb-0  font-muted font400">{{catgeory.description}}</p>
                         </div>
                     </div>
@@ -32,20 +27,22 @@
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-center">
-                        <mat-slide-toggle [checked]="catgeory.status=='A' ? true:false"
-                            (change)="onChange($event, catgeory)"></mat-slide-toggle>
+                        <mat-slide-toggle [checked]="catgeory.status=='A' ? true:false" (change)="onChange($event, catgeory)"></mat-slide-toggle>
                     </div>
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-end">
                         <button class="light-outlined-button sm-btn" (click)="editCategory(catgeory.categoryId)"><span
-                                class="icon-edit-2"></span>
-                            Edit</button>
+                            class="icon-edit-2"></span> Edit
+                        </button>
                     </div>
                 </td>
             </tr>
             <tr *ngIf="items.length==0 && !loading">
-                <span>No data found</span>
+                <div class="d-flex flex-column align-items-center p-5">
+                    <img src="../../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                    <span class="font-muted font14 text-center">No Category created. Click on "Add new" to make your first category.</span>
+                </div>
             </tr>
         </tbody>
     </table>
