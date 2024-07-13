@@ -21,8 +21,8 @@ export class EstimateComponent implements OnInit {
   sortOrder = 1;
   productList: any = [];
 
-  pageSize: number = 5;
-  pageSizeOptions: number[] = [5, 10, 20, 50];
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [10, 20, 50];
   pageEvent: PageEvent | undefined;
 
   estimateRagePickerForm!: FormGroup;
@@ -133,7 +133,7 @@ export class EstimateComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.stats = res.data;
-          //////console.log(this.stats)
+          console.log(this.stats)
         },
         error: error => {
         }

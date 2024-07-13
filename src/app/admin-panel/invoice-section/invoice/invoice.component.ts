@@ -18,8 +18,8 @@ export class InvoiceComponent implements OnInit {
   sortProperty: string = 'id';
   sortOrder = 1;
 
-  pageSize: number = 5;
-  pageSizeOptions: number[] = [5, 10, 20, 50];
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [10, 20, 50];
   pageEvent: PageEvent | undefined;
 
   invoiceRagePickerForm!: FormGroup;

@@ -22,8 +22,8 @@ export class CategoryListComponent {
   sortProperty: string = 'id';
   sortOrder = 1;
 
-  pageSize: number = 5;
-  pageSizeOptions: number[] = [5, 10, 20, 50];
+  pageSize: number = 10;
+  pageSizeOptions: number[] = [10, 20, 50];
   pageEvent: PageEvent | undefined;
   constructor(private _categoryService: CategoryService, private _router: Router, private _dialog: MatDialog, private _snackBar: MatSnackBar) {
 
