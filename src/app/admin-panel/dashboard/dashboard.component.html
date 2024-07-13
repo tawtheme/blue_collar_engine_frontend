@@ -5,12 +5,12 @@
             <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
                 <div class="dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle gap-2" data-bs-toggle="dropdown"
-                        data-bs-display="static" aria-expanded="false">
-                        <span class="icon-add font12"></span>Add New<span class="icon-down-arrow"></span>
+                        data-bs-display="static" aria-expanded="false"><span class="icon-add font12"></span> Add New<span class="icon-down-arrow"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li><a href="/admin/create-estimate">Create Estimate</a></li>
                         <li><a href="/admin/create-invoice">Create Invoice</a></li>
+                        <li><a href="#">Add Customer</a></li>
                     </ul>
                 </div>
             </div>
@@ -19,27 +19,27 @@
 </div>
 
 <div class="container-xxl">
-    <div class="row pt-4 pb-5">
+    <div class="row py-4">
         <div class="col-3">
-            <div class="py-2 px-3 border rounded">
+            <div class="py-2 px-4 border rounded">
                 <h4 class="my-1">{{stats?.totalBookingCount}}</h4>
                 <p class="mb-0 font13 font-muted">Total Booking</p>
             </div>
         </div>
         <div class="col-3">
-            <div class="py-2 px-3 border rounded">
+            <div class="py-2 px-4 border rounded">
                 <h4 class="my-1">{{stats?.totalEstimateCount}}</h4>
                 <p class="mb-0 font13 font-muted">Total Estimate</p>
             </div>
         </div>
         <div class="col-3">
-            <div class="py-2 px-3 border rounded">
+            <div class="py-2 px-4 border rounded">
                 <h4 class="my-1">{{stats?.totalInvoiceCount}}</h4>
                 <p class="mb-0 font13 font-muted">Total Invoice</p>
             </div>
         </div>
         <div class="col-3">
-            <div class="py-2 px-3 border rounded">
+            <div class="py-2 px-4 border rounded">
                 <h4 class="my-1">${{stats?.totalRevenueAmt | number : '1.2-2'}}</h4>
                 <p class="mb-0 font13 font-muted">Total Revenue</p>
             </div>
@@ -72,6 +72,13 @@
                     [xaxis]="chartOptions.xaxis">
                 </apx-chart>
             </div>
+            <!--
+                <div id="pie-chart">
+                    <apx-chart [series]="pieChartOptions.series" [chart]="pieChartOptions.chart"
+                        [labels]="pieChartOptions.labels" [responsive]="pieChartOptions.responsive">
+                    </apx-chart>
+                </div>
+            -->
         </div>
     </div>
 
@@ -169,8 +176,8 @@
                                 <th>Customer Name</th>
                                 <th>Revenue</th>
                                 <th>Sales</th>
-                                <th>Sucess Rate</th>
-                                <th class="text-end">Customer Rating</th>
+                                <th>Job Sucess</th>
+                                <th class="text-end">Rating</th>
                             </tr>
                         </thead>
                         <tbody>

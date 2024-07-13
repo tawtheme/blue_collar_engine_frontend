@@ -1051,6 +1051,7 @@ button.btn.dropdown-toggle {
   font-weight: 400;
   display: flex;
   align-items: center;
+  border-radius: 12px;
 }
 .dropdown-toggle::after {
   border: 0;
@@ -1399,12 +1400,11 @@ tag-input.form-control {
 }
 
 .muiDatePickerFromField {
-  width: 100%;
+  width: 200px;
+
   .mat-mdc-text-field-wrapper {
     border: 1px solid var(--border-color);
-    padding: 8px 12px;
-    font-size: 14px;
-    color: var(--dark);
+    padding: 6px 12px;
     background-color: var(--white) !important;
     font-weight: 300;
     border-radius: 5px;
@@ -1414,7 +1414,12 @@ tag-input.form-control {
       min-height: auto;
       input {
         font-family: "JUST Sans";
-        font-weight: 300;
+        font-weight: 400; font-size: 13px;
+        color: var(--dark);
+      }
+      .mat-date-range-input-start-wrapper{
+        overflow: inherit;
+        max-width: calc(50% - 8px);
       }
     }
     .mat-mdc-icon-button {
@@ -1439,6 +1444,11 @@ tag-input.form-control {
   .mat-mdc-form-field-subscript-wrapper {
     display: none;
   }
+  .mdc-icon-button svg, .mdc-icon-button img{
+    width: 20px !important;
+    height: 20px !important;
+    margin: 3px 0px 0px 2px;
+    }
 }
 
 .ShapeBox38 {

@@ -96,7 +96,7 @@ $font-family: "JUST Sans";
   border: 1px solid;
   border-color: $border-color;
   padding: 10px 15px;
-  border-radius: 4px;
+  border-radius: 12px;
   height: $height;
   font-family: $font-family;
   cursor: pointer;
@@ -224,7 +224,7 @@ $font-family: "JUST Sans";
 @mixin badge($background-color, $text-color, $border-color: transparent) {
   display: inline-block;
   padding: 0.15rem 0.35rem;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   background-color: $background-color;
   color: $text-color;
   font-size: 12px;
