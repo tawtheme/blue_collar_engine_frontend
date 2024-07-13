@@ -82,9 +82,9 @@
         <table class="row-border">
             <thead>
                 <tr>
-                    <th class="td-1">
+                    <!--<th class="td-1">
                         <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
-                    </th>
+                    </th>-->
                     <th (click)="sortBy('refNo')">Estimate No.{{sortIcon('refNo')}}</th>
                     <th (click)="sortBy('createdDate')">Create Date{{sortIcon('createdDate')}}</th>
                     <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
@@ -95,9 +95,10 @@
             </thead>
             <tbody>
                 <tr *ngFor="let estimate of items">
-                    <td class="td-1">
+                    
+                   <!--<td class="td-1">
                         <mat-checkbox class="example-margin" [checked]="estimate.ischeck ==true"></mat-checkbox>
-                    </td>
+                    </td>-->
                     <td>{{estimate.refNo}}</td>
                     <td>{{estimate.createdDate | date:'mediumDate' }}</td>
                     <td>{{estimate.firstName}} {{estimate.lastName}}</td>

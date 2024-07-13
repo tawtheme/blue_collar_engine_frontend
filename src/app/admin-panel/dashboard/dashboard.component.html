@@ -98,9 +98,9 @@
                         <div class="font14 mb-0 font500">{{booking.customerName}}</div>
                         <div class="font13 mb-0 font-muted">{{booking.address}}, {{booking.city}}, {{booking.state}}, {{booking.zipCode}}</div>
                     </div>
-                    <div *ngIf="todayBooking.length==0 && !todayBookingLoaded" class="d-flex flex-column h-100">
-                        <img src="../../../assets/images/no-data-found.svg" alt="image"/>
-                        <span>Currently, there are no bookings to show.</span>
+                    <div *ngIf="todayBooking.length==0 && !todayBookingLoaded" class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
+                        <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                        <span class="font-muted font14 text-center">Currently, there are no bookings to show.</span>
                     </div>
                 </div>
             </div>
@@ -127,9 +127,9 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="estimateInvoices.length==0 && !estimateInvoiceLoaded" class="d-flex flex-column h-100">
-                        <img src="../../../assets/images/no-data-found.svg" alt="image"/>
-                        <span>Currently, there are no estimates to show.</span>
+                    <div *ngIf="estimateInvoices.length==0 && !estimateInvoiceLoaded" class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
+                        <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                        <span class="font-muted font14 text-center">Currently, there are no estimates to show.</span>
                     </div>
                 </div>
             </div>
@@ -156,9 +156,9 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="invoices.length==0 && !invoiceLoaded" class="d-flex flex-column h-100">
-                        <img src="../../../assets/images/no-data-found.svg" alt="image"/>
-                        <span>Currently, there are no invoices to show.</span>
+                    <div *ngIf="invoices.length==0 && !invoiceLoaded" class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
+                        <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                        <span class="font-muted font14 text-center">Currently, there are no invoices to show.</span>
                     </div>
                 </div>
             </div>
