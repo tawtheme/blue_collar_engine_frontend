@@ -5,8 +5,7 @@
                 <img src="{{tenantInfo?.companyImagePath}}" alt="" class="img-fluid" (error)="setDefaultPic()" />
             </a>
             <div class="ms-auto">
-                <button
-                    class="light-outlined-button py-2 text-black  font500 px-3 font16  rounded-pill d-inline-flex align-items-center gap-2">
+                <button class="light-outlined-button py-2 text-black font500 px-3 font16 rounded-pill d-inline-flex align-items-center gap-2">
                     <span class="icon-call"></span>
                     {{tenantInfo?.phoneNumber | usMobileNo}}
                 </button>
@@ -28,15 +27,16 @@
                 <div class="bg-light border mt-4 rounded p-4">
                     <form class="payment-success-feedback" [formGroup]="ratingForm" (ngSubmit)="onSubmit()">
                         <h2>Customer Feedback</h2>
-                        <p class="font18 text-black">How would you rate our technicians for the service they provided?
-                        </p>
-                        <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
-                            (ratingUpdated)="onRatingChanged($event)"  [customDisable]="starDisable"></app-star-rating>
-                        <p class="font18 text-black mt-3">Is there anything else you'd like us to share with us?</p>
-                        <textarea placeholder="Enter here" class="form-control" rows="5" maxlength="4000"
-                            formControlName="feedback">
-
-                        </textarea>
+                        <div class="d-flex flex-column">
+                            <div class="font18 text-black mb-1">How would you rate our technicians for the service they provided?</div>
+                            <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
+                                (ratingUpdated)="onRatingChanged($event)" [customDisable]="starDisable">
+                            </app-star-rating>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <div class="font18 text-black mt-1">Is there anything else you'd like us to share with us?</div>
+                            <textarea placeholder="Enter here" class="form-control" rows="5" maxlength="4000" formControlName="feedback"></textarea>
+                        </div>
                         <button class="btn px-5 mt-4 font18 py-2">Send Feedback</button>
                     </form>
                 </div>
