@@ -38,6 +38,8 @@ import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.co
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { SharedModule } from './shared/shared.module';
 import { DatePipe } from '@angular/common';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 
 Date.prototype.toISOString = function () {
     return moment(this).format("YYYY-MM-DDTHH:mm:ss");
@@ -84,7 +86,9 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
         PagenotfoundComponent,
         PaymentSuccessComponent,
         FeatureInvoiceComponent,
-        FeatureEstimateComponent                        
+        FeatureEstimateComponent,
+        PrivacyPolicyComponent,
+        TermsOfServiceComponent                        
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

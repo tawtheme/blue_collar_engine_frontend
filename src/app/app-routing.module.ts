@@ -13,6 +13,8 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.component';
 import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 
 const routes: Routes = [
   {
@@ -35,6 +37,14 @@ const routes: Routes = [
       {
         path: 'page/estimate',
         component: FeatureEstimateComponent,
+      },
+      {
+        path: 'privacy-policy',
+        component: PrivacyPolicyComponent,
+      },
+      {
+        path: 'terms-of-service',
+        component: TermsOfServiceComponent,
       },
     ],
   },
