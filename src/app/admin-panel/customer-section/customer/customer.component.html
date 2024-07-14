@@ -75,9 +75,11 @@
         <table class="row-border">
             <thead>
                 <tr>
+                    <!--
                     <th>
                         <mat-checkbox class="example-margin" (change)="checkAll($event)"></mat-checkbox>
                     </th>
+                    -->
                     <th (click)="sortBy('createdDate')">Create date{{sortIcon('createdDate')}}</th>
                     <th (click)="sortBy('firstName')">Customer Name{{sortIcon('firstName')}}</th>
                     <th (click)="sortBy('mobileNumber')">Contact number{{sortIcon('mobileNumber')}}</th>
@@ -90,9 +92,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let cust of items">
+                    <!--
                     <td>
                         <mat-checkbox class="example-margin" [checked]="cust.ischeck ==true" [disableRipple]="true"></mat-checkbox>
                     </td>
+                    -->
                     <td>{{cust.createdDate | date:'mediumDate' }}</td>
                     <td>{{cust.firstName}} {{cust.lastName}}</td>
                     <td>{{cust.mobileNumber | usMobileNo}}</td>
