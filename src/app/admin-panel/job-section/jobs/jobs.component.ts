@@ -29,17 +29,21 @@ export class JobsComponent implements OnInit {
   pageSize: number = 0;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   pageEvent: PageEvent | undefined;
-  activePageDataChunkAssigned: any = []
+  activePageDataChunkAssigned: any = [];
   apiBaseUrl: string = environment.apiUrl + '/';
-  constructor(private _router: Router, private _bookingService: BookingService, private _dialog: MatDialog, private _formBuilder: FormBuilder) {
-  }
+  constructor(
+    private _router: Router,
+    private _bookingService: BookingService,
+    private _dialog: MatDialog,
+    private _formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.bookingSearchForm = this._formBuilder.group({
       searchStr: ['', null],
       bookingDate: [null, null],
       type: ['', null],
-      currentStatus: ['', null]
+      currentStatus: ['', null],
     });
     this.bookingSearchForm.controls['bookingDate'].setValue(new Date());
 
@@ -74,37 +78,37 @@ export class JobsComponent implements OnInit {
         return;
       }
       _param = param;
-    }
-    else {
+    } else {
       _param = {
-        "id": 0,
-        "pageNumber": 0,
-        "pageSize": this.pageSize,
-        "searchStr": "",
-        "type": "U",
-        "bookingDate": new Date()
-      }
+        id: 0,
+        pageNumber: 0,
+        pageSize: this.pageSize,
+        searchStr: '',
+        type: 'U',
+        bookingDate: new Date(),
+      };
     }
     ////console.log(JSON.stringify(_param))
-    this._bookingService.getAll(_param)
+    this._bookingService
+      .getAll(_param)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.loadUnAssigned = false;
           this.unAssignedBooking = res.data;
-          this.unAssignedBooking.forEach(res => {
+          this.unAssignedBooking.forEach((res) => {
             if (res.assignedTeamMembers.length > 0) {
               res.assignedTeamMembers.forEach((r: any) => {
                 if (r.profileImagePath != '' && r.profileImagePath != null) {
-                  r.profileImagePath = this.apiBaseUrl + r.profileImagePath
+                  r.profileImagePath = this.apiBaseUrl + r.profileImagePath;
                 }
-              })
+              });
             }
-          })
+          });
         },
-        error: error => {
+        error: (error) => {
           this.loadUnAssigned = false;
-        }
+        },
       });
   }
 
@@ -116,42 +120,41 @@ export class JobsComponent implements OnInit {
         this.assignedBooking = [];
         this.loadAssigned = false;
         return;
-      }
-      else {
+      } else {
         _param = param;
       }
-    }
-    else {
+    } else {
       _param = {
-        "id": 0,
-        "pageNumber": 0,
-        "pageSize": this.pageSize,
-        "searchStr": "",
-        "type": "A",
-        "bookingDate": new Date()
-      }
+        id: 0,
+        pageNumber: 0,
+        pageSize: this.pageSize,
+        searchStr: '',
+        type: 'A',
+        bookingDate: new Date(),
+      };
     }
     //   ////console.log("loadAssigned" + JSON.parse(_param))
-    this._bookingService.getAll(_param)
+    this._bookingService
+      .getAll(_param)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.loadAssigned = false;
           this.assignedBooking = res.data;
           ////console.log(this.assignedBooking)
-          this.assignedBooking.forEach(res => {
+          this.assignedBooking.forEach((res) => {
             if (res.assignedTeamMembers.length > 0) {
               res.assignedTeamMembers.forEach((r: any) => {
                 if (r.profileImagePath != '' && r.profileImagePath != null) {
-                  r.profileImagePath = this.apiBaseUrl + r.profileImagePath
+                  r.profileImagePath = this.apiBaseUrl + r.profileImagePath;
                 }
-              })
+              });
             }
-          })
+          });
         },
-        error: error => {
+        error: (error) => {
           this.loadAssigned = false;
-        }
+        },
       });
   }
 
@@ -165,60 +168,76 @@ export class JobsComponent implements OnInit {
         return;
       }
       _param = param;
-    }
-    else {
+    } else {
       _param = {
-        "id": 0,
-        "pageNumber": 0,
-        "pageSize": this.pageSize,
-        "searchStr": "",
-        "type": "C",
-        "bookingDate": new Date()
-      }
+        id: 0,
+        pageNumber: 0,
+        pageSize: this.pageSize,
+        searchStr: '',
+        type: 'C',
+        bookingDate: new Date(),
+      };
     }
     // ////console.log("loadCompeleted" + JSON.parse(_param))
-    this._bookingService.getAll(_param)
+    this._bookingService
+      .getAll(_param)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.loadCompeleted = false;
           this.compeletedBooking = res.data;
-          this.compeletedBooking.forEach(res => {
+          this.compeletedBooking.forEach((res) => {
             if (res.assignedTeamMembers.length > 0) {
               res.assignedTeamMembers.forEach((r: any) => {
                 if (r.profileImagePath != '' && r.profileImagePath != null) {
-                  r.profileImagePath = this.apiBaseUrl + r.profileImagePath
+                  r.profileImagePath = this.apiBaseUrl + r.profileImagePath;
                 }
-              })
+              });
             }
-          })
+          });
         },
-        error: error => {
+        error: (error) => {
           this.loadCompeleted = false;
-        }
+        },
       });
   }
 
   openEditViewBooking(booking: any) {
     //debugger
-    this._dialog.open(EditViewBookingComponent, { width: '1200px', height: '800px', data: { 'bookingInfo': booking, isEnableEdit: true }, disableClose: true })
+    this._dialog.open(EditViewBookingComponent, {
+      width: '1200px',
+      minHeight: '480px',
+      maxHeight: '90vh',
+      data: { bookingInfo: booking, isEnableEdit: true },
+      disableClose: true,
+      panelClass: 'bookings-details-dialog-container',
+    });
   }
 
   filterBooking() {
     var obj = this.bookingSearchForm.value;
     var _param = {
-      "id": 0,
-      "pageNumber": 0,
-      "pageSize": this.pageSize,
-      "searchStr": obj.searchStr,
-      "type": obj.type,
-      "bookingDate": obj.bookingDate,
-      "currentStatus": obj.currentStatus
-    }
+      id: 0,
+      pageNumber: 0,
+      pageSize: this.pageSize,
+      searchStr: obj.searchStr,
+      type: obj.type,
+      bookingDate: obj.bookingDate,
+      currentStatus: obj.currentStatus,
+    };
     ////console.log(obj)
-    this.getAllUnAssignedBooking({ ..._param, ...{ type: _param.type == '' ? 'U' : _param.type, currentStatus: '' } });
-    this.getAllAssignedBooking({ ..._param, ...{ type: _param.type == '' ? 'A' : _param.type } });
-    this.getAllCompletedBooking({ ..._param, ...{ type: _param.type == '' ? 'C' : _param.type, currentStatus: '' } });
+    this.getAllUnAssignedBooking({
+      ..._param,
+      ...{ type: _param.type == '' ? 'U' : _param.type, currentStatus: '' },
+    });
+    this.getAllAssignedBooking({
+      ..._param,
+      ...{ type: _param.type == '' ? 'A' : _param.type },
+    });
+    this.getAllCompletedBooking({
+      ..._param,
+      ...{ type: _param.type == '' ? 'C' : _param.type, currentStatus: '' },
+    });
   }
 
   resetFilter() {
@@ -230,20 +249,22 @@ export class JobsComponent implements OnInit {
   }
 
   getBookingStats() {
-    this._bookingService.getBookingStats()
+    this._bookingService
+      .getBookingStats()
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.bookingStats = res.data;
           ////console.log(this.bookingStats)
         },
-        error: error => {
-        }
+        error: (error) => {},
       });
   }
 
-  onChangeCurrentStatus(event:any){
-    this.bookingSearchForm.controls['currentStatus'].setValue(event.target.value);
+  onChangeCurrentStatus(event: any) {
+    this.bookingSearchForm.controls['currentStatus'].setValue(
+      event.target.value
+    );
     this.filterBooking();
   }
 
@@ -253,13 +274,13 @@ export class JobsComponent implements OnInit {
 
   onUnassignedDateChange(event: MatDatepickerInputEvent<Date>): void {
     var _param = {
-      "id": 0,
-      "pageNumber": 0,
-      "pageSize": 0,
-      "searchStr": "",
-      "type": "",
-      "bookingDate": event.value
-    }
+      id: 0,
+      pageNumber: 0,
+      pageSize: 0,
+      searchStr: '',
+      type: '',
+      bookingDate: event.value,
+    };
     this.getAllUnAssignedBooking(_param);
     this.getAllAssignedBooking(_param);
     this.getAllCompletedBooking(_param);
@@ -269,13 +290,13 @@ export class JobsComponent implements OnInit {
     let firstCut = e.pageIndex * e.pageSize;
     let secondCut = firstCut + e.pageSize;
     var _param = {
-      "id": 0,
-      "pageNumber": e.pageIndex + 1,
-      "pageSize": e.pageSize,
-      "searchStr": "",
-      "type": "",
-      "bookingDate": new Date()
-    }
+      id: 0,
+      pageNumber: e.pageIndex + 1,
+      pageSize: e.pageSize,
+      searchStr: '',
+      type: '',
+      bookingDate: new Date(),
+    };
     if (type == 'U') {
       this.getAllUnAssignedBooking(_param);
     }
