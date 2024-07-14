@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService, private snackBar: MatSnackBar
-        
+        private authenticationService: AuthenticationService, private _snackBar: MatSnackBar
+
     ) {
         ////debugger
         // redirect to home if already logged in
@@ -26,8 +26,6 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/login']);
         }
         this.user = <User>this.authenticationService.userValue;
-       
-
     }
 
     ngOnInit() {
@@ -41,6 +39,10 @@ export class LoginComponent implements OnInit {
     get f() { return this.loginForm.controls; }
 
     onSubmit() {
+        // this._snackBar.open('Success', 'Close', {
+        //     panelClass: 'app-notification-success',
+        // });
+        // return;
         this.submitted = true;
         // stop here if form is invalid
         if (this.loginForm.invalid) {
@@ -66,13 +68,22 @@ export class LoginComponent implements OnInit {
                 }
             });
     }
+
+    openSnakbar() {
+        this._snackBar.open('Success', 'Close', {
+            panelClass: 'custom-snakbar',
+            duration: 200000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+        });
+    }
 }
 
-export class UsernameValidator {  
-    static cannotContainSpace(control: AbstractControl) : ValidationErrors | null {  
-        if((control.value as string).indexOf(' ') >= 0){  
-            return {cannotContainSpace: true}  
-        }      
-        return null;  
-    }  
+export class UsernameValidator {
+    static cannotContainSpace(control: AbstractControl): ValidationErrors | null {
+        if ((control.value as string).indexOf(' ') >= 0) {
+            return { cannotContainSpace: true }
+        }
+        return null;
+    }
 }  

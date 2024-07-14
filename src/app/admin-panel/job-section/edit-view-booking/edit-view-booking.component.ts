@@ -90,7 +90,7 @@ export class EditViewBookingComponent {
 
   save() {
     if (this.selectedValues.length == 0) {
-      this._snackBar.open("Please assign atleast one team member", "Error");
+      this._snackBar.open("Please assign at least one Team member.",'Close');
       return;
     }
     else {
@@ -103,7 +103,7 @@ export class EditViewBookingComponent {
         .subscribe({
           next: (res) => {
             this.loading = false;
-            this._snackBar.open(res.message);
+            this._snackBar.open(res.message,'Close');
             this.cancel();
             this._bookingService.bookingTeamMemberAssign.next(true);
           },

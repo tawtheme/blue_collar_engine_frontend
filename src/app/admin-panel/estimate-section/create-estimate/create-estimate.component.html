@@ -36,7 +36,7 @@
                 <div class="col-md-3">
                     <div class="form-group ">
                         <label for="expiryDate" class="form-label">Due Date</label>
-                        <mat-form-field class="example-full-width muiDatePickerFromField" (click)="picker.open()">
+                        <mat-form-field class="example-full-width muiDatePickerFromField w-100" (click)="picker.open()">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
                                 placeholder="Choose a date"
                                 [ngClass]="{ 'is-invalid': submitted && estimateInvoiceForm.get('expiryDate')?.hasError('required') }"
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <h4 class="mb-15 font16">Customer Details</h4>
+            <h4 class="mb-8 font16">Customer Details</h4>
             <div class="row gx-5 mb-4">
                 <div class="col-lg-6">
                     <div class="border p-3 rounded h-100 ">
@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <h4 class="mb-15 font16">Item Details</h4>
+            <h4 class="mb-8 font16">Item Details</h4>
             <div formArrayName="products">
                 <div class="itemDetailsTable">
                     <table>
@@ -186,7 +186,7 @@
                     </button>
                 </div>
             </div>
-            <div class="row mt-4 gx-5">
+            <div class="row mt-5 gx-5">
                 <div class="col-lg-7">
                     <div class="card p-3">
                         <h4 class="font16 mb-1">Add Notes</h4>

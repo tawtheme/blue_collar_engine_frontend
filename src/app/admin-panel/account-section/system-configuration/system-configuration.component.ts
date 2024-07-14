@@ -58,7 +58,7 @@ export class SystemConfigurationComponent {
   }
 
   removeTermCondition(i: number) {
-    const message = `Are you sure you want to do delete?`;
+    const message = `Are you sure you want to delete?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
@@ -86,7 +86,7 @@ export class SystemConfigurationComponent {
       .pipe(first())
       .subscribe({
         next: (res) => {
-          this._snackBar.open(res.message);
+          this._snackBar.open(res.message,'Close');
         },
         error: () => {
 
@@ -130,7 +130,7 @@ export class SystemConfigurationComponent {
       .subscribe({
         next: (res) => {
           this.submitted = false;
-          this._snackBar.open(res.message);
+          this._snackBar.open(res.message,'Close');
         },
         error: (e) => {
           this.loading = false;

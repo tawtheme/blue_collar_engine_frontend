@@ -46,7 +46,7 @@ export class SecurityComponent {
       .subscribe({
         next: (res) => {
           this.submitted = false;
-          this._snackBar.open(res.message);
+          this._snackBar.open(res.message,'Close');
         },
         error: (e) => {
           this.loading = false;

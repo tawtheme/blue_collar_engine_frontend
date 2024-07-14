@@ -180,6 +180,7 @@ export class DashboardComponent implements OnInit {
     this._dashboardService.getTopTechnician().subscribe({
       next: (res: { data: any[] }) => {
         this.technician = res.data;
+        console.log(this.technician)
         this.technician.forEach((res) => {
           res.profileImagePath = this.apiBaseUrl + res.profileImagePath;
         });
@@ -348,9 +349,7 @@ export class DashboardComponent implements OnInit {
         }
       }
     };
-
   }
-
 
   openOnBoardModel() {
     this._dialog.open(OnboardPopupComponent, { width: '900px', height: '600px', data: { 'onBoardStatus': this.onBoardStatus, isEnableEdit: false }, disableClose: true })

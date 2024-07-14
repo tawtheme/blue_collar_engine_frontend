@@ -72,7 +72,7 @@ export class AddNewAddressComponent {
       //////console.log(res)
       let el: HTMLElement = this.addNewAddressCancelEle.nativeElement;
       el.click();
-      this._snackBar.open(res.message);
+      this._snackBar.open(res.message,'Close');
       this.addressForm.reset();
       this.submitted = false;
       this.addressForm.controls['tenantAddressId'].setValue(0);
