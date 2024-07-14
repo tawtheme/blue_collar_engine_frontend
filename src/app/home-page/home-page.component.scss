@@ -247,6 +247,9 @@ form.hero_newsletter_form button {
   .hero-contents h1 {
     font-size: 48px;
   }
+  .section-feature-image {
+    text-align: center;
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -285,7 +288,7 @@ form.hero_newsletter_form button {
   }
 
   .section-title2-sec h3 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .section-cta p,
@@ -318,12 +321,14 @@ form.hero_newsletter_form button {
 
   .section-cta .btn-light,
   .section-hvac-insights .btn-light {
-    padding-left: 25px;
-    padding-right: 25px;
     font-size: 16px;
+    padding: 10px 25px !important;
   }
 
   .section-faq .section-feature-content p {
     font-size: 16px;
+  }
+  .hero-contents p {
+    margin-bottom: 0;
   }
 }

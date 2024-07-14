@@ -47,9 +47,23 @@
     padding: 60px 0;
   }
 }
+@media screen and (max-width: 991px) {
+  .section-title-sec h2 {
+    font-size: 32px;
+  }
+}
 
+@media screen and (max-width: 767px) {
+  .our-news-item {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+  }
+}
 @media screen and (max-width: 575px) {
   .section-space-ptb {
     padding: 40px 0;
+  }
+  .section-title-sec h2 {
+    font-size: 26px;
   }
 }
