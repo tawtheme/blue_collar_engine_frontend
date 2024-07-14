@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '@app/_services';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,8 +16,7 @@ export class SecurityComponent {
   submitted = false;
   loading = false;
   passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])/;
-  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar) {
-
+  constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private authenticationService: AuthenticationService, private router: Router) {
   }
 
   ngOnInit() {
@@ -47,6 +48,8 @@ export class SecurityComponent {
         next: (res) => {
           this.submitted = false;
           this._snackBar.open(res.message,'Close');
+          this.authenticationService.logout();
+          this.router.navigate(['/login']);          
         },
         error: (e) => {
           this.loading = false;
