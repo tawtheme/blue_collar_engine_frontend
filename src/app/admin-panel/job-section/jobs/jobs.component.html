@@ -19,16 +19,16 @@
                 </div>
                 <div class="dashboard-widget-card-info">
                     <h6>{{bookingStats?.totalUnAssignedCount}}</h6>
-                    <p>Unassigned Booking</p>
+                    <p>Total Unassigned</p>
                 </div>
             </div>
             <div class="dashboard-widget-card ">
-                <div class="dashboard-widget-card-circle lightSuccessBox ">
-                    <span class="icon-tick"></span>
+                <div class="dashboard-widget-card-circle lightPrimaryBox ">
+                    <span class="icon-new"></span>
                 </div>
                 <div class="dashboard-widget-card-info">
                     <h6>{{bookingStats?.totalAssignedCount}}</h6>
-                    <p>Assigned Booking</p>
+                    <p>Total Assigned</p>
                 </div>
             </div>
             <div class="dashboard-widget-card ">
@@ -37,7 +37,7 @@
                 </div>
                 <div class="dashboard-widget-card-info">
                     <h6>{{bookingStats?.totalCompletedCount}}</h6>
-                    <p>Completed Booking</p>
+                    <p>Total Completed</p>
                 </div>
             </div>
             <div class="dashboard-widget-card ">
@@ -46,7 +46,7 @@
                 </div>
                 <div class="dashboard-widget-card-info">
                     <h6>{{bookingStats?.totalBookingCount}}</h6>
-                    <p>Total Booking</p>
+                    <p>Overvall Total</p>
                 </div>
             </div>
         </div>
@@ -85,26 +85,29 @@
                 <div class="booking-top-head unassigned-booking">
                     Unassigned ({{unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0}})
                 </div>
-                <div class="assigned-booking-item" (click)="openEditViewBooking(booking)"
-                    *ngFor="let booking of unAssignedBooking">
-                    <div class="d-flex gap-3 mb-2">
-                        <span class="grey-badge"><span class="icon-time"></span> {{booking.bookingDate | date:'mediumDate' }} at {{booking.bookingTime}}</span>
-                        <button class="danger-badge" type="button">{{booking.statusText}}</button>
+                <div class="booking-listing">
+                    <div class="assigned-booking-item" (click)="openEditViewBooking(booking)" *ngFor="let booking of unAssignedBooking">
+                        <div class="d-flex flex-column align-items-start">
+                            <button class="danger-badge mb-2" type="button">{{booking.statusText}}</button>
+                            <span class="primary-badge"><span class="icon-time"></span> {{booking.bookingDate | date:'mediumDate' }} at {{booking.bookingTime}}</span>
+                        </div>
+                        <div class="d-flex flex-column mt-2">
+                            <div class="font15 font500">{{booking.customerName}}</div>
+                            <div class="font13 font-muted">{{booking.address}} {{booking.city}} {{booking.state}} {{booking.zipCode}}</div>
+                        </div>
+                        <div class="d-flex flex-column mt-2">
+                            <div class="font13 d-flex align-items-center gap-2 font-muted">
+                                <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}} 
+                            </div>
+                            <div class="font13 d-flex align-items-center gap-2 font-muted">
+                                <span class="icon-email"></span>{{booking.emailAddress}} 
+                            </div>
+                        </div>
                     </div>
-                    <h4 class="font16 mb-1">{{booking.customerName}}</h4>
-                    <p class="font14 mb-2 font-muted">{{booking.address}} {{booking.city}} {{booking.state}}
-                        {{booking.zipCode}}
-                    </p>
-                    <div class="font14 d-flex align-items-center gap-2 mt-1 mb-2 font-muted">
-                        <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}} 
+                    <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned" class="d-flex flex-column align-items-center p-5">
+                        <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                        <span class="font-muted font14 text-center">No unassigned bookings available</span>
                     </div>
-                    <div class="font14 d-flex align-items-center gap-2 font-muted">
-                        <span class="icon-email"></span>{{booking.emailAddress}} 
-                    </div>
-                </div>
-                <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned" class="d-flex flex-column align-items-center p-5">
-                    <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
-                    <span class="font-muted font14 text-center">No unassigned bookings available</span>
                 </div>
                 <!--
                     <mat-paginator [length]="unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0"
