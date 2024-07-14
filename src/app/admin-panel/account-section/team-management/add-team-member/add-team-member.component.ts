@@ -27,7 +27,7 @@ export class AddTeamMemberComponent {
   message: string[] = [];
   progressInfos: any[] = [];
   apiBaseUrl: string = environment.apiUrl + '/';
-  states:any[]=[];
+  states: any[] = [];
   constructor(private _accountSettingService: AccountSettingService, private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private _dialog: MatDialog, private _masterService: MasterService) {
 
   }
@@ -43,14 +43,14 @@ export class AddTeamMemberComponent {
       address: ['', [Validators.required]],
       city: ['', [Validators.required]],
       state: ['', [Validators.required]],
-      zipCode: ['', [Validators.required]],
+      zipCode: ['', [Validators.required, Validators.pattern('[0-9]{5,6}')]],
       latitude: ['', null],
       longitude: ['', null],
       status: ['', [Validators.required]],
       designation: ['', [Validators.required]],
       profileImagePath: ['', null],
     });
-     this.getAllStates();
+    this.getAllStates();
   }
   // convenience getter for easy access to form fields
   get f() { return this.userForm.controls; }
@@ -59,11 +59,11 @@ export class AddTeamMemberComponent {
     this.previews = [];
     if (this.userForm != undefined) {
       if (this.items != null) {
-        //////console.log(this.items)
+        ////////console.log(this.items)
         this.userForm.patchValue(this.items);
         this.userForm.controls['mobileNo'].disable();
         this.userForm.controls['emailAddress'].disable();
-        //////console.log(this.userForm.controls['profileImagePath'].value)
+        ////////console.log(this.userForm.controls['profileImagePath'].value)
         if (this.userForm.controls['profileImagePath'].value != '' && this.userForm.controls['profileImagePath'].value != null) {
           var _data = {
             'filePath': this.userForm.controls['profileImagePath'].value,
@@ -94,8 +94,8 @@ export class AddTeamMemberComponent {
     }
     this.loading = true;
     param = { ...param, ...{ mobileNo: param.mobileNo.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, ''), alternateNo: param.alternateNo != null && param.alternateNo != '' ? param.alternateNo.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '') : '', file: this.selectedFiles } };
-   // ////console.log(param)
-    //return;
+    // //console.log(param)
+    // return;
     const formData = new FormData();
     formData.append('teamId', param.teamId);
     formData.append('userId', param.userId);
@@ -112,13 +112,13 @@ export class AddTeamMemberComponent {
     formData.append('longitude', param.longitude);
     formData.append('status', param.status);
     formData.append('designation', param.designation);
-    formData.append('profileImagePath', param.profileImagePath);
+    formData.append('profileImagePath', param.profileImagePath == null ? '' : param.profileImagePath);
     formData.append('file', this.selectedFiles == null ? null : this.selectedFiles[0]);
     this._accountSettingService.addUpdateUser(formData).subscribe({
       next: res => {
         this.submitted = false;
         this.loading = false;
-        this._snackBar.open(res.message,'Close');
+        this._snackBar.open(res.message, 'Close');
         this._accountSettingService.userAdded.next(true);
         let el: HTMLElement = this.addTeamMemberEle.nativeElement;
         el.click();
@@ -162,7 +162,7 @@ export class AddTeamMemberComponent {
   }
 
   removeTeamImg(index: number, uploadId: number) {
-    ////////console.log(this.categoryServiceForm.value.categoryServiceId)
+    //////////console.log(this.categoryServiceForm.value.categoryServiceId)
     const message = `Are you sure you want to delete?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {

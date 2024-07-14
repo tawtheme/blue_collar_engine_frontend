@@ -1,4 +1,4 @@
-﻿import { Component, Renderer2 } from '@angular/core';
+﻿import { Component, HostListener, Renderer2 } from '@angular/core';
 
 import { AuthenticationService } from './_services';
 import { User, Role } from './_models';
@@ -6,10 +6,34 @@ import { LoaderService } from './_services/loader.service';
 
 @Component({ selector: 'app-root', templateUrl: 'app.component.html' })
 export class AppComponent {
+  
+  // @HostListener('document:keydown', ['$event'])
+  // handleKeyboardEvent(e: KeyboardEvent) {
+  //   //console.log(e)
+  //   if (e.key === 'F12') {
+  //     return false;
+  //   }
+  //   if (e.ctrlKey && e.shiftKey && e.key === "I") {
+  //     return false;
+  //   }
+  //   if (e.ctrlKey && e.shiftKey && e.key === "C") {
+  //     return false;
+  //   }
+  //   if (e.ctrlKey && e.shiftKey && e.key === "J") {
+  //     return false;
+  //   }
+  //   if (e.ctrlKey && e.key == "U") {
+  //     return false;
+  //   }
+  //   return true;
+  // }
   user?: User | null;
   loading: boolean = false;
   constructor(private authenticationService: AuthenticationService, private loaderService: LoaderService, private renderer: Renderer2) {
     this.authenticationService.user.subscribe(x => this.user = x);
+    // document.addEventListener('contextmenu', function(e) {
+    //   e.preventDefault();
+    // });
   }
 
   get isAdmin() {

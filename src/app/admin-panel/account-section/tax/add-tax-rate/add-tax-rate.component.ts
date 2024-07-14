@@ -49,15 +49,15 @@ export class AddTaxRateComponent {
     this.submitted = true;
     var param = this.addTaxForm.value;
     if (this.addTaxForm.invalid) {
-      debugger
-      console.log(param)
+     // debugger
+      ////console.log(param)
       return;
     }
-    //////console.log(param)
+    ////////console.log(param)
     this.loading = true;
     this._accountSettingService.addTenantTax(param).subscribe(res => {
       this.loading = false;
-      //////console.log(res)
+      ////////console.log(res)
       let el: HTMLElement = this.addTaxCancelEle.nativeElement;
       el.click();
       this._snackBar.open(res.message,'Close');

@@ -73,7 +73,7 @@ export class EstimateComponent implements OnInit {
   checkAll(ev: any) {
     //debugger
     this.items!.forEach(x => x.ischeck = ev.target.checked)
-    //////console.log(this.pageOfItems)
+    ////////console.log(this.pageOfItems)
   }
 
   redirectToCreateEstimate(estimateId: number) {
@@ -133,7 +133,7 @@ export class EstimateComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.stats = res.data;
-          console.log(this.stats)
+          //console.log(this.stats)
         },
         error: error => {
         }

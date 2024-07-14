@@ -28,7 +28,7 @@
                     <div class="d-flex teamProfileWrap align-items-center gap-2">
                         <div>                               
                             <img src="../../../../assets/images/blank-img.png" *ngIf="user.profileImagePath==null || user.profileImagePath==''" class="tech-image">
-                            <img [src]="user.profileImagePath" *ngIf="user.profileImagePath!=null || user.profileImagePath!=''" class="tech-image">
+                            <img [src]="user.profileImagePath" *ngIf="user.profileImagePath!=null && user.profileImagePath!=''" class="tech-image">
                         </div>
                         <div>
                             <div class="font15 mb-1">{{user.firstName}} {{user.lastName}}</div>
