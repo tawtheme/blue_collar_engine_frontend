@@ -195,7 +195,7 @@ export class CreateEstimateComponent implements OnInit {
     let param = this.estimateInvoiceForm.value as any;
     Object.assign(param, { status: this.clickType });
     if (this.clickType == 'S') {
-      const message = `Are you sure you want to do save?`;
+      const message = `Are you sure you want to save?`;
       const dialogData = new ConfirmDialogModel("Confirmation", message);
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         maxWidth: "400px",
@@ -228,7 +228,7 @@ export class CreateEstimateComponent implements OnInit {
           else {
             this.loadingDraft = false;
           }
-          this._snackBar.open(res.message);
+          this._snackBar.open(res.message,'Close');
           //////console.log(res)
           this._router.navigate(['/admin/estimate']);
         },

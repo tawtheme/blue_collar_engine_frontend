@@ -201,7 +201,7 @@ export class CustomerDetailsComponent implements OnInit {
         this._router.navigate(['/admin/create-invoice'], { queryParams: { invoiceId: invoiceId } })
       }
       else {
-        this._snackBar.open("You cannot create an invoice until the customer status is In-Active. Kindly activate it first.");
+        this._snackBar.open("You cannot create an invoice until the customer status is In-Active. Kindly activate it first.",'Close');
         return;
       }
     }
@@ -216,7 +216,7 @@ export class CustomerDetailsComponent implements OnInit {
         this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } });
       }
       else {
-        this._snackBar.open("You cannot create an estimate invoice until the customer status is In-Active. Kindly activate it first.");
+        this._snackBar.open("You cannot create an estimate invoice until the customer status is In-Active. Kindly activate it first.",'Close');
         return;
       }
     }

@@ -102,7 +102,7 @@ export class BookingSlotComponent {
   }
 
   removeSelectedService(serviceId: number) {
-    const message = `Are you sure you want to do remove?`;
+    const message = `Are you sure you want to delete?`;
     const dialogData = new ConfirmDialogModel('Confirmation', message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
       maxWidth: '400px',

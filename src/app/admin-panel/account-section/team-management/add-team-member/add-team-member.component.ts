@@ -118,7 +118,7 @@ export class AddTeamMemberComponent {
       next: res => {
         this.submitted = false;
         this.loading = false;
-        this._snackBar.open(res.message);
+        this._snackBar.open(res.message,'Close');
         this._accountSettingService.userAdded.next(true);
         let el: HTMLElement = this.addTeamMemberEle.nativeElement;
         el.click();
@@ -163,7 +163,7 @@ export class AddTeamMemberComponent {
 
   removeTeamImg(index: number, uploadId: number) {
     ////////console.log(this.categoryServiceForm.value.categoryServiceId)
-    const message = `Are you sure you want to remove?`;
+    const message = `Are you sure you want to delete?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",

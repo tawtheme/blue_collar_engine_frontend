@@ -97,14 +97,14 @@ export class BookingAddressComponent {
     if (this.mobileVerifyForm.controls['otp'].value == '') {
       this.authenticationService.generateOTP(_param).subscribe(res => {
         this.IsShowEditBtn = true;
-        this._snackBar.open("One time password have been sent on mobile no.")
+        this._snackBar.open("One time password have been sent on mobile no.",'Close')
       })
     }
     else {
       _param.otp = this.mobileVerifyForm.controls['otp'].value;
       this.authenticationService.verifyOTP(_param).subscribe(res => {
         ////////console.log(res)
-        this._snackBar.open(res.message);
+        this._snackBar.open(res.message,'Close');
         this.openVerifyOTP = false;
         this.isVerifyOtp = true;
         this._customerService.findCustomerByMobileNo(_param.sendTo).subscribe(res => {
@@ -129,7 +129,7 @@ export class BookingAddressComponent {
   }
 
   removeSelectedService(serviceId: number) {
-    const message = `Are you sure you want to do remove?`;
+    const message = `Are you sure you want to delete?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
@@ -169,7 +169,7 @@ export class BookingAddressComponent {
       return;
     }
     else if (this.selectedServices.length == 0) {
-      this._snackBar.open("Please add atleast one service");
+      this._snackBar.open("Please add atleast one service",'Close');
     }
     else {
       let _param = this.calanderBookingForm.value as any;
@@ -178,7 +178,7 @@ export class BookingAddressComponent {
       _param = { ..._param, ...{ mobileNo: _mobileNo, bookingDate: this.bookingDate, timeSlot: this.bookingTime, timeSlotText: this.bookingTimeText, bookingDetails: this.selectedServices, customerId: (_param.customerId == '' ? 0 : _param.customerId), addressId: (_param.customerAddressId == '' ? 0 : _param.customerAddressId), status: 'U' } };
       this.dialogRef.close();
       this._bookingService.createBooking(_param).subscribe(res => {
-        this._snackBar.open(res.message);             
+        this._snackBar.open(res.message,'Close');             
         this._router.navigateByUrl('/booking/booking-success', { state: _param });
       })
     }

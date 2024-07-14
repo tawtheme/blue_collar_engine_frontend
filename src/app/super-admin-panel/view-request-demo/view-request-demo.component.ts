@@ -107,7 +107,7 @@ export class ViewRequestDemoComponent {
           this.loading = false;
           let el: HTMLElement = this.customerCancelEle.nativeElement;
           el.click();
-          this._snackBar.open(res.message);
+          this._snackBar.open(res.message, 'Close');
           this._requestDemoService.subDomainAdded.next(true);
         },
         error: error => {

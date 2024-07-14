@@ -228,7 +228,7 @@ export class CreateInvoiceComponent implements OnInit {
     Object.assign(param, { status: this.clickType });
     ////////console.log(param)
     if (this.clickType == 'S') {
-      const message = `Are you sure you want to do send?`;
+      const message = `Are you sure you want to send?`;
       const dialogData = new ConfirmDialogModel("Confirmation", message);
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         maxWidth: "400px",
@@ -261,7 +261,7 @@ export class CreateInvoiceComponent implements OnInit {
           else {
             this.loadingDraft = false;
           }
-          this._snackBar.open(res.message);
+          this._snackBar.open(res.message,'Close');
           ////////console.log(res)
           if (this.bookingId > 0) {
             this._router.navigate(['/admin/bookings']);

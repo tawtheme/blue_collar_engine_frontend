@@ -23,7 +23,7 @@ export class AddTaxRateComponent {
       taxId: [0, null],
       name: ['', [Validators.required]],
       tax: ['', [Validators.required]],
-      effectiveDate: ['', [Validators.required]]
+      effectiveDate: [null, [Validators.required]]
     });
   }
 
@@ -34,6 +34,7 @@ export class AddTaxRateComponent {
     if(this.addTaxForm!=undefined){
       if (this.items != null) {
         this.addTaxForm.patchValue(this.items);
+        this.todayDate=this.items.effectiveDate;
       }
       else {
         this.submitted=false;
@@ -44,10 +45,12 @@ export class AddTaxRateComponent {
     }  
   }
   
-  onSubmit() {
+  onSubmit() {    
     this.submitted = true;
-    var param = this.addTaxForm.getRawValue();
+    var param = this.addTaxForm.value;
     if (this.addTaxForm.invalid) {
+      debugger
+      console.log(param)
       return;
     }
     //////console.log(param)
@@ -57,7 +60,7 @@ export class AddTaxRateComponent {
       //////console.log(res)
       let el: HTMLElement = this.addTaxCancelEle.nativeElement;
       el.click();
-      this._snackBar.open(res.message);
+      this._snackBar.open(res.message,'Close');
       this._accountSettingService.tenantAddressAdded.next(true);
     });
   }

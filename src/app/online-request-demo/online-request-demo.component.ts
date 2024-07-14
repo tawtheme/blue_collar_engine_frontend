@@ -98,7 +98,7 @@ export class OnlineRequestDemoComponent implements OnInit {
           this.requestDemoForm.controls['howHearAboutUs'].setValue('');
           this.requestDemoForm.controls['timeZone'].setValue('');
           this.submitted = false;
-          this._snackBar.open(res.message);
+          this._snackBar.open(res.message,'Close');
         },
         error: error => {
           this.loading = false;

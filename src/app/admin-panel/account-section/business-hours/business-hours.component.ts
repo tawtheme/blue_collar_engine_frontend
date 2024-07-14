@@ -79,7 +79,7 @@ export class BusinessHoursComponent {
   }
 
   remove(empIndex: number, skillIndex: number) {
-    const message = `Are you sure you want to do delete?`;
+    const message = `Are you sure you want to delete?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
@@ -141,7 +141,7 @@ export class BusinessHoursComponent {
     ////console.log(JSON.stringify(param))
     this._accountSettingService.addUpdateBusinessHours(param).subscribe(res => {
       this.loading = false;
-      this._snackBar.open(res.message);
+      this._snackBar.open(res.message,'Close');
     });
   }
   onOpenTimeset(event: any) {

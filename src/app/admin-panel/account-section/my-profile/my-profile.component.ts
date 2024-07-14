@@ -129,13 +129,13 @@ export class MyProfileComponent {
       this.selectedFiles = null;
       this.submitted = false;
       this.profileForm.controls['companyImagePath'].setValue("");
-      this._snackBar.open("Only png, jpeg, jpg extension files are allowed", "Error");
+      this._snackBar.open("Only png, jpeg, jpg extension files are allowed",'Close');
     }
   }
 
   removeServiceImage(index: number, uploadId: number) {
     ////////console.log(this.categoryServiceForm.value.categoryServiceId)
-    const message = `Are you sure you want to remove?`;
+    const message = `Are you sure you want to delete?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
@@ -182,8 +182,7 @@ export class MyProfileComponent {
     this._accountSettingService.updateProfile(formData)
       .subscribe(res => {
         this.submitted = false;
-        this._snackBar.open(res.message);
-
+        this._snackBar.open(res.message,'Close');
       });
   }
 }

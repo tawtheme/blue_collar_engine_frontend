@@ -63,7 +63,7 @@ export class ContractorAddressBookComponent {
     if(ev.source.checked){
       return;
     }
-    const message = `Are you sure you want to set as default?`;
+    const message = `Are you sure you want to set this address as the default address?`;
     const dialogData = new ConfirmDialogModel("Confirmation", message);
     const dialogRef = this._dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
@@ -73,7 +73,7 @@ export class ContractorAddressBookComponent {
       if (dialogResult) {
         addressInfo = { ...addressInfo, ...{ isDefault: ev.checked } };
         this._accountSettingService.setAsDefaultAddress(addressInfo).subscribe(res => {
-          this._snackBar.open(res.message);
+          this._snackBar.open(res.message,'Close');
           var _param = {
             "id": 0,
             "pageNumber": 0,

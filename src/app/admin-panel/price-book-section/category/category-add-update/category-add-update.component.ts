@@ -60,7 +60,7 @@ export class CategoryAddUpdateComponent {
           //////console.log(res)
           let el: HTMLElement = this.customerCancelEle.nativeElement;
           el.click();
-          this._snackBar.open(res.message);
+          this._snackBar.open(res.message,'Close');
           this._categoryService.categoryAdded.next(true);
         },
         error: error => {
