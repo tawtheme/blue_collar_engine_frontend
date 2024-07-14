@@ -15,6 +15,8 @@ import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.compo
 import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { FeatureThreeComponent } from './feature-three/feature-three.component';
+import { FeatureFourComponent } from './feature-four/feature-four.component';
 
 const routes: Routes = [
   {
@@ -37,6 +39,14 @@ const routes: Routes = [
       {
         path: 'page/estimate',
         component: FeatureEstimateComponent,
+      },
+      {
+        path: 'page/feature-three',
+        component: FeatureThreeComponent,
+      },
+      {
+        path: 'page/feature-four',
+        component: FeatureFourComponent,
       },
       {
         path: 'privacy-policy',

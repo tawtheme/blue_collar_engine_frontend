@@ -14,21 +14,11 @@ export class FrontendLayoutComponent {
     //////console.log('window.location.href :' + getLink)
 
     const { hostname } = new URL(getLink);
-    var subdomain = hostname.split(".")[0];
+    var subdomain = hostname.split('.')[0];
     //////console.log(subdomain)
     if (subdomain != environment.baseUrlHostName) {
       this._route.navigate(['/booking']);
     }
-  }
-
-  ngOnInit(): void {
-    const accordionItems = document.querySelectorAll('.accordion-item');
-    accordionItems.forEach((item) => {
-      item.addEventListener('show.bs.collapse', () => {
-        accordionItems.forEach((i) => i.classList.remove('opened'));
-        item.classList.add('opened');
-      });
-    });
   }
 
   @HostListener('window:scroll', [])

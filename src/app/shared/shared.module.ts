@@ -6,25 +6,31 @@ import { MaterialModule } from 'src/material/material.module';
 import { StarRatingComponent } from '@app/shared/star-rating/star-rating.component';
 import { OnlynumberDirective } from '@app/_helpers/directive/onlynumber.directive';
 import { NumericDirective } from '@app/_helpers/directive/numeric.directive';
+import { FaqsComponent } from './faqs/faqs.component';
+import { CtaSectionComponent } from './cta-section/cta-section.component';
+import { NewsAndBlogsComponent } from './news-and-blogs/news-and-blogs.component';
 
 @NgModule({
-  imports: [  
-    CommonModule,    
-    MaterialModule  
-  ],
+  imports: [CommonModule, MaterialModule],
   exports: [
     PhoneMaskDirective,
     UsMobileNoPipe,
     OnlynumberDirective,
     NumericDirective,
-    StarRatingComponent
+    StarRatingComponent,
+    FaqsComponent,
+    CtaSectionComponent,
+    NewsAndBlogsComponent,
   ],
   declarations: [
     PhoneMaskDirective,
     OnlynumberDirective,
     UsMobileNoPipe,
     NumericDirective,
-    StarRatingComponent
-  ]
+    StarRatingComponent,
+    FaqsComponent,
+    CtaSectionComponent,
+    NewsAndBlogsComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

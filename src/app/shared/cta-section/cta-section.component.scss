@@ -1,0 +1,49 @@
+.section-hvac-insights {
+  background-image: url("../../../assets/images/frontend/images/hvac-insights-bg.png");
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: right;
+  height: 350px;
+  display: flex;
+  align-items: center;
+
+  h2 {
+    color: #fff;
+    font-size: 35px;
+    font-weight: 700;
+  }
+
+  p {
+    color: #fff;
+    font-size: 20px;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  .btn-light {
+    padding-left: 35px;
+    padding-right: 35px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    color: #2d64d6;
+    font-size: 18px;
+  }
+}
+
+.bg-blue-primary {
+  background-color: #2d64d6;
+}
+
+@media screen and (max-width: 991px) {
+  .section-hvac-insights {
+    padding: 60px 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section-hvac-insights {
+    height: auto;
+    padding: 40px 0;
+  }
+}

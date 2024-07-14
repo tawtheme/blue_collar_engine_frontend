@@ -22,7 +22,7 @@ a {
   &:focus {
     text-decoration: none !important;
   }
-  
+
   &:hover {
     color: #172ea1;
     text-decoration: none !important;
@@ -369,43 +369,6 @@ small {
   transform: rotate(-90deg);
 }
 
-.discover-accordion-section .accordion-item {
-  margin-bottom: 25px;
-  overflow: hidden;
-  padding: 20px 30px 20px 30px;
-  border-radius: 20px;
-  border: 1px solid #d1d5db !important;
-}
-
-.discover-accordion-section .accordion-item.opened {
-  background: #f4f8ff;
-  border-color: #bbd3f9 !important;
-}
-
-.discover-accordion-section .accordion-item button.accordion-button {
-  padding: 0;
-  box-shadow: none;
-  background: transparent;
-  font-size: 17px;
-  color: #0e172a;
-  font-weight: 500;
-}
-
-.discover-accordion-section .accordion-item button.accordion-button::after {
-  display: none;
-}
-
-.discover-accordion-section .accordion-item .accordion-body {
-  padding: 0;
-  padding-top: 5px;
-}
-
-.discover-accordion-section .accordion-item p {
-  margin: 0;
-  font-size: 15px;
-  color: #4b5563;
-}
-
 .footer-section {
   background: #030b18;
   position: relative;
@@ -421,7 +384,6 @@ small {
       margin-bottom: 20px;
     }
     ul {
-      
       li {
         margin-bottom: 15px;
 
@@ -433,13 +395,12 @@ small {
           align-items: center;
           gap: 12px;
 
-          &:hover{
+          &:hover {
             color: #2d64d6;
           }
         }
       }
-    }  
-
+    }
   }
   .footer-bottom {
     border-top: 1px solid #545454;
@@ -447,7 +408,7 @@ small {
   }
 }
 
-.section-title-sec{
+.section-title-sec {
   p {
     color: #6b7280;
     font-size: 18px;
@@ -457,58 +418,10 @@ small {
     color: #0e172a;
     font-size: 42px;
     font-weight: 700;
-    
+
     span {
       color: #2d64d6;
     }
-  }
-}
-.section-hvac-insights {
-  background-image: url("../../../assets/images/frontend/images/hvac-insights-bg.png");
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: right;
-  height: 350px;
-  display: flex;
-  align-items: center;
-
-  h2 {
-    color: #fff;
-    font-size: 35px;
-    font-weight: 700;
-  }
-  
-  p {
-    color: #fff;
-    font-size: 20px;
-    margin: 0;
-    font-weight: 300;
-  }
-  
-  .btn-light {
-    padding-left: 35px;
-    padding-right: 35px;
-    display: inline-flex;
-    align-items: center;
-    gap: 15px;
-    color: #2d64d6;
-    font-size: 18px;
-  }
-}
-
-.section-faq .section-feature-content p {
-  font-size: 18px;
-}
-
-.our-news-item {
-  margin-bottom: 50px;
-  padding-bottom: 50px;
-  border-bottom: 1px solid #d1d5db;
-
-  &:last-child {
-    padding-bottom: 0;
-    margin-bottom: 0;
-    border-bottom: 0;
   }
 }
 
@@ -568,16 +481,12 @@ small {
     padding-bottom: 10px;
   }
 
-  .discover-accordion-section .accordion-item:last-child {
-    margin-bottom: 0;
-  }
-
   .footer-column ul {
     display: flex;
     flex-wrap: wrap;
     row-gap: 10px;
     column-gap: 30px;
-    
+
     li {
       margin-bottom: 0;
 
@@ -619,20 +528,6 @@ small {
 
   .section-space-pb {
     padding-bottom: 40px;
-  }
-
-  .discover-accordion-section .accordion-item {
-    padding: 15px;
-    border-radius: 10px;
-  }
-
-  .discover-accordion-section .accordion-item button.accordion-button {
-    font-size: 16px;
-    line-height: 1.3;
-  }
-
-  .discover-accordion-section .accordion-item p {
-    font-size: 14px;
   }
 
   .top-right-call {

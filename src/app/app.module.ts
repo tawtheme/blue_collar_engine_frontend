@@ -31,75 +31,84 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
-import {NgxStripeModule} from "ngx-stripe";
+import { NgxStripeModule } from 'ngx-stripe';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.component';
 import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig } from '@angular/material/snack-bar';
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarConfig,
+} from '@angular/material/snack-bar';
 import { SharedModule } from './shared/shared.module';
 import { DatePipe } from '@angular/common';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { FeatureThreeComponent } from './feature-three/feature-three.component';
+import { FeatureFourComponent } from './feature-four/feature-four.component';
 
 Date.prototype.toISOString = function () {
-    return moment(this).format("YYYY-MM-DDTHH:mm:ss");
-}
+  return moment(this).format('YYYY-MM-DDTHH:mm:ss');
+};
 const matSnackbarDefaultConfig: MatSnackBarConfig = {
-    verticalPosition: 'top',
-    horizontalPosition: 'center',
-    duration: 2000,
-    panelClass:"custom-snakbar"
-  };
+  verticalPosition: 'top',
+  horizontalPosition: 'center',
+  duration: 2000,
+  panelClass: 'custom-snakbar',
+};
 
-  
 @NgModule({
-    imports: [
-        BrowserModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot({
-            timeOut: 5000, // 10 seconds
-            closeButton: true,
-            progressBar: true,
-        }),
-        NgbModule,
-        MaterialModule,
-        JwtModule,
-        SharedModule,
-        NgxStripeModule.forRoot()
-    ],
-    declarations: [
-        AppComponent,
-        LoginComponent,
-        UnauthorizedComponent,
-        LayoutComponent,
-        SecureLayoutComponent,
-        ForgetPasswordComponent,
-        OnlineRequestDemoComponent,
-        HeaderComponent,
-        ResetPasswordComponent,
-        ConfirmDialogComponent,
-        HomePageComponent,
-        FrontendLayoutComponent,
-        PagenotfoundComponent,
-        PaymentSuccessComponent,
-        FeatureInvoiceComponent,
-        FeatureEstimateComponent,
-        PrivacyPolicyComponent,
-        TermsOfServiceComponent                        
-    ],
-    providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-        {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: matSnackbarDefaultConfig},
-        { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-        JwtHelperService,
-        LoaderService,
-        DatePipe
-    ],
-    bootstrap: [AppComponent]
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 5000, // 10 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
+    NgbModule,
+    MaterialModule,
+    JwtModule,
+    SharedModule,
+    NgxStripeModule.forRoot(),
+  ],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    UnauthorizedComponent,
+    LayoutComponent,
+    SecureLayoutComponent,
+    ForgetPasswordComponent,
+    OnlineRequestDemoComponent,
+    HeaderComponent,
+    ResetPasswordComponent,
+    ConfirmDialogComponent,
+    HomePageComponent,
+    FrontendLayoutComponent,
+    PagenotfoundComponent,
+    PaymentSuccessComponent,
+    FeatureInvoiceComponent,
+    FeatureEstimateComponent,
+    PrivacyPolicyComponent,
+    TermsOfServiceComponent,
+    FeatureThreeComponent,
+    FeatureFourComponent,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: matSnackbarDefaultConfig,
+    },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    LoaderService,
+    DatePipe,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

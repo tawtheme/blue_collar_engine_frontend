@@ -1414,10 +1414,11 @@ tag-input.form-control {
       min-height: auto;
       input {
         font-family: "JUST Sans";
-        font-weight: 400; font-size: 13px;
+        font-weight: 400;
+        font-size: 13px;
         color: var(--dark);
       }
-      .mat-date-range-input-start-wrapper{
+      .mat-date-range-input-start-wrapper {
         overflow: inherit;
         max-width: calc(50% - 8px);
       }
@@ -1444,11 +1445,12 @@ tag-input.form-control {
   .mat-mdc-form-field-subscript-wrapper {
     display: none;
   }
-  .mdc-icon-button svg, .mdc-icon-button img{
+  .mdc-icon-button svg,
+  .mdc-icon-button img {
     width: 20px !important;
     height: 20px !important;
     margin: 3px 0px 0px 2px;
-    }
+  }
 }
 
 .ShapeBox38 {
@@ -1748,7 +1750,8 @@ app-header {
   z-index: 3;
 }
 
-.no-data-found-img{
-  width: 80px; height: auto;
+.no-data-found-img {
+  width: 80px;
+  height: auto;
   margin: 0px 0px 5px 0px;
 }
