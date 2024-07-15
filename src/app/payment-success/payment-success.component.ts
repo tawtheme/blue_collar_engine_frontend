@@ -110,6 +110,10 @@ export class PaymentSuccessComponent {
     if (this.ratingForm.invalid) {
       return;
     }
+    if(this.rating==0){
+      this._snackBar.open("Rating is required");
+      return;
+    }
     param = { ...param, ...{ rate: this.rating, tenantUserId: this.tenantInfo.userId, bookingId: this.bookingId } };
     this._bookingService.saveBookingRating(param)
       .subscribe(res => {

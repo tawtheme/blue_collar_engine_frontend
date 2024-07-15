@@ -66,7 +66,15 @@ export class EditViewBookingComponent {
         next: (res) => {
           this.loading = false;
           this.assignTeam = res.data;
-          ////////////console.log(this.assignTeam)
+          this.assignTeam = this.assignTeam.sort(function (a: { fullName: string; }, b: { fullName: string; }) {
+            if (a.fullName < b.fullName) {
+              return -1;
+            }
+            if (a.fullName > b.fullName) {
+              return 1;
+            }
+            return 0;
+          });
         },
         error: error => {
           this.loading = false;
