@@ -73,7 +73,7 @@ export class ContractorAddressBookComponent {
       if (dialogResult) {
         addressInfo = { ...addressInfo, ...{ isDefault: ev.checked } };
         this._accountSettingService.setAsDefaultAddress(addressInfo).subscribe(res => {
-          this._snackBar.open(res.message,'Close');
+          this._snackBar.open(res.message);
           var _param = {
             "id": 0,
             "pageNumber": 0,

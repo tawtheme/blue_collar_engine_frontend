@@ -69,7 +69,7 @@ export class CreateCustomerAddressComponent implements OnInit {
           this.loading = false;
           let el: HTMLElement = this.customerAddCancelEle.nativeElement;
           el.click();
-          this._snackBar.open(res.message,'Close');
+          this._snackBar.open(res.message);
           this._customerService.customerAdded.next(true);
           if (param.customerId > 0) {
             this._customerService.customerDetailAdded.next(param.customerId);

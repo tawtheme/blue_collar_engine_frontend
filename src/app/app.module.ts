@@ -52,7 +52,7 @@ Date.prototype.toISOString = function () {
 const matSnackbarDefaultConfig: MatSnackBarConfig = {
   verticalPosition: 'top',
   horizontalPosition: 'center',
-  duration: 5000,
+  duration: 2000,
   panelClass: 'custom-snakbar',
 };
 

@@ -121,7 +121,7 @@ export class CategoryListComponent {
           'status': category.status == 'A' ? 'D' : 'A'
         }
         this._categoryService.ChangeStatus(_param).subscribe(res => {
-          this._snackBar.open("Status has been changed successfully.",'Close');          
+          this._snackBar.open("Status has been changed successfully.");          
           category.status = category.status == 'A' ? 'D' : 'A';
         })
       }

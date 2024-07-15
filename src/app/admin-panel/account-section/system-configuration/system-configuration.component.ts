@@ -86,7 +86,7 @@ export class SystemConfigurationComponent {
       .pipe(first())
       .subscribe({
         next: (res) => {
-          this._snackBar.open(res.message,'Close');
+          this._snackBar.open(res.message);
         },
         error: () => {
 
@@ -130,7 +130,7 @@ export class SystemConfigurationComponent {
       .subscribe({
         next: (res) => {
           this.submitted = false;
-          this._snackBar.open(res.message,'Close');
+          this._snackBar.open(res.message);
         },
         error: (e) => {
           this.loading = false;

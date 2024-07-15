@@ -228,7 +228,7 @@ export class CreateEstimateComponent implements OnInit {
           else {
             this.loadingDraft = false;
           }
-          this._snackBar.open(res.message,'Close');
+          this._snackBar.open(res.message);
           ////////console.log(res)
           this._router.navigate(['/admin/estimate']);
         },

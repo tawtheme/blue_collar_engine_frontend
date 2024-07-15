@@ -61,7 +61,7 @@ export class ResetPasswordComponent {
           ////////console.log(res)
           this.submitted = false;
           this.resetPasswordForm.reset();
-          this._snackBar.open(res.message, 'Close');          
+          this._snackBar.open(res.message);          
         },
         error: error => {
           this.loading = false;

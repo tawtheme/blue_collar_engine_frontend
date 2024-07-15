@@ -38,11 +38,7 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
-    onSubmit() {
-        // this._snackBar.open('Success', 'Close', {
-        //     panelClass: 'app-notification-success',
-        // });
-        // return;
+    onSubmit() {       
         this.submitted = true;
         // stop here if form is invalid
         if (this.loginForm.invalid) {
@@ -70,7 +66,7 @@ export class LoginComponent implements OnInit {
     }
 
     openSnakbar() {
-        this._snackBar.open('Success', 'Close', {
+        this._snackBar.open('Success', '', {
             panelClass: 'custom-snakbar',
             duration: 200000,
             verticalPosition: 'top',

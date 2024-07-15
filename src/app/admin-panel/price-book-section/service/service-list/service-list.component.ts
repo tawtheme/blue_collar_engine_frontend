@@ -131,7 +131,7 @@ export class ServiceListComponent {
           'status': service.isOnlineBooking == true ? false : true
         }
         this._categoryService.ChangeBookingStatus(_param).subscribe(res => {
-          this._snackBar.open("Booking status has been changed successfully.",'Close');
+          this._snackBar.open("Booking status has been changed successfully.");
           service.isOnlineBooking = (service.isOnlineBooking == true ? false : true);
           //this._categoryService.categoryServiceAdded.next(true);
         })

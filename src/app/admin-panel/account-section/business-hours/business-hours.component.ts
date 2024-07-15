@@ -141,7 +141,7 @@ export class BusinessHoursComponent {
     //////console.log(JSON.stringify(param))
     this._accountSettingService.addUpdateBusinessHours(param).subscribe(res => {
       this.loading = false;
-      this._snackBar.open(res.message,'Close');
+      this._snackBar.open(res.message);
     });
   }
   onOpenTimeset(event: any) {

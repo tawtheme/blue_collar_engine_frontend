@@ -17,10 +17,10 @@ export class ErrorInterceptor implements HttpInterceptor {
             if ([401, 403].includes(err.status) && this.authenticationService.userValue) {
                 this.authenticationService.logout();
                 if (err.status == 401) {
-                    this._snackBar.open("Unauthorized access",'Close');
+                    this._snackBar.open("Unauthorized access");
                 }
                 else {
-                    this._snackBar.open("Session has been expired",'Close');
+                    this._snackBar.open("Session has been expired");
                 }
                 return throwError(() => error);
             }
@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             else {
                 error = err.error.message || err.error.data || err.statusText;
             }
-            this._snackBar.open(error,'Close');
+            this._snackBar.open(error);
             return throwError(() => error);
         }))
     }

@@ -128,7 +128,7 @@
                                 <td class="col-md-6">
                                     <div class="form-group mb-3">
                                         <select id="item" class="form-select" formControlName="productId"
-                                            (ngModelChange)="bindProductInfo($event,i)"
+                                             (ngModelChange)="bindProductInfo($event,i)"
                                             [ngClass]="{ 'is-invalid': submitted && product.get('productId')!.errors?.required }">
                                             <option value="" selected>Type or click to select an item</option>
                                             <option value="{{product.categoryServiceId}}"

@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
         const user = this.authenticationService.userValue;
         //////console.log(state.url)
         if (this._jwtHelperService.isTokenExpired(user?.data.token!)) {
-            this._snackBar.open("Session has been expired", 'Close');
+            this._snackBar.open("Session has been expired");
             this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
             return false;
         }

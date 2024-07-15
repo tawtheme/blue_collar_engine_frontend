@@ -47,7 +47,7 @@ export class SecurityComponent {
       .subscribe({
         next: (res) => {
           this.submitted = false;
-          this._snackBar.open(res.message,'Close');
+          this._snackBar.open(res.message);
           this.authenticationService.logout();
           this.router.navigate(['/login']);          
         },

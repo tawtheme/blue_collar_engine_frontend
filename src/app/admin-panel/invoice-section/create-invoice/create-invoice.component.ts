@@ -224,9 +224,8 @@ export class CreateInvoiceComponent implements OnInit {
     if (this.invoiceForm.invalid) {
       return;
     }
-    let param = this.invoiceForm.value as any;
-    Object.assign(param, { status: this.clickType });
-    //////////console.log(param)
+    let param = this.invoiceForm.getRawValue() as any;
+    Object.assign(param, { status: this.clickType });   
     if (this.clickType == 'S') {
       const message = `Are you sure you want to send?`;
       const dialogData = new ConfirmDialogModel("Confirmation", message);
@@ -261,7 +260,7 @@ export class CreateInvoiceComponent implements OnInit {
           else {
             this.loadingDraft = false;
           }
-          this._snackBar.open(res.message,'Close');
+          this._snackBar.open(res.message);
           //////////console.log(res)
           if (this.bookingId > 0) {
             this._router.navigate(['/admin/bookings']);
@@ -356,6 +355,8 @@ export class CreateInvoiceComponent implements OnInit {
           }
           productArr.push(obj);
           var teacher: FormGroup = this.newProduct();
+          teacher.controls['productId'].disable();
+          teacher.controls['qty'].disable();
           this.products().push(teacher);
         })
       });

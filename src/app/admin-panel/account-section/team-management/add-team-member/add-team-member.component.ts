@@ -118,7 +118,7 @@ export class AddTeamMemberComponent {
       next: res => {
         this.submitted = false;
         this.loading = false;
-        this._snackBar.open(res.message, 'Close');
+        this._snackBar.open(res.message);
         this._accountSettingService.userAdded.next(true);
         let el: HTMLElement = this.addTeamMemberEle.nativeElement;
         el.click();
@@ -157,7 +157,7 @@ export class AddTeamMemberComponent {
       this.selectedFiles = null;
       this.submitted = false;
       this.userForm.controls['companyImagePath'].setValue("");
-      this._snackBar.open("Only png, jpeg, jpg extension files are allowed", "Error");
+      this._snackBar.open("Only png, jpeg, jpg extension files are allowed");
     }
   }
 

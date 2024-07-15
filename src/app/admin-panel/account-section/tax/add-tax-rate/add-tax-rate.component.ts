@@ -60,7 +60,7 @@ export class AddTaxRateComponent {
       ////////console.log(res)
       let el: HTMLElement = this.addTaxCancelEle.nativeElement;
       el.click();
-      this._snackBar.open(res.message,'Close');
+      this._snackBar.open(res.message);
       this._accountSettingService.tenantAddressAdded.next(true);
     });
   }

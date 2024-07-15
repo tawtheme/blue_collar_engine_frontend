@@ -129,7 +129,7 @@ export class MyProfileComponent {
       this.selectedFiles = null;
       this.submitted = false;
       this.profileForm.controls['companyImagePath'].setValue("");
-      this._snackBar.open("Only png, jpeg, jpg extension files are allowed",'Close');
+      this._snackBar.open("Only png, jpeg, jpg extension files are allowed");
     }
   }
 
@@ -182,7 +182,7 @@ export class MyProfileComponent {
     this._accountSettingService.updateProfile(formData)
       .subscribe(res => {
         this.submitted = false;
-        this._snackBar.open(res.message,'Close');
+        this._snackBar.open(res.message);
       });
   }
 }

@@ -128,7 +128,7 @@ export class AddUpdateServiceComponent {
         ////////console.log(res)
         let el: HTMLElement = this.customerCancelEle.nativeElement;
         el.click();
-        this._snackBar.open(res.message,'Close');
+        this._snackBar.open(res.message);
         this._categoryService.categoryServiceAdded.next(true);
       });
   }
@@ -176,7 +176,7 @@ export class AddUpdateServiceComponent {
       this.selectedFiles = null;
       this.submitted = false;
       this.categoryServiceForm.controls['files'].setValue("");
-      this._snackBar.open("Only png, jpeg, jpg extension files are allowed",'Close');
+      this._snackBar.open("Only png, jpeg, jpg extension files are allowed");
     }
   }
 
@@ -198,7 +198,7 @@ export class AddUpdateServiceComponent {
             'status': 'D'
           }
           this._uploadService.changeStatus(_param).subscribe(res => {
-            this._snackBar.open("Service Image has been deleted successfully.",'Close');
+            this._snackBar.open("Service Image has been deleted successfully.");
             let el: HTMLElement = this.customerCancelEle.nativeElement;
             el.click();
             this._categoryService.categoryServiceAdded.next(true);

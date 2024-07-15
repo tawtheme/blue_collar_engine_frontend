@@ -63,7 +63,7 @@ export class PaymentSuccessComponent {
           //////console.log(res.data)
           if (res.data == null) {
             this.hideSubmitBtn = true;
-            this._snackBar.open("This link is no longer valid.", 'Close')
+            this._snackBar.open("This link is no longer valid.")
             return;
           }
           this.tenantInfo = { ...res.data, ...{ companyImagePath: this.apiBaseUrl + res.data.companyImagePath } };
@@ -114,7 +114,7 @@ export class PaymentSuccessComponent {
     this._bookingService.saveBookingRating(param)
       .subscribe(res => {
         this.submitted = false;
-        this._snackBar.open(res.message, 'Close');
+        this._snackBar.open(res.message);
         if (this.tenantInfo.websiteUrl != undefined && this.tenantInfo.websiteUrl != null && this.tenantInfo.websiteUrl != "") {
           let url: string = '';
           if (!/^http[s]?:\/\//.test(this.tenantInfo.websiteUrl)) {
