@@ -47,7 +47,7 @@ export class CreateInvoiceComponent implements OnInit {
   filteredProducts: Observable<any[]>;
   productCtrl = new FormControl();
   bookingId: number = 0;
-  termAndConditionDetail:any[]=[];
+  termAndConditionDetail: any[] = [];
   constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _snackBar: MatSnackBar, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService, private _bookingService: BookingService) {
     this.filteredProducts = this.productCtrl.valueChanges
       .pipe(
@@ -133,11 +133,21 @@ export class CreateInvoiceComponent implements OnInit {
     this._invoiceService.get(invoiceId).subscribe(res => {
       this.products().clear();
       res.data.products.forEach((t: { batches: any[]; }) => {
-        var teacher: FormGroup = this.newProduct();
-        this.products().push(teacher);
+        var product: FormGroup = this.newProduct();
+        if (res.data.status != 'Draft') {
+          product.controls['productId'].disable();
+          product.controls['qty'].disable();
+          product.controls['description'].disable();
+        }
+        this.products().push(product);
       });
       this.invoiceForm.patchValue(res.data);
-
+      if (res.data.status != 'Draft') {
+        this.invoiceForm.controls['customerId'].disable();
+        this.invoiceForm.controls['expiryDate'].disable();
+        this.invoiceForm.controls['discount'].disable();
+        this.invoiceForm.controls['notes'].disable();
+      };
       this.customerInfo = <CustomerModel>res.data;
       this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
       this.getAddress(this.customerInfo.customerId);
@@ -225,7 +235,7 @@ export class CreateInvoiceComponent implements OnInit {
       return;
     }
     let param = this.invoiceForm.getRawValue() as any;
-    Object.assign(param, { status: this.clickType });   
+    Object.assign(param, { status: this.clickType });
     if (this.clickType == 'S') {
       const message = `Are you sure you want to send?`;
       const dialogData = new ConfirmDialogModel("Confirmation", message);
@@ -380,7 +390,7 @@ export class CreateInvoiceComponent implements OnInit {
       .subscribe({
         next: (res) => {
           ////console.log(res.data)
-          this.termAndConditionDetail=res.data.termAndConditionDetail;
+          this.termAndConditionDetail = res.data.termAndConditionDetail;
         },
         error: () => {
         }

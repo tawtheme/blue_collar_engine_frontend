@@ -93,7 +93,7 @@
                     <div class="p-3 recentListing" *ngFor="let booking of todayBooking">
                         <div class="d-flex gap-3 mb-1">
                             <span class="grey-badge gap-2 d-flex align-items-center"><span class="icon-time"></span> {{booking.bookingTime}}</span>
-                            <button [ngClass]="{'warning-badge': booking.status === 'U', 'primary-badge' : booking.status === 'A','success-badge' : booking.status === 'C' }" type="button">{{booking.statusText}}</button>
+                            <button [ngClass]="{'danger-badge': booking.status === 'U', 'primary-badge' : booking.status === 'A','success-badge' : booking.status === 'C' }" type="button">{{booking.statusText}}</button>
                         </div>
                         <div class="font14 mb-0 font500">{{booking.customerName}}</div>
                         <div class="font13 mb-0 font-muted">{{booking.address}}, {{booking.city}}, {{booking.state}}, {{booking.zipCode}}</div>

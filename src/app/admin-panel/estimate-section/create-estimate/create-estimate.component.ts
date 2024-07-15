@@ -76,7 +76,7 @@ export class CreateEstimateComponent implements OnInit {
     }
     this.getAll(_param);
     this.getAllProduct(_param);
-    this.bindTax(ConstantManager.TaxType);   
+    this.bindTax(ConstantManager.TaxType);
     this._activeRoute.queryParams
       .subscribe(params => {
         if (params.estimateId != undefined && params.estimateId > 0) {
@@ -109,11 +109,21 @@ export class CreateEstimateComponent implements OnInit {
     this._estimateService.get(estimateId).subscribe(res => {
       this.products().clear();
       res.data.products.forEach((t: { batches: any[]; }) => {
-        var _product: FormGroup = this.newProduct();
-        this.products().push(_product);
+        var product: FormGroup = this.newProduct();
+        if (res.data.status != 'Draft') {
+          product.controls['productId'].disable();
+          product.controls['qty'].disable();
+          product.controls['description'].disable();
+        }
+        this.products().push(product);
       });
       this.estimateInvoiceForm.patchValue(res.data);
-
+      if (res.data.status != 'Draft') {
+        this.estimateInvoiceForm.controls['customerId'].disable();
+        this.estimateInvoiceForm.controls['expiryDate'].disable();
+        this.estimateInvoiceForm.controls['discount'].disable();
+        this.estimateInvoiceForm.controls['notes'].disable();
+      }
       this.customerInfo = <CustomerModel>res.data;
       this.estimateInvoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
       this.getAddress(this.customerInfo.customerId);
