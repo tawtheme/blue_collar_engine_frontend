@@ -38,9 +38,6 @@ export class BookingAddressComponent {
     @Inject(MAT_DIALOG_DATA) public data: any, private _bookingService: BookingService) {
     this.tenantInfo = <any>this.authenticationService.tenantValue;
     this.user = <any>this.authenticationService.userValue;
-    // //////////console.log(this.tenantInfo)
-    // //////////console.log(this.user)
-    ////////////console.log(this.data)
     this.businessHours = this.data.businessHours;
     this.bookingTime = this.data.bookingTime;
     this.bookingTimeText = this.data.bookingTimeText;
@@ -91,7 +88,7 @@ export class BookingAddressComponent {
     var _param = {
       "sendTo": _mobileNo,
       "otp": "",
-      "timeZone": this.tenantInfo.timeZone,
+      "timeZone": this.tenantInfo.timezone,
       "validTillInMin": 10
     }
     if (this.mobileVerifyForm.controls['otp'].value == '') {
