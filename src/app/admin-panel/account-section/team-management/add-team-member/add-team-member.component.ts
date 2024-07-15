@@ -108,8 +108,8 @@ export class AddTeamMemberComponent {
     formData.append('city', param.city);
     formData.append('state', param.state);
     formData.append('zipCode', param.zipCode);
-    formData.append('latitude', param.latitude);
-    formData.append('longitude', param.longitude);
+    formData.append('latitude', param.latitude== null ? '' : param.latitude);
+    formData.append('longitude', param.longitude== null ? '' : param.longitude);
     formData.append('status', param.status);
     formData.append('designation', param.designation);
     formData.append('profileImagePath', param.profileImagePath == null ? '' : param.profileImagePath);

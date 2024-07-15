@@ -62,7 +62,8 @@
             </div>
             <div>
                 <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
-                    <input matInput [matDatepicker]="picker" formControlName="bookingDate" placeholder="Choose a date" readonly>
+                    <input matInput [matDatepicker]="picker" formControlName="bookingDate" placeholder="Choose a date"
+                        readonly>
                     <mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -86,26 +87,30 @@
                     Unassigned ({{unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0}})
                 </div>
                 <div class="booking-listing">
-                    <div class="assigned-booking-item" (click)="openEditViewBooking(booking)" *ngFor="let booking of unAssignedBooking">
+                    <div class="assigned-booking-item" (click)="openEditViewBooking(booking)"
+                        *ngFor="let booking of unAssignedBooking">
                         <div class="d-flex flex-column align-items-start">
                             <button class="danger-badge mb-2" type="button">{{booking.statusText}}</button>
-                            <span class="primary-badge"><span class="icon-time"></span> {{booking.bookingDate | date:'mediumDate' }} at {{booking.bookingTime}}</span>
+                            <span class="primary-badge"><span class="icon-time"></span> {{booking.bookingDate |
+                                date:'mediumDate' }} at {{booking.bookingTime}}</span>
                         </div>
                         <div class="d-flex flex-column mt-2">
                             <div class="font15 font500">{{booking.customerName}}</div>
-                            <div class="font13 font-muted">{{booking.address}} {{booking.city}} {{booking.state}} {{booking.zipCode}}</div>
+                            <div class="font13 font-muted">{{booking.address}} {{booking.city}} {{booking.state}}
+                                {{booking.zipCode}}</div>
                         </div>
                         <div class="d-flex flex-column mt-2">
                             <div class="font13 d-flex align-items-center gap-2 font-muted">
-                                <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}} 
+                                <span class="icon-call"></span>{{booking.mobileNumber | usMobileNo}}
                             </div>
                             <div class="font13 d-flex align-items-center gap-2 font-muted">
-                                <span class="icon-email"></span>{{booking.emailAddress}} 
+                                <span class="icon-email"></span>{{booking.emailAddress}}
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned" class="d-flex flex-column align-items-center p-5">
-                        <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                    <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned"
+                        class="d-flex flex-column align-items-center p-5">
+                        <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
                         <span class="font-muted font14 text-center">No unassigned bookings available</span>
                     </div>
                 </div>
@@ -125,7 +130,8 @@
                             <div class="booking-top-head assigned-booking">
                                 Assigned ({{assignedBooking.length > 0 ? assignedBooking[0].totalCount:0}})
                             </div>
-                            <select class="status-select" formControlName="currentStatus" (change)="onChangeCurrentStatus($event)">
+                            <select class="status-select" formControlName="currentStatus"
+                                (change)="onChangeCurrentStatus($event)">
                                 <option value="" selected>Status All</option>
                                 <option value="A">Assigned</option>
                                 <option value="JS">Job Started</option>
@@ -134,13 +140,17 @@
                             </select>
                         </div>
                         <div class="booking-listing">
-                            <div class="assigned-booking-item" (click)="openEditViewBooking(booking)" *ngFor="let booking of assignedBooking"> 
+                            <div class="assigned-booking-item" (click)="openEditViewBooking(booking)"
+                                *ngFor="let booking of assignedBooking">
                                 <div class="d-flex flex-column">
                                     <div class="d-flex gap-3 mb-0 align-items-center justify-content-between">
                                         <span class="white-badge bg-light px-1 py-0">#{{booking.bookingId}}</span>
                                         <div class="d-flex align-items-center">
-                                            <div *ngFor="let teamMember of booking.assignedTeamMembers" class="userAvtarGroup-rounded-wrapper">
-                                                <img src="{{teamMember.profileImagePath}}" (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'" alt="image" class="rounded-circle">
+                                            <div *ngFor="let teamMember of booking.assignedTeamMembers"
+                                                class="userAvtarGroup-rounded-wrapper">
+                                                <img src="{{teamMember.profileImagePath}}"
+                                                    (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
+                                                    alt="image" class="rounded-circle">
                                             </div>
                                         </div>
                                     </div>
@@ -158,21 +168,28 @@
                                 </div>
                                 <div class="d-flex align-items-start flex-column">
                                     <h5 class="font14 mb-1 mt-3 font400 font-muted">Date and Time</h5>
-                                    <span class="primary-badge"> {{booking.bookingDate | date:'mediumDate' }} at {{booking.bookingTime}}</span>
+                                    <span class="primary-badge"> {{booking.bookingDate | date:'mediumDate' }} at
+                                        {{booking.bookingTime}}</span>
                                 </div>
                                 <div class="d-flex align-items-start flex-column">
                                     <h5 class="font14 mb-1 mt-3 font400 font-muted">Services</h5>
-                                    <div class="d-flex flex-wrap gap-2 items-center" *ngFor="let cat of booking.categories">
+                                    <!-- <div class="d-flex flex-wrap gap-2 items-center" *ngFor="let cat of booking.categories">
                                         <span class="white-badge bg-light" *ngFor="let service of cat.products">{{service.serviceName}}</span>
+                                    </div> -->
+                                    <div class="d-flex flex-wrap gap-2 items-center">
+                                        <span class="white-badge bg-light" *ngFor="let service of booking.bookingServicesNameList">{{service}}</span>
                                     </div>
                                 </div>
-                                <app-booking-step-dashboard [bookingId]="booking.bookingId"></app-booking-step-dashboard>
+                                <app-booking-step-dashboard
+                                    [bookingId]="booking.bookingId"></app-booking-step-dashboard>
                             </div>
-                            <div *ngIf="assignedBooking.length==0 && !loadAssigned" class="d-flex flex-column align-items-center p-5">
-                                <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                            <div *ngIf="assignedBooking.length==0 && !loadAssigned"
+                                class="d-flex flex-column align-items-center p-5">
+                                <img src="../../../assets/images/no-data-found.svg" alt="image"
+                                    class="no-data-found-img" />
                                 <span class="font-muted font14 text-center">No assigned booking available</span>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <!--
                         <mat-paginator [length]="assignedBooking.length > 0 ? assignedBooking[0].totalCount:0"
@@ -195,8 +212,11 @@
                                     <div class="d-flex gap-3 mb-0 align-items-center justify-content-between">
                                         <span class="white-badge bg-light px-1 py-0">#{{booking.bookingId}}</span>
                                         <div class="d-flex align-items-center">
-                                            <div *ngFor="let teamMember of booking.assignedTeamMembers" class="userAvtarGroup-rounded-wrapper">
-                                                <img src="{{teamMember.profileImagePath}}" (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'" alt="image" class="rounded-circle">
+                                            <div *ngFor="let teamMember of booking.assignedTeamMembers"
+                                                class="userAvtarGroup-rounded-wrapper">
+                                                <img src="{{teamMember.profileImagePath}}"
+                                                    (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
+                                                    alt="image" class="rounded-circle">
                                             </div>
                                         </div>
                                     </div>
@@ -214,19 +234,20 @@
                                 </div>
                                 <div class="d-flex align-items-start flex-column">
                                     <h5 class="font14 mb-1 mt-3 font400 font-muted">Date and Time</h5>
-                                    <span class="primary-badge">{{booking.bookingDate | date:'mediumDate' }} at {{booking.bookingTime}}</span>
+                                    <span class="primary-badge">{{booking.bookingDate | date:'mediumDate' }} at
+                                        {{booking.bookingTime}}</span>
                                 </div>
                                 <div class="d-flex align-items-start flex-column">
                                     <h5 class="font14 mb-2 mt-3 font400 font-muted">Services</h5>
-                                    <div *ngFor="let cat of booking.categories" class="d-flex flex-wrap gap-2 items-center">
-                                        <span class="white-badge bg-light"
-                                            *ngFor="let service of cat.products">{{service.serviceName}}
-                                        </span>
+                                    <div class="d-flex flex-wrap gap-2 items-center">
+                                        <span class="white-badge bg-light" *ngFor="let service of booking.bookingServicesNameList">{{service}}</span>
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="compeletedBooking.length==0 && !loadCompeleted" class="d-flex flex-column align-items-center p-5">
-                                <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
+                            <div *ngIf="compeletedBooking.length==0 && !loadCompeleted"
+                                class="d-flex flex-column align-items-center p-5">
+                                <img src="../../../assets/images/no-data-found.svg" alt="image"
+                                    class="no-data-found-img" />
                                 <span class="font-muted font14 text-center">No compeleted booking available</span>
                             </div>
                         </div>

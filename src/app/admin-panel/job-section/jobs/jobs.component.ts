@@ -141,7 +141,7 @@ export class JobsComponent implements OnInit {
         next: (res) => {
           this.loadAssigned = false;
           this.assignedBooking = res.data;
-          //////console.log(this.assignedBooking)
+          console.log(this.assignedBooking)
           this.assignedBooking.forEach((res) => {
             if (res.assignedTeamMembers.length > 0) {
               res.assignedTeamMembers.forEach((r: any) => {

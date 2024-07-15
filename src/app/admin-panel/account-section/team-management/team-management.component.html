@@ -2,7 +2,8 @@
     <div class="d-flex align-items-center">
         <div>
             <h4 class="mb-1 font20">Team Members</h4>
-            <p class="font14 mb-0 font-muted">Manage and Update your team members. Add, Edit, or View your team members.</p>
+            <p class="font14 mb-0 font-muted">Manage and Update your team members. Add, Edit, or View your team members.
+            </p>
         </div>
         <div class="ms-auto">
             <button class="primary-filled-button  w-100" type="button" (click)="addNewUser()">
@@ -26,9 +27,11 @@
             <tr *ngFor="let user of users">
                 <td>
                     <div class="d-flex teamProfileWrap align-items-center gap-2">
-                        <div>                               
-                            <img src="../../../../assets/images/blank-img.png" *ngIf="user.profileImagePath==null || user.profileImagePath==''" class="tech-image">
-                            <img [src]="user.profileImagePath" *ngIf="user.profileImagePath!=null && user.profileImagePath!=''" class="tech-image">
+                        <div>
+                            <img src="../../../../assets/images/blank-img.png"
+                                *ngIf="user.profileImagePath==null || user.profileImagePath==''" class="tech-image">
+                            <img [src]="user.profileImagePath"
+                                *ngIf="user.profileImagePath!=null && user.profileImagePath!=''" class="tech-image">
                         </div>
                         <div>
                             <div class="font15 mb-1">{{user.firstName}} {{user.lastName}}</div>
@@ -38,7 +41,7 @@
                     </div>
                 </td>
                 <td>{{user.mobileNo | usMobileNo}}</td>
-                <td>---</td>
+                <td>{{user.lastBookingAssignedDate | date:'medium'}}</td>
                 <td>
                     <mat-slide-toggle [checked]="user.status=='A'" (change)="onChange($event)"></mat-slide-toggle>
                 </td>
@@ -53,8 +56,9 @@
             <tr *ngIf="users.length == 0 && !loading" class="text-center">
                 <td class="text-center" colspan="6">
                     <div class="d-flex flex-column align-items-center p-5">
-                        <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
-                        <span class="font-muted font14 text-center">No Team Member created. Click on "Add new" to create a member.</span>
+                        <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
+                        <span class="font-muted font14 text-center">No Team Member created. Click on "Add new" to create
+                            a member.</span>
                     </div>
                 </td>
             </tr>
@@ -62,13 +66,16 @@
     </table>
 </div>
 <div class="card-footer pb-0 pt-3">
-    <mat-paginator [length]="users.length > 0 ? users[0].totalCount:0" *ngIf="users.length > 0" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>
+    <mat-paginator [length]="users.length > 0 ? users[0].totalCount:0" *ngIf="users.length > 0" [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>
 </div>
 
-<button style="display:none;" class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas" data-bs-target="#AddTeamMember" #addUserCancelEle>
+<button style="display:none;" class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas"
+    data-bs-target="#AddTeamMember" #addUserCancelEle>
     <span class="icon-add"></span>Add New
 </button>
 
-<div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddTeamMember" aria-labelledby="offcanvasRightLabel">
+<div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddTeamMember"
+    aria-labelledby="offcanvasRightLabel">
     <app-add-team-member [items]="userInfo"></app-add-team-member>
 </div>

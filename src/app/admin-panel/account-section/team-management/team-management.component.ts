@@ -44,6 +44,7 @@ export class TeamManagementComponent {
       .subscribe({
         next: (res: { data: any[]; }) => {
           this.users = res.data;
+          console.log(this.users)
           this.users.forEach(res => {
             if (res.profileImagePath != null && res.profileImagePath != "") {
               res.profileImagePath = this.apiBaseUrl + res.profileImagePath
