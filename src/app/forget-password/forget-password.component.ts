@@ -38,7 +38,7 @@ export class ForgetPasswordComponent implements OnInit {
     this.authenticationService.forgetPassword(this.f.email.value)
       .subscribe((res) => {
         this.loading = false;
-        ////////console.log(res)
+        //////////console.log(res)
         this.submitted = false;
         this.forgetPasswordForm.reset();
 

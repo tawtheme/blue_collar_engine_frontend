@@ -9,7 +9,7 @@ export class AppComponent {
   
   // @HostListener('document:keydown', ['$event'])
   // handleKeyboardEvent(e: KeyboardEvent) {
-  //   //console.log(e)
+  //   ////console.log(e)
   //   if (e.key === 'F12') {
   //     return false;
   //   }

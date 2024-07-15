@@ -17,7 +17,7 @@ export class BookingStepComponent {
   loading: boolean = false;
   constructor(private _bookingService: BookingService, private authenticationService: AuthenticationService) {
     this.user = <User>this.authenticationService.userValue;
-    ////////////console.log(this.user.data.tenantInfo.timezone)
+    //////////////console.log(this.user.data.tenantInfo.timezone)
   }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class BookingStepComponent {
       'bookingId': this.bookingId,
       'timeZone': this.user.data.tenantInfo.timezone
     }
-   // //////////console.log(param)
+   // ////////////console.log(param)
     this.getBookingSteps(param);
   }
 
@@ -36,7 +36,7 @@ export class BookingStepComponent {
       .subscribe({
         next: (res) => {
           this.bookingStepInfo = res.data;
-          ////////console.log(this.bookingStepInfo)
+          //////////console.log(this.bookingStepInfo)
           this._bookingService.bookingStepData.next(this.bookingStepInfo);
           this.loading = false;
         }

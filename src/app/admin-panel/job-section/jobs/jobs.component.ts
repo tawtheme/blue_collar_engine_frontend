@@ -88,7 +88,7 @@ export class JobsComponent implements OnInit {
         bookingDate: new Date(),
       };
     }
-    //////console.log(JSON.stringify(_param))
+    ////////console.log(JSON.stringify(_param))
     this._bookingService
       .getAll(_param)
       .pipe(first())
@@ -133,7 +133,7 @@ export class JobsComponent implements OnInit {
         bookingDate: new Date(),
       };
     }
-    //   //////console.log("loadAssigned" + JSON.parse(_param))
+    //   ////////console.log("loadAssigned" + JSON.parse(_param))
     this._bookingService
       .getAll(_param)
       .pipe(first())
@@ -141,7 +141,7 @@ export class JobsComponent implements OnInit {
         next: (res) => {
           this.loadAssigned = false;
           this.assignedBooking = res.data;
-          console.log(this.assignedBooking)
+          //console.log(this.assignedBooking)
           this.assignedBooking.forEach((res) => {
             if (res.assignedTeamMembers.length > 0) {
               res.assignedTeamMembers.forEach((r: any) => {
@@ -178,7 +178,7 @@ export class JobsComponent implements OnInit {
         bookingDate: new Date(),
       };
     }
-    // //////console.log("loadCompeleted" + JSON.parse(_param))
+    // ////////console.log("loadCompeleted" + JSON.parse(_param))
     this._bookingService
       .getAll(_param)
       .pipe(first())
@@ -225,7 +225,7 @@ export class JobsComponent implements OnInit {
       bookingDate: obj.bookingDate,
       currentStatus: obj.currentStatus,
     };
-    //////console.log(obj)
+    ////////console.log(obj)
     this.getAllUnAssignedBooking({
       ..._param,
       ...{ type: _param.type == '' ? 'U' : _param.type, currentStatus: '' },
@@ -255,7 +255,7 @@ export class JobsComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.bookingStats = res.data;
-          //////console.log(this.bookingStats)
+          ////////console.log(this.bookingStats)
         },
         error: (error) => {},
       });

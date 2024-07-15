@@ -81,7 +81,7 @@ export class OnlineRequestDemoComponent implements OnInit {
     var _mobileNo = this.requestDemoForm.controls['phoneNumber'].value.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '');
     var _param = this.requestDemoForm.value;
     _param = { ..._param, ...{ phoneNumber: _mobileNo } };
-    ////////console.log(_param)
+    //////////console.log(_param)
     if (this.requestDemoForm.invalid) {
       return;
     }

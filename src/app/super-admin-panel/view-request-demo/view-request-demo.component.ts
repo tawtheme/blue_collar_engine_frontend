@@ -88,7 +88,7 @@ export class ViewRequestDemoComponent {
   bindTimeZonesDDL() {
     this._masterService.getTimeZones().subscribe(res => {
       this.timezones = res.data;
-      ////////console.log(this.timezones)
+      //////////console.log(this.timezones)
       this.loading = false;
     });
   }

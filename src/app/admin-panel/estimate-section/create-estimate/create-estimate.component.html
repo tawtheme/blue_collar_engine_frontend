@@ -173,9 +173,9 @@
                                 </td>
                                 <td>
                                     <button class="btn" (click)="removeQuantity(i)"
-                                        *ngIf="i > 0 && !isShowRegNo || (isShowRegNo && status=='Draft')">
-                                        <span class="icon-delete"></span>
-                                    </button>
+                                    *ngIf="i > 0 && (!isShowRegNo || (isShowRegNo && status=='Draft'))">
+                                    <span class="icon-delete"></span>
+                                </button>
                                 </td>
                             </tr>
                         </tbody>

@@ -57,7 +57,7 @@ export class CategoryListComponent {
         next: (res) => {
           this.loading = false;
           this.items = res.data;
-         // //////console.log(this.items)
+         // ////////console.log(this.items)
         },
         error: error => {
           this.loading = false;
@@ -104,8 +104,8 @@ export class CategoryListComponent {
   }
 
   onChange(ev: any, category: any) {
-    ////////console.log(ev.checked)
-    ////////console.log(ev.source.checked)
+    //////////console.log(ev.checked)
+    //////////console.log(ev.source.checked)
     ////debugger
     ev.source.checked = ev.checked == true ? false : true;
     const message = `Are you sure you want to change status?`;

@@ -43,7 +43,7 @@ export class BookingAddressComponent {
     this.bookingTimeText = this.data.bookingTimeText;
     this.bookingDate = this.data.bookingDate;
     this.selectedServices = this.data.selectedServices;
-    //////console.log(this.selectedServices)
+    ////////console.log(this.selectedServices)
     if (this.selectedServices.length > 0) {
       this.isEnableNextBtn = true;
     }
@@ -100,12 +100,12 @@ export class BookingAddressComponent {
     else {
       _param.otp = this.mobileVerifyForm.controls['otp'].value;
       this.authenticationService.verifyOTP(_param).subscribe(res => {
-        //////////console.log(res)
+        ////////////console.log(res)
         this._snackBar.open(res.message);
         this.openVerifyOTP = false;
         this.isVerifyOtp = true;
         this._customerService.findCustomerByMobileNo(_param.sendTo).subscribe(res => {
-          //////////console.log(res)
+          ////////////console.log(res)
           if (res.data.response != -1 && res.data.response != -2) {
             this.calanderBookingForm.patchValue(res.data.result);
           }
@@ -148,7 +148,7 @@ export class BookingAddressComponent {
       if (res.length > 0) {
         this.selectedServices = res;
         this.isEnableNextBtn = true;
-        //////console.log(this.selectedServices)
+        ////////console.log(this.selectedServices)
       }
       else {
         this.isEnableNextBtn = false;

@@ -12,7 +12,7 @@ export class BookingSharedService {
 
 
   getProducts(): Observable<any> {
-    //////////console.log('this.cartItems :', this.cartItems);
+    ////////////console.log('this.cartItems :', this.cartItems);
     return this.products.asObservable();
   }
 

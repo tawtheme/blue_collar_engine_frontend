@@ -81,7 +81,7 @@ export class SystemConfigurationComponent {
     }
     let param = this.invoiceTermConditionForm.value as any;
     param = { ...param, ...{ type: 'IT' } };
-    ////console.log(param)
+    //////console.log(param)
     this._accountSettingService.addUpdateTermsConditions(param)
       .pipe(first())
       .subscribe({
@@ -99,7 +99,7 @@ export class SystemConfigurationComponent {
       .pipe(first())
       .subscribe({
         next: (res) => {
-          ////console.log(res.data)
+          //////console.log(res.data)
           this.termAndConditionDetail().clear();
           if (res.data != null) {
             res.data.termAndConditionDetail.forEach((t: { batches: any[]; }) => {
@@ -107,7 +107,7 @@ export class SystemConfigurationComponent {
               this.termAndConditionDetail().push(_termCondition);
             });
             this.invoiceTermConditionForm.patchValue(res.data);
-            ////console.log(this.invoiceTermConditionForm.value)
+            //////console.log(this.invoiceTermConditionForm.value)
           }
         },
         error: () => {
@@ -124,7 +124,7 @@ export class SystemConfigurationComponent {
     if (this.configurationForm.invalid) {
       return;
     }
-    ////////console.log(param)
+    //////////console.log(param)
     this.loading = true;
     this._accountSettingService.addUpdateStripeConfiguration(param)
       .subscribe({
