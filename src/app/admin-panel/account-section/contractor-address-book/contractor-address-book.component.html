@@ -5,15 +5,15 @@
             <p class="font14 mb-0 font-muted">Manage and update your addresses effortlessly in your Address Book.</p>
         </div>
         <div class="ms-auto">
-            <button class="primary-filled-button  w-100" type="button" (click)="addNewAddress()"><span class="icon-add"></span>Add New</button>
+            <button class="primary-filled-button w-100" type="button" (click)="addNewAddress()"><span class="icon-add"></span>Add New</button>
         </div>
     </div>
 </div>
 <div class="row g-4">
     <div class="col-lg-6" *ngFor="let address of items">
-        <div class="p-4 border rounded">
+        <div class="p-4 border rounded h-100">
             <div class="mb-4">
-                <h4 class="font15 mb-2 ">{{address.addressLabel}}</h4>
+                <h4 class="font15 mb-2">{{address.addressLabel}}</h4>
                 <p class="font14 mb-0 font-muted">{{address.address}}, {{address.state}}, {{address.city}}, {{address.zipCode}}</p>
             </div>
             <div class="d-flex justify-content-between align-items-center ">

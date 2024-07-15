@@ -29,7 +29,7 @@
                 </div>
                 <div class="estimate-widget-card-info">
                     <h6>${{stats?.totalEstimateDraftRevenue | number : '1.2-2'}}</h6>
-                    <p>Draft from {{stats?.totalEstimateDraftCount}} estimates</p>
+                    <p>Total Amount of {{stats?.totalEstimateDraftCount}} Drafts</p>
                 </div>
             </div>
             <div class="estimate-widget-card ">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="estimate-widget-card-info">
                     <h6>${{stats?.totalEstimateSentRevenue | number : '1.2-2'}}</h6>
-                    <p>Sent from {{stats?.totalEstimateSentCount}} estimates</p>
+                    <p>Total Amount of {{stats?.totalEstimateSentCount}} sent estimates</p>
                 </div>
             </div>
         </div>
@@ -123,7 +123,7 @@
     </div>
     <div class="card-footer pb-0 pt-3">
         <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"
-            [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-            (page)="onPageChanged($event)"></mat-paginator>
+            [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)">
+        </mat-paginator>
     </div>
 </div>

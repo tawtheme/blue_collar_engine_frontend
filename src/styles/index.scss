@@ -695,10 +695,10 @@ ul {
   background-color: var(--white);
   top: 54px;
   position: sticky;
-  z-index: 2;
+  z-index: 999;
   .page-title {
     @include flexbox(row, space-between, flex-start);
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 
