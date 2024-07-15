@@ -8,7 +8,7 @@
 }
 
 .payment-success-inner {
-  padding: 80px 0;
+  padding: 50px 0;
 
   .payment-success-top {
     .icon {
@@ -43,4 +43,14 @@
       }
     }
   }
+}
+
+.mat-icon{
+  height: 44px; width: 44px;
+}
+.material-icons{
+  font-size: 44px;
+}
+.mat-mdc-icon-button.mat-mdc-button-base{
+  padding: 0px;
 }

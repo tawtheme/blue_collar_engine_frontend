@@ -19,22 +19,22 @@
             <div class="icon">
                 <img src="../../../assets/images/frontend/images/tick.png" class="img-fluid" />
             </div>
-            <h2 class="mb-2">Your payment was successful</h2>
-            <p class="font16">Thank you for your payment.</p>
+            <h2 class="mb-1">Your payment was successful</h2>
+            <p class="font18">Thank you for your payment.</p>
         </div>
         <div class="row" *ngIf="ratingForm.value.bookingId > 0">
-            <div class="col-lg-8 mx-auto">
+            <div class="col-lg-5 mx-auto">
                 <div class="bg-light border mt-4 rounded p-4">
                     <form class="payment-success-feedback" [formGroup]="ratingForm" (ngSubmit)="onSubmit()">
-                        <h2>Customer Feedback</h2>
+                        <h2 class="mb-2 font20">Customer Feedback</h2>
                         <div class="d-flex flex-column">
-                            <div class="font18 text-black mb-1">How would you rate our technicians for the service they provided?</div>
+                            <div class="font14 text-black mb-1">How would you rate our technicians for the service they provided?</div>
                             <app-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
                                 (ratingUpdated)="onRatingChanged($event)" [customDisable]="starDisable">
                             </app-star-rating>
                         </div>
-                        <div class="d-flex flex-column">
-                            <div class="font18 text-black mt-1">Is there anything else you'd like us to share with us?</div>
+                        <div class="d-flex flex-column mt-3">
+                            <div class="font14 text-black mb-1">Is there anything else you'd like us to share with us?</div>
                             <textarea placeholder="Enter here" class="form-control" rows="5" maxlength="4000" formControlName="feedback"></textarea>
                         </div>
                         <button class="btn px-5 mt-4 font18 py-2">Send Feedback</button>
