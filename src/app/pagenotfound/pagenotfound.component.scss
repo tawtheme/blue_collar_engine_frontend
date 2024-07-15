@@ -1,0 +1,32 @@
+.error-page-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+
+    img{
+        width: 600px;
+        height: auto;
+    }
+
+    h3{
+        margin: 20px 0px 10px 0px;
+        font-size: 50px;
+    }
+    p{
+        margin: 0px 0px 50px 0px; color: var(--muted);
+    }
+    button{
+        background-color: var(--primary);
+        border: none;
+        color: var(--white);
+        padding: 10px 25px;
+        font-size: 14px;
+
+        &:hover{
+            background-color: var(--dark);
+        }
+    }
+}
