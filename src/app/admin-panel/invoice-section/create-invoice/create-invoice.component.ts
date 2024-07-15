@@ -142,6 +142,7 @@ export class CreateInvoiceComponent implements OnInit {
         this.products().push(product);
       });
       this.invoiceForm.patchValue(res.data);
+      this.taxPer=res.data.tax;
       if (res.data.status != 'Draft') {
         this.invoiceForm.controls['customerId'].disable();
         this.invoiceForm.controls['expiryDate'].disable();
@@ -175,7 +176,6 @@ export class CreateInvoiceComponent implements OnInit {
 
   bindTax(type: any) {
     this._accountSettingService.getTax(type).subscribe(res => {
-      //////////console.log(res.data.tax)
       this.invoiceForm.controls['tax'].setValue(res.data.tax);
       this.taxPer = res.data.tax;
     })
@@ -373,9 +373,11 @@ export class CreateInvoiceComponent implements OnInit {
       res.data = { ...res.data, ...{ products: productArr } }
       this.invoiceForm.patchValue(res.data);
       ////////console.log(res.data)
+      this.bindTax(ConstantManager.TaxType);
       this.customerInfo = <CustomerModel>res.data;
       this.customerInfo = { ...this.customerInfo, ...{ serviceAddress: res.data.address } };
       this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
+      this.invoiceForm.controls['customerId'].disable();
       this.getAddress(this.customerInfo.customerId);
       this.isDisabled = false;
       this.calculateTotal();

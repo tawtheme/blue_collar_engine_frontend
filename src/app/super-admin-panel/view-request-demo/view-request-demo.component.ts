@@ -117,16 +117,16 @@ export class ViewRequestDemoComponent {
   }
 
   ngOnChanges() {
-    ////////console.log(this.items)
-    this.requestDemoForm.patchValue(this.items);
-    ////////console.log(this.requestDemoForm.value.subDomainName)
-    if (this.items.subDomainName != null) {
-      this.requestDemoForm.controls['subDomainName'].disable();
-      this.IsShwoButtonPanel = false;
-    }
-    else {
-      this.requestDemoForm.controls['subDomainName'].enable();
-      this.IsShwoButtonPanel = true;
+    if (this.requestDemoForm != undefined) {
+      this.requestDemoForm.patchValue(this.items);
+      if (this.items.subDomainName != null) {
+        this.requestDemoForm.controls['subDomainName'].disable();
+        this.IsShwoButtonPanel = false;
+      }
+      else {
+        this.requestDemoForm.controls['subDomainName'].enable();
+        this.IsShwoButtonPanel = true;
+      }
     }
   }
 }

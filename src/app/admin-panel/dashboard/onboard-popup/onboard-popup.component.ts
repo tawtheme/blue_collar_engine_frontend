@@ -16,7 +16,7 @@ export class OnboardPopupComponent {
   ngOnInit(): void {
     this.onBoardData = this.data.onBoardStatus;
     //////console.log(this._router.url)
-    this.isShowCancelBtn = (this._router.url == '/admin' ? true : false);
+   // this.isShowCancelBtn = (this._router.url == '/admin' ? true : false);
   }
 
   cancel() {
