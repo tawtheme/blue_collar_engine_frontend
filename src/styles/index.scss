@@ -695,7 +695,7 @@ ul {
   background-color: var(--white);
   top: 54px;
   position: sticky;
-  z-index: 999;
+  z-index: 2;
   .page-title {
     @include flexbox(row, space-between, flex-start);
     font-size: 22px;
