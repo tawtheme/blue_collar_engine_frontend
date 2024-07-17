@@ -5,18 +5,13 @@ import { PaginationModel } from '@app/_models/pagination';
 import { AuthenticationService } from '@app/_services';
 import { CategoryService } from '@app/_services/admin-panel/category/category.service';
 import { BookingSharedService } from '@app/_services/site-panel/booking/booking-shared.service';
-import { environment } from '@environments/environment.prod';
 import { ToastrService } from 'ngx-toastr';
-import { Subject, first } from 'rxjs';
+import { first } from 'rxjs';
 import { TenantService } from '@app/_services/secure-panel/tenant.service';
-import {
-  ConfirmDialogComponent,
-  ConfirmDialogModel,
-} from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { CustomerService } from '@app/_services/admin-panel/customer/customer.service';
 import { BookingSlotComponent } from '../booking-slot/booking-slot.component';
-import { HttpHeaders } from '@angular/common/http';
+import { environment } from '@environments/environment';
 @Component({
   selector: 'app-booking',
   templateUrl: './booking.component.html',
