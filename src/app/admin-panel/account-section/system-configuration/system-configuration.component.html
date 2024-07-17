@@ -62,7 +62,10 @@
     </div>
     <form class="p-4 pt-0" [formGroup]="invoiceTermConditionForm" (ngSubmit)="onSubmitTermCondition()">
         <div class="d-flex flex-column gap-3" formArrayName="termAndConditionDetail">
-
+            <button type="button" class="light-outlined-button rounded p-0 ShapeBox38" #tooltip="matTooltip"
+                matTooltip="Add new" (click)="addNewTermCondition()">
+                <span class="icon-add"></span>
+            </button>
             <div class="d-flex gap-3 align-items-start"
                 *ngFor="let item of termAndConditionDetail().controls; let i = index" [formGroupName]="i">
                 <textarea type="text" id="invoiceTerm" formControlName="description" class="form-control"
@@ -76,15 +79,8 @@
                         (click)="removeTermCondition(i)">
                         <span class="icon-delete"></span>
                     </button>
-                    <button *ngIf="i === termAndConditionDetail().controls.length - 1" type="button"
-                        class="light-outlined-button rounded p-0 ShapeBox38" #tooltip="matTooltip" matTooltip="Add new"
-                        (click)="addNewTermCondition()">
-                        <span class="icon-add"></span>
-                    </button>
                 </div>
-
             </div>
-
             <div class="d-flex justify-content-start gap-3 mt-4"
                 *ngIf="invoiceTermConditionForm.value.termAndConditionDetail.length > 0">
                 <button class="primary-filled-button px-5">
