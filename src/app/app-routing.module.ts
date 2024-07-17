@@ -17,6 +17,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { FeatureThreeComponent } from './feature-three/feature-three.component';
 import { FeatureFourComponent } from './feature-four/feature-four.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
         path: 'terms-of-service',
         component: TermsOfServiceComponent,
       },
+      {
+        path: 'about-us',
+        component: AboutUsComponent,
+      }
     ],
   },
   {

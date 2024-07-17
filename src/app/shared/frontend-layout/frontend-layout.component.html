@@ -1,9 +1,9 @@
 <header class="main-header sticky-top">
     <div class="top-header-bar">
         <div class="container-xxl">
-            <p class="mb-0">Join our plan and enjoy priority service and discounts! <a href="javascript:void(0);"
-                    routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                    [routerLink]="['/online-request-demo']" target="_blank">Click here</a></p>
+            <p class="mb-0">Join our plan and enjoy priority service and discounts! 
+                <a href="javascript:void(0);" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/online-request-demo']" target="_blank">Click here</a>
+            </p>
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light header-navigation">
@@ -19,16 +19,26 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto mb-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Features </a>
+                        <a class="nav-link" aria-current="page" href="#features">Features</a>
+                    </li>
+                    <!--
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Price</a>
+                        </li>
+                   
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Company</a>
+                        </li>
+                     -->                  
+                    <li class="nav-item">
+                        <a class="nav-link" href="#podcast">Podcast</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Price</a>
+                        <a class="nav-link" href="#faqs">FAQs </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Resources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Company</a>
+                        <a class="nav-link" href="javascript:void(0);" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                        [routerLink]="['/about-us']">About Us</a>
                     </li>
                 </ul>
                 <div class="top-menu-right">
@@ -36,56 +46,65 @@
                         <span class="icon-call"></span> (347) 849-3436
                     </a>
                     <a href="javascript:void(0);" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                        [routerLink]="['/login']" class="btn btn-outline-primary">Login</a>
+                        [routerLink]="['/login']" class="btn btn-outline-primary">Login
+                    </a>
                     <a href="javascript:void(0);" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                        [routerLink]="['/online-request-demo']" class="btn btn-fill-primary">Get Demo</a>
+                        [routerLink]="['/online-request-demo']" class="btn btn-fill-primary">Get Demo
+                    </a>
                 </div>
-
             </div>
         </div>
     </nav>
 </header>
 
 <router-outlet></router-outlet>
+
 <footer class="footer-section">
     <div class="footer-top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-12 footer-column mb-4 mb-lg-0">
+                <div class="col-lg-4 col-md-12 footer-column mb-4 mb-lg-0">
                     <h5 class="ft-title">Contact Us</h5>
                     <ul>
                         <li><a href="tel:3478493436"> <span class="icon-call"></span> (347) 849-3436</a></li>
-                        <li><a href="#"> <span class="icon-email"></span>info@bluecollarengine.com</a></li>
+                        <li><a href="mailto:info@bluecollarengine.com"> <span class="icon-email"></span>info@bluecollarengine.com</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-4 mb-4 mb-md-0 footer-column">
-                    <h5 class="ft-title">Features</h5>
-                    <ul>
-                        <li><a href="#">Online Scheduling</a></li>
-                        <li><a href="#">Job Management</a></li>
-                        <li><a href="#">Estimate</a></li>
-                        <li><a href="#">Invoicing</a></li>
-                        <li><a href="#">Price Book</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3  col-md-4 mb-4 mb-md-0 footer-column">
+                <!--
+                    <div class="col-lg-3 col-md-4 mb-4 mb-md-0 footer-column">
+                        <h5 class="ft-title">Features</h5>
+                        <ul>
+                            <li><a href="#">Online Scheduling</a></li>
+                            <li><a href="#">Job Management</a></li>
+                            <li><a href="#">Estimate</a></li>
+                            <li><a href="#">Invoicing</a></li>
+                            <li><a href="#">Price Book</a></li>
+                        </ul>
+                    </div>
+                -->
+                <div class="col-lg-4  col-md-4 mb-4 mb-md-0 footer-column">
                     <h5 class="ft-title">Resources</h5>
                     <ul>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">News & Press</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Support</a></li>
+                        <!--
+                            <li><a href="#">Pricing</a></li>
+                            <li><a href="#">News & Press</a></li>
+                        -->
+                        <li><a href="#faqs">FAQs</a></li>
+                        <!--<li><a href="#">Support</a></li>-->
                         <li><a [routerLink]="['/terms-of-service']">Terms and Conditions</a></li>
                         <li><a [routerLink]="['/privacy-policy']">Privacy Policy</a></li>
                     </ul>
                 </div>
-                <div class="col-lg-3 col-md-4 mb-4 mb-md-0 footer-column">
+                <div class="col-lg-4 col-md-4 mb-4 mb-md-0 footer-column">
                     <h5 class="ft-title">Company</h5>
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li><a href="#">Affiliates</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a [routerLink]="['/about-us']">About Us</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <!--
+                            <li><a href="#">Partners</a></li>
+                            <li><a href="#">Affiliates</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        -->
                     </ul>
                 </div>
             </div>

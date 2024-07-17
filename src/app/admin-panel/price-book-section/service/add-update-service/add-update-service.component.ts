@@ -154,7 +154,7 @@ export class AddUpdateServiceComponent {
     this.selectedFiles = event.target.files;
     var _type = this.selectedFiles[0].type;
     if (_type == 'image/jpeg' || _type == 'image/png' || _type == 'image/jpg') {
-      //this.previews = [];
+      this.previews = [];
       if (this.selectedFiles && this.selectedFiles[0]) {
         const numberOfFiles = this.selectedFiles.length;
         for (let i = 0; i < numberOfFiles; i++) {

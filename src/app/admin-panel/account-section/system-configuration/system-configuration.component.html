@@ -27,42 +27,33 @@
             </div>
         </div>
         <div class="d-flex justify-content-start gap-3 mt-4">
-            <button class="primary-filled-button px-5">
-                Save Changes
-            </button>
-            <button class="primary-filled-button px-5" (click)="hideConfiguration()" type="button"
-                *ngIf="isShowHideBtn">
-                Hide
-            </button>
+            <button class="primary-filled-button px-5">Save Changes</button>
+            <button class="primary-filled-button px-5" (click)="hideConfiguration()" type="button" *ngIf="isShowHideBtn"> Hide </button>
         </div>
     </form>
 
     <form class="p-4 pt-0" [formGroup]="configurationForm" *ngIf="isEditDisabled">
         <div class="form-group mb-3">
             <label for="PublicKey" class="form-label">Secret Key</label>
-            <input type="text" id="secretKey" formControlName="secretKeyMask" class="form-control"
-                placeholder="Enter Secret Key" maxlength="500" />
+            <input type="text" id="secretKey" formControlName="secretKeyMask" class="form-control" placeholder="Enter Secret Key" maxlength="500" />
         </div>
         <div class="form-group mb-3">
             <label for="SecretKey" class="form-label">Publish Key</label>
-            <input type="text" id="publishableKey" formControlName="publishableKeyMask" class="form-control"
-                placeholder="Enter Publish Key" maxlength="500" />
+            <input type="text" id="publishableKey" formControlName="publishableKeyMask" class="form-control" placeholder="Enter Publish Key" maxlength="500" />
         </div>
         <div class="d-flex justify-content-start gap-3 mt-4">
-            <button class="primary-filled-button px-5" (click)="editConfiguration()" type="button">
-                Edit
-            </button>
+            <button class="primary-filled-button px-5" (click)="editConfiguration()" type="button">Edit</button>
         </div>
     </form>
 </div>
 
 <div class="border rounded overflow-hidden mb-4 mb-lg-5">
-    <div class="px-4 py-3">
+    <div class="px-4 py-3 d-flex align-items-center justify-content-between">
         <h4 class="mb-0 font18 font500">Invoice Terms and conditions</h4>
+        <button type="button" class="light-outlined-button rounded px-3" #tooltip="matTooltip" matTooltip="Add new" (click)="addNewTermCondition()"><span class="icon-add"></span> Add New</button>
     </div>
     <form class="p-4 pt-0" [formGroup]="invoiceTermConditionForm" (ngSubmit)="onSubmitTermCondition()">
         <div class="d-flex flex-column gap-3" formArrayName="termAndConditionDetail">
-
             <div class="d-flex gap-3 align-items-start"
                 *ngFor="let item of termAndConditionDetail().controls; let i = index" [formGroupName]="i">
                 <textarea type="text" id="invoiceTerm" formControlName="description" class="form-control"
@@ -76,16 +67,9 @@
                         (click)="removeTermCondition(i)">
                         <span class="icon-delete"></span>
                     </button>
-                    <button *ngIf="i === termAndConditionDetail().controls.length - 1" type="button"
-                        class="light-outlined-button rounded p-0 ShapeBox38" #tooltip="matTooltip" matTooltip="Add new"
-                        (click)="addNewTermCondition()">
-                        <span class="icon-add"></span>
-                    </button>
                 </div>
-
             </div>
-
-            <div class="d-flex justify-content-start gap-3 mt-4"
+            <div class="d-flex justify-content-start gap-3"
                 *ngIf="invoiceTermConditionForm.value.termAndConditionDetail.length > 0">
                 <button class="primary-filled-button px-5">
                     Save

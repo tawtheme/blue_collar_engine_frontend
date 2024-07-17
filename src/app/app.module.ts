@@ -45,6 +45,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { FeatureThreeComponent } from './feature-three/feature-three.component';
 import { FeatureFourComponent } from './feature-four/feature-four.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 Date.prototype.toISOString = function () {
   return moment(this).format('YYYY-MM-DDTHH:mm:ss');
@@ -95,6 +96,7 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
     TermsOfServiceComponent,
     FeatureThreeComponent,
     FeatureFourComponent,
+    AboutUsComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
