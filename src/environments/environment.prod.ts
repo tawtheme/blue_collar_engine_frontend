@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://api.bluecollarengine.com',
-    baseUrlHostName:'bluecollarengine',
+    apiUrl: 'https://api.tawfresh.com',
+    baseUrlHostName:'tawfresh',
     tenantToken: "kwVEV6"
 };
