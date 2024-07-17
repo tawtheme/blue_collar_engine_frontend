@@ -1,6 +1,26 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+/* styles.css */
+html {
+  overflow: hidden; /* Hide default scrollbar */
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.mCustomScrollbar {
+  height: 100%;
+  overflow: auto; /* Ensure custom scrollbar applies */
+}
+.mCSB_scrollTools {
+  z-index: 9;
+}
+
 /* Absolute Center Spinner */
 .loading {
   position: fixed;
@@ -190,9 +210,9 @@ app-add-team-member {
 div.custom-star button {
   margin: 0px -18px 0px 0px;
 }
-.disable:hover{
+.disable:hover {
   cursor: not-allowed;
-  }
-  .disable:active{
+}
+.disable:active {
   pointer-events: none;
-  }
+}

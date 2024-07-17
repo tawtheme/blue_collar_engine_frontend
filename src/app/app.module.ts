@@ -73,6 +73,7 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
     MaterialModule,
     JwtModule,
     SharedModule,
+
     NgxStripeModule.forRoot(),
   ],
   declarations: [
