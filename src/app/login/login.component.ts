@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
     submitted = false;
     error = '';
     user: User;
+    currentYear: number = new Date().getFullYear();
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
-    onSubmit() {       
+    onSubmit() {
         this.submitted = true;
         // stop here if form is invalid
         if (this.loginForm.invalid) {
