@@ -519,7 +519,7 @@ ul {
   .authleftBottom {
     margin-top: auto;
     .authIconShape {
-      @include square-circle(65px, circle);
+      @include square-circle(50px, circle);
       @include flexbox(row, center, center);
       background-color: var(--white);
     }
