@@ -494,7 +494,6 @@ ul {
 }
 
 // Auth Styles Start //
-
 .authWrapper {
   background: var(--light-primary);
   width: 100%;
@@ -514,7 +513,7 @@ ul {
     background-size: cover;
     background-position: center;
     .authLogo {
-      width: 180px;
+      width: 65px;
     }
   }
   .authleftBottom {
@@ -533,7 +532,7 @@ ul {
       line-height: 1.5;
     }
     .textCopywrite {
-      margin-top: 70px;
+      margin-top: 10px;
       font-weight: 200;
       font-size: 12px;
       margin-bottom: 0;
@@ -542,7 +541,7 @@ ul {
   .authrightWrapper {
     @include flexbox(row, center, center);
     width: calc(100% - 450px);
-    padding: 35px 0;
+    padding: 30px 0;
     min-height: 100vh;
     .fxt-content {
       width: 400px;
