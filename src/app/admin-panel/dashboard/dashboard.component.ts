@@ -26,9 +26,9 @@ import {
   ApexTooltip,
   ApexResponsive,
   ApexNonAxisChartSeries,
-} from "ng-apexcharts";
+} from 'ng-apexcharts';
 const startDate = new Date();
-const endDate = new Date(startDate.getTime() - (336 * 60 * 60 * 1000));
+const endDate = new Date(startDate.getTime() - 336 * 60 * 60 * 1000);
 
 @Component({
   selector: 'app-dashboard',
@@ -60,10 +60,10 @@ export class DashboardComponent implements OnInit {
   dashboardRagePickerForm!: FormGroup;
   onBoardStatus: any;
 
-  @ViewChild("chart", { static: false }) chart!: ChartComponent;
+  @ViewChild('chart', { static: false }) chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions> | any;
 
-  @ViewChild("pie-chart", { static: false }) pieChart!: ChartComponent;
+  @ViewChild('pie-chart', { static: false }) pieChart!: ChartComponent;
   public pieChartOptions: Partial<PieChartOptions> | any;
 
   constructor(
@@ -72,10 +72,10 @@ export class DashboardComponent implements OnInit {
     private _invoiceService: InvoiceService,
     private _accountSettingService: AccountSettingService,
     private _dashboardService: DashboardService,
-    private _formBuilder: FormBuilder, private _dialog: MatDialog, private _router: Router
-  ) {
-
-  }
+    private _formBuilder: FormBuilder,
+    private _dialog: MatDialog,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.dashboardRagePickerForm = this._formBuilder.group({
@@ -225,22 +225,20 @@ export class DashboardComponent implements OnInit {
           this.graphStats = res.data;
           this.bindHighChart(this.graphStats);
         },
-        error: (error) => { },
+        error: (error) => {},
       });
 
     this.bindPieChart(objDahsboardGraphInput);
   }
 
   getDashboardStats() {
-    this._dashboardService.getDashboardStats()
-      .subscribe({
-        next: (res: { data: any[]; }) => {
-          this.stats = res.data;
-          ////console.log(this.stats)
-        },
-        error: error => {
-        }
-      });
+    this._dashboardService.getDashboardStats().subscribe({
+      next: (res: { data: any[] }) => {
+        this.stats = res.data;
+        ////console.log(this.stats)
+      },
+      error: (error) => {},
+    });
   }
 
   bindHighChart(graphStats: any = []) {
@@ -307,64 +305,67 @@ export class DashboardComponent implements OnInit {
     //     },
     //   },
     //   series: graphData,
-    // });    
+    // });
     this.chartOptions = {
       series: graphData,
       chart: {
-        type: "bar",
-        height: 300
+        type: 'bar',
+        height: 300,
       },
       plotOptions: {
         bar: {
           horizontal: false,
-          columnWidth: "55%",
-          endingShape: "rounded"
-        }
+          columnWidth: '55%',
+          endingShape: 'rounded',
+        },
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
         show: true,
         width: 2,
-        colors: ["transparent"]
+        colors: ['transparent'],
       },
       xaxis: {
-        categories: days
+        categories: days,
       },
       yaxis: {
         title: {
-          text: "Total Count"
+          text: 'Total Count',
         },
-        min: 0
+        min: 0,
       },
       fill: {
-        opacity: 1
+        opacity: 1,
       },
       tooltip: {
         y: {
           formatter: function (val: string) {
             return val;
-          }
-        }
-      }
+          },
+        },
+      },
     };
   }
 
   openOnBoardModel() {
-    this._dialog.open(OnboardPopupComponent, { width: '900px', height: '600px', data: { 'onBoardStatus': this.onBoardStatus, isEnableEdit: false }, disableClose: true })
+    this._dialog.open(OnboardPopupComponent, {
+      width: '900px',
+      height: '600px',
+      data: { onBoardStatus: this.onBoardStatus, isEnableEdit: false },
+      disableClose: true,
+    });
   }
 
   getOnBoardStats() {
-    this._dashboardService.GetOnBoardStatus()
-      .subscribe({
-        next: (res: { data: any[]; }) => {
-          this.onBoardStatus = res.data;
-          ////////console.log(this.onBoardStatus)
-        },
-        error: error => {
-        }
-      });
+    this._dashboardService.GetOnBoardStatus().subscribe({
+      next: (res: { data: any[] }) => {
+        this.onBoardStatus = res.data;
+        ////////console.log(this.onBoardStatus)
+      },
+      error: (error) => {},
+    });
   }
 
   bindPieChart(objDahsboardGraphInput: any) {
@@ -385,7 +386,7 @@ export class DashboardComponent implements OnInit {
             series: serviceCountArr,
             chart: {
               width: 450,
-              type: "pie"
+              type: 'pie',
             },
             labels: labelArr,
             responsive: [
@@ -393,19 +394,18 @@ export class DashboardComponent implements OnInit {
                 breakpoint: 480,
                 options: {
                   chart: {
-                    width: 200
+                    width: 200,
                   },
                   legend: {
-                    position: "bottom"
-                  }
-                }
-              }
-            ]
+                    position: 'bottom',
+                  },
+                },
+              },
+            ],
           };
         },
-        error: (error) => { },
+        error: (error) => {},
       });
-
   }
 }
 export type ChartOptions = {
