@@ -34,7 +34,7 @@ export class AddTaxRateComponent {
     if (this.addTaxForm != undefined) {
       if (this.items != null) {
         this.addTaxForm.patchValue(this.items);
-        this.todayDate=this.items.effectiveDate;
+        //this.todayDate=this.items.effectiveDate;
       }
       else {
         this.submitted = false;

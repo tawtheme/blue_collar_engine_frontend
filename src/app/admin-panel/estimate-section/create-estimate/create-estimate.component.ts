@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -43,6 +43,7 @@ export class CreateEstimateComponent implements OnInit {
   status: string = '';
   todayDate: Date = new Date();
   isProceed: boolean = false;
+  selectedServicesList: any = [];
   constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _snackBar: MatSnackBar, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, private dialog: MatDialog, private _accountSettingService: AccountSettingService, private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
@@ -108,7 +109,8 @@ export class CreateEstimateComponent implements OnInit {
   get(estimateId: number) {
     this._estimateService.get(estimateId).subscribe(res => {
       this.products().clear();
-      res.data.products.forEach((t: { batches: any[]; }) => {
+      res.data.products.forEach((t: { productId: any; }) => {
+        this.selectedServicesList.push(parseInt(t.productId));
         var product: FormGroup = this.newProduct();
         if (res.data.status != 'Draft') {
           product.controls['productId'].disable();
@@ -169,11 +171,28 @@ export class CreateEstimateComponent implements OnInit {
   }
 
   bindProductInfo(ev: any, index: number) {
-    var productData = this.productList.filter(function (event: { categoryServiceId: number; }) {
-      return event.categoryServiceId == ev;
+    if (!this.selectedServicesList.includes(parseInt(ev))) {
+      var productData = this.productList.filter(function (event: { categoryServiceId: number; }) {
+        return event.categoryServiceId == ev;
+      });
+      if (productData.length > 0) {
+        this.products().at(index).get('price')?.setValue(productData[0].price);
+        this.calculateTotal();
+        this.selectedServicesList.push(parseInt(ev));
+      }
+    }
+    else {
+      this._snackBar.open("This service has already been added.")
+      this.products().at(index).get('productId')?.setValue('');
+      //return;
+    }
+    this.selectedServicesList = [];
+    this.estimateInvoiceForm.getRawValue().products.forEach((t: { productId: any; }) => {
+      if (t.productId != '') {
+        this.selectedServicesList.push(parseInt(t.productId));
+      }
     });
-    this.products().at(index).get('price')?.setValue(productData[0].price);
-    this.calculateTotal();
+    //console.log(this.selectedServicesList);
   }
 
   getAddress(customerId: number) {
