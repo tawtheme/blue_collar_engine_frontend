@@ -48,6 +48,7 @@ export class CreateInvoiceComponent implements OnInit {
   productCtrl = new FormControl();
   bookingId: number = 0;
   termAndConditionDetail: any[] = [];
+  selectedServicesList: any = [];
   constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _snackBar: MatSnackBar, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService, private _bookingService: BookingService) {
     this.filteredProducts = this.productCtrl.valueChanges
       .pipe(
@@ -132,7 +133,8 @@ export class CreateInvoiceComponent implements OnInit {
   get(invoiceId: number) {
     this._invoiceService.get(invoiceId).subscribe(res => {
       this.products().clear();
-      res.data.products.forEach((t: { batches: any[]; }) => {
+      res.data.products.forEach((t: { productId: any; }) => {
+        this.selectedServicesList.push(parseInt(t.productId));
         var product: FormGroup = this.newProduct();
         if (res.data.status != 'Draft') {
           product.controls['productId'].disable();
@@ -142,7 +144,7 @@ export class CreateInvoiceComponent implements OnInit {
         this.products().push(product);
       });
       this.invoiceForm.patchValue(res.data);
-      this.taxPer=res.data.tax;
+      this.taxPer = res.data.tax;
       if (res.data.status != 'Draft') {
         this.invoiceForm.controls['customerId'].disable();
         this.invoiceForm.controls['expiryDate'].disable();
@@ -166,7 +168,11 @@ export class CreateInvoiceComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.productList = res.data;
-          ////////////console.log(this.productList)
+          this.productList.map((x: any) => ({
+            ...x,
+            isDisabled: false
+          }));
+          console.log(this.productList)
         },
         error: error => {
           this.loading = false;
@@ -202,11 +208,28 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   bindProductInfo(ev: any, index: number) {
-    var productData = this.productList.filter(function (event: { categoryServiceId: number; }) {
-      return event.categoryServiceId == ev;
+    if (!this.selectedServicesList.includes(parseInt(ev))) {
+      var productData = this.productList.filter(function (event: { categoryServiceId: number; }) {
+        return event.categoryServiceId == ev;
+      });
+      if (productData.length > 0) {
+        this.products().at(index).get('price')?.setValue(productData[0].price);
+        this.calculateTotal();
+        this.selectedServicesList.push(parseInt(ev));
+      }
+    }
+    else {
+      this._snackBar.open("This service has already been added.")
+      this.products().at(index).get('productId')?.setValue('');
+      //return;
+    }
+    this.selectedServicesList = [];
+    this.invoiceForm.getRawValue().products.forEach((t: { productId: any; }) => {
+      if (t.productId != '') {
+        this.selectedServicesList.push(parseInt(t.productId));
+      }
     });
-    this.products().at(index).get('price')?.setValue(productData[0].price);
-    this.calculateTotal();
+    //console.log(this.selectedServicesList);
   }
 
   getAddress(customerId: number) {
@@ -398,5 +421,4 @@ export class CreateInvoiceComponent implements OnInit {
         }
       });
   }
-
 }

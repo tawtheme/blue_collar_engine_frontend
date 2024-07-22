@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -26,6 +26,9 @@ export class ErrorInterceptor implements HttpInterceptor {
             }
             else if (err.status == 400) {
                 error = err.error.message || err.error.data;
+            }
+            else if (err.status === 0) {
+                error = 'Unable to Connect to the Server';
             }
             else {
                 error = err.error.message || err.error.data || err.statusText;

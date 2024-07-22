@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { environment } from '@environments/environment';
 import { DatePipe } from '@angular/common';
-
+import moment from 'moment';
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
@@ -186,6 +186,7 @@ export class JobsComponent implements OnInit {
         next: (res) => {
           this.loadCompeleted = false;
           this.compeletedBooking = res.data;
+          console.log(this.compeletedBooking)
           this.compeletedBooking.forEach((res) => {
             if (res.assignedTeamMembers.length > 0) {
               res.assignedTeamMembers.forEach((r: any) => {
