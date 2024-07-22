@@ -33,8 +33,6 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JWT_OPTIONS, JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 import { NgxStripeModule } from 'ngx-stripe';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
-import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.component';
-import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
 import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarConfig,
@@ -43,9 +41,11 @@ import { SharedModule } from './shared/shared.module';
 import { DatePipe } from '@angular/common';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
-import { FeatureThreeComponent } from './feature-three/feature-three.component';
-import { FeatureFourComponent } from './feature-four/feature-four.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { OnlineBookingSystemComponent } from './online-booking-system/online-booking-system.component';
+import { BookingSystemComponent } from './booking-system/booking-system.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { EstimateComponent } from './estimate/estimate.component';
 
 Date.prototype.toISOString = function () {
   return moment(this).format('YYYY-MM-DDTHH:mm:ss');
@@ -91,13 +91,13 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
     FrontendLayoutComponent,
     PagenotfoundComponent,
     PaymentSuccessComponent,
-    FeatureInvoiceComponent,
-    FeatureEstimateComponent,
     PrivacyPolicyComponent,
     TermsOfServiceComponent,
-    FeatureThreeComponent,
-    FeatureFourComponent,
     AboutUsComponent,
+    OnlineBookingSystemComponent,
+    BookingSystemComponent,
+    InvoiceComponent,
+    EstimateComponent,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

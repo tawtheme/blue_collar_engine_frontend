@@ -11,13 +11,13 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
-import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.component';
-import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
-import { FeatureThreeComponent } from './feature-three/feature-three.component';
-import { FeatureFourComponent } from './feature-four/feature-four.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { OnlineBookingSystemComponent } from './online-booking-system/online-booking-system.component';
+import { BookingSystemComponent } from './booking-system/booking-system.component';
+import { EstimateComponent } from './estimate/estimate.component';
 
 const routes: Routes = [
   {
@@ -35,19 +35,19 @@ const routes: Routes = [
       },
       {
         path: 'page/invoice',
-        component: FeatureInvoiceComponent,
+        component: InvoiceComponent,
       },
       {
         path: 'page/estimate',
-        component: FeatureEstimateComponent,
+        component: EstimateComponent,
       },
       {
-        path: 'page/feature-three',
-        component: FeatureThreeComponent,
+        path: 'page/online-booking-system',
+        component: OnlineBookingSystemComponent,
       },
       {
-        path: 'page/feature-four',
-        component: FeatureFourComponent,
+        path: 'page/booking-system',
+        component: BookingSystemComponent,
       },
       {
         path: 'privacy-policy',
@@ -60,7 +60,7 @@ const routes: Routes = [
       {
         path: 'about-us',
         component: AboutUsComponent,
-      }
+      },
     ],
   },
   {
