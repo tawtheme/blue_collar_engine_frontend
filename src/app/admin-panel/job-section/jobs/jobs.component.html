@@ -246,13 +246,13 @@
                                     <div>
                                         <h5 class="font14 mb-1 mt-3 font400 font-muted">Services Duration</h5>
                                         <div class="d-flex flex-wrap gap-2 items-center">
-                                            <span class="font13">03 hours (09:00AM - 12:00PM)</span>
+                                            <span class="font13">{{booking.totalJobDuration}} hours ({{booking.jobStartedDate | date:'mediumTime'}} - {{booking.jobFinishedDate | date:'mediumTime'}})</span>                                                                      
                                         </div>
                                     </div>
                                     <div>
                                         <h5 class="font14 mb-2 mt-3 font400 font-muted">Rating</h5>
                                         <div class="d-flex flex-wrap gap-2 items-center">
-                                            <span class="success-badge">4/5</span>
+                                            <span class="success-badge">{{booking.rating}}/5</span>
                                         </div>
                                     </div>
                                 </div>
