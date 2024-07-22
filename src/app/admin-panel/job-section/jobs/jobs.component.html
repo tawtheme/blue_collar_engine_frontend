@@ -149,8 +149,7 @@
                                             <div *ngFor="let teamMember of booking.assignedTeamMembers"
                                                 class="userAvtarGroup-rounded-wrapper">
                                                 <img src="{{teamMember.profileImagePath}}"
-                                                    (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
-                                                    alt="image" class="rounded-circle">
+                                                    (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'" alt="image">
                                             </div>
                                         </div>
                                     </div>
@@ -216,7 +215,7 @@
                                                 class="userAvtarGroup-rounded-wrapper">
                                                 <img src="{{teamMember.profileImagePath}}"
                                                     (error)="teamMember.profileImagePath = '../../../../assets/images/blank-img.png'"
-                                                    alt="image" class="rounded-circle">
+                                                    alt="image">
                                             </div>
                                         </div>
                                     </div>
@@ -234,7 +233,7 @@
                                 </div>
                                 <div class="d-flex align-items-start flex-column">
                                     <h5 class="font14 mb-1 mt-3 font400 font-muted">Date and Time</h5>
-                                    <span class="primary-badge">{{booking.bookingDate | date:'mediumDate' }} at
+                                    <span class="white-badge bg-light">{{booking.bookingDate | date:'mediumDate' }} at
                                         {{booking.bookingTime}}</span>
                                 </div>
                                 <div class="d-flex align-items-start flex-column">
@@ -243,11 +242,24 @@
                                         <span class="white-badge bg-light" *ngFor="let service of booking.bookingServicesNameList">{{service}}</span>
                                     </div>
                                 </div>
+                                <div class="d-flex flex-row align-items-start flex-column">
+                                    <div>
+                                        <h5 class="font14 mb-1 mt-3 font400 font-muted">Services Duration</h5>
+                                        <div class="d-flex flex-wrap gap-2 items-center">
+                                            <span class="font13">03 hours (09:00AM - 12:00PM)</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5 class="font14 mb-2 mt-3 font400 font-muted">Rating</h5>
+                                        <div class="d-flex flex-wrap gap-2 items-center">
+                                            <span class="success-badge">4/5</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div *ngIf="compeletedBooking.length==0 && !loadCompeleted"
                                 class="d-flex flex-column align-items-center p-5">
-                                <img src="../../../assets/images/no-data-found.svg" alt="image"
-                                    class="no-data-found-img" />
+                                <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
                                 <span class="font-muted font14 text-center">No compeleted booking available</span>
                             </div>
                         </div>
