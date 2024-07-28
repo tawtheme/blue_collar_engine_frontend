@@ -34,7 +34,6 @@ export class BusinessHoursComponent {
 
   ngOnInit() {
     this._accountSettingService.tenentProfileInfo.subscribe(res => {
-      ////////////console.log(res);
       this.timeZone = res.timezone;
     });
     this.bindTimeZonesDDL();
@@ -110,6 +109,7 @@ export class BusinessHoursComponent {
     this.preLoading = true;
     this._accountSettingService.getBusinessHoursDays().subscribe(res => {
       this.preLoading = false;
+      console.log(res.data)
       res.data.forEach((day: any, index: any) => {
         this.days().push(this._formBuilder.group({
           dayId: [day.dayId],
@@ -117,6 +117,7 @@ export class BusinessHoursComponent {
           isActive: [day.isActive],
           businessHours: this._formBuilder.array([])
         }));
+        //console.log(day.businessHours)
         day.businessHours.forEach((value: any) => {
           this.businessHours(index).push(this._formBuilder.group({
             businessHourId: [value.businessHourId],
@@ -138,12 +139,13 @@ export class BusinessHoursComponent {
       return;
     }
     this.loading = true;
-    ////////console.log(JSON.stringify(param))
-    this._accountSettingService.addUpdateBusinessHours(param).subscribe(res => {
-      this.loading = false;
-      this._snackBar.open(res.message);
-    });
+    console.log(JSON.stringify(param))
+    // this._accountSettingService.addUpdateBusinessHours(param).subscribe(res => {
+    //   this.loading = false;
+    //   this._snackBar.open(res.message);
+    // });
   }
+  
   onOpenTimeset(event: any) {
     //////////console.log(event);
   }

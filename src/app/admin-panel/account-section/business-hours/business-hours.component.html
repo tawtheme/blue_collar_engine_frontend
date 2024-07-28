@@ -39,7 +39,7 @@
                             <div class="form-group flex-grow-1" *ngIf="!hours.value.isDeleted">
                                 <input aria-label="default time" class="form-control" formControlName="openTime"
                                     [ngxTimepicker]="defaultValue" [value]="hours.value.openTime"
-                                    placeholder="Open time"
+                                    placeholder="Open time" 
                                     [ngClass]="{ 'is-invalid': submitted && hours.get('openTime')!.errors?.required }"
                                     readonly>
                                 <div *ngIf="submitted && hours.get('openTime')!.errors" class="invalid-feedback">
