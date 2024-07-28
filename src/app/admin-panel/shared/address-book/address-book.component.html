@@ -3,9 +3,9 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
     </button>
 </div>
-<perfect-scrollbar>
-    <div class="offcanvas-body">
-        <form class="sidebar-popup-inner">
+<form class="sidebar-popup-inner">
+    <perfect-scrollbar>
+        <div class="offcanvas-body">
             <div class="card-checkbox" *ngFor="let address of items">
                 <label (change)="setAddress(address)">
                     <input type="radio" name="address" class="card-input-element" [checked]="address.isDefault">
@@ -20,14 +20,16 @@
                     </div>
                 </label>
             </div>
-        </form>
-    </div>
-</perfect-scrollbar>
-<div class="sidebar-popup-bottom offcanvas-footer" *ngIf="IsShowAddEdit">
-    <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="button"
-        (click)="addAdreess()"><span class="icon-add"></span> Add Address</button>
-</div>
+        </div>
+    </perfect-scrollbar>
 
-<a href="javascript:void(0);" style="display:none;" data-bs-toggle="offcanvas" data-bs-target="#AddAddressSidebar"
-    aria-controls="AddAddressSidebar" #clickEvent><span class="icon-edit-2"></span>
-    Edit Details</a>
+    <div class="sidebar-popup-bottom offcanvas-footer" *ngIf="IsShowAddEdit">
+        <button class="primary-filled-button filled w-100" data-bs-dismiss="offcanvas" type="button"
+            (click)="addAdreess()"><span class="icon-add"></span> Add Address</button>
+    </div>
+
+    <a href="javascript:void(0);" style="display:none;" data-bs-toggle="offcanvas" data-bs-target="#AddAddressSidebar"
+        aria-controls="AddAddressSidebar" #clickEvent><span class="icon-edit-2"></span>
+        Edit Details</a>
+
+</form>
