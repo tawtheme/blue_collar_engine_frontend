@@ -15,7 +15,7 @@ export class TeamDetailsComponent {
       minHeight: '480px',
       maxHeight: '90vh',
       disableClose: true,
-      panelClass: 'bookings-details-dialog-container',
+      panelClass: 'bookings-details-dialog-container'
     });
   }
 }

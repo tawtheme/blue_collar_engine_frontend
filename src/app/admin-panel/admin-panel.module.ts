@@ -50,8 +50,6 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { TeamDetailsComponent } from './account-section/team-management/team-details/team-details.component';
 import { TeamBookingDetailsComponent } from './account-section/team-management/team-booking-details/team-booking-details.component';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -65,7 +63,6 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     }),
     SharedModule,
     MaterialModule,
-    PerfectScrollbarModule,
     NgApexchartsModule,
   ],
   declarations: [
