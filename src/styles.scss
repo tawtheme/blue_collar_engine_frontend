@@ -3,7 +3,7 @@
 
 /* styles.css */
 html {
-  overflow: hidden; /* Hide default scrollbar */
+  overflow-x: hidden; /* Hide default scrollbar */
 }
 
 body,
@@ -11,7 +11,7 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .mCustomScrollbar {
   height: 100%;
@@ -215,4 +215,8 @@ div.custom-star button {
 }
 .disable:active {
   pointer-events: none;
+}
+
+perfect-scrollbar .ps-content {
+  height: 100%;
 }

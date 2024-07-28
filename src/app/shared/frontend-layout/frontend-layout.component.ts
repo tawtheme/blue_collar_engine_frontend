@@ -10,6 +10,7 @@ import { environment } from '@environments/environment';
 })
 export class FrontendLayoutComponent {
   currentYear: number = new Date().getFullYear();
+
   constructor(private _route: Router) {
     let getLink = window.location.href;
     //////////console.log('window.location.href :' + getLink)

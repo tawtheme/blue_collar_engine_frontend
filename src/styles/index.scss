@@ -864,6 +864,10 @@ ul {
   background-color: var(--light-danger) !important;
   border-color: var(--border-danger) !important;
 }
+.lightWarningCardBox {
+  background-color: var(--light-warning) !important;
+  border-color: var(--wraning-label) !important;
+}
 
 // Tabs
 .borderStyleTabs {
@@ -1481,7 +1485,8 @@ tag-input.form-control {
     width: 28px;
     height: 28px;
     border: 1px solid var(--indigo);
-    margin: 0 0 0 -12px; border-radius: 10px;
+    margin: 0 0 0 -12px;
+    border-radius: 10px;
     &:nth-child(1) {
       border: 1px solid var(--border-color2);
     }

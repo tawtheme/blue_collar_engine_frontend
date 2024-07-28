@@ -46,6 +46,7 @@ import { OnlineBookingSystemComponent } from './online-booking-system/online-boo
 import { BookingSystemComponent } from './booking-system/booking-system.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { EstimateComponent } from './estimate/estimate.component';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 Date.prototype.toISOString = function () {
   return moment(this).format('YYYY-MM-DDTHH:mm:ss');
@@ -73,7 +74,7 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
     MaterialModule,
     JwtModule,
     SharedModule,
-
+    PerfectScrollbarModule,
     NgxStripeModule.forRoot(),
   ],
   declarations: [
@@ -103,7 +104,10 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: matSnackbarDefaultConfig },
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: matSnackbarDefaultConfig,
+    },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
     LoaderService,
@@ -111,4 +115,4 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -9,7 +9,6 @@ import { AuthenticationService } from './_services';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { User, Role } from './_models';
 import { LoaderService } from './_services/loader.service';
-import { MCustomScrollbarService } from './_models/mcustomscrollbar.service';
 
 @Component({ selector: 'app-root', templateUrl: 'app.component.html' })
 export class AppComponent implements AfterViewInit {
@@ -39,18 +38,12 @@ export class AppComponent implements AfterViewInit {
     private authenticationService: AuthenticationService,
     private loaderService: LoaderService,
     private renderer: Renderer2,
-    private mCustomScrollbarService: MCustomScrollbarService,
     private router: Router
   ) {
     this.authenticationService.user.subscribe((x) => (this.user = x));
     // document.addEventListener('contextmenu', function(e) {
     //   e.preventDefault();
     // });
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationEnd) {
-        this.applyScrollbar();
-      }
-    });
   }
 
   get isAdmin() {
@@ -72,19 +65,5 @@ export class AppComponent implements AfterViewInit {
         //this.renderer.removeClass(document.body, 'cursor-loader');
       }
     });
-
-    this.applyScrollbar();
-
-    // this.mCustomScrollbarService.initializeMCustomScrollbar('body');
-  }
-  private applyScrollbar() {
-    setTimeout(() => {
-      this.mCustomScrollbarService.applyCustomScrollbar([
-        'body',
-        '.recent-wrapper',
-        '.popularSection',
-        '.booking-listing',
-      ]);
-    }, 500); // Adjust timeout as necessary
   }
 }
