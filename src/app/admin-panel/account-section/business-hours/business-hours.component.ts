@@ -166,17 +166,17 @@ export class BusinessHoursComponent {
       return;
     }
     this.loading = true;
-    var _errMsg = '';
+    var _errMsgDay = [];
     for (let i = 0; i < param.days.length; i++) {
       var _filteredDays = param.days[i].businessHours.filter(function (e: any) {
         return e.isDeleted == false;
       })
       if (this.isOverlapping(_filteredDays)) {
-        _errMsg += param.days[i].dayName + ' hours are overlaped \n';
+        _errMsgDay.push(param.days[i].dayName);
       }
     }
-    if (_errMsg != '') {
-      this._snackBar.open(_errMsg)
+    if (_errMsgDay.length > 0) {
+      this._snackBar.open(_errMsgDay.join(', ') + ' hours are overlaped. Please correct.')
       return;
     }
     this._accountSettingService.addUpdateBusinessHours(param).subscribe(res => {
