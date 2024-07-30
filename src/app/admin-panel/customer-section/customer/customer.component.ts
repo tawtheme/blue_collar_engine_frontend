@@ -26,6 +26,7 @@ export class CustomerComponent implements OnInit {
   pageSizeOptions: number[] = [10, 20, 50];
   pageEvent: PageEvent | undefined;
   customerStats: any;
+  
   constructor(private _customerService: CustomerService, private _router: Router) {
 
   }
@@ -38,12 +39,13 @@ export class CustomerComponent implements OnInit {
       "searchStr": ""
     }
     this.getAll(_param);
-   this.getCustomerStats();
+    this.getCustomerStats();
     this._customerService.customerAdded.subscribe((data: boolean) => {
+      debugger
       if (data) {
         this.getAll(_param);
       }
-    });
+    });    
   }
 
   getAll(param: PaginationModel) {
@@ -54,7 +56,7 @@ export class CustomerComponent implements OnInit {
         next: (res) => {
           this.loading = false;
           this.items = res.data;
-        //  ////////console.log(this.items)
+          //  ////////console.log(this.items)
         },
         error: error => {
           this.loading = false;

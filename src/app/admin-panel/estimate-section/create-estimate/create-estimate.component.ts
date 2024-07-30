@@ -1,4 +1,4 @@
-import { Component, DebugElement, OnInit } from '@angular/core';
+import { Component, DebugElement, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -12,6 +12,7 @@ import { CustomerService } from '@app/_services/admin-panel/customer/customer.se
 import { EstimateService } from '@app/_services/admin-panel/estimate/estimate.service';
 import { MasterService } from '@app/_services/admin-panel/master/master.service';
 import { ProductService } from '@app/_services/admin-panel/product/product.service';
+import { CustomerComponent } from '@app/admin-panel/customer-section/customer/customer.component';
 import { ConfirmDialogComponent, ConfirmDialogModel } from '@app/shared/confirm-dialog/confirm-dialog/confirm-dialog.component';
 import moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
@@ -44,6 +45,7 @@ export class CreateEstimateComponent implements OnInit {
   todayDate: Date = new Date();
   isProceed: boolean = false;
   selectedServicesList: any = [];
+  @ViewChild('customerAddNewEle') customerAddNewEle!: ElementRef<HTMLElement>;
   constructor(private _formBuilder: FormBuilder, private _estimateService: EstimateService, private _router: Router, private _snackBar: MatSnackBar, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, private dialog: MatDialog, private _accountSettingService: AccountSettingService, private _categoryService: CategoryService) { }
 
   ngOnInit(): void {
@@ -85,6 +87,11 @@ export class CreateEstimateComponent implements OnInit {
           this.get(params.estimateId);
         }
       });
+      this._customerService.customerAdded.subscribe((data: boolean) => {
+        if (data) {
+          this.getAll(_param);        
+        }
+      });  
   }
 
   // convenience getter for easy access to form fields
@@ -150,22 +157,30 @@ export class CreateEstimateComponent implements OnInit {
   }
 
   bindCustomerInfo(ev: any) {
-    var customerData = this.customerList.filter(function (event: { customerId: number; }) {
-      return event.customerId == ev.target.value;
-    });
-    //////console.log(customerData)
-    this.customerInfo = <CustomerModel>customerData[0];
-    if (this.customerInfo == undefined) {
-      this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
-      this.isDisabled = true;
+    if (ev.target.value == -1) {
+     // console.log('calling add customer')
+      this.estimateInvoiceForm.controls['customerId'].setValue('');
+      let el: HTMLElement = this.customerAddNewEle.nativeElement;
+      el.click();
     }
     else {
-      this.customerInfo.serviceAddress = customerData[0].serviceAddress + ', ' + customerData[0].city + ', ' + customerData[0].state + ', ' + customerData[0].zipCode;
-      if (this.customerInfo.customerId > 0) {
-        this.isDisabled = false;
+      var customerData = this.customerList.filter(function (event: { customerId: number; }) {
+        return event.customerId == ev.target.value;
+      });
+      //////console.log(customerData)
+      this.customerInfo = <CustomerModel>customerData[0];
+      if (this.customerInfo == undefined) {
+        this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
+        this.isDisabled = true;
       }
-      this.estimateInvoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
-      this.getAddress(this.customerInfo.customerId);
+      else {
+        this.customerInfo.serviceAddress = customerData[0].serviceAddress + ', ' + customerData[0].city + ', ' + customerData[0].state + ', ' + customerData[0].zipCode;
+        if (this.customerInfo.customerId > 0) {
+          this.isDisabled = false;
+        }
+        this.estimateInvoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
+        this.getAddress(this.customerInfo.customerId);
+      }
     }
 
   }
@@ -331,7 +346,4 @@ export class CreateEstimateComponent implements OnInit {
         }
       });
   }
-
-
-
 }

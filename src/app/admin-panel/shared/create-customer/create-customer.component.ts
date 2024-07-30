@@ -29,14 +29,14 @@ export class CreateCustomerComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.maxLength(50)]],
       companyName: ['', [Validators.maxLength(200)]],
       mobileNumber: ['', [Validators.required]],
-      landlineNo: ['', [Validators.required]],
+      landlineNo: ['', null],
       emailAddress: ['', [Validators.required, Validators.maxLength(200)]],
       serviceAddress: ['', [Validators.required, Validators.maxLength(500)]],
       state: ['', [Validators.required, Validators.maxLength(50)]],
       city: ['', [Validators.required, Validators.maxLength(50)]],
       zipCode: ['', [Validators.required, Validators.maxLength(10), Validators.pattern('[0-9]{5,6}')]],
       setDefaultBillingAddress: [true],
-      tags: ['', [Validators.required, Validators.maxLength(500)]],
+      tags: ['', [Validators.maxLength(500)]],
       status: ['A', null],
     });
 

@@ -308,4 +308,14 @@ export class JobsComponent implements OnInit {
       this.getAllCompletedBooking(_param);
     }
   }
+
+  bookingDateChange(){
+    this.filterBooking();
+  }
+
+  clearStartDate() {
+    this.bookingSearchForm.controls['bookingDate'].setValue(null); 
+    this.filterBooking();
+}
+
 }

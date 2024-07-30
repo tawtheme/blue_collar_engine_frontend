@@ -29,6 +29,7 @@
                             <option value="" selected>Select</option>
                             <option value="{{cust.customerId}}" *ngFor="let cust of customerList">{{cust.firstName}}
                                 {{cust.lastName}}</option>
+                                <option value="-1">Create New</option>
                         </select>
                         <div *ngIf="submitted && f.customerId.errors" class="invalid-feedback">
                             <div *ngIf="f.customerId.errors.required">Select a customer</div>
@@ -229,4 +230,14 @@
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddressBookSidebar"
     aria-labelledby="offcanvasRightLabel">
     <app-address-book [items]="customerAddress" [IsShowAddEdit]="false"></app-address-book>
+</div>
+
+<button class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas" style="display: none;"
+    data-bs-target="#AddCustomerSidebar" aria-controls="AddCustomerSidebar"><span class="icon-add"
+        #customerAddNewEle></span> Add New
+</button>
+
+<div class="offcanvas offcanvas-end sidebar-popup offcanvas-w480" tabindex="-1" id="AddCustomerSidebar"
+    aria-labelledby="offcanvasRightLabel">
+    <app-create-customer></app-create-customer>
 </div>

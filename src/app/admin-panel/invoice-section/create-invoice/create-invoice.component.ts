@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -49,6 +49,7 @@ export class CreateInvoiceComponent implements OnInit {
   bookingId: number = 0;
   termAndConditionDetail: any[] = [];
   selectedServicesList: any = [];
+  @ViewChild('customerAddNewEle') customerAddNewEle!: ElementRef<HTMLElement>;
   constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _snackBar: MatSnackBar, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService, private _bookingService: BookingService) {
     this.filteredProducts = this.productCtrl.valueChanges
       .pipe(
@@ -108,6 +109,12 @@ export class CreateInvoiceComponent implements OnInit {
           this.getBookingInfo(this.bookingId);
         }
       });
+
+      this._customerService.customerAdded.subscribe((data: boolean) => {
+        if (data) {
+          this.getAll(_param);        
+        }
+      });  
   }
 
   // convenience getter for easy access to form fields
@@ -188,6 +195,12 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   bindCustomerInfo(ev: any) {
+    if (ev.target.value == -1) {
+      this.invoiceForm.controls['customerId'].setValue('');
+      let el: HTMLElement = this.customerAddNewEle.nativeElement;
+      el.click();
+    }
+    else {
     var customerData = this.customerList.filter(function (event: { customerId: number; }) {
       return event.customerId == ev.target.value;
     });
@@ -204,7 +217,7 @@ export class CreateInvoiceComponent implements OnInit {
       this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
       this.getAddress(this.customerInfo.customerId);
     }
-
+  }
   }
 
   bindProductInfo(ev: any, index: number) {
