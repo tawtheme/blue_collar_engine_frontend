@@ -47,6 +47,7 @@ import { BookingSystemComponent } from './booking-system/booking-system.componen
 import { InvoiceComponent } from './invoice/invoice.component';
 import { EstimateComponent } from './estimate/estimate.component';
 
+
 Date.prototype.toISOString = function () {
   return moment(this).format('YYYY-MM-DDTHH:mm:ss');
 };
@@ -73,7 +74,7 @@ const matSnackbarDefaultConfig: MatSnackBarConfig = {
     MaterialModule,
     JwtModule,
     SharedModule,
-
+    
     NgxStripeModule.forRoot(),
   ],
   declarations: [

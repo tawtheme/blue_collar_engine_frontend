@@ -4,16 +4,15 @@ import { CustomerService } from '@app/_services/admin-panel/customer/customer.se
 @Component({
   selector: 'app-address-book',
   templateUrl: './address-book.component.html',
-  styleUrls: ['./address-book.component.scss']
+  styleUrls: ['./address-book.component.scss'],
 })
 export class AddressBookComponent implements OnInit {
   @Input() items?: any;
   @Input() IsShowAddEdit: boolean = true;
   @ViewChild('clickEvent') clickEvent!: ElementRef<HTMLElement>;
-  constructor(private _customerService: CustomerService) { }
+  constructor(private _customerService: CustomerService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   getData(address: any) {
     //this.address = address;

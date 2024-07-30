@@ -5,53 +5,54 @@
   column-gap: 20px;
 
   .dashboard-widget-card {
-      display: flex; column-gap: 20px;
-      background-color: white;
-      border: 1px solid var(--border-color2);
-      padding: 1rem;
-      border-radius: 5px;
-      margin-bottom: 15px;      
-    
-      &-circle {
-          width: 48px;
-          height: 48px;
-          min-width: 48px;
-          border-radius: 50%;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          font-size: 1.5rem;
-      }
-      &-info {
-          flex-grow: 1;
-          h6 {
-          font-size: 20px;
-          margin-bottom: 5px;
+    display: flex;
+    column-gap: 20px;
+    background-color: white;
+    border: 1px solid var(--border-color2);
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 15px;
+
+    &-circle {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+    }
+    &-info {
+      flex-grow: 1;
+      h6 {
+        font-size: 20px;
+        margin-bottom: 5px;
+        color: var(--dark);
+        span {
+          font-size: 11px;
           color: var(--dark);
-          span {
-              font-size: 11px;
-              color: var(--dark);
-              margin-left: 2px;
-              font-weight: 400;
-          }
-          }
-          p {
-          font-size: 13px;
-          color: var(--muted);
-          margin: 0;
-          }
+          margin-left: 2px;
+          font-weight: 400;
+        }
       }
+      p {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0;
+      }
+    }
   }
 }
 
 /*..search-filter..*/
-.booking-filter{
+.booking-filter {
   display: grid;
   grid-template-columns: 4fr 1fr 1fr;
   column-gap: 20px;
 
-  .iconPosition{
+  .iconPosition {
     position: absolute;
     left: 10px;
     top: 10px;
@@ -60,55 +61,64 @@
 }
 
 /*..booking column..*/
-.bookingColumn{
-  background-color: #F3F4F6;
-  padding: 10px 10px 50px 10px; border-radius: 8px;
-  height: 800px; max-height: 100%; overflow: hidden;
+.bookingColumn {
+  background-color: #f3f4f6;
+  padding: 10px 10px 50px 10px;
+  border-radius: 8px;
+  height: 800px;
+  max-height: 100%;
+  overflow: hidden;
 
-  .booking-top-head{
+  .booking-top-head {
     color: var(--white);
-    font-weight: 400; font-size: 14px;
-    padding: 5px 8px; border-radius: 8px;
-    margin-bottom: 10px; display: inline-flex;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: inline-flex;
   }
-  .unassigned-booking{
+  .unassigned-booking {
     background-color: var(--danger);
   }
-  .assigned-booking{
+  .assigned-booking {
     background-color: var(--wraning-label);
   }
-  .compelete-booking{
+  .compelete-booking {
     background-color: var(--dark-green);
   }
 
-  .status-select{
-    width: 100px; height: 30px;
-    color: var(--muted); font-size: 13px;
+  .status-select {
+    width: 100px;
+    height: 30px;
+    color: var(--muted);
+    font-size: 13px;
     border: 1px solid var(--border-color2);
-    border-radius: 8px; padding: 0px 5px;
+    border-radius: 8px;
+    padding: 0px 5px;
     margin-bottom: 10px;
 
-    &:focus{
+    &:focus {
       outline: none;
     }
   }
-  .booking-listing{
-    overflow: scroll;
+  .booking-listing {
+    overflow-y: auto;
     height: 100%;
 
     .assigned-booking-item {
       cursor: pointer;
       background-color: var(--white);
       border-radius: 10px;
-      padding: 15px; margin: 0px 0px 20px 0px;
+      padding: 15px;
+      margin: 0px 0px 20px 0px;
       border: 1px solid var(--border-color2);
 
-      &:last-child{
+      &:last-child {
         margin: 0px 0px 0px 0px;
       }
     }
   }
-  
 }
 
 .overlap-rounded-wrapper {
@@ -121,7 +131,8 @@
 }
 
 .bookingDateTimeWrapper {
-  display: flex; align-items: center;
+  display: flex;
+  align-items: center;
   position: relative;
 
   span.icon-calendar {

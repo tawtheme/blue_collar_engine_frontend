@@ -1,6 +1,6 @@
 .recent-wrapper {
   height: 300px;
-  overflow: auto;
+  overflow-y: auto;
 
   .recentListing {
     border-bottom: var(--bs-border-width) var(--bs-border-style)

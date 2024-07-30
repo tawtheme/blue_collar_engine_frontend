@@ -1,9 +1,10 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
 
 /* styles.css */
 html {
-  overflow: hidden; /* Hide default scrollbar */
+  overflow-x: hidden; /* Hide default scrollbar */
 }
 
 body,
@@ -11,7 +12,7 @@ html {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 .mCustomScrollbar {
   height: 100%;
@@ -215,4 +216,31 @@ div.custom-star button {
 }
 .disable:active {
   pointer-events: none;
+}
+
+perfect-scrollbar .ps-content {
+  height: 100%;
+}
+
+.bookings-details-dialog-container {
+  .mdc-dialog__container .mdc-dialog__surface {
+    overflow: hidden !important;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.perfect-scrollbar-outer {
+  display: flex;
+  overflow-y: auto;
+  min-height: 480px;
+  max-width: 80vw;
+  max-height: 90vh;
+}
+
+app-team-booking-details,
+app-edit-view-booking {
+  height: 100%;
+  flex-grow: 1;
+  display: flex;
 }

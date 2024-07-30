@@ -1,0 +1,160 @@
+<div class="page-title-box items-center">
+    <div class="container-xxl">
+        <div class="d-flex items-center">
+            <div class="">
+                <div class="d-flex items-center mb-10">
+                    <h4 class="page-title">Team Details</h4>
+                </div>
+                <div class="breadcrumb">
+                    <a [routerLink]="['/admin/account-setting']">Account Setting</a>
+                    <span class="separator">/</span>
+                    <a [routerLink]="['/admin/account-setting']">Team</a>
+                    <span class="separator">/</span>
+                    <span>Team Details</span>
+                </div>
+            </div>
+            <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
+                <button type="button" class="btn btn-primary  gap-3"><span class="icon-edit font12"></span> Edit Profile
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-xxl">
+    <div class="row py-4">
+        <div class="col-lg-4">
+            <div class="bg-light border rounded h-100 team-member-details-info p-4">
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="team-member-img">
+                        <img src="../../../../../assets/images/services1.png" class="img-fluid" alt="" />
+                    </div>
+                    <div>
+                        <h4 class="font18 mb-2">John Smith</h4>
+                        <span class="white-badge">AC Repair</span>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-6">
+                        <p class="font14 font-muted mb-1">User ID</p>
+                        <h4 class="font16 text-black font500">4483</h4>
+                    </div>
+                    <div class="col-6">
+                        <p class="font14 font-muted mb-1">Member Since</p>
+                        <h4 class="font16 text-black font500">2024</h4>
+                    </div>
+                    <div class="col-12">
+                        <p class="font14 font-muted mb-1">Address</p>
+                        <h4 class="font16 text-black font500">333 Cedar Drive, Mountain View, CA 94040</h4>
+                    </div>
+                    <div class="col-12">
+                        <p class="font14 font-muted mb-1">Phone Number</p>
+                        <h4 class="font16 text-black font500 d-flex align-items-center gap-2"><span
+                                class="icon-call"></span>(345) 847 459</h4>
+                    </div>
+                    <div class="col-12">
+                        <p class="font14 font-muted mb-1">Email Address</p>
+                        <h4 class="font16 text-black font500 d-flex align-items-center gap-2"><span
+                                class="icon-email"></span>johndeo@example.com</h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-3">
+                    <div class="py-2 px-4 border rounded lightGreyCardBox">
+                        <h4 class="my-1">30</h4>
+                        <p class="mb-0 font13 font-muted">Total Jobs</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="py-2 px-4 border rounded lightPrimaryCardBox">
+                        <h4 class="my-1">10:00:00</h4>
+                        <p class="mb-0 font13 font-muted">Avg. Job Duration</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="py-2 px-4 border rounded lightWarningCardBox ">
+                        <h4 class="my-1">4/5</h4>
+                        <p class="mb-0 font13 font-muted">Overall Rating</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="py-2 px-4 border rounded lightSuccessCardBox">
+                        <h4 class="my-1">$25,346</h4>
+                        <p class="mb-0 font13 font-muted">Total Revenue</p>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-4">
+                <div class="d-flex align-items-center mb-3">
+                    <h3 class="mb-0 font18">Quick Overview</h3>
+                    <div class="ms-auto">
+                        <input type="date" id="date" name="date" placeholder="Select date..." class="form-control">
+                    </div>
+                </div>
+                <div class="border rounded">
+                    <img src="../../../../../assets/images/dashboard-graph.png" class="img-fluid" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <h3 class="mb-4 font18 mt-0">Assigned Booking</h3>
+    <div class="table-top-filter-row row">
+        <div class="col-md-8">
+            <div class="table-top-filter-left">
+                <div class="top-search-group flexGrow2 startIconInputField">
+                    <input type="text" id="search" name="search" placeholder="Search with Name, Phone number here..."
+                        class="form-control">
+                    <span class="icon-search iconPosition"></span>
+                </div>
+            </div>
+        </div>
+        <div class="table-top-filter-right">
+            <input type="date" id="date" name="date" class="form-control">
+        </div>
+    </div>
+    <div class="mt-20 pb-5">
+        <table class="row-border">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date and Time</th>
+                    <th>Customer Name</th>
+                    <th>Services</th>
+                    <th>Services Duration</th>
+                    <th>Invoice Amount</th>
+                    <th>Status</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>345467</td>
+                    <td>Feb 26, 2024 at 10:00AM</td>
+                    <td>John Smith</td>
+                    <td>
+                        <div class="d-flex flex-column gap-2 align-items-start">
+                            <span class="grey-badge">Duct repair</span>
+                            <span class="grey-badge">Furnace repair</span>
+                        </div>
+                    </td>
+                    <td>3 hours</td>
+                    <td>$5430.00</td>
+                    <td>
+                        <span class="warning-badge">Assigned</span>
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center justify-content-end">
+                            <button class=" light-outlined-button" (click)="openTeamBookingDetails()">View
+                                Details</button>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

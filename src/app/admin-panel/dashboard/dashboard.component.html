@@ -90,23 +90,27 @@
                     <a href="/admin/bookings" class="ms-auto font13">View All</a>
                 </div>
                 <div class="border rounded recent-wrapper">
-                    <div class="p-3 recentListing" *ngFor="let booking of todayBooking">
-                        <div class="d-flex gap-3 mb-1">
-                            <span class="grey-badge gap-2 d-flex align-items-center"><span class="icon-time"></span>
-                                {{booking.bookingTime}}</span>
-                            <button
-                                [ngClass]="{'danger-badge': booking.status === 'U', 'primary-badge' : booking.status === 'A','success-badge' : booking.status === 'C' }"
-                                type="button">{{booking.statusText}}</button>
+                    <perfect-scrollbar>
+                        <div class="p-3 recentListing" *ngFor="let booking of todayBooking">
+                            <div class="d-flex gap-3 mb-1">
+                                <span class="grey-badge gap-2 d-flex align-items-center"><span class="icon-time"></span>
+                                    {{booking.bookingTime}}</span>
+                                <button
+                                    [ngClass]="{'danger-badge': booking.status === 'U', 'primary-badge' : booking.status === 'A','success-badge' : booking.status === 'C' }"
+                                    type="button">{{booking.statusText}}</button>
+                            </div>
+                            <div class="font14 mb-0 font500">{{booking.customerName}}</div>
+                            <div class="font13 mb-0 font-muted">{{booking.address}}, {{booking.city}},
+                                {{booking.state}},
+                                {{booking.zipCode}}</div>
                         </div>
-                        <div class="font14 mb-0 font500">{{booking.customerName}}</div>
-                        <div class="font13 mb-0 font-muted">{{booking.address}}, {{booking.city}}, {{booking.state}},
-                            {{booking.zipCode}}</div>
-                    </div>
-                    <div *ngIf="todayBooking.length==0 && !todayBookingLoaded"
-                        class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
-                        <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
-                        <span class="font-muted font14 text-center">Currently, there are no bookings to show.</span>
-                    </div>
+                        <div *ngIf="todayBooking.length==0 && !todayBookingLoaded"
+                            class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
+                            <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
+                            <span class="font-muted font14 text-center">Currently, there are no bookings to show.</span>
+                        </div>
+                    </perfect-scrollbar>
+
                 </div>
             </div>
             <div class="col-lg-4">
@@ -114,32 +118,37 @@
                     <div class="font15 font600">Recent Estimate</div>
                     <a href="/admin/estimate" class="ms-auto font13">View All</a>
                 </div>
-                <div class="border rounded recent-wrapper ">
-                    <div class="p-3 recentListing" *ngFor="let estimate of estimateInvoices">
-                        <div class="d-flex gap-3 mb-1">
-                            <span class="grey-badge gap-2 d-flex align-items-center">
-                                <span class="icon-calendar"></span> {{estimate.createdDate | date:'mediumDate'}}
-                            </span>
-                            <button
-                                [ngClass]="{'grey-badge': estimate.status === 'Draft', 'warning-badge' : estimate.status === 'Sent'}"
-                                type="button">{{estimate.status}}</button>
-                        </div>
-                        <div class="d-flex align-items-top justify-content-between gap-3">
-                            <div class="d-flex flex-column align-items-start justify-content-center">
-                                <div class="font14 mb-0 font500">{{estimate.firstName}} {{estimate.lastName}}</div>
-                                <div class="font13 mb-0 font-muted">{{estimate.serviceAddress}}</div>
+
+                <div class="border rounded recent-wrapper">
+                    <perfect-scrollbar>
+                        <div class="p-3 recentListing" *ngFor="let estimate of estimateInvoices">
+                            <div class="d-flex gap-3 mb-1">
+                                <span class="grey-badge gap-2 d-flex align-items-center">
+                                    <span class="icon-calendar"></span> {{estimate.createdDate | date:'mediumDate'}}
+                                </span>
+                                <button
+                                    [ngClass]="{'grey-badge': estimate.status === 'Draft', 'warning-badge' : estimate.status === 'Sent'}"
+                                    type="button">{{estimate.status}}</button>
                             </div>
-                            <div>
-                                <div class="font14 mb-1 ms-auto font500">${{estimate.totalAmount | number : '1.2-2'}}
+                            <div class="d-flex align-items-top justify-content-between gap-3">
+                                <div class="d-flex flex-column align-items-start justify-content-center">
+                                    <div class="font14 mb-0 font500">{{estimate.firstName}} {{estimate.lastName}}</div>
+                                    <div class="font13 mb-0 font-muted">{{estimate.serviceAddress}}</div>
+                                </div>
+                                <div>
+                                    <div class="font14 mb-1 ms-auto font500">${{estimate.totalAmount | number :
+                                        '1.2-2'}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div *ngIf="estimateInvoices.length==0 && !estimateInvoiceLoaded"
-                        class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
-                        <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
-                        <span class="font-muted font14 text-center">Currently, there are no estimates to show.</span>
-                    </div>
+                        <div *ngIf="estimateInvoices.length==0 && !estimateInvoiceLoaded"
+                            class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
+                            <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
+                            <span class="font-muted font14 text-center">Currently, there are no estimates to
+                                show.</span>
+                        </div>
+                    </perfect-scrollbar>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -148,36 +157,39 @@
                     <a href="/admin/invoice" class="ms-auto font13">View All</a>
                 </div>
                 <div class="border rounded recent-wrapper">
-                    <div class="p-3 recentListing" *ngFor="let invoice of invoices">
-                        <div class="d-flex gap-3 mb-1">
-                            <span class="grey-badge gap-2 d-flex align-items-center">
-                                <span class="icon-calendar"></span> {{invoice.createdDate | date:'mediumDate'}}
-                            </span>
-                            <button
-                                [ngClass]="{'grey-badge': invoice.status === 'Draft', 'warning-badge' : invoice.status === 'Sent', 'success-badge' : invoice.status === 'Paid'}">{{invoice.status}}</button>
-                        </div>
-                        <div class="d-flex align-items-top justify-content-between gap-3">
-                            <div class="d-flex flex-column align-items-start justify-content-center">
-                                <div class="font14 mb-0 font500">{{invoice.firstName}} {{invoice.lastName}}</div>
-                                <div class="font13 mb-0 font-muted">{{invoice.serviceAddress}}</div>
+                    <perfect-scrollbar>
+                        <div class="p-3 recentListing" *ngFor="let invoice of invoices">
+                            <div class="d-flex gap-3 mb-1">
+                                <span class="grey-badge gap-2 d-flex align-items-center">
+                                    <span class="icon-calendar"></span> {{invoice.createdDate | date:'mediumDate'}}
+                                </span>
+                                <button
+                                    [ngClass]="{'grey-badge': invoice.status === 'Draft', 'warning-badge' : invoice.status === 'Sent', 'success-badge' : invoice.status === 'Paid'}">{{invoice.status}}</button>
                             </div>
-                            <div>
-                                <div class="font14 mb-1 ms-auto font500">${{invoice.totalAmount | number : '1.2-2'}}
+                            <div class="d-flex align-items-top justify-content-between gap-3">
+                                <div class="d-flex flex-column align-items-start justify-content-center">
+                                    <div class="font14 mb-0 font500">{{invoice.firstName}} {{invoice.lastName}}</div>
+                                    <div class="font13 mb-0 font-muted">{{invoice.serviceAddress}}</div>
+                                </div>
+                                <div>
+                                    <div class="font14 mb-1 ms-auto font500">${{invoice.totalAmount | number : '1.2-2'}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div *ngIf="invoices.length==0 && !invoiceLoaded"
-                        class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
-                        <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
-                        <span class="font-muted font14 text-center">Currently, there are no invoices to show.</span>
-                    </div>
+                        <div *ngIf="invoices.length==0 && !invoiceLoaded"
+                            class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
+                            <img src="../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
+                            <span class="font-muted font14 text-center">Currently, there are no invoices to show.</span>
+                        </div>
+                    </perfect-scrollbar>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="mb-5">
+    <div class="pb-5">
         <div class="row gx-4">
             <div class="col-lg-7">
                 <div class="d-flex align-items-center mb-1">
@@ -185,51 +197,54 @@
                     <!-- <a href="#" class="ms-auto font13">View All</a> -->
                 </div>
                 <div class="border rounded popularSection">
-                    <table class="row-border">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Revenue</th>
-                                <th>Job</th>
-                                <th>Job Sucess</th>
-                                <th class="text-end">Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let tech of technician">
-                                <td>
-                                    <div class="d-flex align-items-top gap-2">
-                                        <div class="tech-image">
-                                            <img [src]="tech.profileImagePath"
-                                                (error)="tech.profileImagePath = '../../../../assets/images/blank-img.png'">
+                    <perfect-scrollbar>
+                        <table class="row-border">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Revenue</th>
+                                    <th>Job</th>
+                                    <th>Job Sucess</th>
+                                    <th class="text-end">Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let tech of technician">
+                                    <td>
+                                        <div class="d-flex align-items-top gap-2">
+                                            <div class="tech-image">
+                                                <img [src]="tech.profileImagePath"
+                                                    (error)="tech.profileImagePath = '../../../../assets/images/blank-img.png'">
+                                            </div>
+                                            <div class="d-flex flex-column">
+                                                {{tech.fullName}}
+                                                <span class="tech-role">{{tech.designation}}</span>
+                                            </div>
                                         </div>
-                                        <div class="d-flex flex-column">
-                                            {{tech.fullName}}
-                                            <span class="tech-role">{{tech.designation}}</span>
+                                    </td>
+                                    <td>${{tech.totalRevenue | number : '1.2-2'}}</td>
+                                    <td>{{tech.totalSalesCount}}</td>
+                                    <td>{{tech.successRate}}%</td>
+                                    <td>
+                                        <span class="success-badge" *ngIf="tech.totalSalesCount > 0"
+                                            [ngClass]="{'danger-badge': (tech.averageRating <= 2), 'warning-badge' : tech.averageRating === 3,'success-badge' : tech.averageRating > 3}">{{tech.averageRating}}/5</span>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="technician.length==0 && !technicianLoaded">
+                                    <td class="text-center" colspan="4">
+                                        <div
+                                            class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
+                                            <img src="../../../assets/images/no-data-found.svg" alt="image"
+                                                class="no-data-found-img" />
+                                            <span class="font-muted font14 text-center">Currently, there are no
+                                                technicians
+                                                to show.</span>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>${{tech.totalRevenue | number : '1.2-2'}}</td>
-                                <td>{{tech.totalSalesCount}}</td>
-                                <td>{{tech.successRate}}%</td>
-                                <td>
-                                    <span class="success-badge" *ngIf="tech.totalSalesCount > 0"
-                                        [ngClass]="{'danger-badge': (tech.averageRating <= 2), 'warning-badge' : tech.averageRating === 3,'success-badge' : tech.averageRating > 3}">{{tech.averageRating}}/5</span>
-                                </td>
-                            </tr>
-                            <tr *ngIf="technician.length==0 && !technicianLoaded">
-                                <td class="text-center" colspan="4">
-                                    <div
-                                        class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
-                                        <img src="../../../assets/images/no-data-found.svg" alt="image"
-                                            class="no-data-found-img" />
-                                        <span class="font-muted font14 text-center">Currently, there are no technicians
-                                            to show.</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
                 </div>
             </div>
             <div class="col-lg-5">
@@ -238,33 +253,36 @@
                     <!-- <a href="#" class="ms-auto font13">View All</a> -->
                 </div>
                 <div class="border rounded popularSection">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Service Name</th>
-                                <th>Sales</th>
-                                <th class="text-end">Revenue</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let service of topServices">
-                                <td>{{service.serviceName}}</td>
-                                <td>{{service.totalSalesCount}}</td>
-                                <td>${{service.totalRevenue | number : '1.2-2'}}</td>
-                            </tr>
-                            <tr *ngIf="topServices.length==0 && !topServicesLoaded">
-                                <td class="text-center" colspan="4">
-                                    <div
-                                        class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
-                                        <img src="../../../assets/images/no-data-found.svg" alt="image"
-                                            class="no-data-found-img" />
-                                        <span class="font-muted font14 text-center">Currently, there are no services to
-                                            show.</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <perfect-scrollbar>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Service Name</th>
+                                    <th>Sales</th>
+                                    <th class="text-end">Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let service of topServices">
+                                    <td>{{service.serviceName}}</td>
+                                    <td>{{service.totalSalesCount}}</td>
+                                    <td>${{service.totalRevenue | number : '1.2-2'}}</td>
+                                </tr>
+                                <tr *ngIf="topServices.length==0 && !topServicesLoaded">
+                                    <td class="text-center" colspan="4">
+                                        <div
+                                            class="d-flex flex-column h-100 text-center align-items-center justify-content-center">
+                                            <img src="../../../assets/images/no-data-found.svg" alt="image"
+                                                class="no-data-found-img" />
+                                            <span class="font-muted font14 text-center">Currently, there are no services
+                                                to
+                                                show.</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </perfect-scrollbar>
                 </div>
             </div>
         </div>

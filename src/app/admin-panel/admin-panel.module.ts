@@ -46,7 +46,10 @@ import { SystemConfigurationComponent } from './account-section/system-configura
 import { TeamManagementComponent } from './account-section/team-management/team-management.component';
 import { AddTeamMemberComponent } from './account-section/team-management/add-team-member/add-team-member.component';
 import { OnboardPopupComponent } from './dashboard/onboard-popup/onboard-popup.component';
-import { NgApexchartsModule } from "ng-apexcharts";
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { TeamDetailsComponent } from './account-section/team-management/team-details/team-details.component';
+import { TeamBookingDetailsComponent } from './account-section/team-management/team-booking-details/team-booking-details.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -60,7 +63,7 @@ import { NgApexchartsModule } from "ng-apexcharts";
     }),
     SharedModule,
     MaterialModule,
-    NgApexchartsModule
+    NgApexchartsModule,
   ],
   declarations: [
     DashboardComponent,
@@ -100,8 +103,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     TeamManagementComponent,
     AddTeamMemberComponent,
     OnboardPopupComponent,
-
+    TeamDetailsComponent,
+    TeamBookingDetailsComponent,
   ],
-
 })
-export class AdminPanelModule { }
+export class AdminPanelModule {}
