@@ -110,11 +110,11 @@ export class CreateInvoiceComponent implements OnInit {
         }
       });
 
-      this._customerService.customerAdded.subscribe((data: boolean) => {
-        if (data) {
-          this.getAll(_param);        
-        }
-      });  
+    this._customerService.customerAdded.subscribe((data: boolean) => {
+      if (data) {
+        this.getAll(_param);
+      }
+    });
   }
 
   // convenience getter for easy access to form fields
@@ -196,28 +196,30 @@ export class CreateInvoiceComponent implements OnInit {
 
   bindCustomerInfo(ev: any) {
     if (ev.target.value == -1) {
+      this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
+      this.isDisabled = true;
       this.invoiceForm.controls['customerId'].setValue('');
       let el: HTMLElement = this.customerAddNewEle.nativeElement;
       el.click();
     }
     else {
-    var customerData = this.customerList.filter(function (event: { customerId: number; }) {
-      return event.customerId == ev.target.value;
-    });
-    this.customerInfo = <CustomerModel>customerData[0];
-    if (this.customerInfo == undefined) {
-      this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
-      this.isDisabled = true;
-    }
-    else {
-      this.customerInfo.serviceAddress = customerData[0].serviceAddress + ', ' + customerData[0].city + ', ' + customerData[0].state + ', ' + customerData[0].zipCode;
-      if (this.customerInfo.customerId > 0) {
-        this.isDisabled = false;
+      var customerData = this.customerList.filter(function (event: { customerId: number; }) {
+        return event.customerId == ev.target.value;
+      });
+      this.customerInfo = <CustomerModel>customerData[0];
+      if (this.customerInfo == undefined) {
+        this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
+        this.isDisabled = true;
       }
-      this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
-      this.getAddress(this.customerInfo.customerId);
+      else {
+        this.customerInfo.serviceAddress = customerData[0].serviceAddress + ', ' + customerData[0].city + ', ' + customerData[0].state + ', ' + customerData[0].zipCode;
+        if (this.customerInfo.customerId > 0) {
+          this.isDisabled = false;
+        }
+        this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
+        this.getAddress(this.customerInfo.customerId);
+      }
     }
-  }
   }
 
   bindProductInfo(ev: any, index: number) {

@@ -27,9 +27,9 @@
                         <select id="employeesNumber" class="form-select" (change)="bindCustomerInfo($event)"
                             formControlName="customerId" [ngClass]="{ 'is-invalid': submitted && f.customerId.errors }">
                             <option value="" selected>Select</option>
+                            <option value="-1">Create new customer</option>
                             <option value="{{cust.customerId}}" *ngFor="let cust of customerList">{{cust.firstName}}
-                                {{cust.lastName}}</option>
-                                <option value="-1">Create New</option>
+                                {{cust.lastName}}</option>         
                         </select>
                         <div *ngIf="submitted && f.customerId.errors" class="invalid-feedback">
                             <div *ngIf="f.customerId.errors.required">Select a customer</div>

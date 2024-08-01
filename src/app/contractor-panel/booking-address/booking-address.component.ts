@@ -173,8 +173,10 @@ export class BookingAddressComponent {
       let _param = this.calanderBookingForm.value as any;
       
       var _mobileNo = this.mobileVerifyForm.controls['mobileNo'].value.replace(/[\s~`!@#$%^&*(){}\[\];:"'<,.>?\/\\|_+=-]/g, '');
-      _param = { ..._param, ...{ mobileNo: _mobileNo, bookingDate: this.bookingDate, timeSlot: this.bookingTime, timeSlotText: this.bookingTimeText, bookingDetails: this.selectedServices, customerId: (_param.customerId == '' ? 0 : _param.customerId), addressId: (_param.customerAddressId == '' ? 0 : _param.customerAddressId), status: 'U' } };
+      _param = { ..._param, ...{ mobileNo: _mobileNo, bookingDate: this.bookingDate, timeSlot: this.bookingTimeText, bookingDetails: this.selectedServices, customerId: (_param.customerId == '' ? 0 : _param.customerId), addressId: (_param.customerAddressId == '' ? 0 : _param.customerAddressId), status: 'U' } };
       this.dialogRef.close();
+      //console.log(_param)
+      //return;
       this._bookingService.createBooking(_param).subscribe(res => {
         this._snackBar.open(res.message);             
         this._router.navigateByUrl('/booking/booking-success', { state: _param });

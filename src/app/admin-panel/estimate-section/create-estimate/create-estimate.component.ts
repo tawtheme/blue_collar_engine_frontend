@@ -159,6 +159,8 @@ export class CreateEstimateComponent implements OnInit {
   bindCustomerInfo(ev: any) {
     if (ev.target.value == -1) {
      // console.log('calling add customer')
+     this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
+     this.isDisabled = true;
       this.estimateInvoiceForm.controls['customerId'].setValue('');
       let el: HTMLElement = this.customerAddNewEle.nativeElement;
       el.click();

@@ -12,7 +12,7 @@
             <div class="d-flex align-items-md-center gap-2 gap-md-4 flex-column flex-md-row ">
                 <div class="font15 d-flex align-items-center gap-2 font-muted text-black">
                     <span class="icon-call"></span>
-                    {{bookingData.mobileNo  | usMobileNo}}
+                    {{bookingData.mobileNo | usMobileNo}}
                 </div>
                 <div class="font15 d-flex align-items-center gap-2 font-muted text-black"><span
                         class="icon-email"></span>{{bookingData.emailAddress}}</div>
@@ -25,7 +25,8 @@
                 </div>
                 <div class="">
                     <p class="mb-0 font-muted">Date and Time</p>
-                    <h4 class="font15 font-muted mb-0 text-black">{{bookingData.timeSlotText}} <span class="font400">{{bookingData.bookingDate | date:'mediumDate' }}</span></h4>
+                    <h4 class="font15 font-muted mb-0 text-black"> <span class="font400">{{bookingData.bookingDate |
+                            date:'mediumDate' }} at {{bookingData.timeSlot}}</span> </h4>
                 </div>
             </div>
         </div>
@@ -36,7 +37,8 @@
                 </div>
                 <div class="">
                     <p class="mb-0 font-muted">Address</p>
-                    <h4 class="font15 text-black mb-0">{{bookingData.serviceAddress}}, {{bookingData.city}}, {{bookingData.state}}, {{bookingData.zipCode}}</h4>
+                    <h4 class="font15 text-black mb-0">{{bookingData.serviceAddress}}, {{bookingData.city}},
+                        {{bookingData.state}}, {{bookingData.zipCode}}</h4>
                 </div>
             </div>
         </div>
@@ -45,7 +47,8 @@
             <div class="bg-white rounded p-3" *ngFor="let service of bookingData.bookingDetails">
                 <div class="row">
                     <div class="col-md-8 order-sm-1 order-2">
-                        <span class="primary-badge border-0 px-3 rounded-pill mb-2">${{service.price | number : '1.2-2'}}</span>
+                        <span class="primary-badge border-0 px-3 rounded-pill mb-2">${{service.price | number :
+                            '1.2-2'}}</span>
                         <h4 class="mb-1 font16">{{service.serviceName}}</h4>
                         <p class="font14 font-muted font300 mb-0">{{service.description}}</p>
                     </div>
@@ -56,7 +59,7 @@
                         <div class="booking-services-item-img text-end" *ngIf="service.uploadedFiles.length > 0">
                             <img class="img-fluid rounded" src="{{service.uploadedFiles[0].filePath}}"
                                 (error)="service.uploadedFiles[0].filePath = './../../../../assets/images/services3.png'" />
-                        </div>                      
+                        </div>
                     </div>
                 </div>
             </div>

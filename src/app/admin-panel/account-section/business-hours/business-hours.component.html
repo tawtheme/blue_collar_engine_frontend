@@ -38,7 +38,8 @@
                             *ngFor="let hours of businessHours(empIndex).controls; let skillIndex=index"
                             [formGroupName]="skillIndex">
                             <div class="form-group flex-grow-1" *ngIf="!hours.value.isDeleted">
-                                <select class="form-control" formControlName="openTime" (change)="onChange($event)"
+                                <select class="form-control" formControlName="openTime"
+                                    (change)="onOpenTimeChange($event)"
                                     [ngClass]="{ 'is-invalid': submitted && hours.get('openTime')!.errors?.required }">
                                     <option value="">Select Open Time</option>
                                     <option *ngFor="let hoursArr of hours.value.hoursDDL" value="{{hoursArr}}">
@@ -53,6 +54,7 @@
                             <span *ngIf="!hours.value.isDeleted">to</span>
                             <div class="form-group flex-grow-1" *ngIf="!hours.value.isDeleted">
                                 <select class="form-control" formControlName="closeTime"
+                                    (change)="onCloseTimeChange(empIndex, skillIndex)"
                                     [ngClass]="{ 'is-invalid': submitted && hours.get('closeTime')!.errors?.required }">
                                     <option value="">Select Close Time</option>
                                     <option *ngFor="let hoursArr of hours.value.hoursDDL" value="{{hoursArr}}">
