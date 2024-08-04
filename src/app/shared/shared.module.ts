@@ -9,9 +9,13 @@ import { NumericDirective } from '@app/_helpers/directive/numeric.directive';
 import { FaqsComponent } from './faqs/faqs.component';
 import { CtaSectionComponent } from './cta-section/cta-section.component';
 import { NewsAndBlogsComponent } from './news-and-blogs/news-and-blogs.component';
+import { PERFECT_SCROLLBAR_CONFIG, PerfectScrollbarConfigInterface, PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
 
 @NgModule({
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, PerfectScrollbarModule],
   exports: [
     PhoneMaskDirective,
     UsMobileNoPipe,
@@ -21,6 +25,7 @@ import { NewsAndBlogsComponent } from './news-and-blogs/news-and-blogs.component
     FaqsComponent,
     CtaSectionComponent,
     NewsAndBlogsComponent,
+    PerfectScrollbarModule
   ],
   declarations: [
     PhoneMaskDirective,
@@ -32,5 +37,11 @@ import { NewsAndBlogsComponent } from './news-and-blogs/news-and-blogs.component
     CtaSectionComponent,
     NewsAndBlogsComponent,
   ],
+  providers: [
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: PERFECT_SCROLLBAR_CONFIG
+    }
+  ]
 })
 export class SharedModule {}

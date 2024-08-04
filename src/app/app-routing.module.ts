@@ -1,76 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-//import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
-import { OnlineRequestDemoComponent } from './online-request-demo/online-request-demo.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { HomePageComponent } from './home-page/home-page.component';
-import { FrontendLayoutComponent } from './shared/frontend-layout/frontend-layout.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
-import { FeatureInvoiceComponent } from './feature-invoice/feature-invoice.component';
-import { FeatureEstimateComponent } from './feature-estimate/feature-estimate.component';
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
-import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
-import { FeatureThreeComponent } from './feature-three/feature-three.component';
-import { FeatureFourComponent } from './feature-four/feature-four.component';
-import { AboutUsComponent } from './about-us/about-us.component';
-
 const routes: Routes = [
   {
     path: '',
-    component: FrontendLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: HomePageComponent,
-        pathMatch: 'full',
-      },
-      {
-        path: 'online-request-demo',
-        component: OnlineRequestDemoComponent,
-      },
-      {
-        path: 'page/invoice',
-        component: FeatureInvoiceComponent,
-      },
-      {
-        path: 'page/estimate',
-        component: FeatureEstimateComponent,
-      },
-      {
-        path: 'page/feature-three',
-        component: FeatureThreeComponent,
-      },
-      {
-        path: 'page/feature-four',
-        component: FeatureFourComponent,
-      },
-      {
-        path: 'privacy-policy',
-        component: PrivacyPolicyComponent,
-      },
-      {
-        path: 'terms-of-service',
-        component: TermsOfServiceComponent,
-      },
-      {
-        path: 'about-us',
-        component: AboutUsComponent,
-      }
-    ],
-  },
-  {
-    path: 'home',
-    component: HomePageComponent,
-  },
+    component: LoginComponent,
+  },  
   {
     path: 'login',
     component: LoginComponent,
-  },
+  }, 
   {
     path: 'forget-password',
     component: ForgetPasswordComponent,
@@ -83,7 +27,6 @@ const routes: Routes = [
     path: 'reset-password',
     component: ResetPasswordComponent,
   },
-
   {
     path: 'booking',
     loadChildren: () =>

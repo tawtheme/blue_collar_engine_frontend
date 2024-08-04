@@ -494,7 +494,6 @@ ul {
 }
 
 // Auth Styles Start //
-
 .authWrapper {
   background: var(--light-primary);
   width: 100%;
@@ -514,13 +513,13 @@ ul {
     background-size: cover;
     background-position: center;
     .authLogo {
-      width: 180px;
+      width: 65px;
     }
   }
   .authleftBottom {
     margin-top: auto;
     .authIconShape {
-      @include square-circle(65px, circle);
+      @include square-circle(50px, circle);
       @include flexbox(row, center, center);
       background-color: var(--white);
     }
@@ -533,7 +532,7 @@ ul {
       line-height: 1.5;
     }
     .textCopywrite {
-      margin-top: 70px;
+      margin-top: 10px;
       font-weight: 200;
       font-size: 12px;
       margin-bottom: 0;
@@ -542,7 +541,7 @@ ul {
   .authrightWrapper {
     @include flexbox(row, center, center);
     width: calc(100% - 450px);
-    padding: 35px 0;
+    padding: 30px 0;
     min-height: 100vh;
     .fxt-content {
       width: 400px;
@@ -865,6 +864,10 @@ ul {
   background-color: var(--light-danger) !important;
   border-color: var(--border-danger) !important;
 }
+.lightWarningCardBox {
+  background-color: var(--light-warning) !important;
+  border-color: var(--wraning-label) !important;
+}
 
 // Tabs
 .borderStyleTabs {
@@ -1129,7 +1132,8 @@ table tbody td {
 .offcanvas app-category-add-update,
 .offcanvas app-add-update-service,
 .offcanvas app-add-new-address,
-.offcanvas app-add-tax-rate {
+.offcanvas app-add-tax-rate,
+.offcanvas app-address-book {
   height: 100%;
 }
 .offcanvas-w480 {
@@ -1483,17 +1487,9 @@ tag-input.form-control {
     height: 28px;
     border: 1px solid var(--indigo);
     margin: 0 0 0 -12px;
+    border-radius: 10px;
     &:nth-child(1) {
-      border: 1px solid var(--yellow);
-    }
-    &:nth-child(2) {
-      border: 1px solid var(--primary80);
-    }
-    &:nth-child(3) {
-      border: 1px solid var(--info);
-    }
-    &:nth-child(4) {
-      border: 1px solid var(--border-success);
+      border: 1px solid var(--border-color2);
     }
   }
 }

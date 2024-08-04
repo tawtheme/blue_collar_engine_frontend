@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PageEvent } from '@angular/material/paginator';
 import { environment } from '@environments/environment';
 import { DatePipe } from '@angular/common';
-
+import moment from 'moment';
 @Component({
   selector: 'app-jobs',
   templateUrl: './jobs.component.html',
@@ -36,7 +36,7 @@ export class JobsComponent implements OnInit {
     private _bookingService: BookingService,
     private _dialog: MatDialog,
     private _formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.bookingSearchForm = this._formBuilder.group({
@@ -88,12 +88,12 @@ export class JobsComponent implements OnInit {
         bookingDate: new Date(),
       };
     }
-    ////////console.log(JSON.stringify(_param))
+ 
     this._bookingService
       .getAll(_param)
       .pipe(first())
       .subscribe({
-        next: (res) => {
+        next: (res) => {          
           this.loadUnAssigned = false;
           this.unAssignedBooking = res.data;
           this.unAssignedBooking.forEach((res) => {
@@ -105,6 +105,7 @@ export class JobsComponent implements OnInit {
               });
             }
           });
+          console.log(this.unAssignedBooking);
         },
         error: (error) => {
           this.loadUnAssigned = false;
@@ -186,6 +187,7 @@ export class JobsComponent implements OnInit {
         next: (res) => {
           this.loadCompeleted = false;
           this.compeletedBooking = res.data;
+          console.log(this.compeletedBooking)
           this.compeletedBooking.forEach((res) => {
             if (res.assignedTeamMembers.length > 0) {
               res.assignedTeamMembers.forEach((r: any) => {
@@ -225,7 +227,7 @@ export class JobsComponent implements OnInit {
       bookingDate: obj.bookingDate,
       currentStatus: obj.currentStatus,
     };
-    ////////console.log(obj)
+    console.log(obj)
     this.getAllUnAssignedBooking({
       ..._param,
       ...{ type: _param.type == '' ? 'U' : _param.type, currentStatus: '' },
@@ -242,9 +244,10 @@ export class JobsComponent implements OnInit {
 
   resetFilter() {
     this.bookingSearchForm.reset();
-    this.bookingSearchForm.controls['bookingDate'].setValue(new Date());
+    //this.bookingSearchForm.controls['bookingDate'].setValue(new Date());
     this.bookingSearchForm.controls['type'].setValue('');
     this.bookingSearchForm.controls['currentStatus'].setValue('');
+    this.clearStartDate();
     this.filterBooking();
   }
 
@@ -257,7 +260,7 @@ export class JobsComponent implements OnInit {
           this.bookingStats = res.data;
           ////////console.log(this.bookingStats)
         },
-        error: (error) => {},
+        error: (error) => { },
       });
   }
 
@@ -306,5 +309,14 @@ export class JobsComponent implements OnInit {
     if (type == 'C') {
       this.getAllCompletedBooking(_param);
     }
+  }
+
+  bookingDateChange() {
+    this.filterBooking();
+  }
+
+  clearStartDate() {
+    this.bookingSearchForm.controls['bookingDate'].setValue(null);
+    this.filterBooking();
   }
 }

@@ -5,88 +5,95 @@
     </button>
 </div>
 <form class="sidebar-popup-inner" [formGroup]="categoryServiceForm" (ngSubmit)="onSubmit()">
-    <div class="offcanvas-body">
-        <div class="form-group mb-3">
-            <label for="services" class="form-label">Category</label>
-            <select id="services" formControlName="categoryId" name="services" class="form-select"
-                [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }">
-                <option value="">Select</option>
-                <option value="{{category.categoryId}}" *ngFor="let category of categories"> {{category.name}}</option>
-            </select>
-            <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
-                <div *ngIf="f.categoryId.errors.required">Category is required</div>
-            </div>
-        </div>
-        <div class="form-group mb-3">
-            <label for="serviceName" class="form-label">Service Name</label>
-            <input type="text" formControlName="serviceName" class="form-control mb-3" placeholder="Enter Service Name"
-                maxlength="50" [ngClass]="{ 'is-invalid': submitted && f.serviceName.errors }" />
-            <div *ngIf="submitted && f.serviceName.errors" class="invalid-feedback">
-                <div *ngIf="f.serviceName.errors.required">Service name is required</div>
-            </div>
-        </div>
-        <div class="form-group mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea id="description" formControlName="description" class="form-control  mb-3" rows="4"
-                placeholder="Enter Descriptions..." resize="none"></textarea>
+    <perfect-scrollbar>
+        <div class="offcanvas-body">
 
-        </div>
-        <div class="form-group mb-3">
-            <label for="uploadPhoto" class="form-label">Upload Photo</label>
-            <div class="uploadPhotoFormWrapper" id="uploadPhoto">
-                <input type="file" accept="image/*" (change)="selectFiles($event)" formControlName="files"
-                    [ngClass]="{ 'is-invalid': submitted && f.files.errors }" />
-                <div *ngIf="submitted && f.files.errors" class="invalid-feedback">
-                    <div *ngIf="f.files.errors.required">Image is required</div>
+            <div class="form-group mb-3">
+                <label for="services" class="form-label">Category</label>
+                <select id="services" formControlName="categoryId" name="services" class="form-select"
+                    [ngClass]="{ 'is-invalid': submitted && f.categoryId.errors }">
+                    <option value="">Select</option>
+                    <option value="{{category.categoryId}}" *ngFor="let category of categories"> {{category.name}}
+                    </option>
+                </select>
+                <div *ngIf="submitted && f.categoryId.errors" class="invalid-feedback">
+                    <div *ngIf="f.categoryId.errors.required">Category is required</div>
                 </div>
-                <div class="d-flex align-items-center">
-                    <span class="icon-attachment fs-5"></span>
-                    <div class="ms-2">
-                        <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose file to upload</h5>
-                        <p class="font13 font-muted font300 mb-0">Supported format: PNG, JPG, JPEG</p>
+            </div>
+            <div class="form-group mb-3">
+                <label for="serviceName" class="form-label">Service Name</label>
+                <input type="text" formControlName="serviceName" class="form-control mb-3"
+                    placeholder="Enter Service Name" maxlength="50"
+                    [ngClass]="{ 'is-invalid': submitted && f.serviceName.errors }" />
+                <div *ngIf="submitted && f.serviceName.errors" class="invalid-feedback">
+                    <div *ngIf="f.serviceName.errors.required">Service name is required</div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea id="description" formControlName="description" class="form-control  mb-3" rows="4"
+                    placeholder="Enter Descriptions..." resize="none"></textarea>
+
+            </div>
+            <div class="form-group mb-3">
+                <label for="uploadPhoto" class="form-label">Upload Photo</label>
+                <div class="uploadPhotoFormWrapper" id="uploadPhoto">
+                    <input type="file" accept="image/*" (change)="selectFiles($event)" formControlName="files"
+                        [ngClass]="{ 'is-invalid': submitted && f.files.errors }" />
+                    <div *ngIf="submitted && f.files.errors" class="invalid-feedback">
+                        <div *ngIf="f.files.errors.required">Image is required</div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="icon-attachment fs-5"></span>
+                        <div class="ms-2">
+                            <h5 class="font14 font-muted font400 mb-2">Drag & Drop or Choose file to upload</h5>
+                            <p class="font13 font-muted font300 mb-0">Supported format: PNG, JPG, JPEG</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uploadedPhotoWrapper">
+                    <div class="uploadedImagesItem" *ngFor='let preview of previews;index as i'>
+                        <button type="button" class="btn" (click)="removeServiceImage(preview.index, preview.uploadId)">
+                            <span class="icon-close-1"></span>
+                        </button>
+                        <img [src]="preview.filePath" class="preview img-fluid"
+                            (error)="preview.filePath ='../../../../assets/images/blank-img.png'">
                     </div>
                 </div>
             </div>
-            <div class="uploadedPhotoWrapper">
-                <div class="uploadedImagesItem" *ngFor='let preview of previews;index as i'>
-                    <button type="button" class="btn" (click)="removeServiceImage(preview.index, preview.uploadId)">
-                        <span class="icon-close-1"></span>
-                    </button>
-                    <img [src]="preview.filePath" class="preview img-fluid"
-                        (error)="preview.filePath ='../../../../assets/images/blank-img.png'">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="text" formControlName="price" id="price" name="price" placeholder="Enter Price"
+                            class="form-control" maxlength="50"
+                            [ngClass]="{ 'is-invalid': submitted && f.price.errors }" numeric decimals='2' appNumeric>
+                        <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                            <div *ngIf="f.price.errors.required">Price is required</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="form-group mb-3">
-                    <label for="price" class="form-label">Price</label>
-                    <input type="number" formControlName="price" id="price" name="price" placeholder="Enter Price"
-                        class="form-control" maxlength="50" [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
-                    <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
-                        <div *ngIf="f.price.errors.required">Price is required</div>
+                <div class="col-lg-6">
+                    <div class="form-group mb-3">
+                        <label for="cost" class="form-label">Cost</label>
+                        <input type="text" formControlName="cost" id="cost" name="cost" placeholder="Enter Cost"
+                            class="form-control" maxlength="50"
+                            [ngClass]="{ 'is-invalid': submitted && f.cost.errors }" numeric decimals='2' appNumeric>
+                        <div *ngIf="submitted && f.cost.errors" class="invalid-feedback">
+                            <div *ngIf="f.cost.errors.required">Cost is required</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="form-group mb-3">
-                    <label for="cost" class="form-label">Cost</label>
-                    <input type="number" formControlName="cost" id="cost" name="cost" placeholder="Enter Cost"
-                        class="form-control" maxlength="50" [ngClass]="{ 'is-invalid': submitted && f.cost.errors }">
-                    <div *ngIf="submitted && f.cost.errors" class="invalid-feedback">
-                        <div *ngIf="f.cost.errors.required">Cost is required</div>
-                    </div>
-                </div>
+            <div class="form-group mb-3">
+                <label for="onlinebooking" class="form-label">Online Booking</label>
+                <select id="onlinebooking" formControlName="isOnlineBooking" name="onlinebooking" class="form-select">
+                    <option value="true">Enable</option>
+                    <option value="false"> Disable</option>
+                </select>
             </div>
         </div>
-        <div class="form-group mb-3">
-            <label for="onlinebooking" class="form-label">Online Booking</label>
-            <select id="onlinebooking" formControlName="isOnlineBooking" name="onlinebooking" class="form-select">
-                <option value="true">Enable</option>
-                <option value="false"> Disable</option>
-            </select>
-        </div>
-    </div>
+    </perfect-scrollbar>
     <div class="sidebar-popup-bottom offcanvas-footer">
         <button class="light-outlined-button outlined w-100" data-bs-dismiss="offcanvas" type="button">Cancel</button>
         <button class="btn btn-primary w-100">

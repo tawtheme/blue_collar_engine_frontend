@@ -28,7 +28,7 @@
                 <td>{{tax.effectiveDate | date:'mediumDate'}}</td>
                 <td>
                     <div class="d-flex align-items-center justify-content-end">
-                        <button class="light-outlined-button sm-btn" (click)="editTax(tax)">
+                        <button class="light-outlined-button sm-btn" (click)="editTax(tax)" *ngIf="tax.isActive">
                             <span class="icon-edit-2"></span> Edit
                         </button>
                     </div>

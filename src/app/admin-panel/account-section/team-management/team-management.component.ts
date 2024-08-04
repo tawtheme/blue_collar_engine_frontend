@@ -1,14 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { AccountSettingService } from '@app/_services/admin-panel/Tenant/account-setting.service';
-import { MasterService } from '@app/_services/master.service';
 import { environment } from '@environments/environment';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-team-management',
   templateUrl: './team-management.component.html',
-  styleUrls: ['./team-management.component.scss']
+  styleUrls: ['./team-management.component.scss'],
 })
 export class TeamManagementComponent {
   users: any[] = [];
@@ -20,18 +18,16 @@ export class TeamManagementComponent {
   pageSizeOptions: number[] = [10, 20, 50];
   pageEvent: PageEvent | undefined;
 
-  constructor(private _accountSettingService: AccountSettingService) {
-
-  }
+  constructor(private _accountSettingService: AccountSettingService) {}
   ngOnInit() {
     var _param = {
-      "id": 0,
-      "pageNumber": 1,
-      "pageSize": this.pageSize,
-      "searchStr": "",
-    }
+      id: 0,
+      pageNumber: 1,
+      pageSize: this.pageSize,
+      searchStr: '',
+    };
     this.getAllUsers(_param);
-    this._accountSettingService.userAdded.subscribe(res => {
+    this._accountSettingService.userAdded.subscribe((res) => {
       if (res) {
         this.getAllUsers(_param);
       }
@@ -40,19 +36,18 @@ export class TeamManagementComponent {
 
   getAllUsers(param: any) {
     this.loading = true;
-    this._accountSettingService.getAllUsers(param)
-      .subscribe({
-        next: (res: { data: any[]; }) => {
-          this.users = res.data;
-          //console.log(this.users)
-          this.users.forEach(res => {
-            if (res.profileImagePath != null && res.profileImagePath != "") {
-              res.profileImagePath = this.apiBaseUrl + res.profileImagePath
-            }
-          })
-          this.loading = false;
-        }
-      });
+    this._accountSettingService.getAllUsers(param).subscribe({
+      next: (res: { data: any[] }) => {
+        this.users = res.data;
+        //console.log(this.users)
+        this.users.forEach((res) => {
+          if (res.profileImagePath != null && res.profileImagePath != '') {
+            res.profileImagePath = this.apiBaseUrl + res.profileImagePath;
+          }
+        });
+        this.loading = false;
+      },
+    });
   }
 
   editUser(userInfo: any) {
@@ -70,8 +65,7 @@ export class TeamManagementComponent {
   onChange(ev: any) {
     if (ev.checked) {
       ev.source.checked = false;
-    }
-    else {
+    } else {
       ev.source.checked = true;
     }
   }
@@ -80,11 +74,11 @@ export class TeamManagementComponent {
     let firstCut = e.pageIndex * e.pageSize;
     let secondCut = firstCut + e.pageSize;
     var _param = {
-      "id": 0,
-      "pageNumber": e.pageIndex + 1,
-      "pageSize": e.pageSize,
-      "searchStr": ""
-    }
+      id: 0,
+      pageNumber: e.pageIndex + 1,
+      pageSize: e.pageSize,
+      searchStr: '',
+    };
     this.getAllUsers(_param);
   }
 }

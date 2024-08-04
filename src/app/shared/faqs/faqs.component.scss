@@ -34,6 +34,10 @@
   border: 1px solid #d1d5db !important;
 }
 
+.discover-accordion-section .accordion-item:last-child {
+  margin-bottom: 0;
+}
+
 .discover-accordion-section .accordion-item.opened {
   background: #f4f8ff;
   border-color: #bbd3f9 !important;

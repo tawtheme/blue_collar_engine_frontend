@@ -38,6 +38,7 @@
     "ng-apexcharts": "^1.7.2",
     "ngx-chips": "^3.0.0",
     "ngx-material-timepicker": "^13.1.1",
+    "ngx-perfect-scrollbar": "^10.1.1",
     "ngx-stripe": "^15.8.1",
     "ngx-toastr": "^15.0.0",
     "rxjs": "~7.5.0",

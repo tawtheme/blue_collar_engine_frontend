@@ -134,7 +134,8 @@
 
         <!--booking-table-->
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="pills-booking" role="tabpanel" aria-labelledby="pills-booking-tab" tabindex="0">
+            <div class="tab-pane fade show active" id="pills-booking" role="tabpanel"
+                aria-labelledby="pills-booking-tab" tabindex="0">
                 <table class="row-border mb-3">
                     <thead>
                         <tr>
@@ -154,7 +155,8 @@
                             <td>
                                 <div class="d-flex gap5 items-center">
                                     <div *ngFor="let service of booking.categories">
-                                        <span class="grey-badge" *ngFor="let product of service.products">{{product.serviceName}}</span>
+                                        <span class="grey-badge"
+                                            *ngFor="let product of service.products">{{product.serviceName}}</span>
                                     </div>
                                 </div>
                             </td>
@@ -162,24 +164,25 @@
                                 <span class="success-badge">{{booking.statusText}}</span>
                             </td>
                             <td>
-                                <button class="light-outlined-button sm-btn float-end" type="button" (click)="openEditViewBooking(booking)">View Details</button>
+                                <button class="light-outlined-button sm-btn float-end" type="button"
+                                    (click)="openEditViewBooking(booking)">View Details</button>
                             </td>
                         </tr>
                         <tr *ngIf="bookings.length==0 && !loadBooking">
-                            <td>
+                            <td style="text-align: center;">
                                 <span>No data found</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <mat-paginator [length]="bookings.length > 0 ? bookings[0].totalCount:0" *ngIf="bookings.length > 0"
-                    [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                    (page)="onPageChanged($event, 'B')">
+                    [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event, 'B')">
                 </mat-paginator>
             </div>
-            
+
             <!--estimate-table-->
-            <div class="tab-pane fade" id="pills-estimate" role="tabpanel" aria-labelledby="pills-estimate-tab" tabindex="0">
+            <div class="tab-pane fade" id="pills-estimate" role="tabpanel" aria-labelledby="pills-estimate-tab"
+                tabindex="0">
                 <table class="row-border mb-3">
                     <thead>
                         <tr>
@@ -197,7 +200,8 @@
                             <td>{{invoice.serviceAddress}}</td>
                             <td> ${{invoice.totalAmount | number : '1.2-2'}}</td>
                             <td>
-                                <button class="light-outlined-button sm-btn float-end" type="button" (click)="redirectToCreateEstimate(invoice.estimateId)">View Details</button>
+                                <button class="light-outlined-button sm-btn float-end" type="button"
+                                    (click)="redirectToCreateEstimate(invoice.estimateId)">View Details</button>
                             </td>
                         </tr>
                         <tr *ngIf="estimateInvoice.length==0 && !loadEstimateInvoice">
@@ -214,7 +218,8 @@
             </div>
 
             <!--invoice-table-->
-            <div class="tab-pane fade" id="pills-invoices" role="tabpanel" aria-labelledby="pills-invoices-tab" tabindex="0">
+            <div class="tab-pane fade" id="pills-invoices" role="tabpanel" aria-labelledby="pills-invoices-tab"
+                tabindex="0">
                 <table class="row-border mb-3">
                     <thead>
                         <tr>
@@ -238,7 +243,8 @@
                                 <span class="warning-badge">{{invoice.status}}</span>
                             </td>
                             <td>
-                                <button class="light-outlined-button sm-btn float-end" type="button" (click)="viewInvoice(invoice.invoiceId)">View Details</button>
+                                <button class="light-outlined-button sm-btn float-end" type="button"
+                                    (click)="viewInvoice(invoice.invoiceId)">View Details</button>
                             </td>
                         </tr>
                         <tr *ngIf="invoices.length==0 && !loadInvoice">
@@ -249,8 +255,7 @@
                     </tbody>
                 </table>
                 <mat-paginator [length]="invoices.length > 0 ? invoices[0].totalCount:0" *ngIf="invoices.length > 0"
-                    [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-                    (page)="onPageChanged($event, 'I')">
+                    [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event, 'I')">
                 </mat-paginator>
             </div>
         </div>

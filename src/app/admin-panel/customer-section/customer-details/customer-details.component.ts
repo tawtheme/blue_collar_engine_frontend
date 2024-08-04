@@ -14,7 +14,7 @@ import { first } from 'rxjs';
 @Component({
   selector: 'app-customer-details',
   templateUrl: './customer-details.component.html',
-  styleUrls: ['./customer-details.component.scss']
+  styleUrls: ['./customer-details.component.scss'],
 })
 export class CustomerDetailsComponent implements OnInit {
   customerInfo: any;
@@ -32,41 +32,50 @@ export class CustomerDetailsComponent implements OnInit {
   pageSize: number = 5;
   pageSizeOptions: number[] = [5, 10, 20, 50];
   pageEvent: PageEvent | undefined;
-  constructor(private route: ActivatedRoute, private _customerService: CustomerService, private _router: Router, private _bookingService: BookingService, private _invoiceService: InvoiceService, private _estimateService: EstimateService, private _dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(
+    private route: ActivatedRoute,
+    private _customerService: CustomerService,
+    private _router: Router,
+    private _bookingService: BookingService,
+    private _invoiceService: InvoiceService,
+    private _estimateService: EstimateService,
+    private _dialog: MatDialog,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    this.route.queryParams
-      .subscribe(params => {
-        this.customerId = params.customerId;
-        this.get(params.customerId);
-        this.getAddress(params.customerId);
-        this.getCustomerStats(this.customerId);
-        var _param = {
-          "id": 0,
-          "pageNumber": 1,
-          "pageSize": this.pageSize,
-          "searchStr": "",
-          "type": "",
-          "bookingDate": null,
-          'customerUserId': this.customerId
-        }
-        this.getBookings(_param);
-        this.getInvoices(_param);
-        this.getEstimateinvoices(_param);
-      }
-      );
-    this._customerService.customerDetailAdded.subscribe((customerId: number) => {
-      if (customerId > 0) {
-        this.get(customerId);
-        this.getAddress(customerId);
-      }
+    this.route.queryParams.subscribe((params) => {
+      this.customerId = params.customerId;
+      this.get(params.customerId);
+      this.getAddress(params.customerId);
+      this.getCustomerStats(this.customerId);
+      var _param = {
+        id: 0,
+        pageNumber: 1,
+        pageSize: this.pageSize,
+        searchStr: '',
+        type: '',
+        bookingDate: null,
+        customerUserId: this.customerId,
+      };
+      this.getBookings(_param);
+      this.getInvoices(_param);
+      this.getEstimateinvoices(_param);
     });
-
+    this._customerService.customerDetailAdded.subscribe(
+      (customerId: number) => {
+        if (customerId > 0) {
+          this.get(customerId);
+          this.getAddress(customerId);
+        }
+      }
+    );
   }
 
   getBookings(param: PaginationModel) {
     this.loadBooking = true;
-    this._bookingService.getAll(param)
+    this._bookingService
+      .getAll(param)
       .pipe(first())
       .subscribe({
         next: (res) => {
@@ -74,15 +83,16 @@ export class CustomerDetailsComponent implements OnInit {
           this.bookings = res.data;
           //////////console.log(this.bookings)
         },
-        error: error => {
+        error: (error) => {
           this.loadBooking = false;
-        }
+        },
       });
   }
 
   getInvoices(param: PaginationModel) {
     this.loadInvoice = true;
-    this._invoiceService.getAll(param)
+    this._invoiceService
+      .getAll(param)
       .pipe(first())
       .subscribe({
         next: (res) => {
@@ -90,15 +100,16 @@ export class CustomerDetailsComponent implements OnInit {
           this.invoices = res.data;
           //////////console.log(this.invoices)
         },
-        error: error => {
+        error: (error) => {
           this.loadInvoice = false;
-        }
+        },
       });
   }
 
   getEstimateinvoices(param: PaginationModel) {
     this.loadEstimateInvoice = true;
-    this._estimateService.getAll(param)
+    this._estimateService
+      .getAll(param)
       .pipe(first())
       .subscribe({
         next: (res) => {
@@ -106,42 +117,44 @@ export class CustomerDetailsComponent implements OnInit {
           this.estimateInvoice = res.data;
           //////////console.log(this.estimateInvoice)
         },
-        error: error => {
+        error: (error) => {
           this.loadEstimateInvoice = false;
-        }
+        },
       });
   }
 
   get(customerId: number) {
-    this._customerService.get(customerId)
+    this._customerService
+      .get(customerId)
       .pipe(first())
       .subscribe({
         next: (res) => {
           this.customerInfo = res.data;
         },
-        error: error => {
-        }
+        error: (error) => {},
       });
   }
 
   getAddress(customerId: number) {
     var _param = {
-      "id": 0,
-      "pageNumber": 0,
-      "pageSize": 0,
-      "searchStr": ""
-    }
-    this._customerService.getAllAddress(_param)
+      id: 0,
+      pageNumber: 0,
+      pageSize: 0,
+      searchStr: '',
+    };
+    this._customerService
+      .getAllAddress(_param)
       .pipe(first())
       .subscribe({
         next: (res) => {
-          this.customerAddress = res.data.filter(function (el: { customerId: number; }) {
+          this.customerAddress = res.data.filter(function (el: {
+            customerId: number;
+          }) {
             return el.customerId == customerId;
           });
           // //////////console.log(this.customerAddress)
         },
-        error: error => {
-        }
+        error: (error) => {},
       });
   }
 
@@ -151,7 +164,8 @@ export class CustomerDetailsComponent implements OnInit {
 
   getCustomerStats(customerId: number) {
     this.customerStatsLoading = true;
-    this._customerService.getCustomerStats(customerId)
+    this._customerService
+      .getCustomerStats(customerId)
       .pipe(first())
       .subscribe({
         next: (res) => {
@@ -159,9 +173,9 @@ export class CustomerDetailsComponent implements OnInit {
           this.customerStats = res.data;
           //////////console.log(this.customerStats)
         },
-        error: error => {
+        error: (error) => {
           this.customerStatsLoading = false;
-        }
+        },
       });
   }
 
@@ -169,14 +183,14 @@ export class CustomerDetailsComponent implements OnInit {
     let firstCut = e.pageIndex * e.pageSize;
     let secondCut = firstCut + e.pageSize;
     var _param = {
-      "id": 0,
-      "pageNumber": e.pageIndex + 1,
-      "pageSize": e.pageSize,
-      "searchStr": "",
-      "type": "",
-      "bookingDate": null,
-      'customerUserId': this.customerId
-    }
+      id: 0,
+      pageNumber: e.pageIndex + 1,
+      pageSize: e.pageSize,
+      searchStr: '',
+      type: '',
+      bookingDate: null,
+      customerUserId: this.customerId,
+    };
     if (type == 'B') {
       this.getBookings(_param);
     }
@@ -189,19 +203,30 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   openEditViewBooking(booking: any) {
-    this._dialog.open(EditViewBookingComponent, { width: '1200px', height: '800px', data: { 'bookingInfo': booking, isEnableEdit: false }, disableClose: true })
+    this._dialog.open(EditViewBookingComponent, {
+      width: '1200px',
+      minHeight: '480px',
+      maxHeight: '90vh',
+      data: { bookingInfo: booking, isEnableEdit: false },
+      disableClose: true,
+      panelClass: 'bookings-details-dialog-container',
+    });
   }
 
-  viewInvoice(invoiceId: number) {   
+  viewInvoice(invoiceId: number) {
     if (invoiceId > 0) {
-      this._router.navigate(['/admin/create-invoice'], { queryParams: { invoiceId: invoiceId } })
-    }
-    else {
+      this._router.navigate(['/admin/create-invoice'], {
+        queryParams: { invoiceId: invoiceId },
+      });
+    } else {
       if (this.customerInfo.status == 'A') {
-        this._router.navigate(['/admin/create-invoice'], { queryParams: { invoiceId: invoiceId } })
-      }
-      else {
-        this._snackBar.open("You cannot create an invoice until the customer status is In-Active. Kindly activate it first.");
+        this._router.navigate(['/admin/create-invoice'], {
+          queryParams: { invoiceId: invoiceId },
+        });
+      } else {
+        this._snackBar.open(
+          'You cannot create an invoice until the customer status is In-Active. Kindly activate it first.'
+        );
         return;
       }
     }
@@ -209,17 +234,20 @@ export class CustomerDetailsComponent implements OnInit {
 
   redirectToCreateEstimate(estimateId: number) {
     if (estimateId > 0) {
-      this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } });
-    }
-    else {
+      this._router.navigate(['/admin/create-estimate'], {
+        queryParams: { estimateId: estimateId },
+      });
+    } else {
       if (this.customerInfo.status == 'A') {
-        this._router.navigate(['/admin/create-estimate'], { queryParams: { estimateId: estimateId } });
-      }
-      else {
-        this._snackBar.open("You cannot create an estimate invoice until the customer status is In-Active. Kindly activate it first.");
+        this._router.navigate(['/admin/create-estimate'], {
+          queryParams: { estimateId: estimateId },
+        });
+      } else {
+        this._snackBar.open(
+          'You cannot create an estimate invoice until the customer status is In-Active. Kindly activate it first.'
+        );
         return;
       }
     }
   }
-
 }

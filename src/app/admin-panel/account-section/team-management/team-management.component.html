@@ -18,6 +18,7 @@
             <tr>
                 <th>Name</th>
                 <th>Contact Number</th>
+                <th>Email Address</th>
                 <th>Last Booking</th>
                 <th>Status</th>
                 <th>Action</th>
@@ -41,14 +42,15 @@
                     </div>
                 </td>
                 <td>{{user.mobileNo | usMobileNo}}</td>
+                <td></td>
                 <td>{{user.lastBookingAssignedDate | date:'medium'}}</td>
                 <td>
                     <mat-slide-toggle [checked]="user.status=='A'" (change)="onChange($event)"></mat-slide-toggle>
                 </td>
                 <td>
                     <div class="d-flex align-items-center justify-content-end">
-                        <button class="light-outlined-button sm-btn" (click)="editUser(user)">
-                            <span class="icon-edit-2"></span> Edit
+                        <button class="light-outlined-button sm-btn" [routerLink]="['/admin/team-details']">
+                            View Details
                         </button>
                     </div>
                 </td>

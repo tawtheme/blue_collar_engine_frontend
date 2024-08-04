@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -48,6 +48,8 @@ export class CreateInvoiceComponent implements OnInit {
   productCtrl = new FormControl();
   bookingId: number = 0;
   termAndConditionDetail: any[] = [];
+  selectedServicesList: any = [];
+  @ViewChild('customerAddNewEle') customerAddNewEle!: ElementRef<HTMLElement>;
   constructor(private _formBuilder: FormBuilder, private _invoiceService: InvoiceService, private _router: Router, private _snackBar: MatSnackBar, private _customerService: CustomerService, private _productService: ProductService, private _masterService: MasterService, private _activeRoute: ActivatedRoute, public dialog: MatDialog, private _categoryService: CategoryService, private _accountSettingService: AccountSettingService, private _bookingService: BookingService) {
     this.filteredProducts = this.productCtrl.valueChanges
       .pipe(
@@ -107,6 +109,12 @@ export class CreateInvoiceComponent implements OnInit {
           this.getBookingInfo(this.bookingId);
         }
       });
+
+    this._customerService.customerAdded.subscribe((data: boolean) => {
+      if (data) {
+        this.getAll(_param);
+      }
+    });
   }
 
   // convenience getter for easy access to form fields
@@ -132,7 +140,8 @@ export class CreateInvoiceComponent implements OnInit {
   get(invoiceId: number) {
     this._invoiceService.get(invoiceId).subscribe(res => {
       this.products().clear();
-      res.data.products.forEach((t: { batches: any[]; }) => {
+      res.data.products.forEach((t: { productId: any; }) => {
+        this.selectedServicesList.push(parseInt(t.productId));
         var product: FormGroup = this.newProduct();
         if (res.data.status != 'Draft') {
           product.controls['productId'].disable();
@@ -142,7 +151,7 @@ export class CreateInvoiceComponent implements OnInit {
         this.products().push(product);
       });
       this.invoiceForm.patchValue(res.data);
-      this.taxPer=res.data.tax;
+      this.taxPer = res.data.tax;
       if (res.data.status != 'Draft') {
         this.invoiceForm.controls['customerId'].disable();
         this.invoiceForm.controls['expiryDate'].disable();
@@ -166,7 +175,11 @@ export class CreateInvoiceComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.productList = res.data;
-          ////////////console.log(this.productList)
+          this.productList.map((x: any) => ({
+            ...x,
+            isDisabled: false
+          }));
+          console.log(this.productList)
         },
         error: error => {
           this.loading = false;
@@ -182,31 +195,56 @@ export class CreateInvoiceComponent implements OnInit {
   }
 
   bindCustomerInfo(ev: any) {
-    var customerData = this.customerList.filter(function (event: { customerId: number; }) {
-      return event.customerId == ev.target.value;
-    });
-    this.customerInfo = <CustomerModel>customerData[0];
-    if (this.customerInfo == undefined) {
+    if (ev.target.value == -1) {
       this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
       this.isDisabled = true;
+      this.invoiceForm.controls['customerId'].setValue('');
+      let el: HTMLElement = this.customerAddNewEle.nativeElement;
+      el.click();
     }
     else {
-      this.customerInfo.serviceAddress = customerData[0].serviceAddress + ', ' + customerData[0].city + ', ' + customerData[0].state + ', ' + customerData[0].zipCode;
-      if (this.customerInfo.customerId > 0) {
-        this.isDisabled = false;
+      var customerData = this.customerList.filter(function (event: { customerId: number; }) {
+        return event.customerId == ev.target.value;
+      });
+      this.customerInfo = <CustomerModel>customerData[0];
+      if (this.customerInfo == undefined) {
+        this.customerInfo = { firstName: '', lastName: '', mobileNumber: '', emailAddress: '', serviceAddress: '', customerAddressId: 0, customerId: 0 };
+        this.isDisabled = true;
       }
-      this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
-      this.getAddress(this.customerInfo.customerId);
+      else {
+        this.customerInfo.serviceAddress = customerData[0].serviceAddress + ', ' + customerData[0].city + ', ' + customerData[0].state + ', ' + customerData[0].zipCode;
+        if (this.customerInfo.customerId > 0) {
+          this.isDisabled = false;
+        }
+        this.invoiceForm.controls['customerAddressId'].setValue(this.customerInfo.customerAddressId);
+        this.getAddress(this.customerInfo.customerId);
+      }
     }
-
   }
 
   bindProductInfo(ev: any, index: number) {
-    var productData = this.productList.filter(function (event: { categoryServiceId: number; }) {
-      return event.categoryServiceId == ev;
+    if (!this.selectedServicesList.includes(parseInt(ev))) {
+      var productData = this.productList.filter(function (event: { categoryServiceId: number; }) {
+        return event.categoryServiceId == ev;
+      });
+      if (productData.length > 0) {
+        this.products().at(index).get('price')?.setValue(productData[0].price);
+        this.calculateTotal();
+        this.selectedServicesList.push(parseInt(ev));
+      }
+    }
+    else {
+      this._snackBar.open("This service has already been added.")
+      this.products().at(index).get('productId')?.setValue('');
+      //return;
+    }
+    this.selectedServicesList = [];
+    this.invoiceForm.getRawValue().products.forEach((t: { productId: any; }) => {
+      if (t.productId != '') {
+        this.selectedServicesList.push(parseInt(t.productId));
+      }
     });
-    this.products().at(index).get('price')?.setValue(productData[0].price);
-    this.calculateTotal();
+    //console.log(this.selectedServicesList);
   }
 
   getAddress(customerId: number) {
@@ -398,5 +436,4 @@ export class CreateInvoiceComponent implements OnInit {
         }
       });
   }
-
 }

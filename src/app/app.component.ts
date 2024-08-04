@@ -1,12 +1,17 @@
-﻿import { Component, HostListener, Renderer2 } from '@angular/core';
-
+﻿import {
+  Component,
+  HostListener,
+  Renderer2,
+  OnInit,
+  AfterViewInit,
+} from '@angular/core';
 import { AuthenticationService } from './_services';
+import { Router, NavigationEnd, Event } from '@angular/router';
 import { User, Role } from './_models';
 import { LoaderService } from './_services/loader.service';
 
 @Component({ selector: 'app-root', templateUrl: 'app.component.html' })
-export class AppComponent {
-  
+export class AppComponent implements AfterViewInit {
   // @HostListener('document:keydown', ['$event'])
   // handleKeyboardEvent(e: KeyboardEvent) {
   //   ////console.log(e)
@@ -29,8 +34,13 @@ export class AppComponent {
   // }
   user?: User | null;
   loading: boolean = false;
-  constructor(private authenticationService: AuthenticationService, private loaderService: LoaderService, private renderer: Renderer2) {
-    this.authenticationService.user.subscribe(x => this.user = x);
+  constructor(
+    private authenticationService: AuthenticationService,
+    private loaderService: LoaderService,
+    private renderer: Renderer2,
+    private router: Router
+  ) {
+    this.authenticationService.user.subscribe((x) => (this.user = x));
     // document.addEventListener('contextmenu', function(e) {
     //   e.preventDefault();
     // });
