@@ -5,8 +5,8 @@
             <div class="page-title-right d-flex align-items-center gap-3 ms-auto">
                 <button class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#AddCustomerSidebar" aria-controls="AddCustomerSidebar"><span
-                        class="icon-add"></span> Add New
-                    </button>
+                        class="icon-add" #customerAddNewEle></span> Add New
+                </button>
             </div>
         </div>
     </div>
@@ -102,23 +102,28 @@
                     <td>{{cust.mobileNumber | usMobileNo}}</td>
                     <td>
                         <div class="tableAddressTd text-wrap">
-                            {{cust.serviceAddress}},  {{cust.city}},  {{cust.state}},  {{cust.zipCode}}
+                            {{cust.serviceAddress}}, {{cust.city}}, {{cust.state}}, {{cust.zipCode}}
                         </div>
                     </td>
                     <td>${{cust?.balanceDueAmount | number : '1.2-2'}}</td>
-                    <td>{{cust?.lastBookingCreatedDate==null ? '---':(cust?.lastBookingCreatedDate | date:'medium') }}</td>
-                    <td> <mat-slide-toggle [checked]="cust.status=='A'" (change)="onChange($event)"></mat-slide-toggle></td>
+                    <td>{{cust?.lastBookingCreatedDate==null ? '---':(cust?.lastBookingCreatedDate | date:'medium') }}
+                    </td>
+                    <td> <mat-slide-toggle [checked]="cust.status=='A'" (change)="onChange($event)"></mat-slide-toggle>
+                    </td>
                     <td>
                         <div class="d-flex align-items-center justify-content-end">
-                            <button class=" light-outlined-button font13" (click)="redirectToCustomerDetail(cust.customerId)">View Details</button>
+                            <button class=" light-outlined-button font13"
+                                (click)="redirectToCustomerDetail(cust.customerId)">View Details</button>
                         </div>
                     </td>
-                </tr>                   
+                </tr>
                 <tr *ngIf="items.length == 0 && !loading" class="text-center">
                     <td class="text-center" colspan="8">
                         <div class="d-flex flex-column align-items-center p-5">
-                            <img src=".../../../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img"/>
-                            <span class="font-muted font14 text-center">No Customer created. Click on "Add new" to make your first customer</span>
+                            <img src=".../../../../../../assets/images/no-data-found.svg" alt="image"
+                                class="no-data-found-img" />
+                            <span class="font-muted font14 text-center">No Customer created. Click on "Add new" to make
+                                your first customer</span>
                         </div>
                     </td>
                 </tr>
@@ -128,8 +133,7 @@
     <div class="card-footer pb-0 pt-3">
         <!-- <app-pagination [items]="items" [pageSize]="10" (changePage)="onChangePage($event)"></app-pagination> -->
         <mat-paginator [length]="items.length > 0 ? items[0].totalCount:0" *ngIf="items.length > 0"
-            [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-            (page)="onPageChanged($event)"></mat-paginator>
+            [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event)"></mat-paginator>
     </div>
 </div>
 

@@ -9,11 +9,12 @@ import { Subject, map } from 'rxjs';
 export class CustomerService {
   public customerAdded: Subject<boolean>;
   public customerDetailAdded: Subject<number>;
-
+  public customerAddNewTrigger: Subject<boolean>;
   public bindAddress: Subject<any>;
   constructor(private http: HttpClient) {
     this.customerAdded = new Subject<boolean>();
     this.customerDetailAdded = new Subject<number>();
+    this.customerAddNewTrigger = new Subject<boolean>();
     this.bindAddress = new Subject<any>();
   }
 

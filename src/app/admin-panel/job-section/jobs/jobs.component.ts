@@ -36,7 +36,7 @@ export class JobsComponent implements OnInit {
     private _bookingService: BookingService,
     private _dialog: MatDialog,
     private _formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.bookingSearchForm = this._formBuilder.group({
@@ -88,12 +88,12 @@ export class JobsComponent implements OnInit {
         bookingDate: new Date(),
       };
     }
-    ////////console.log(JSON.stringify(_param))
+ 
     this._bookingService
       .getAll(_param)
       .pipe(first())
       .subscribe({
-        next: (res) => {
+        next: (res) => {          
           this.loadUnAssigned = false;
           this.unAssignedBooking = res.data;
           this.unAssignedBooking.forEach((res) => {
@@ -105,6 +105,7 @@ export class JobsComponent implements OnInit {
               });
             }
           });
+          console.log(this.unAssignedBooking);
         },
         error: (error) => {
           this.loadUnAssigned = false;
@@ -226,7 +227,7 @@ export class JobsComponent implements OnInit {
       bookingDate: obj.bookingDate,
       currentStatus: obj.currentStatus,
     };
-    ////////console.log(obj)
+    console.log(obj)
     this.getAllUnAssignedBooking({
       ..._param,
       ...{ type: _param.type == '' ? 'U' : _param.type, currentStatus: '' },
@@ -243,9 +244,10 @@ export class JobsComponent implements OnInit {
 
   resetFilter() {
     this.bookingSearchForm.reset();
-    this.bookingSearchForm.controls['bookingDate'].setValue(new Date());
+    //this.bookingSearchForm.controls['bookingDate'].setValue(new Date());
     this.bookingSearchForm.controls['type'].setValue('');
     this.bookingSearchForm.controls['currentStatus'].setValue('');
+    this.clearStartDate();
     this.filterBooking();
   }
 
@@ -258,7 +260,7 @@ export class JobsComponent implements OnInit {
           this.bookingStats = res.data;
           ////////console.log(this.bookingStats)
         },
-        error: (error) => {},
+        error: (error) => { },
       });
   }
 
@@ -307,5 +309,14 @@ export class JobsComponent implements OnInit {
     if (type == 'C') {
       this.getAllCompletedBooking(_param);
     }
+  }
+
+  bookingDateChange() {
+    this.filterBooking();
+  }
+
+  clearStartDate() {
+    this.bookingSearchForm.controls['bookingDate'].setValue(null);
+    this.filterBooking();
   }
 }

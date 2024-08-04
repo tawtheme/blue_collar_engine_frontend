@@ -25,8 +25,9 @@
                         <select id="employeesNumber" class="form-select" (change)="bindCustomerInfo($event)"
                             formControlName="customerId" [ngClass]="{ 'is-invalid': submitted && f.customerId.errors }">
                             <option value="" selected>Select</option>
+                            <option value="-1">Create new customer</option>
                             <option value="{{cust.customerId}}" *ngFor="let cust of customerList">{{cust.firstName}}
-                                {{cust.lastName}}</option>
+                                {{cust.lastName}}</option>                            
                         </select>
                         <div *ngIf="submitted && f.customerId.errors" class="invalid-feedback">
                             <div *ngIf="f.customerId.errors.required">Select a customer</div>
@@ -173,9 +174,9 @@
                                 </td>
                                 <td>
                                     <button class="btn" (click)="removeQuantity(i)"
-                                    *ngIf="i > 0 && (!isShowRegNo || (isShowRegNo && status=='Draft'))">
-                                    <span class="icon-delete"></span>
-                                </button>
+                                        *ngIf="i > 0 && (!isShowRegNo || (isShowRegNo && status=='Draft'))">
+                                        <span class="icon-delete"></span>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
@@ -201,7 +202,8 @@
                         <div class="d-flex mb-2 align-items-center justify-content-between">
                             <div class="font-muted font14 d-flex align-items-center gap-2 me-3">Discount</div>
                             <input type="text" formControlName="discount" placeholder="Discount"
-                                class="form-control discount-input" (change)="calculateTotal()" numeric decimals='2' appNumeric>
+                                class="form-control discount-input" (change)="calculateTotal()" numeric decimals='2'
+                                appNumeric>
                         </div>
                         <div class="d-flex mb-2 align-items-center">
                             <div class="font-muted font14">Sub Total</div>
@@ -229,4 +231,14 @@
 <div class="offcanvas offcanvas-end sidebar-popup" tabindex="-1" id="AddressBookSidebar"
     aria-labelledby="offcanvasRightLabel">
     <app-address-book [items]="customerAddress" [IsShowAddEdit]="false"></app-address-book>
+</div>
+
+<button class="primary-filled-button  w-100" type="button" data-bs-toggle="offcanvas" style="display: none;"
+    data-bs-target="#AddCustomerSidebar" aria-controls="AddCustomerSidebar"><span class="icon-add"
+        #customerAddNewEle></span> Add New
+</button>
+
+<div class="offcanvas offcanvas-end sidebar-popup offcanvas-w480" tabindex="-1" id="AddCustomerSidebar"
+    aria-labelledby="offcanvasRightLabel">
+    <app-create-customer></app-create-customer>
 </div>

@@ -63,9 +63,12 @@
             <div>
                 <mat-form-field class="muiDatePickerFromField" (click)="picker.open()">
                     <input matInput [matDatepicker]="picker" formControlName="bookingDate" placeholder="Choose a date"
-                        readonly>
-                    <mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true"></mat-datepicker-toggle>
+                        readonly (dateChange)="bookingDateChange()">
+                    <mat-datepicker-toggle matSuffix [for]="picker" [disableRipple]="true"></mat-datepicker-toggle>                    
                     <mat-datepicker #picker></mat-datepicker>
+                    <!-- <mat-datepicker-toggle matSuffix (click)="clearStartDate()">
+                        <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                    </mat-datepicker-toggle> -->
                 </mat-form-field>
             </div>
             <!-- <div>
@@ -77,7 +80,7 @@
                 </select>
             </div> -->
             <div class="d-flex gap-3 justify-content-between">
-                <button class="primary-filled-button px-5" type="button" (click)="filterBooking()">Search</button>
+                <!-- <button class="primary-filled-button px-5" type="button" (click)="filterBooking()">Search</button> -->
                 <button class="light-primary-outlined-button px-4" type="button" (click)="resetFilter()">Reset</button>
             </div>
         </div>
@@ -87,7 +90,7 @@
                     Unassigned ({{unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0}})
                 </div>
                 <div class="booking-listing">
-                    <perfect-scrollbar *ngIf="unAssignedBooking.length > 0 && loadUnAssigned">
+                    <perfect-scrollbar>
                         <div class="assigned-booking-item" (click)="openEditViewBooking(booking)"
                             *ngFor="let booking of unAssignedBooking">
                             <div class="d-flex flex-column align-items-start">
@@ -115,12 +118,7 @@
                         <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
                         <span class="font-muted font14 text-center">No unassigned bookings available</span>
                     </div>
-                </div>
-                <!--
-                    <mat-paginator [length]="unAssignedBooking.length > 0 ? unAssignedBooking[0].totalCount:0"
-                        *ngIf="unAssignedBooking.length > 0" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChanged($event, 'U')">
-                    </mat-paginator>
-                -->
+                </div>               
             </div>
         </div>
         <div class="col-lg-9">

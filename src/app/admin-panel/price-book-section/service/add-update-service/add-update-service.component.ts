@@ -108,14 +108,15 @@ export class AddUpdateServiceComponent {
     this.submitted = true;
     let param = this.categoryServiceForm.value as any;
     param = { ...param, ...{ files: this.selectedFiles } };
+
     const formData = new FormData();
     formData.append('categoryServiceId', param.categoryServiceId);
     formData.append('categoryId', param.categoryId);
     formData.append('serviceName', param.serviceName);
     formData.append('price', param.price);
     formData.append('cost', param.cost);
-    formData.append('description', param.description);
-    formData.append('status', param.status);
+    formData.append('description', param.description == null ? '' : param.description);
+    formData.append('status', param.status == null ? 'A' : param.status);
     formData.append('isOnlineBooking', param.isOnlineBooking);
     formData.append('files', this.selectedFiles == null ? null : this.selectedFiles[0]);
     this.loading = true;

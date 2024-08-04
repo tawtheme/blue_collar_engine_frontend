@@ -65,9 +65,9 @@
                 <div class="col-lg-6">
                     <div class="form-group mb-3">
                         <label for="price" class="form-label">Price</label>
-                        <input type="number" formControlName="price" id="price" name="price" placeholder="Enter Price"
+                        <input type="text" formControlName="price" id="price" name="price" placeholder="Enter Price"
                             class="form-control" maxlength="50"
-                            [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+                            [ngClass]="{ 'is-invalid': submitted && f.price.errors }" numeric decimals='2' appNumeric>
                         <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
                             <div *ngIf="f.price.errors.required">Price is required</div>
                         </div>
@@ -76,9 +76,9 @@
                 <div class="col-lg-6">
                     <div class="form-group mb-3">
                         <label for="cost" class="form-label">Cost</label>
-                        <input type="number" formControlName="cost" id="cost" name="cost" placeholder="Enter Cost"
+                        <input type="text" formControlName="cost" id="cost" name="cost" placeholder="Enter Cost"
                             class="form-control" maxlength="50"
-                            [ngClass]="{ 'is-invalid': submitted && f.cost.errors }">
+                            [ngClass]="{ 'is-invalid': submitted && f.cost.errors }" numeric decimals='2' appNumeric>
                         <div *ngIf="submitted && f.cost.errors" class="invalid-feedback">
                             <div *ngIf="f.cost.errors.required">Cost is required</div>
                         </div>
