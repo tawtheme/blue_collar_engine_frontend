@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api.tawfresh.com',
+  apiUrl: 'https://api.bluecollarengine.dev',
   baseUrlHostName: 'localhost',
   tenantToken: 'kwVEV6',
 };
