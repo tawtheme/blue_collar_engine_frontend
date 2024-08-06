@@ -625,8 +625,9 @@ ul {
 .light-primary-outlined-button {
   @include button(#e8f0fd, var(--primary), #bbd3f9, 38px, 14px);
   &:hover {
-    background-color: var(--light-primary);
-    border-color: var(--border-color);
+    background-color: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
   }
 }
 .light-outlined-button {
@@ -1421,6 +1422,7 @@ tag-input.form-control {
         font-weight: 400;
         font-size: 13px;
         color: var(--dark);
+        letter-spacing: 0;
       }
       .mat-date-range-input-start-wrapper {
         overflow: inherit;
@@ -1435,10 +1437,8 @@ tag-input.form-control {
       margin-right: 10px;
     }
   }
-  .mdc-line-ripple {
-    &::before {
-      display: none;
-    }
+  .mdc-icon-button__ripple {
+    display: none;
   }
   .mat-date-range-input-container {
     justify-content: space-between;
@@ -1454,6 +1454,7 @@ tag-input.form-control {
     width: 20px !important;
     height: 20px !important;
     margin: 3px 0px 0px 2px;
+    color: var(--muted);
   }
 }
 
@@ -1653,6 +1654,10 @@ app-booking-slot .mat-calendar-header .mat-calendar-controls {
 
 .mat-mdc-dialog-container .mdc-dialog__content {
   font-family: "JUST Sans" !important;
+}
+
+.mat-calendar-body-selected{
+  background-color: var(--primary) !important;
 }
 
 @media screen and (max-width: 767px) {
