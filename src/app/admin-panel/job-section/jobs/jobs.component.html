@@ -112,12 +112,12 @@
                                 </div>
                             </div>
                         </div>
+                        <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned"
+                            class="d-flex flex-column align-items-center p-5">
+                            <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
+                            <span class="font-muted font14 text-center">No unassigned bookings available</span>
+                        </div>
                     </perfect-scrollbar>
-                    <div *ngIf="unAssignedBooking.length==0 && !loadUnAssigned"
-                        class="d-flex flex-column align-items-center p-5">
-                        <img src="../../../../assets/images/no-data-found.svg" alt="image" class="no-data-found-img" />
-                        <span class="font-muted font14 text-center">No unassigned bookings available</span>
-                    </div>
                 </div>               
             </div>
         </div>

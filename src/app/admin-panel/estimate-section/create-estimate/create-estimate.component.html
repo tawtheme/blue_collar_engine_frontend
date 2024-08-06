@@ -3,8 +3,7 @@
         <div class="d-flex items-center">
             <div class="">
                 <div class="d-flex items-center mb-10">
-                    <h4 class="page-title">{{estimateInvoiceForm.value.estimateId ==0 ?'Add New Estimate':'View
-                        Estimate'}} </h4>
+                    <h4 class="page-title">{{estimateInvoiceForm.value.estimateId ==0 ?'Add New Estimate':'View Estimate'}} </h4>
                 </div>
                 <div class="breadcrumb">
                     <a [routerLink]="['/admin/estimate']">Estimate</a>
@@ -18,16 +17,18 @@
 <div class="container-xxl">
     <div class="py-4">
         <form [formGroup]="estimateInvoiceForm">
-            <div class="row g-4 mb-4">
+            <h4 class="mb-8 font16">Customer Details</h4>
+            <div class="row gx-4 mb-3">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="fname" class="form-label">Customer Name</label>
                         <select id="employeesNumber" class="form-select" (change)="bindCustomerInfo($event)"
                             formControlName="customerId" [ngClass]="{ 'is-invalid': submitted && f.customerId.errors }">
-                            <option value="" selected>Select</option>
-                            <option value="-1">Create new customer</option>
-                            <option value="{{cust.customerId}}" *ngFor="let cust of customerList">{{cust.firstName}}
-                                {{cust.lastName}}</option>                            
+                            <option value="" selected>Select Customer</option>
+                            <option value="-1">Create New Customer</option>
+                            <option value="{{cust.customerId}}" *ngFor="let cust of customerList">
+                                {{cust.firstName}}
+                                {{cust.lastName}}
+                            </option>  
                         </select>
                         <div *ngIf="submitted && f.customerId.errors" class="invalid-feedback">
                             <div *ngIf="f.customerId.errors.required">Select a customer</div>
@@ -35,11 +36,10 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group ">
-                        <label for="expiryDate" class="form-label">Due Date</label>
-                        <mat-form-field class="example-full-width muiDatePickerFromField w-100" (click)="picker.open()">
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width muiDatePickerFromField w-100 mat-primary" (click)="picker.open()">
                             <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="expiryDate"
-                                placeholder="Choose a date"
+                                placeholder="Select Due Date"
                                 [ngClass]="{ 'is-invalid': submitted && estimateInvoiceForm.get('expiryDate')?.hasError('required') }"
                                 readonly>
                             <mat-datepicker-toggle matSuffix [for]="picker" disabled="false"
@@ -54,15 +54,13 @@
                 <div class="col-md-3" *ngIf="isShowRegNo">
                     <div class="form-group ">
                         <label for="EstimateId" class="form-label">Estimate ID</label>
-                        <input type="text" id="EstimateId" formControlName="refNo" placeholder="EstimateId"
-                            class="form-control" readonly>
+                        <input type="text" id="EstimateId" formControlName="refNo" placeholder="EstimateId" class="form-control" readonly>
                     </div>
                 </div>
             </div>
-            <h4 class="mb-8 font16">Customer Details</h4>
-            <div class="row gx-5 mb-4">
+            <div class="row gx-4 mb-4">
                 <div class="col-lg-6">
-                    <div class="border p-3 rounded h-100 ">
+                    <div class="border p-3 rounded h-100">
                         <div class="row mb-2">
                             <div class="col-4">
                                 <div class="font-muted font14">Customer Name</div>
@@ -95,8 +93,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="border p-3 rounded h-100 ">
-                        <div class="font-muted font14 d-flex align-items-center gap-2 mb-2">Service Address
-                        </div>
+                        <div class="font-muted font14 d-flex align-items-center gap-2 mb-2">Service Address</div>
                         <div class="font14 d-flex align-items-center gap-2" *ngIf="customerInfo.serviceAddress!=''">
                             <span class="icon-address"></span>{{customerInfo.serviceAddress}}
                         </div>
@@ -104,9 +101,8 @@
                         <button class="light-outlined-button xs-btn mt-2 px-2" type="button" data-bs-toggle="offcanvas"
                             [disabled]="isDisabled" data-bs-target="#AddressBookSidebar"
                             aria-controls="AddressBookSidebar" *ngIf="!isShowRegNo || (isShowRegNo && status=='Draft')">
-                            <span class="icon-edit"></span>
-                            Change
-                            Address</button>
+                            <span class="icon-edit"></span>Change Address
+                        </button>
                     </div>
                 </div>
             </div>
@@ -210,12 +206,12 @@
                             <div class="font14 ms-auto">${{subTotal| number : '1.2-2'}} </div>
                         </div>
                         <div class="d-flex mb-2 align-items-center">
-                            <div class="font-muted font14">Tax Rate: {{taxPer | number : '1.2-2'}}%</div>
+                            <div class="font-muted font14">Tax Rate ({{taxPer | number : '1.2-2'}}%)</div>
                             <div class="font14 ms-auto text-primary">+ {{taxAmount | number : '1.2-2'}} </div>
                         </div>
                         <div class="d-flex mt-2 mb-2 align-items-center">
-                            <h4 class="font18">Estimate Total</h4>
-                            <h4 class="font18 ms-auto">${{estimateTotal | number : '1.2-2'}}</h4>
+                            <h4 class="font16">Total Amount</h4>
+                            <h4 class="font16 ms-auto">${{estimateTotal | number : '1.2-2'}}</h4>
                         </div>
                     </div>
                 </div>
